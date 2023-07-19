@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    working_dir: /var/www
+    command: 'php artisan octane:start --server=swoole --host=0.0.0.0 --port=80'
+    volumes:
+      - ./:/var/www
+      - ./modules/Frontend/public:/var/www/public
+      - ./public/index.php:/opt/var/public/index.php
+  nginx:
+      build: ./docker/nginx
+      links:
+          - app
+      volumes:
+          - ./storage/uploads:/var/www/public/uploads
+          - ./modules/Frontend/public:/var/www/public
+          - ./modules/Admin/public:/var/www/public/${APP_ADMIN}
+      environment:
+          NGINX_NO_CACHE: ${NGINX_NO_CACHE}
+          NGINX_PAGESPEED: 1
+          NGINX_PAGESPEED_IMG: 1
+          NGINX_PAGESPEED_JS: 1
+          NGINX_PAGESPEED_CSS: 1
+      ports:
+          - ${APP_PORT}:8888
+      restart: on-failure
+
