@@ -29,7 +29,7 @@ services:
     app_dev:
         build: .
         working_dir: /var/www
-        command: 'bash -c "php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
+        command: 'bash -c "composer install && php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
         volumes:
             - ./:/var/www
             - ./modules/Frontend/public:/var/www/public

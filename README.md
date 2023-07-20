@@ -1,6 +1,5 @@
 ## Local Installation
 
-### Using Docker (Recommended)
 #### Install required tools and dependencies:
 
 * [Docker](https://www.docker.com/community-edition#/download)
@@ -10,6 +9,10 @@
 ```bash
 sh dev.sh
 ```
+
+* [Frontend url] (http://localhost:9100/)
+* [Admin url] (http://localhost:9200/)
+
 #### Build for production
 
 ```bash
