@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+    admin_dev:
+        image: node:19
+        working_dir: /var/www
+        command: bash -c "npm i && npm run dev --host"
+        volumes:
+            - ./modules/Admin:/var/www
+        ports:
+            - 9200:9200
+#    frontend_dev:
+#        image: node:18
+#        working_dir: /var/www
+#        command: 'npm run dev --host'
+#        volumes:
+#            - ./modules/Frontend:/var/www
+    frontend_dev:
+        image: node:19
+        working_dir: /var/www
+        command: bash -c "npm i && npm run dev --host"
+        volumes:
+            - ./:/var/www
+            - ./modules/Frontend/public:/var/www/public
+            - ./public/index.php:/var/www/public/index.php
+            - ./public/build:/var/www/public/build
+        ports:
+            - 9300:9300
+    app_dev:
+        build: .
+        working_dir: /var/www
+        command: 'bash -c "php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
+        volumes:
+            - ./:/var/www
+            - ./modules/Frontend/public:/var/www/public
+            - ./public/index.php:/var/www/public/index.php
+            - ./public/build:/var/www/public/build
+        ports:
+            - 9100:80
+#    nginx:
+#        build: ./docker/nginx
+#        links:
+#            - app
+#        volumes:
+#            - ./storage/uploads:/var/www/public/uploads
+#            - ./modules/Frontend/public:/var/www/public
+#            - ./modules/Admin/public:/var/www/public/${APP_ADMIN}
+#            - ./public/build:/opt/var/public/build
+#
+#        environment:
+#            NGINX_NO_CACHE: ${NGINX_NO_CACHE}
+#            NGINX_PAGESPEED: 1
+#            NGINX_PAGESPEED_IMG: 1
+#            NGINX_PAGESPEED_JS: 1
+#            NGINX_PAGESPEED_CSS: 1
+#        ports:
+#            - ${APP_PORT}:8888
+#        restart: on-failure
+

@@ -9,18 +9,9 @@ const routes = [
     },
     path: "/",
     name: "style",
-    component: Style,
-  },
-  {
-    // Document title tag
-    // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
-    meta: {
-      title: "Dashboard",
-    },
-    path: "/dashboard",
-    name: "dashboard",
     component: Home,
   },
+
   {
     meta: {
       title: "Users",

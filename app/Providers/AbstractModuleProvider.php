@@ -11,6 +11,7 @@ class AbstractModuleProvider extends ServiceProvider
     protected $featureName = '';
     protected $dir = '';
     protected $routePrefix;
+    protected $viewPrefix;
     protected $middleware = [];
     /**
      * The policy mappings for the application.
@@ -29,6 +30,7 @@ class AbstractModuleProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        $this->mapRoutes();
     }
 
     /**
@@ -43,13 +45,16 @@ class AbstractModuleProvider extends ServiceProvider
         $dirName = basename(dirname($class_info->getFileName()));
         $this->namespace = 'Modules\\' . $dirName;
         $this->featureName = strtolower($dirName);
+        if (!$this->viewPrefix) {
+            $this->viewPrefix = $dirName;
+        }
         if (is_dir($this->dir . '/resources/views')) {
-            $this->loadViewsFrom($this->dir .  '/resources/views', $dirName);
+            $this->loadViewsFrom($this->dir . '/resources/views', $this->viewPrefix);
         }
         if (!$this->routePrefix) {
-            $this->routePrefix =  $this->featureName;
+            $this->routePrefix = $this->featureName;
         }
-        $this->mapRoutes();
+
     }
 
     /**
