@@ -4,13 +4,13 @@
             <div class="xl:px-[100px] px-5 md:px-10">
                 <div class="flex items-center">
                     <div class="logo w-[80px] md:w-[100px] xl:w-[180px]" id="logo">
-                        <Link @click.prevent="toggle" href="/">
+                        <a  href="/">
                             <img
                                 src="/data/img/logo.png?ver=1" alt="logo"/>
-                        </Link>
+                        </a>
                     </div>
                     <div class="flex items-center ml-auto nav" id="nav-right">
-                        <button id="open-menu"
+                        <button @click.prevent="toggle" id="open-menu"
                                 class="cursor-pointer hamburger-icon w-[26px] md:w-auto">
                             <svg width="41" height="32" viewbox="0 0 41 32" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@
             <div id="main-menu" class="px-10 py-10 lg:px-16">
                 <ul class="flex flex-col p-0 m-0 font-bold uppercase list-none">
                     <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Home</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -48,10 +48,10 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/product/detox-package" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/product/detox-package" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Detox Package</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -61,10 +61,10 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Recovery Package</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -74,10 +74,10 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/product/transformation-package" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/product/transformation-package" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Transformation Package</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -87,10 +87,10 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/product/revitalization-package" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/product/revitalization-package" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Revitalization Package</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
@@ -100,34 +100,34 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <!-- <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/about-us/" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/about-us/" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">About us</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z" fill="#BFBCB9" />
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li>
                     <li class="py-5 border-white border-solid last:pb-0 border-opacity-40">
-                        <Link href="/contact-us/" class="h-[40px] xl:h-[60px] flex items-center">
+                        <a href="/contact-us/" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">Contact us</span>
                             <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z" fill="#BFBCB9" />
                                 </svg>
                             </span>
-                        </Link>
+                        </a>
                     </li> -->
                 </ul>
             </div>
             <div id="social-header" class="">
                 <ul class="flex items-center justify-center pt-5 text-center list-none border-t border-white border-solid pb-7 border-opacity-40">
                     <li class="mx-2 md:mx-3">
-                        <Link href="#">
+                        <a href="#">
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="black"/>
@@ -135,10 +135,10 @@
                                     d="M31.6396 32.363V42.7059H26.8885V32.363H22.9414V28.1692H26.8885V26.6434C26.8885 20.9786 29.2549 18 34.2619 18C35.7969 18 36.1806 18.2467 37.0212 18.4477V22.5958C36.0801 22.4313 35.8151 22.34 34.8375 22.34C33.6771 22.34 33.0558 22.6689 32.4894 23.3176C31.9229 23.9663 31.6396 25.0901 31.6396 26.6982V28.1784H37.0212L35.5776 32.3722H31.6396V32.363Z"
                                     fill="white"/>
                             </svg>
-                        </Link>
+                        </a>
                     </li>
                     <li class="mx-2 md:mx-3">
-                        <Link href="#">
+                        <a href="#">
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="black"/>
@@ -152,10 +152,10 @@
                                     d="M36.4997 24.7435C37.0761 24.7435 37.5433 24.2763 37.5433 23.6999C37.5433 23.1235 37.0761 22.6562 36.4997 22.6562C35.9233 22.6562 35.4561 23.1235 35.4561 23.6999C35.4561 24.2763 35.9233 24.7435 36.4997 24.7435Z"
                                     fill="black"/>
                             </svg>
-                        </Link>
+                        </a>
                     </li>
                     <li class="mx-2 md:mx-3">
-                        <Link href="#">
+                        <a href="#">
                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="black"/>
@@ -164,7 +164,7 @@
                                     fill="white"/>
                                 <path d="M36.0849 29.8435L27.1758 24.7061V34.981L36.0849 29.8435Z" fill="black"/>
                             </svg>
-                        </Link>
+                        </a>
                     </li>
                 </ul>
             </div>

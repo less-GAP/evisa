@@ -1,5 +1,6 @@
 import "./bootstrap";
 import "../css/app.css";
+import a from "./components/a.vue";
 import "@protonemedia/laravel-splade/dist/style.css";
 import { createPinia } from "pinia";
 
@@ -12,5 +13,6 @@ const app = createApp({
     render: renderSpladeApp({ el }),
 }).use(SpladePlugin, {
     'max_keep_alive': 50,
+    'transform_anchors': true,
 }).use(pinia)
     .mount(el)

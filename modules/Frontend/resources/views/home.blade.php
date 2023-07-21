@@ -11,20 +11,20 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <Link href="/product/detox-package/" title="Detox">
+                                            <a href="/product/detox-package/" title="Detox">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/4-months/detox.png" alt="Detox">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense:
                                                 $162.00</p>
                                         </div>
                                         <div class="swiper-slide">
-                                            <Link href="/product/detox-package/" title="Detox">
+                                            <a href="/product/detox-package/" title="Detox">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/7-months/detox.png" alt="Detox">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Basic: $104.50</p>
                                         </div>
                                     </div>
@@ -47,14 +47,14 @@
                     <div class="box info-product relative max-w-[460px] mx-auto px-5 md:px-8 py-4 md:py-12">
                         <div class="relative z-10 inner">
                             <h4 class="mb-2 product-package-name font-title">
-                                <Link href="/product/detox-package/"
+                                <a href="/product/detox-package/"
                                       title="Detox">Detox Package
-                                </Link>
+                                </a>
                             </h4>
                             <p class="mb-3 product-package-description md:mb-6">A functional diet pack to help cleanse
                                 the body. This pack provides foods rich in nutrients and antioxidants, which promote
                                 health and remove harmful substances from the body.</p>
-                            <Link href="/product/detox-package/" title="Detox" class="btn">View more</Link>
+                            <a href="/product/detox-package/" title="Detox" class="btn">View more</a>
                         </div>
                     </div>
                 </div>
@@ -102,21 +102,21 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <Link href="/product/recovery-package/" title="Recovery">
+                                            <a href="/product/recovery-package/" title="Recovery">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/4-months/recovery.png" alt="Recovery">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense:
                                                 $180.00</p>
                                             <p class="text-center">/month on 1 month-use</p>
                                         </div>
                                         <div class="swiper-slide">
-                                            <Link href="/product/recovery-package/" title="Recovery">
+                                            <a href="/product/recovery-package/" title="Recovery">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/7-months/recovery.png" alt="Recovery">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Basic: $122.50</p>
                                             <p class="text-center">/month on 2 months-use</p>
                                         </div>
@@ -142,7 +142,7 @@
                             <h4 class="mb-2 product-package-name font-title">Recovery Package</h4>
                             <p class="mb-3 product-package-description md:mb-6">A functional dietary package to support
                                 recovery and regeneration after exhausting exercise or exercise.</p>
-                            <Link href="/product/recovery-package/" class="btn">View more</Link>
+                            <a href="/product/recovery-package/" class="btn">View more</a>
                         </div>
                     </div>
                 </div>
@@ -190,22 +190,22 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <Link href="/product/transformation-package/" title="Transformation">
+                                            <a href="/product/transformation-package/" title="Transformation">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/4-months/transformation.png"
                                                     alt="Transformation">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense: $347</p>
                                             <p class="text-center">/month on 1 month-use</p>
                                         </div>
                                         <div class="swiper-slide">
-                                            <Link href="/product/transformation-package/" title="Transformation">
+                                            <a href="/product/transformation-package/" title="Transformation">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/7-months/transformation.png"
                                                     alt="Transformation">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Basic: $285</p>
                                             <p class="text-center">/month on 2 months-use</p>
                                         </div>
@@ -232,7 +232,7 @@
                             <p class="mb-3 product-package-description md:mb-6">provides low calorie, high fiber and
                                 nutrient rich foods that help burn fat, boost metabolism and support effective weight
                                 loss.</p>
-                            <Link href="/product/transformation-package/" class="btn">View more</Link>
+                            <a href="/product/transformation-package/" class="btn">View more</a>
                         </div>
                     </div>
                 </div>
@@ -280,23 +280,23 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <Link href="/product/revitalization-package" title="Revitalization">
+                                            <a href="/product/revitalization-package" title="Revitalization">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/4-months/revitalization-men.png"
                                                     alt="Revitalization">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense:
                                                 $319.50</p>
                                             <p class="text-center">/month on 1 month-use</p>
                                         </div>
                                         <div class="swiper-slide">
-                                            <Link href="/product/revitalization-package" title="Revitalization">
+                                            <a href="/product/revitalization-package" title="Revitalization">
                                                 <img
                                                     class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
                                                     src="/data/img/product/7-months/revitalization-men.png"
                                                     alt="Revitalization">
-                                            </Link>
+                                            </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Basic: $265</p>
                                             <p class="text-center">/month on 2 months-use</p>
                                         </div>
@@ -323,7 +323,7 @@
                             <p class="mb-3 product-package-description md:mb-6">This pack provides foods rich in
                                 antioxidants, vitamins and minerals that help provide energy, promote health and
                                 rejuvenate the body.</p>
-                            <Link href="/product/revitalization-package" class="btn">View more</Link>
+                            <a href="/product/revitalization-package" class="btn">View more</a>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@
                                 <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
                                     <div class="swiper-wrapper" id="swiper-wrapper-b95a123555c8bc15" aria-live="polite">
                                         <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 2" data-swiper-slide-index="0" style="width: 736px; margin-right: 30px;">
-                                            <a href="#" title="Detox">
+                                            <a href="" title="Detox">
                                                 <img class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto" src="/data/img/product/4-months/detox.png" alt="Detox">
                                             </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense: $162.00</p>
