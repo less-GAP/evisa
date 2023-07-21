@@ -1,6 +1,5 @@
 import "./bootstrap";
 import "../css/app.css";
-import a from "./components/a.vue";
 import "@protonemedia/laravel-splade/dist/style.css";
 import { createPinia } from "pinia";
 

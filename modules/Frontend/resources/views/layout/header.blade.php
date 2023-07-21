@@ -23,11 +23,11 @@
                 </div>
             </div>
         </div>
-        <nav v-class="{open:!toggled}" id="navigation-main"
+        <nav :class="{open:toggled}" id="navigation-main"
              class="navigation-main  side-nav fixed z-50 right-0 top-0 w-full md:w-[635px] h-full bg-black text-white flex flex-col justify-between">
             <div
                 class="flex justify-end px-10 py-5 nav-top lg:px-24 h-[63px] md:h-[71px] xl:h-[103px] border-b border-white border-solid">
-                <button id="close-menu" class="ml-8 w-[26px] md:w-auto">
+                <button @click.prevent="toggle"  id="close-menu" class="ml-8 w-[26px] md:w-auto">
                     <svg width="41" height="32" viewBox="0 0 41 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="7.41895" width="41" height="4" rx="2" transform="rotate(45 7.41895 0)" fill="white"/>
                         <rect x="4.58984" y="29" width="41" height="4" rx="2" transform="rotate(-45 4.58984 29)"
