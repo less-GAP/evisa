@@ -25,9 +25,13 @@ import {
   initPopovers,
   initTabs,
   initTooltips } from 'flowbite'
+import {useAuthStore} from "@/stores/auth";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
+  if(!useAuthStore().isLogin()){
+    router.push('login')
+  }
   initAccordions();
   initCarousels();
   initCollapses();
@@ -39,13 +43,11 @@ onMounted(() => {
   initPopovers();
   initTabs();
   initTooltips();
+
+
+
 })
-useMainStore().setUser({
-  name: "John Doe",
-  email: "john@example.com",
-  avatar:
-    "https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93",
-});
+
 
 const layoutAsidePadding = "xl:pl-60";
 

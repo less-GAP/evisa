@@ -16,6 +16,11 @@ import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.
 import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
 import {Modal} from "@/components";
 
+import Api from "@/utils/Api";
+const tableData = ref({})
+Api.get('user/list').then(data=>{
+  tableData.value = data
+})
 const isShowModal = ref(false)
 function closeModal() {
   isShowModal.value = false
@@ -73,6 +78,7 @@ const formStatusSubmit = () => {
 
       </SectionTitleLineWithButton>
       <CardBox form @submit.prevent="submit">
+        {{tableData}}
         <div class="relative overflow-x-auto sm:rounded-lg">
           <div class="flex items-center justify-between py-4 bg-white dark:bg-gray-800">
             <div>
