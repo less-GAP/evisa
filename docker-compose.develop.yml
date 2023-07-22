@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    app_dev:
+    app:
       build: .
       working_dir: /var/www
       command: 'bash -c "composer install && php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
