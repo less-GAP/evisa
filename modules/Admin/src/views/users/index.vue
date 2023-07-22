@@ -78,7 +78,6 @@ const formStatusSubmit = () => {
 
       </SectionTitleLineWithButton>
       <CardBox form @submit.prevent="submit">
-        {{tableData}}
         <div class="relative overflow-x-auto sm:rounded-lg">
           <div class="flex items-center justify-between py-4 bg-white dark:bg-gray-800">
             <div>
