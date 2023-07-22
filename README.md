@@ -12,7 +12,11 @@
 * https://tailwindcss.com/
 * https://flowbite-vue.com/
 * https://github.com/justboil/admin-one-vue-tailwind
+#### Setup
 
+```bash
+copy .env.example .env
+```
 
 #### Run local development
 

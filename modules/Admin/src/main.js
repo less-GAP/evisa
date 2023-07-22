@@ -7,18 +7,21 @@ import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
 import "./css/main.css";
-
+import {useAuthStore} from "@/stores/auth";
+import piniaPersist from 'pinia-plugin-persist'
 
 /* Init Pinia */
 const pinia = createPinia();
-
+pinia.use(piniaPersist)
 /* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+const myApp = createApp(App).use(router).use(pinia)
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
-
+const authStore = useAuthStore();
+myApp.config.globalProperties.$auth = authStore;
+myApp.mount("#app");
 /* Fetch sample data */
 // mainStore.fetch("clients");
 // mainStore.fetch("history");
