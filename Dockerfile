@@ -11,4 +11,5 @@ RUN apt-get update && apt-get install procps libgmp-dev -y
 
 RUN docker-php-ext-configure pcntl --enable-pcntl \
   && docker-php-ext-install \
-    pcntl gmp bcmath mysqli
+    pcntl gmp bcmath mysqli pdo pdo_mysql \
+  && docker-php-ext-enable mysqli
