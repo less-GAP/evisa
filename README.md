@@ -3,11 +3,14 @@
 #### Install required tools and dependencies:
 
 * [Docker](https://www.docker.com/community-edition#/download)
-#### Framework and Libraries:
+#### Framework and Libraries for Frontend:
 
 * https://laravel.com/docs/10.x/
 * https://splade.dev/
-  
+* https://vuejs.org/
+* https://tailwindcss.com/
+
+#### Framework and Libraries for Admin:
 * https://vuejs.org/
 * https://tailwindcss.com/
 * https://flowbite-vue.com/
