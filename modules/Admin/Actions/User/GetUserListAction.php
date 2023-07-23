@@ -9,8 +9,15 @@ use Illuminate\Http\Request;
 
 class GetUserListAction
 {
-    public function handle(Request $request){
+    public function handle(Request $request)
+    {
 
-        return User::query()->paginate(15);
+        $query = User::query();
+        if ($search = $request->input('search')) {
+            $query->where('username', 'like', '%' . $search . '%')
+                ->orWhere('full_name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%');
+        }
+        return $query->paginate($request->input('perPage',15));
     }
 }

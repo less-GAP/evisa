@@ -12,6 +12,7 @@
     "@protonemedia/laravel-splade": "^1.4.15",
     "@rushstack/eslint-patch": "^1.1.4",
     "@vue/compat": "^3.3.4",
+    "ant-design-vue": "^4.0.0",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
     "emotion": "^10.0.27",

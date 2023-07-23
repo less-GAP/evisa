@@ -1,7 +1,8 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
+
 const publicPages = ['/login'];
 
 const routes = [
@@ -17,12 +18,20 @@ const routes = [
   {
     meta: {
       title: "Users",
-      isPublic: true,
 
     },
     path: "/users",
     name: "users",
     component: () => import("@/views/users/index.vue"),
+  },
+  {
+    meta: {
+      title: "User Detail",
+
+    },
+    path: "/users/:id",
+    name: "user-detail",
+    component: () => import("@/views/users/ProfileView.vue"),
   },
   {
     meta: {
@@ -87,7 +96,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    return savedPosition || { top: 0 };
+    return savedPosition || {top: 0};
   },
 });
 router.beforeEach(async (to) => {

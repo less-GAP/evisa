@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Actions\GetUserInfoAction;
+use Modules\Admin\Actions\User\DeleteUserAction;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
 
 Route::get('/', function () {
@@ -14,5 +15,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function(){
         return 'admin authed';
     });
     Route::get('auth/userInfo', GetUserInfoAction::class.'@handle');
+    Route::delete('user/{id}', DeleteUserAction::class.'@handle');
     Route::get('user/list', \Modules\Admin\Actions\User\GetUserListAction::class.'@handle');
+    Route::post('user/activeList', \Modules\Admin\Actions\User\PostActiveUserListAction::class.'@handle');
 });
