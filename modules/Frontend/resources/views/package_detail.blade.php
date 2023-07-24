@@ -17,7 +17,7 @@
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Intense: $162.00</p>
                                         </div>
                                         <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 2" data-swiper-slide-index="1" style="width: 736px; margin-right: 30px;">
-                                            <a href="#" title="Detox">
+                                            <a  title="Detox">
                                                 <img class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto" src="/data/img/product/7-months/detox.png" alt="Detox">
                                             </a>
                                             <p class="product-package-price mt-2 md:mt-4 text-center">Basic: $104.50</p>
@@ -39,7 +39,7 @@
                 <div class="w-full mt-5 col md:w-1/2 md:order-first md:mt-0">
                     <div class="box info-product relative max-w-[460px] mx-auto px-5 md:px-8 py-4 md:py-12">
                         <div class="relative z-10 inner">
-                            <h4 class="mb-2 product-package-name font-title"><a href="#" title="Detox">Detox Package</a></h4>
+                            <h4 class="mb-2 product-package-name font-title"><a  title="Detox">Detox Package</a></h4>
                             <p class="mb-3 product-package-description md:mb-6">A functional diet pack to help cleanse the body. This pack provides foods rich in nutrients and antioxidants, which promote health and remove harmful substances from the body.</p>
 
                         </div>
@@ -83,7 +83,7 @@
                     <div class="swiper-wrapper !h-auto" id="swiper-wrapper-00d1ff3d47b1ee6a" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(335.143px, 0px, 0px);">
                         <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 163.429px; margin-right: 60px;">
                             <div class="product-include">
-                                <a href="#" data-target="#product-1" class="active">
+                                <a  data-target="#product-1" class="active">
                                     <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
                                         <img src="/data/img/product/package-1/q-detox-herbal-tea.jpeg" alt="Q DAILY DETOX Herbal Tea">
                                     </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4" style="width: 163.429px; margin-right: 60px;">
                             <div class="product-include">
-                                <a href="#" data-target="#product-2" class=" ">
+                                <a  data-target="#product-2" class=" ">
                                     <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
                                         <img src="/data/img/product/package-1/q-ultra-greens.jpeg" alt="Q ULTRA GREENS">
                                     </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="swiper-slide" role="group" aria-label="3 / 4" style="width: 163.429px; margin-right: 60px;">
                             <div class="product-include">
-                                <a href="#" data-target="#product-3" class="">
+                                <a  data-target="#product-3" class="">
                                     <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
                                         <img src="/data/img/product/package-1/q-sleep-spray.jpeg" alt="Q SLEEP Spray">
                                     </div>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="swiper-slide" role="group" aria-label="4 / 4" style="width: 163.429px; margin-right: 60px;">
                             <div class="product-include">
-                                <a href="#" data-target="#product-4" class="">
+                                <a  data-target="#product-4" class="">
                                     <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
                                         <img src="/data/img/product/package-1/q-complete-vanilla.jpeg" alt="Q COMPLETE Vanilla">
                                     </div>
@@ -128,7 +128,7 @@
                 <div class="tab active" id="product-1">
                     <div class="items-center row">
                         <div class="w-full col md:w-1/2">
-                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a href="#">Q DAILY DETOX Herbal Tea</a></h4>
+                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a >Q DAILY DETOX Herbal Tea</a></h4>
                             <div class="product-detail xl:pr-10" style="color: #666666;">
                                 <p class="mb-3">You are exposed daily to pollution in the air, in some of the products you use, and in the food you eat. Your body is like a sponge, absorbing the good AND the bad. Don’t worry, no need for drastic, uncomfortable cleanse regimens. Just keep it clean daily. <br>This subtle yet effective emerald blue tea is designed to cleanse and purify your body’s detox pathways. When you cleanse and purify, you feel lighter and eliminate toxins. You might even lose weight, too. <br>Cleanse your body. Cleanse your life.</p>
                                 <p class="mb-2"><strong>Benefits:</strong></p>
@@ -150,7 +150,7 @@
                 <div class="tab" id="product-2">
                     <div class="items-center row">
                         <div class="w-full col md:w-1/2">
-                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a href="#">Q ULTRA GREENS</a></h4>
+                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a >Q ULTRA GREENS</a></h4>
                             <div class="product-detail xl:pr-10" style="color: #666666;">
                                 <p class="mb-3">Fill nutritional gaps, detoxify your body, and balance PH levels for better health and wellness. Boasting 20 superfoods, this nutrient-packed superstar will help boost energy, support digestion, and just flat out make you feel better.*</p>
                                 <p class="mb-2"><strong>Benefits:</strong></p>
@@ -174,7 +174,7 @@
                 <div class="tab" id="product-3">
                     <div class="items-center row">
                         <div class="w-full col md:w-1/2">
-                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a href="#">Q SLEEP Spray</a></h4>
+                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-6 font-title"><a >Q SLEEP Spray</a></h4>
                             <div class="product-detail xl:pr-10" style="color: #666666;">
                                 <p class="mb-3"><strong>Natural Spearmint Flavor</strong>
                                     <br>Designed for the same great sleep you know and love— now featuring calming Chamomile.
@@ -196,7 +196,7 @@
                 <div class="tab" id="product-4">
                     <div class="items-center row">
                         <div class="w-full col md:w-1/2">
-                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-2 font-title"><a href="#">Q COMPLETE Vanilla</a></h4>
+                            <h4 class="uppercase text-2xl xl:text-[45px] font-bold mb-2 font-title"><a >Q COMPLETE Vanilla</a></h4>
                             <p class="mb-6">*Only for 4-months course</p>
                             <div class="product-detail xl:pr-10" style="color: #666666;">
                                 <p class="mb-3">This creamy, delicious shake will leave you so satisfied, you won't even THINK about cheating when it comes to a healthy diet. With fiber, digestive enzymes, and pre &amp; probiotics, Q COMPLETE will keep things running smoother than ever. Q COMPLETE also contains mood-lifting B vitamins to help chase away those weight loss blues. All in less than 170 calories!*</p>
