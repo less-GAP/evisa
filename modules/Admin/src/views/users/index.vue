@@ -33,6 +33,9 @@ function showEditUser(user, reload) {
 
 const pageConfig = {
   fetchApi: (params) => Api.get('user/list', {params}),
+  addAction: (reload) => {
+    showEditUser({}, reload)
+  },
   itemActions: [
     {
       label: 'View'
@@ -107,8 +110,10 @@ const pageConfig = {
       >
 
       </SectionTitleLineWithButton>
-      <DataTable :selectionActions="pageConfig.selectionActions" :itemActions="pageConfig.itemActions"
+      <DataTable :selectionActions="pageConfig.selectionActions"
+                 :itemActions="pageConfig.itemActions"
                  :columns="pageConfig.columns"
+                 :addAction="pageConfig.addAction"
                  :api="pageConfig.fetchApi">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
