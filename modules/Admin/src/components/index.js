@@ -37,7 +37,6 @@ import {
   StackedAvatars,
   StackedAvatarsCounter,
   Tab,
-  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -58,8 +57,9 @@ import {
   Tooltip,
   useToast
 } from "flowbite-vue"
-
+import DataTable from "./DataTable.vue"
 export {
+  DataTable,
   Accordion,
   AccordionContent,
   AccordionHeader,
@@ -98,12 +98,6 @@ export {
   StackedAvatars,
   StackedAvatarsCounter,
   Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeadCell,
-  TableRow,
   Tabs,
   TheCard,
   Timeline,
