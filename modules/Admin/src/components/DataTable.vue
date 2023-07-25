@@ -100,7 +100,7 @@ reload()
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
           </svg>
         </div>
-        <Input size="md" @keyup.enter="reload" v-model="params.search" placeholder="Enter to search...">
+        <Input size="md" @keyup.enter="reload" v-model="params.search" placeholder="Tìm kiếm...">
           <template #prefix>
             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -117,8 +117,8 @@ reload()
         <button size="lg" id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
                 class="inline-flex mr-3 items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-lg px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                 type="button">
-          <span class="sr-only">Action button</span>
-          Action
+          <span class="sr-only">Hành động</span>
+          Hành động
           <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -140,7 +140,7 @@ reload()
           </ul>
 
         </div>
-        <Button v-if="addAction" size="lg" @click="()=>{addAction(reload)}">Add</Button>
+        <Button v-if="addAction" size="lg" @click="()=>{addAction(reload)}">Thêm mới</Button>
 
       </div>
 

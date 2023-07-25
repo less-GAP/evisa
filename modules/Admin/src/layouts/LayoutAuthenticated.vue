@@ -32,17 +32,7 @@ onMounted(() => {
   if(!useAuthStore().isLogin()){
     router.push('login')
   }
-  initAccordions();
-  initCarousels();
-  initCollapses();
-  initDials();
-  initDismisses();
-  initDrawers();
-  initDropdowns();
-  initModals();
-  initPopovers();
-  initTabs();
-  initTooltips();
+
 
 
 

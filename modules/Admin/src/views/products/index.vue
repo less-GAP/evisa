@@ -19,15 +19,15 @@
 
   import Api from "@/utils/Api";
   import router from "@/router";
-  import FormUser from "./FormUser.vue";
+  import FormDetail from "./FormDetail.vue";
 
   const isShowModal = ref(false)
 
-  const editUser = ref(null);
+  const editProduct = ref(null);
 
   function showEditUser(user, reload) {
     isShowModal.value = true;
-    editUser.value = user;
+    editProduct.value = user;
   }
 
   const tableConfig = {
@@ -104,7 +104,7 @@
     <SectionMain>
       <SectionTitleLineWithButton
         :icon="mdiBallotOutline"
-        title="Product Management"
+        title="Quản lý sản phẩm"
         main
       >
 
@@ -125,9 +125,7 @@
               label=""
               :outline="true"
             >
-
             </a-button>
-
           </a-popconfirm>
         </template>
         <template #cell[full_name]="{item,column}">
@@ -149,7 +147,7 @@
     </SectionMain>
 
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:visible="isShowModal">
-    <FormUser :user="editUser"></FormUser>
-  </a-modal>
+  <a-drawer :footer="null" width="80%" v-model:visible="isShowModal" title="Thông tin sản phẩm" :closable="false" placement="right">
+    <FormDetail :value="editProduct"></FormDetail>
+  </a-drawer>
 </template>

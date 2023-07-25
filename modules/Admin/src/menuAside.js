@@ -22,7 +22,7 @@ export default [
   },
   {
     to: "/products",
-    label: "Products",
+    label: "Sản phẩm",
     icon: mdiContacts,
   },
   {

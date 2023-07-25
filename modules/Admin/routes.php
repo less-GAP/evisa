@@ -22,5 +22,4 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 
     Route::get('product/list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
 
-
 });
