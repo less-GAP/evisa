@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         \App\Models\User::truncate();
-         \App\Models\User::factory()->create([
-             'full_name' => 'Admin',
-             'username' => 'admin',
-             'role' => 'admin',
-             'email' => 'admin@test.com',
-             'email_verified_at' => Carbon::now(),
-             'password' => \Hash::make('123456'),
-         ]);
+        \App\Models\User::factory()->create([
+            'full_name' => 'Admin',
+            'username' => 'admin',
+            'role' => 'admin',
+            'email' => 'admin@test.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => \Hash::make('123456'),
+        ]);
         \App\Models\User::factory()->count(20)->create();
     }
 }

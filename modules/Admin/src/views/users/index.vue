@@ -32,8 +32,11 @@ function showEditUser(user, reload) {
 
 }
 
-const pageConfig = {
-  fetchApi: (params) => Api.get('user/list', {params}),
+const tableConfig = {
+  api: (params) => Api.get('user/list', {params}),
+  addAction: (reload) => {
+    showEditUser({}, reload)
+  },
   itemActions: [
     {
       label: 'View'
@@ -108,9 +111,7 @@ const pageConfig = {
       >
 
       </SectionTitleLineWithButton>
-      <DataTable :selectionActions="pageConfig.selectionActions" :itemActions="pageConfig.itemActions"
-                 :columns="pageConfig.columns"
-                 :api="pageConfig.fetchApi">
+      <DataTable v-bind="tableConfig" >
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
             title="Are you sure delete this user?"

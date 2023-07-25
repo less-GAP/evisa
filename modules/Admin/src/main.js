@@ -6,9 +6,10 @@ import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
-import 'ant-design-vue/dist/reset.css';
 
 import "./css/main.css";
+import 'ant-design-vue/dist/reset.css';
+
 import {useAuthStore} from "@/stores/auth";
 import piniaPersist from 'pinia-plugin-persist'
 import Api from "@/utils/Api";

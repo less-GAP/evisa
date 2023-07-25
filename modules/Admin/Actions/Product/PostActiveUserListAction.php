@@ -11,6 +11,7 @@ class PostActiveUserListAction
 {
     public function handle(Request $request)
     {
+
         return 1;
     }
 }
