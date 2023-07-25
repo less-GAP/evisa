@@ -49,7 +49,10 @@ const tableConfig = {
   , ...props.config
 }
 const tableData = ref({})
-
+function reset() {
+  props.pagination.page =1
+  reload()
+}
 function reload() {
   if (props.api) {
     loading.value = true

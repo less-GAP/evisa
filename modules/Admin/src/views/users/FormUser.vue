@@ -17,12 +17,8 @@ import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
 const props = defineProps({
   value:Object
 })
-const selectOptions = [
-  {id: 1, label: "Business development"},
-  {id: 2, label: "Marketing"},
-  {id: 3, label: "Sales"},
-];
 
+const emit = defineEmits(["success" , "cancel"]);
 const form = reactive(props.value || {
   isNew: true,
   full_name: "",
@@ -32,7 +28,7 @@ const form = reactive(props.value || {
   password: "",
 });
 
-function submit(){
+const submit = function(){
   emit('success')
 }
 
@@ -51,7 +47,7 @@ const formStatusSubmit = () => {
 
 <template>
 
-  <CardBox form @submit.prevent="submit">
+  <CardBox form >
     <FormField label="Grouped with icons">
       <FormControl v-model="form.name" :icon="mdiAccount"/>
       <FormControl v-model="form.email" type="email" :icon="mdiMail"/>
@@ -80,8 +76,8 @@ const formStatusSubmit = () => {
 
     <template #footer>
       <BaseButtons>
-        <BaseButton type="submit" color="info" label="Submit"/>
-        <BaseButton type="reset" color="info" outline label="Reset"/>
+        <BaseButton @click="submit"  type="submit" color="info" label="Submit"/>
+        <BaseButton @click="emit('cancel')" type="reset" color="info" outline label="Reset"/>
       </BaseButtons>
     </template>
   </CardBox>

@@ -3,6 +3,7 @@ version: '3'
 services:
 
     admin_dev:
+        user: ${MY_UID}:${MY_GID}
         image: node:19
         working_dir: /var/www
         command: bash -c "npm i && npm run dev --host"
@@ -31,6 +32,7 @@ services:
       build: .
       working_dir: /var/www
       command: 'bash -c "composer install && php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
+      user: ${MY_UID}:${MY_GID}
       volumes:
         - ./:/var/www
         - ./modules/Frontend/public:/var/www/public

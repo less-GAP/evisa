@@ -35,7 +35,7 @@ function showEditUser(user, reload) {
 const tableConfig = {
   api: (params) => Api.get('user/list', {params}),
   addAction: (reload) => {
-    showEditUser({}, reload)
+    showEditUser(null, reload)
   },
   itemActions: [
     {
@@ -111,7 +111,7 @@ const tableConfig = {
       >
 
       </SectionTitleLineWithButton>
-      <DataTable v-bind="tableConfig" >
+      <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
             title="Are you sure delete this user?"
@@ -151,7 +151,8 @@ const tableConfig = {
     </SectionMain>
 
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:visible="isShowModal">
-    <FormUser :success="editUserState.reload()" :user="editUserState.value"></FormUser>
+  <a-modal :footer="null" width="800px" v-model:open="isShowModal">
+    <FormUser v-if="editUserState" @success="isShowModal=false;editUserState.reload()" @cancel="isShowModal=false"
+              :user="editUserState.value"></FormUser>
   </a-modal>
 </template>

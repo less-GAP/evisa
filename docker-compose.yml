@@ -4,6 +4,7 @@ services:
     app:
         build: .
         working_dir: /var/www
+        user: ${MY_UID}:${MY_GID}
         command: 'bash -c "php artisan octane:start  --server=swoole --host=0.0.0.0 --port=80"'
         volumes:
             - ./:/var/www
@@ -12,6 +13,7 @@ services:
             - ./public/build:/var/www/public/build
     nginx:
         build: ./docker/nginx
+        user: ${MY_UID}:${MY_GID}
         links:
             - app
         volumes:
