@@ -13,6 +13,18 @@ const props = defineProps({
       , rowSelect: true
     }
   },
+  pagination: {
+    type: Object,
+    default: {
+      page:1,
+      total:0,
+      perPage:10
+    }
+  },
+  showSizeChanger: {
+    type: Boolean,
+    default: true
+  },
   params: {
     type: Object,
     default: {
@@ -40,9 +52,11 @@ const tableData = ref({})
 function reload() {
   if (props.api) {
     loading.value = true
-    props.api(props.params).then(rs => {
+    props.api({perPage:props.pagination.perPage,page:props.pagination.page,...props.params}).then(rs => {
       tableData.value = rs.data
+      props.pagination.total = rs.data?.total?rs.data.total:0
     }).finally(() => {
+      checkAll.value = false
       loading.value = false
     })
   }
@@ -210,6 +224,14 @@ reload()
       </tr>
       </tbody>
     </table>
+    <br>
+    <a-pagination :showSizeChanger="showSizeChanger" @change="reload"  v-model:current="pagination.page" v-model:pageSize="pagination.perPage" :total="pagination.total">
+      <template #itemRender="{ type, originalElement }">
+        <a v-if="type === 'prev'">Previous</a>
+        <a v-else-if="type === 'next'">Next</a>
+        <component :is="originalElement" v-else></component>
+      </template>
+    </a-pagination>
   </div>
 </template>
 <style scoped>

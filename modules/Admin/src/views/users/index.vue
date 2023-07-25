@@ -24,11 +24,12 @@ import FormUser from "./FormUser.vue";
 const isShowModal = ref(false)
 
 
-const editUser = ref(null);
+const editUserState = ref(null);
 
 function showEditUser(user, reload) {
   isShowModal.value = true;
-  editUser.value = user;
+  editUserState.value = {user, reload};
+
 }
 
 const pageConfig = {
@@ -150,6 +151,6 @@ const pageConfig = {
 
   </LayoutAuthenticated>
   <a-modal :footer="null" width="800px" v-model:visible="isShowModal">
-    <FormUser :user="editUser"></FormUser>
+    <FormUser :success="editUserState.reload()" :user="editUserState.value"></FormUser>
   </a-modal>
 </template>

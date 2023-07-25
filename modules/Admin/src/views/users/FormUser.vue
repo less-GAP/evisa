@@ -14,23 +14,27 @@ import SectionTitle from "@/components/SectionTitle.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
-
+const props = defineProps({
+  value:Object
+})
 const selectOptions = [
   {id: 1, label: "Business development"},
   {id: 2, label: "Marketing"},
   {id: 3, label: "Sales"},
 ];
 
-const form = reactive({
-  name: "John Doe",
-  email: "john.doe@example.com",
-  phone: "",
-  department: selectOptions[0],
-  subject: "",
-  question: "",
+const form = reactive(props.value || {
+  isNew: true,
+  full_name: "",
+  username: "",
+  email: "",
+  role: "user",
+  password: "",
 });
 
-
+function submit(){
+  emit('success')
+}
 
 const formStatusWithHeader = ref(true);
 
