@@ -10,7 +10,8 @@ import {
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiReact, mdiContacts,
+  mdiReact,
+  mdiContacts,
 } from "@mdi/js";
 
 export default [
@@ -18,6 +19,11 @@ export default [
     to: "/",
     icon: mdiMonitor,
     label: "Dashboard",
+  },
+  {
+    to: "/products",
+    label: "Products",
+    icon: mdiContacts,
   },
   {
     to: "/users",
