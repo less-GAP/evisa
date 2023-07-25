@@ -147,7 +147,9 @@
     </SectionMain>
 
   </LayoutAuthenticated>
-  <a-drawer :footer="null" width="80%" v-model:visible="isShowModal" title="Thông tin sản phẩm" :closable="false" placement="right">
-    <FormDetail :value="editProduct"></FormDetail>
-  </a-drawer>
+
+  <FormDetail :value="editProduct" :isShowModal="isShowModal"></FormDetail>
+
+
+
 </template>
