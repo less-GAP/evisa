@@ -4,6 +4,7 @@ import {reactive, ref} from "vue";
 const props = defineProps({
   value: Object
 })
+
 const validateMessages = {
   required: '${label} is required!',
   types: {
@@ -14,7 +15,9 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
+
 const emit = defineEmits(["success", "cancel"]);
+
 const formState = reactive(props.value || {
   isNew: true,
   full_name: "",
@@ -23,6 +26,7 @@ const formState = reactive(props.value || {
   role: "user",
   password: "",
 });
+
 const formConfig = reactive({
   "validateTrigger": "submit",
   "label-align": "top",
