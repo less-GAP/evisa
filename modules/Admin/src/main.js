@@ -6,9 +6,9 @@ import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
-import 'ant-design-vue/dist/reset.css';
 
 import "./css/main.css";
+
 import {useAuthStore} from "@/stores/auth";
 import piniaPersist from 'pinia-plugin-persist'
 import Api from "@/utils/Api";
@@ -20,7 +20,6 @@ const pinia = createPinia();
 pinia.use(piniaPersist)
 /* Create Vue app */
 const myApp = createApp(App).use(router).use(pinia)
-
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
@@ -28,6 +27,7 @@ const authStore = useAuthStore();
 const tranlation = useTranslation();
 myApp.config.globalProperties.$auth = authStore;
 myApp.config.globalProperties.$api = Api;
+myApp.config.globalProperties.$style = styleStore;
 myApp.config.globalProperties.__ = tranlation.__;
 myApp.use(Antd).mount("#app");
 /* Fetch sample data */

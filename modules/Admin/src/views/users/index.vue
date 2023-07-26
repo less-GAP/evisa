@@ -24,17 +24,18 @@ import FormUser from "./FormUser.vue";
 const isShowModal = ref(false)
 
 
-const editUser = ref(null);
+const editUserState = ref(null);
 
 function showEditUser(user, reload) {
   isShowModal.value = true;
-  editUser.value = user;
+  editUserState.value = {user, reload};
+
 }
 
-const pageConfig = {
-  fetchApi: (params) => Api.get('user/list', {params}),
+const tableConfig = {
+  api: (params) => Api.get('user/list', {params}),
   addAction: (reload) => {
-    showEditUser({}, reload)
+    showEditUser(null, reload)
   },
   itemActions: [
     {
@@ -110,11 +111,7 @@ const pageConfig = {
       >
 
       </SectionTitleLineWithButton>
-      <DataTable :selectionActions="pageConfig.selectionActions"
-                 :itemActions="pageConfig.itemActions"
-                 :columns="pageConfig.columns"
-                 :addAction="pageConfig.addAction"
-                 :api="pageConfig.fetchApi">
+      <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
             title="Are you sure delete this user?"
@@ -154,7 +151,8 @@ const pageConfig = {
     </SectionMain>
 
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:visible="isShowModal">
-    <FormUser :user="editUser"></FormUser>
+  <a-modal :footer="null" width="800px" v-model:open="isShowModal">
+    <FormUser v-if="editUserState" @success="isShowModal=false;editUserState.reload()" @cancel="isShowModal=false"
+              :user="editUserState.value"></FormUser>
   </a-modal>
 </template>

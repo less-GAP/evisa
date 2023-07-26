@@ -14,11 +14,25 @@ const routes = [
     name: "dashboard",
     component: Home,
   },
-
+  {
+    meta: {
+      title: "Products",
+    },
+    path: "/products",
+    name: "products",
+    component: () => import("@/views/products/index.vue"),
+  },
+  {
+    meta: {
+      title: "Product Detail",
+    },
+    path: "/products/:id",
+    name: "product-detail",
+    component: () => import("@/views/products/ProductView.vue"),
+  },
   {
     meta: {
       title: "Users",
-
     },
     path: "/users",
     name: "users",
@@ -27,7 +41,6 @@ const routes = [
   {
     meta: {
       title: "User Detail",
-
     },
     path: "/users/:id",
     name: "user-detail",

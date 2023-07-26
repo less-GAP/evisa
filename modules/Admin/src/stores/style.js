@@ -4,6 +4,11 @@ import { darkModeKey, styleKey } from "@/config";
 
 export const useStyleStore = defineStore("style", {
   state: () => ({
+    antdv:{
+      autoInsertSpaceInButton: true,
+      componentSize: "large",
+      space: "large",
+    },
     /* Styles */
     asideStyle: "",
     asideScrollbarsStyle: "",

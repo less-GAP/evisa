@@ -4,6 +4,7 @@ import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
+import {DownOutlined} from "@ant-design/icons-vue";
 
 const props = defineProps({
   config: {
@@ -13,10 +14,21 @@ const props = defineProps({
       , rowSelect: true
     }
   },
+  pagination: {
+    type: Object,
+    default: {
+      page: 1,
+      total: 0,
+      perPage: 10
+    }
+  },
+  showSizeChanger: {
+    type: Boolean,
+    default: true
+  },
   params: {
     type: Object,
     default: {
-      search: ''
     }
   },
   columns: Array,
@@ -37,13 +49,21 @@ const tableConfig = {
   , ...props.config
 }
 const tableData = ref({})
+const search = ref('')
+
+function reset() {
+  props.pagination.page = 1
+  reload()
+}
 
 function reload() {
   if (props.api) {
     loading.value = true
-    props.api(props.params).then(rs => {
+    props.api({perPage: props.pagination.perPage, page: props.pagination.page, ...props.params,search:search.value}).then(rs => {
       tableData.value = rs.data
+      props.pagination.total = rs.data?.total ? rs.data.total : 0
     }).finally(() => {
+      checkAll.value = false
       loading.value = false
     })
   }
@@ -71,7 +91,6 @@ function toggleCheckAll() {
     selectedItems.value = []
   }
 }
-
 reload()
 
 </script>
@@ -91,58 +110,35 @@ reload()
       <span class="sr-only">Loading...</span>
     </div>
     <div :loading="loading" class="flex items-center justify-between py-4 bg-white dark:bg-gray-800">
-      <label for="table-search" class="sr-only">Search</label>
-      <div class="relative w-2/5">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-               fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-          </svg>
-        </div>
-        <Input size="md" @keyup.enter="reload" v-model="params.search" placeholder="Enter to search...">
-          <template #prefix>
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
-                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+      <a-input
+        allow-clear
+        @keyup.enter="reload"
+        style="max-width: 300px"
+        v-model:value="search"
+        placeholder="Enter to search..."
+        :loading="loading"
+      />
+      <a-space>
+
+        <a-dropdown :disabled="!selectedItems.length">
+          <template #overlay>
+            <a-menu>
+              <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
+                         >
+                {{ action.title }}
+              </a-menu-item>
+
+            </a-menu>
           </template>
+          <a-button>
+            Hành động
+            <DownOutlined/>
+          </a-button>
+        </a-dropdown>
 
-        </Input>
+        <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
 
-      </div>
-      <div>
-
-        <button size="lg" id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
-                class="inline-flex mr-3 items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-lg px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                type="button">
-          <span class="sr-only">Action button</span>
-          Action
-          <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-               viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 4 4 4-4"/>
-          </svg>
-        </button>
-        <!-- Dropdown menu -->
-        <div id="dropdownAction"
-             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-          <ul class="py-1 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
-            <li v-for="action in selectionActions">
-              <button color="light" :disabled="!selectedItems.length" @click="doSelectionAction(action)"
-                      class="block w-full cursor-pointer text-left disabled:opacity-25 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                {{
-                  __(action.title)
-                }}
-              </button>
-            </li>
-          </ul>
-
-        </div>
-        <Button v-if="addAction" size="lg" @click="()=>{addAction(reload)}">Add</Button>
-
-      </div>
+      </a-space>
 
     </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -202,7 +198,7 @@ reload()
           'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
                 type="link"
               >
-                {{itemAction.label}}
+                {{ itemAction.label }}
               </a-button>
 
             </slot>
@@ -211,6 +207,15 @@ reload()
       </tr>
       </tbody>
     </table>
+    <br>
+    <a-pagination :showSizeChanger="showSizeChanger" @change="reload" v-model:current="pagination.page"
+                  v-model:pageSize="pagination.perPage" :total="pagination.total">
+      <template #itemRender="{ type, originalElement }">
+        <a v-if="type === 'prev'">Previous</a>
+        <a v-else-if="type === 'next'">Next</a>
+        <component :is="originalElement" v-else></component>
+      </template>
+    </a-pagination>
   </div>
 </template>
 <style scoped>

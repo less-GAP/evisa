@@ -6,7 +6,7 @@ COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 COPY --from=node /opt /opt
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-RUN npm install vite -g
+RUN composer self-update
 RUN apt-get update && apt-get install procps libgmp-dev -y
 
 RUN docker-php-ext-configure pcntl --enable-pcntl \

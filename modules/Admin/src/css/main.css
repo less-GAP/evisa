@@ -1,3 +1,5 @@
+@import "ant-design-vue/dist/reset.css";
+
 @import "tailwind/_base.css";
 @import "tailwind/_components.css";
 @import "tailwind/_utilities.css";
@@ -6,6 +8,7 @@
 @import "_progress.css";
 @import "_scrollbars.css";
 @import "_table.css";
+
 .ant-btn-primary {
   color: #fff;
   background-color: #1677ff;
