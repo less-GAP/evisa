@@ -16,15 +16,6 @@ const routes = [
   },
   {
     meta: {
-      title: "Users",
-
-    },
-    path: "/users",
-    name: "users",
-    component: () => import("@/views/users/index.vue"),
-  },
-  {
-    meta: {
       title: "Products",
     },
     path: "/products",
@@ -33,8 +24,23 @@ const routes = [
   },
   {
     meta: {
+      title: "Product Detail",
+    },
+    path: "/products/:id",
+    name: "product-detail",
+    component: () => import("@/views/products/ProductView.vue"),
+  },
+  {
+    meta: {
+      title: "Users",
+    },
+    path: "/users",
+    name: "users",
+    component: () => import("@/views/users/index.vue"),
+  },
+  {
+    meta: {
       title: "User Detail",
-
     },
     path: "/users/:id",
     name: "user-detail",

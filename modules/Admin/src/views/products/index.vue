@@ -17,6 +17,10 @@
   import {Modal, DataTable} from "@/components";
   import {DeleteOutlined} from '@ant-design/icons-vue';
 
+  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+
+
+
   import Api from "@/utils/Api";
   import router from "@/router";
   import FormDetail from "./FormDetail.vue";
@@ -33,7 +37,8 @@
   const tableConfig = {
     api: (params) => Api.get('product/list', {params}),
     addAction: (reload) => {
-      showEditUser({}, reload)
+      //showEditUser({}, reload)
+      router.push('/products/0')
     },
     itemActions: [
       {
@@ -149,7 +154,6 @@
   </LayoutAuthenticated>
 
   <FormDetail :value="editProduct" :isShowModal="isShowModal"></FormDetail>
-
 
 
 </template>
