@@ -1,5 +1,5 @@
-<script setup>
-  import {reactive} from "vue";
+<script lang="ts" setup>
+  import {reactive, ref} from "vue";
   import {useMainStore} from "@/stores/main";
   import {
     mdiAccount,
@@ -19,7 +19,12 @@
   import UserCard from "@/components/UserCard.vue";
   import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
   import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+
+  import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+
   import router from "@/router";
+
+  import Api from "@/utils/Api";
 
   import 'jodit/es5/jodit.css';
 
@@ -28,6 +33,10 @@
   const mainStore = useMainStore();
 
   var id = router.currentRoute.value.params.id;
+
+  const loading = ref(false);
+
+  const imageUrl = '';
 
   const formState = reactive({});
 
@@ -39,6 +48,30 @@
   const back = () => {
     router.push('/products');
   };
+  import type { UploadProps } from 'ant-design-vue';
+  const fileList = ref<UploadProps['fileList']>([]);
+  const uploading = ref<boolean>(false);
+  const beforeUpload: UploadProps['beforeUpload'] = file => {
+    fileList.value = [...(fileList.value || []), file];
+    return false;
+  };
+
+  const handleChange = (data) =>{
+    console.log(data.file)
+    const formData = new FormData();
+    formData.append('image', data.file);
+    loading.value = true;
+    Api.post('product/uploadImage', formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(rs => {
+      loading.value = false;
+      fileList.value = [];
+    });
+
+  };
+
 </script>
 
 <template>
@@ -59,15 +92,14 @@
                     list-type="picture-card"
                     class="avatar-uploader"
                     :show-upload-list="false"
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     :before-upload="beforeUpload"
                     @change="handleChange"
                   >
-                    <img v-if="imageUrl" :src="imageUrl" alt="avatar"/>
+                    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
                     <div v-else>
                       <loading-outlined v-if="loading"></loading-outlined>
                       <plus-outlined v-else></plus-outlined>
-                      <div class="ant-upload-text">Tải lên</div>
+                      <div class="ant-upload-text">Upload</div>
                     </div>
                   </a-upload>
                 </a-form-item>

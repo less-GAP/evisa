@@ -17,9 +17,10 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::get('auth/userInfo', GetUserInfoAction::class . '@handle');
     Route::delete('user/{id}', DeleteUserAction::class . '@handle');
     Route::get('user/list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
-    Route::post('user/activeList', \Modules\Admin\Actions\User\PostActiveUserListAction::class . '@handle');
+    Route::post('user/activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
 
 
     Route::get('product/list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+    Route::post('product/uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
 
 });

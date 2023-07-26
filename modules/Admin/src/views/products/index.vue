@@ -19,8 +19,6 @@
 
   import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
 
-
-
   import Api from "@/utils/Api";
   import router from "@/router";
   import FormDetail from "./FormDetail.vue";
