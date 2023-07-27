@@ -17,10 +17,10 @@ return new class extends Migration {
             $table->string('slug')->index();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price')->nullable();
-            $table->decimal('sale_price')->nullable();
-            $table->decimal('point')->nullable();
-            $table->string('status')->nullable();
+            $table->decimal('price')->default(0);
+            $table->decimal('sale_price')->default(0);
+            $table->decimal('point')->default(0);
+            $table->string('status')->default('D');
             $table->string('type')->default('product')->index();
             $table->string('title')->nullable();
             $table->string('meta_description')->nullable();

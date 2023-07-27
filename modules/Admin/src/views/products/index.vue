@@ -40,20 +40,11 @@
     },
     itemActions: [
       {
-        label: 'View'
-        , key: 'view'
-        , icon: mdiEye
-        , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-        , action(item, reload) {
-          router.push('/users/' + item.id)
-        }
-      },
-      {
-        label: 'Edit User'
+        label: 'Edit'
         , key: 'edit'
         , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
         , action(item, reload) {
-          showEditUser(item, reload)
+          router.push('/products/' + item.id)
         }
       },
       {
@@ -68,9 +59,34 @@
 
     ],
     columns: [
-      {title: 'Name', key: 'full_name'}
-      , {title: 'Position', key: 'position'}
-      , {title: 'Status', key: 'status'}
+      {
+        title: 'Hình ảnh',
+        key: 'image'
+      },
+      {
+        title: 'Loại sản phẩm',
+        key: 'type'
+      },
+      {
+        title: 'Tên sản phẩm',
+        key: 'name'
+      },
+      {
+        title: 'Giá niêm yết',
+        key: 'price'
+      },
+      {
+        title: 'Giá sản phẩm',
+        key: 'price'
+      },
+      {
+        title: 'Điểm thưởng(Point)',
+        key: 'point'
+      },
+      {
+        title: 'Status',
+        key: 'status'
+      }
     ],
     selectionActions: [
       {
@@ -131,18 +147,30 @@
             </a-button>
           </a-popconfirm>
         </template>
-        <template #cell[full_name]="{item,column}">
-          <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-               :alt="item.full_name">
-          <div class="pl-3 float-left">
-            <div class="text-base font-semibold">{{ item.full_name }}</div>
-            <div class="font-normal text-gray-500">{{ item.email }}</div>
-          </div>
+        <template #cell[image]="{item,column}">
+          <img class="w-10 h-10 float-left rounded-full" :src="item.image_url"
+               :alt="item.name"/>
         </template>
-        <template #cell[status]>
-          <div class="flex items-center">
+        <template #cell[type]="{item,column}">
+          {{item.type == 'product' ? 'Sản phẩm' : 'Gói sản phẩm'}}
+        </template>
+        <template #cell[name]="{item,column}">
+          {{item.name}}
+        </template>
+        <template #cell[price]="{item,column}">
+          {{item.price}}
+        </template>
+        <template #cell[sale_price]="{item,column}">
+          {{item.sale_price}}
+        </template>
+        <template #cell[status]="{item,column}">
+          <div class="flex items-center" v-if="item.status == 'D'">
             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-            Offline
+            Tắt
+          </div>
+          <div class="flex items-center" v-else>
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+            Hoạt động
           </div>
         </template>
       </DataTable>
