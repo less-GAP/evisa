@@ -19,5 +19,5 @@ yarn-error.log
 /.vscode
 /modules/Frontend/node_modules/
 /modules/Admin/node_modules/
-
 /storage/logs/
+/storage/upload/
