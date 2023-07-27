@@ -11,7 +11,6 @@ class GetProductListAction
 {
     public function handle(Request $request)
     {
-
         $query = Product::query();
         if ($search = $request->input('search')) {
             $query->where('name', 'like', '%' . $search . '%');

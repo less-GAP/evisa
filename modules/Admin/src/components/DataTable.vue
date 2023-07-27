@@ -188,15 +188,14 @@ reload()
           </slot>
 
         </td>
-        <td v-if="itemActions.length" class="px-6 item-actions py-4">
+        <td v-if="itemActions.length" class="px-6 item-actions py-2">
           <!-- Modal toggle -->
           <template v-for="itemAction in itemActions">
             <slot :name="'cellAction['+itemAction.key+']'"
                   v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
               <a-button
                 @click="itemAction.action(item,reload)"
-                :class="itemAction.class ||
-          'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
                 type="link"
               >
                 {{ itemAction.label }}

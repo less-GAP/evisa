@@ -9,12 +9,13 @@ class PostUploadImageAction
 {
     public function handle(Request $request)
     {
+        $fileInfo = [];
         $file = $request->file('image');
         if (!empty($file)) {
             $size = $file->getSize();
             $mimeType = $file->getClientMimeType();
             $extension = $file->guessClientExtension();
-            $fileName = 'products/' . uniqid() . '_' . \Str::slug(basename(str_replace($extension, '', $file->getClientOriginalName()))) . '.' . $extension;
+            $fileName = 'products/' . uniqid() . '-' . \Str::slug(basename(str_replace($extension, '', $file->getClientOriginalName()))) . '.' . $extension;
             $file->storeAs(
                 '', $fileName, ['disk' => 'upload']
             );

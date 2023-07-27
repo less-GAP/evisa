@@ -1,23 +1,12 @@
 <script setup>
   import {reactive, ref, h} from "vue";
-  import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
+  import {mdiBallotOutline, mdiDelete} from "@mdi/js";
   import SectionMain from "@/components/SectionMain.vue";
-  import CardBox from "@/components/CardBox.vue";
-  import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
-  import FormFilePicker from "@/components/FormFilePicker.vue";
-  import FormField from "@/components/FormField.vue";
-  import FormControl from "@/components/FormControl.vue";
-  import BaseDivider from "@/components/BaseDivider.vue";
-  import BaseButton from "@/components/BaseButton.vue";
-  import BaseButtons from "@/components/BaseButtons.vue";
-  import SectionTitle from "@/components/SectionTitle.vue";
   import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
   import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-  import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
   import {Modal, DataTable} from "@/components";
-  import {DeleteOutlined} from '@ant-design/icons-vue';
 
-  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+  import {PlusOutlined, LoadingOutlined, DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
 
   import Api from "@/utils/Api";
   import router from "@/router";
@@ -40,19 +29,20 @@
     },
     itemActions: [
       {
-        label: 'Edit'
-        , key: 'edit'
-        , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-        , action(item, reload) {
+        label: '',
+        class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline',
+        icon: mdiDelete,
+        key: 'edit',
+        action(item, reload) {
           router.push('/products/' + item.id)
         }
       },
       {
-        label: ''
-        , class: 'font-medium text-red-600 dark:text-red-500 hover:underline'
-        , icon: mdiDelete
-        , key: 'delete'
-        , action(item, reload) {
+        label: '',
+        class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
+        icon: mdiDelete,
+        key: 'delete',
+        action(item, reload) {
           Api.delete('user/' + item.id).then(reload)
         }
       }
@@ -147,8 +137,18 @@
             </a-button>
           </a-popconfirm>
         </template>
+        <template #cellAction[edit]="{item,actionMethod}">
+          <a-button
+            type="text"
+            :icon="h(FormOutlined)"
+            label=""
+            :outline="true"
+            @click="actionMethod"
+          >
+          </a-button>
+        </template>
         <template #cell[image]="{item,column}">
-          <img class="w-10 h-10 float-left rounded-full" :src="item.image_url"
+          <img class="w-20 h-auto float-left rounded-full" :src="item.image_url"
                :alt="item.name"/>
         </template>
         <template #cell[type]="{item,column}">

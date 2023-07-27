@@ -11,16 +11,16 @@ class PostProductAction
     public function handle(Request $request)
     {
         $data = $request->all();
+
         try {
             $product = new Product();
             if (isset($data['id']) && $data['id'] > 0) {
-                $product::find($data['id']);
+                $product = Product::find($data['id']);
             }
 
             if (!isset($data['slug']) || $data['slug'] == '') {
                 $data['slug'] = \Str::slug($data['name']);
             }
-
 
             $product->fill($data);
             $product->save();

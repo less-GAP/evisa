@@ -1,98 +1,128 @@
 <script lang="ts" setup>
-  import {reactive, ref, toRaw} from "vue";
-  import {useMainStore} from "@/stores/main";
-  import {
-    mdiAccount,
-    mdiMail,
-    mdiAsterisk,
-    mdiFormTextboxPassword,
-    mdiGithub,
-  } from "@mdi/js";
-  import SectionMain from "@/components/SectionMain.vue";
+import {reactive, ref, toRaw} from "vue";
+import {useMainStore} from "@/stores/main";
+import {
+  mdiAccount,
+  mdiMail,
+  mdiAsterisk,
+  mdiFormTextboxPassword,
+  mdiGithub,
+} from "@mdi/js";
+import SectionMain from "@/components/SectionMain.vue";
 
-  import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
-  import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
-  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
 
-  import router from "@/router";
+import router from "@/router";
 
-  import Api from "@/utils/Api";
+import Api from "@/utils/Api";
 
-  import 'jodit/es5/jodit.css';
+import 'jodit/es5/jodit.css';
 
-  import {JoditEditor} from 'jodit-vue';
+import {JoditEditor} from 'jodit-vue';
 
-  import {notification} from 'ant-design-vue';
+import {notification} from 'ant-design-vue';
 
-  const mainStore = useMainStore();
+import type {UploadProps} from 'ant-design-vue';
 
-  var id = router.currentRoute.value.params.id;
+const mainStore = useMainStore();
 
-  const loading = ref(false);
+const loading = ref(false);
 
-  const imageUrl = ref('');
+const formRef = ref();
 
-  const formRef = ref();
+const formState = reactive({});
 
-  const formState = reactive({});
+const fileList = ref<UploadProps['fileList']>([]);
 
-  const onFinish = () => {
+const uploading = ref<boolean>(false);
 
-    formRef.value
-      .validate()
-      .then(() => {
-        Api.post('product', toRaw(formState)).then(rs => {
-          notification[rs.data.code == 0 ? 'error' : 'success']({
-            message: 'Thông báo',
-            description: rs.data.message,
-          });
-
-          if (rs.data.code == 1) {
-            router.push('/products');
-          }
-        });
-      })
-      .catch(error => {
-        notification['error']({
-          message: 'Thông báo',
-          description: error,
-        });
-      });
-  };
-
-  const back = () => {
-    router.push('/products');
-  };
-  import type {UploadProps} from 'ant-design-vue';
-
-  const fileList = ref<UploadProps['fileList']>([]);
-  const uploading = ref<boolean>(false);
-  const beforeUpload: UploadProps['beforeUpload'] = file => {
+var id = router.currentRoute.value.params.id;
+if(id > 0){
+  Api.get('product/' + id).then(rs => {
+    var product = rs.data.data;
+    formState.id = product.id;
+    formState.name = product.name;
+    formState.type = product.type;
+    formState.status = product.status;
+    formState.sale_price = product.sale_price;
+    formState.price = product.price;
+    formState.point = product.point;
+    formState.short_description = product.short_description;
+    formState.slug = product.slug;
+    formState.title = product.title;
+    formState.meta_description = product.meta_description;
+    formState.meta_keyword = product.meta_keyword;
+    formState.description = product.description;
+    formState.image = product.image;
+    var file = {
+      uid: '-1',
+      name: product.image,
+      url: product.image_url,
+    };
     fileList.value = [...(fileList.value || []), file];
-    return false;
-  };
+  });
+}
 
-  const handleChange = (data) => {
-    //console.log(data.file)
-    const formData = new FormData();
-    formData.append('image', data.file);
-    loading.value = true;
-    Api.post('product/uploadImage', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(rs => {
-      if (rs.data.url != '') {
-        formState.file = rs.data;
-        formState.image = rs.data.name;
-        imageUrl.value = rs.data.url;
-      }
-      loading.value = false;
-      fileList.value = [];
+const onFinish = () => {
+  formRef.value
+    .validate()
+    .then(() => {
+      Api.post('product', toRaw(formState)).then(rs => {
+        notification[rs.data.code == 0 ? 'error' : 'success']({
+          message: 'Thông báo',
+          description: rs.data.message,
+        });
+
+        if (rs.data.code == 1) {
+          router.push('/products');
+        }
+      });
+    })
+    .catch(error => {
+      notification['error']({
+        message: 'Thông báo',
+        description: error,
+      });
     });
-  };
+};
+
+const back = () => {
+  router.push('/products');
+};
+
+
+const beforeUpload: UploadProps['beforeUpload'] = file => {
+  fileList.value = [...(fileList.value || []), file];
+  return false;
+};
+
+const handlePreview = (data) => {
+
+}
+
+const handleChange = (data) => {
+  //console.log(data.file)
+  const formData = new FormData();
+  formData.append('image', data.file);
+  loading.value = true;
+  Api.post('product/uploadImage', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }).then(rs => {
+    if (rs.data.url != '') {
+      formState.file = rs.data;
+      formState.image = rs.data.name;
+      //imageUrl.value = rs.data.url;
+    }
+    loading.value = false;
+    //fileList.value = [];
+  });
+};
 
 
 </script>
@@ -111,22 +141,25 @@
             <a-row :gutter="20">
               <a-col :span="24">
                 <a-form-item label="Hình ảnh">
-                  <a-upload
-                    v-model:file-list="fileList"
-                    name="avatar"
-                    list-type="picture-card"
-                    class="avatar-uploader"
-                    :show-upload-list="false"
-                    :before-upload="beforeUpload"
-                    @change="handleChange"
-                  >
-                    <img v-if="imageUrl" :src="imageUrl" alt="avatar"/>
-                    <div v-else>
-                      <loading-outlined v-if="loading"></loading-outlined>
-                      <plus-outlined v-else></plus-outlined>
-                      <div class="ant-upload-text">Upload</div>
-                    </div>
-                  </a-upload>
+                  <div class="clearfix">
+                    <a-upload
+                      v-model:file-list="fileList"
+                      name="avatar"
+                      list-type="picture-card"
+                      :before-upload="beforeUpload"
+                      @change="handleChange"
+                      @preview="handlePreview"
+                      :max-count="1"
+                      :show-upload-list="true"
+                    >
+
+                      <div>
+                        <loading-outlined v-if="loading"></loading-outlined>
+                        <plus-outlined v-else></plus-outlined>
+                        <div style="margin-top: 8px">Tải lên</div>
+                      </div>
+                    </a-upload>
+                  </div>
                 </a-form-item>
               </a-col>
               <a-col :span="12">
@@ -142,7 +175,10 @@
                 </a-form-item>
               </a-col>
               <a-col :span="12">
-                <a-form-item label="Tình trạng">
+                <a-form-item label="Tình trạng"
+                             name="status"
+                             :rules="[{ required: true, message: 'Vui lòng chọn tình trạng!' }]"
+                >
                   <a-select v-model:value="formState.status" placeholder="">
                     <a-select-option value="A">Hoạt động</a-select-option>
                     <a-select-option value="D">Tắt</a-select-option>
@@ -150,12 +186,18 @@
                 </a-form-item>
               </a-col>
               <a-col :span="24">
-                <a-form-item label="Tên sản phẩm">
+                <a-form-item label="Tên sản phẩm"
+                             name="name"
+                             :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
+                >
                   <a-input v-model:value="formState.name" placeholder="Nhập.." class="text-xs"/>
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item label="Giá bán">
+                <a-form-item label="Giá bán"
+                             name="sale_price"
+                             :rules="[{ required: true, message: 'Vui lòng nhập giá bán sản phẩm!' }]"
+                >
                   <a-input-number v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"
                                   :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
                                   :parser="value => value.replace(/\$\s?|(,*)/g, '')"
@@ -221,8 +263,8 @@
 </template>
 
 <style>
-  .ant-input {
-    border-color: #d9d9d9 !important;
-    border-radius: 5px !important;
-  }
+.ant-input {
+  border-color: #d9d9d9 !important;
+  border-radius: 5px !important;
+}
 </style>
