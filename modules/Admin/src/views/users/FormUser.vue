@@ -1,5 +1,6 @@
 <script setup>
 import {reactive, ref} from "vue";
+import Api from "@/utils/Api";
 
 const props = defineProps({
   value: Object
@@ -17,7 +18,7 @@ const validateMessages = {
 };
 
 const emit = defineEmits(["success", "cancel"]);
-
+const loading = ref(false)
 const formState = reactive(props.value || {
   isNew: true,
   full_name: "",
@@ -36,8 +37,10 @@ const formConfig = reactive({
   "validate-messages": validateMessages,
 });
 
-const submit = function () {
-  emit('success')
+const submit =async function () {
+  loading.value=true
+  const result = await Api.post('user',formState.value)
+  emit('success' ,result.data)
 }
 const cancel = function () {
   emit('cancel')
@@ -52,18 +55,35 @@ const cancel = function () {
     v-bind="formConfig"
     @finish="submit"
   >
-    <a-form-item name="name" label="Name" :rules="[{ required: true }]">
-      <a-input v-model:value="formState.name"/>
+    <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.full_name"/>
     </a-form-item>
-    <a-form-item name="'email'" label="Email" :rules="[{ type: 'email',required: true  }]">
+    <a-form-item name="email" label="Email" :rules="[{ type: 'email',required: true  }]">
       <a-input v-model:value="formState.email"/>
     </a-form-item>
-    <a-form-item name="age" label="Age" :rules="[{ type: 'number', min: 0, max: 99 }]">
-      <a-input-number v-model:value="formState.age"/>
+    <a-form-item label="Role" name="role">
+      <a-radio-group v-model:value="formState.role">
+        <a-radio value="user" name="type">User</a-radio>
+        <a-radio value="admin" name="type">Admin</a-radio>
+      </a-radio-group>
     </a-form-item>
-    <a-form-item >
-      <a-button type="primary" html-type="submit">Submit</a-button>
-      <a-button @click="cancel" html-type="button">Cancel</a-button>
+    <a-form-item
+      label="Password"
+      name="password"
+      :rules="[{ required: true, message: 'Please input your password!' }]"
+    >
+      <a-input-password v-model:value="formState.password">
+        <template #prefix>
+          <LockOutlined class="site-form-item-icon" />
+        </template>
+      </a-input-password>
+    </a-form-item>
+
+    <a-form-item>
+      <a-space>
+        <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
+        <a-button @click="cancel" html-type="button">Cancel</a-button>
+      </a-space>
     </a-form-item>
   </a-form>
 

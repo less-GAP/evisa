@@ -11,16 +11,20 @@ Route::get('/', function () {
 Route::post('auth/login', \Modules\Admin\Actions\Auth\PostLoginAction::class . '@handle');
 
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
-    Route::get('/auth', function () {
-        return 'admin authed';
+
+    Route::prefix('/auth')->group(function () {
+        Route::get('userInfo', GetUserInfoAction::class . '@handle');
+
     });
-    Route::get('auth/userInfo', GetUserInfoAction::class . '@handle');
-    Route::delete('user/{id}', DeleteUserAction::class . '@handle');
-    Route::get('user/list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
-    Route::post('user/activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
+    Route::prefix('/user')->group(function () {
+        Route::delete('{id}', DeleteUserAction::class . '@handle');
+        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
+    });
+    Route::prefix('/product')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+    });
 
-
-    Route::get('product/list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
-    Route::post('product/uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
 
 });

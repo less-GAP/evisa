@@ -113,6 +113,7 @@ reload()
       <a-input
         allow-clear
         @keyup.enter="reload"
+        @change="reload"
         style="max-width: 300px"
         v-model:value="search"
         placeholder="Enter to search..."

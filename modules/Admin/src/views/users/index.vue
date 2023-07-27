@@ -21,15 +21,19 @@ import Api from "@/utils/Api";
 import router from "@/router";
 import FormUser from "./FormUser.vue";
 
-const isShowModal = ref(false)
 
 
-const editUserState = ref(null);
+const modalState = ref({
+  visible:false,
+  value:null,
+  success:()=>{},
+  cancel:()=>{},
+});
 
-function showEditUser(user, reload) {
-  isShowModal.value = true;
-  editUserState.value = {user, reload};
-
+function showEditUser(value, success) {
+  modalState.value.visible = true;
+  modalState.value.value = value;
+  modalState.value.success = success;
 }
 
 const tableConfig = {
@@ -68,7 +72,7 @@ const tableConfig = {
   ],
   columns: [
     {title: 'Name', key: 'full_name'}
-    , {title: 'Position', key: 'position'}
+    , {title: 'Role', key: 'role'}
     , {title: 'Status', key: 'status'}
   ],
   selectionActions: [
@@ -109,7 +113,6 @@ const tableConfig = {
         title="User Management"
         main
       >
-
       </SectionTitleLineWithButton>
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
@@ -151,8 +154,8 @@ const tableConfig = {
     </SectionMain>
 
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:open="isShowModal">
-    <FormUser v-if="editUserState" @success="isShowModal=false;editUserState.reload()" @cancel="isShowModal=false"
-              :user="editUserState.value"></FormUser>
+  <a-modal :footer="null" width="800px" v-model:open="modalState.visible">
+    <FormUser v-if="modalState.visible" @success="isShowModal=false;modalState.reload()" @cancel="modalState.visible=false"
+              :value="modalState.value"></FormUser>
   </a-modal>
 </template>
