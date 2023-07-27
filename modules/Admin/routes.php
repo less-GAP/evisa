@@ -24,6 +24,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::prefix('/product')->group(function () {
         Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
         Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
     });
 
 

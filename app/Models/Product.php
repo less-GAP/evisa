@@ -21,6 +21,7 @@ class Product extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'image',
         'name',
         'type',
         'slug',
@@ -28,6 +29,11 @@ class Product extends Model
         'description',
         'price',
         'sale_price',
+        'point',
+        'status',
+        'title',
+        'meta_description',
+        'meta_keyword'
     ];
 
     /**
@@ -51,6 +57,14 @@ class Product extends Model
     ];
 
     protected $appends = [
-//        'profile_photo_url'
+        'image_url'
     ];
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image != '') {
+            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
+        }
+        return '';
+    }
 }

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import {reactive, ref} from "vue";
+  import {reactive, ref, toRaw} from "vue";
   import {useMainStore} from "@/stores/main";
   import {
     mdiAccount,
@@ -9,18 +9,12 @@
     mdiGithub,
   } from "@mdi/js";
   import SectionMain from "@/components/SectionMain.vue";
-  import CardBox from "@/components/CardBox.vue";
-  import BaseDivider from "@/components/BaseDivider.vue";
-  import FormField from "@/components/FormField.vue";
-  import FormControl from "@/components/FormControl.vue";
-  import FormFilePicker from "@/components/FormFilePicker.vue";
-  import BaseButton from "@/components/BaseButton.vue";
-  import BaseButtons from "@/components/BaseButtons.vue";
-  import UserCard from "@/components/UserCard.vue";
+
   import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+
   import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
-  import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
 
   import router from "@/router";
 
@@ -30,25 +24,49 @@
 
   import {JoditEditor} from 'jodit-vue';
 
+  import {notification} from 'ant-design-vue';
+
   const mainStore = useMainStore();
 
   var id = router.currentRoute.value.params.id;
 
   const loading = ref(false);
 
-  const imageUrl = '';
+  const imageUrl = ref('');
+
+  const formRef = ref();
 
   const formState = reactive({});
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    console.log('formState: ', formState);
+  const onFinish = () => {
+
+    formRef.value
+      .validate()
+      .then(() => {
+        Api.post('product', toRaw(formState)).then(rs => {
+          notification[rs.data.code == 0 ? 'error' : 'success']({
+            message: 'Thông báo',
+            description: rs.data.message,
+          });
+
+          if (rs.data.code == 1) {
+            router.push('/products');
+          }
+        });
+      })
+      .catch(error => {
+        notification['error']({
+          message: 'Thông báo',
+          description: error,
+        });
+      });
   };
 
   const back = () => {
     router.push('/products');
   };
-  import type { UploadProps } from 'ant-design-vue';
+  import type {UploadProps} from 'ant-design-vue';
+
   const fileList = ref<UploadProps['fileList']>([]);
   const uploading = ref<boolean>(false);
   const beforeUpload: UploadProps['beforeUpload'] = file => {
@@ -56,21 +74,26 @@
     return false;
   };
 
-  const handleChange = (data) =>{
-    console.log(data.file)
+  const handleChange = (data) => {
+    //console.log(data.file)
     const formData = new FormData();
     formData.append('image', data.file);
     loading.value = true;
-    Api.post('product/uploadImage', formData,{
+    Api.post('product/uploadImage', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     }).then(rs => {
+      if (rs.data.url != '') {
+        formState.file = rs.data;
+        formState.image = rs.data.name;
+        imageUrl.value = rs.data.url;
+      }
       loading.value = false;
       fileList.value = [];
     });
-
   };
+
 
 </script>
 
@@ -78,7 +101,9 @@
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiAccount" :title="id == '0' ? 'Thêm sản phẩm' : 'Cập nhật sản phẩm'" main></SectionTitleLineWithButton>
-      <a-form layout="vertical" :model="formState"
+      <a-form layout="vertical"
+              ref="formRef"
+              :model="formState"
               @finish="onFinish"
       >
         <a-tabs class="mt-2">
@@ -95,7 +120,7 @@
                     :before-upload="beforeUpload"
                     @change="handleChange"
                   >
-                    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+                    <img v-if="imageUrl" :src="imageUrl" alt="avatar"/>
                     <div v-else>
                       <loading-outlined v-if="loading"></loading-outlined>
                       <plus-outlined v-else></plus-outlined>
@@ -131,17 +156,27 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item label="Giá bán">
-                  <a-input v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"/>
+                  <a-input-number v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                                  style="width: 100%"
+                  />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="Giá niêm yết">
-                  <a-input v-model:value="formState.price" placeholder="Nhập.." class="text-xs"/>
+                  <a-input-number v-model:value="formState.price" placeholder="Nhập.." class="text-xs" style="width: 100%"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                  />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="Điểm thưởng">
-                  <a-input v-model:value="formState.point" placeholder="Nhập.." class="text-xs"/>
+                  <a-input-number v-model:value="formState.point" placeholder="Nhập.." class="text-xs" style="width: 100%"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                  />
                 </a-form-item>
               </a-col>
               <a-col :span="24">

@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('image')->index();
             $table->string('name')->index();
-            $table->string('type')->default('product')->index();
             $table->string('slug')->index();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
@@ -22,6 +21,10 @@ return new class extends Migration {
             $table->decimal('sale_price')->nullable();
             $table->decimal('point')->nullable();
             $table->string('status')->nullable();
+            $table->string('type')->default('product')->index();
+            $table->string('title')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('meta_keyword')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
