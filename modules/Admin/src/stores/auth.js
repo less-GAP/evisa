@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import Api from "@/utils/Api";
+import router from "@/router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -13,6 +14,7 @@ export const useAuthStore = defineStore("auth", {
     },
     logout() {
       this.user = null
+      router.go('/login')
     },
     isLogin() {
       return this.user != null

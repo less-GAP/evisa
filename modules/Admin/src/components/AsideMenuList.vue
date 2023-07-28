@@ -1,5 +1,7 @@
 <script setup>
 import AsideMenuItem from "@/components/AsideMenuItem.vue";
+import {computed} from "vue";
+import {mdiLogout} from "@mdi/js";
 
 defineProps({
   isDropdownList: Boolean,
@@ -10,7 +12,11 @@ defineProps({
 });
 
 const emit = defineEmits(["menu-click"]);
-
+const logoutItem = computed(() => ({
+  label: "Logout",
+  icon: mdiLogout,
+  isLogout: true,
+}));
 const menuClick = (event, item) => {
   emit("menu-click", event, item);
 };
@@ -25,5 +31,7 @@ const menuClick = (event, item) => {
       :is-dropdown-list="isDropdownList"
       @menu-click="menuClick"
     />
+    <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
+
   </ul>
 </template>
