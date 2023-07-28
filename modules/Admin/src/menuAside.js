@@ -1,17 +1,11 @@
 import {
-  mdiAccountCircle,
   mdiMonitor,
-  mdiGithub,
-  mdiLock,
-  mdiAlertCircle,
-  mdiSquareEditOutline,
-  mdiTable,
-  mdiViewList,
-  mdiTelevisionGuide,
-  mdiResponsive,
-  mdiPalette,
-  mdiReact,
-  mdiContacts,
+  mdiCartOutline,
+  mdiArchiveOutline,
+  mdiVideoOutline,
+  mdiAccountSupervisorOutline,
+  mdiAccountCircleOutline,
+  mdiCogOutline
 } from "@mdi/js";
 
 export default [
@@ -23,17 +17,17 @@ export default [
   {
     to: "/orders",
     label: "Đơn hàng",
-    icon: mdiViewList,
+    icon: mdiCartOutline,
   },
   {
     to: "/products",
     label: "Sản phẩm",
-    icon: mdiContacts,
+    icon: mdiArchiveOutline,
   },
 
   {
     label: "Videos",
-    icon: mdiViewList,
+    icon: mdiVideoOutline,
     menu: [
       {
         to: "/videos",
@@ -47,7 +41,7 @@ export default [
   },
   {
     label: "Khách hàng",
-    icon: mdiViewList,
+    icon: mdiAccountSupervisorOutline,
     menu: [
       {
         to: "/customers",
@@ -62,7 +56,7 @@ export default [
   {
     to: "/users",
     label: "Người dùng",
-    icon: mdiContacts,
+    icon: mdiAccountCircleOutline,
   },
 
   // {
@@ -102,7 +96,7 @@ export default [
   // },
   {
     label: "Cấu hình",
-    icon: mdiViewList,
+    icon: mdiCogOutline,
     menu: [
       {
         label: "Hệ thống",

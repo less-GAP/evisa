@@ -35,16 +35,16 @@ myApp.use(Antd).mount("#app");
 // mainStore.fetch("history");
 
 /* App style */
-styleStore.setStyle(localStorage[styleKey] ?? "basic");
+//styleStore.setStyle(localStorage[styleKey] ?? "basic");
 
 /* Dark mode */
-if (
-  (!localStorage[darkModeKey] &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches) ||
-  localStorage[darkModeKey] === "1"
-) {
-  styleStore.setDarkMode(true);
-}
+// if (
+//   (!localStorage[darkModeKey] &&
+//     window.matchMedia("(prefers-color-scheme: dark)").matches) ||
+//   localStorage[darkModeKey] === "1"
+// ) {
+//   styleStore.setDarkMode(true);
+// }
 
 /* Default title tag */
 const defaultDocumentTitle = "";
