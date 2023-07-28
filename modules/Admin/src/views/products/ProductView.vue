@@ -1,128 +1,173 @@
 <script lang="ts" setup>
-import {reactive, ref, toRaw} from "vue";
-import {useMainStore} from "@/stores/main";
-import {
-  mdiAccount,
-  mdiMail,
-  mdiAsterisk,
-  mdiFormTextboxPassword,
-  mdiGithub,
-} from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
+  import {reactive, ref, toRaw} from "vue";
+  import {useMainStore} from "@/stores/main";
+  import {
+    mdiAccount,
+    mdiMail,
+    mdiAsterisk,
+    mdiFormTextboxPassword,
+    mdiGithub,
+  } from "@mdi/js";
+  import SectionMain from "@/components/SectionMain.vue";
 
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+  import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+  import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
-import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
 
-import router from "@/router";
+  import router from "@/router";
 
-import Api from "@/utils/Api";
+  import Api from "@/utils/Api";
 
-import 'jodit/es5/jodit.css';
+  import 'jodit/es5/jodit.css';
 
-import {JoditEditor} from 'jodit-vue';
+  import {JoditEditor} from 'jodit-vue';
 
-import {notification} from 'ant-design-vue';
+  import {notification} from 'ant-design-vue';
 
-import type {UploadProps} from 'ant-design-vue';
+  import type {UploadProps} from 'ant-design-vue';
 
-const mainStore = useMainStore();
+  import ProductList from "./ProductList.vue";
 
-const loading = ref(false);
+  const mainStore = useMainStore();
 
-const formRef = ref();
+  const loading = ref(false);
 
-const formState = reactive({});
+  const activeKey = ref('1');
 
-const fileList = ref<UploadProps['fileList']>([]);
+  const formRef = ref();
 
-const uploading = ref<boolean>(false);
+  const formState = ref({});
 
-var id = router.currentRoute.value.params.id;
-if(id > 0){
-  Api.get('product/' + id).then(rs => {
-    var product = rs.data.data;
-    formState.id = product.id;
-    formState.name = product.name;
-    formState.type = product.type;
-    formState.status = product.status;
-    formState.sale_price = product.sale_price;
-    formState.price = product.price;
-    formState.point = product.point;
-    formState.short_description = product.short_description;
-    formState.slug = product.slug;
-    formState.title = product.title;
-    formState.meta_description = product.meta_description;
-    formState.meta_keyword = product.meta_keyword;
-    formState.description = product.description;
-    formState.image = product.image;
-    var file = {
-      uid: '-1',
-      name: product.image,
-      url: product.image_url,
-    };
-    fileList.value = [...(fileList.value || []), file];
-  });
-}
+  const fileList = ref<UploadProps['fileList']>([]);
 
-const onFinish = () => {
-  formRef.value
-    .validate()
-    .then(() => {
-      Api.post('product', toRaw(formState)).then(rs => {
-        notification[rs.data.code == 0 ? 'error' : 'success']({
-          message: 'Thông báo',
-          description: rs.data.message,
-        });
+  const uploading = ref<boolean>(false);
 
-        if (rs.data.code == 1) {
-          router.push('/products');
-        }
-      });
-    })
-    .catch(error => {
-      notification['error']({
-        message: 'Thông báo',
-        description: error,
-      });
+  const isShowModal = ref(false)
+
+  var id = router.currentRoute.value.params.id;
+  if (id > 0) {
+    loading.value = true
+    Api.get('product/' + id).then(rs => {
+      var product = rs.data.data;
+      formState.value = product
+      var file = {
+        uid: '-1',
+        name: product.image,
+        url: product.image_url,
+      };
+      fileList.value = [...(fileList.value || []), file];
+      loading.value = false
+
     });
-};
+  }
 
-const back = () => {
-  router.push('/products');
-};
+  const onFinish = () => {
+    formRef.value
+      .validate()
+      .then(() => {
+        Api.post('product', toRaw(formState)).then(rs => {
+          notification[rs.data.code == 0 ? 'error' : 'success']({
+            message: 'Thông báo',
+            description: rs.data.message,
+          });
+
+          if (rs.data.code == 1) {
+            router.push('/products');
+          }
+        });
+      })
+      .catch(error => {
+        notification['error']({
+          message: 'Thông báo',
+          description: error,
+        });
+      });
+  };
+
+  const back = () => {
+    router.push('/products');
+  };
 
 
-const beforeUpload: UploadProps['beforeUpload'] = file => {
-  fileList.value = [...(fileList.value || []), file];
-  return false;
-};
+  const beforeUpload: UploadProps['beforeUpload'] = file => {
+    fileList.value = [...(fileList.value || []), file];
+    return false;
+  };
 
-const handlePreview = (data) => {
+  const handlePreview = (data) => {
 
-}
+  }
 
-const handleChange = (data) => {
-  //console.log(data.file)
-  const formData = new FormData();
-  formData.append('image', data.file);
-  loading.value = true;
-  Api.post('product/uploadImage', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
+  const handleChange = (data) => {
+    //console.log(data.file)
+    const formData = new FormData();
+    formData.append('image', data.file);
+    loading.value = true;
+    Api.post('product/uploadImage', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then(rs => {
+      if (rs.data.url != '') {
+        formState.value.file = rs.data;
+        formState.value.image = rs.data.name;
+        //imageUrl.value = rs.data.url;
+      }
+      loading.value = false;
+      //fileList.value = [];
+    });
+  };
+
+
+  const dataSource = ref([]);
+
+  const columns = ref([
+    {
+      title: 'Hình ảnh',
+      dataIndex: 'image',
+      key: 'image',
+      class: 'text-left'
+    },
+    {
+      title: 'Tên sản phẩm',
+      dataIndex: 'name',
+      key: 'name',
+
+    },
+    {
+      title: 'Giá bán',
+      dataIndex: 'sale_price',
+      key: 'sale_price',
+
+    },
+    {
+      title: 'Điểm thưởng',
+      dataIndex: 'point',
+      key: 'point',
+
+    },
+    {
+      title: 'Action',
+      key: 'action',
+
+    },
+  ]);
+
+  const tabActive = (val) => {
+    if (val == 2) { //load danh sach san pham
+
     }
-  }).then(rs => {
-    if (rs.data.url != '') {
-      formState.file = rs.data;
-      formState.image = rs.data.name;
-      //imageUrl.value = rs.data.url;
-    }
-    loading.value = false;
-    //fileList.value = [];
-  });
-};
+  };
+
+  const handleAdd = () => {
+    isShowModal.value = true;
+  };
+
+  const selectProduct = (selects) => {
+    console.log(selects);
+  }
 
 
 </script>
@@ -136,7 +181,7 @@ const handleChange = (data) => {
               :model="formState"
               @finish="onFinish"
       >
-        <a-tabs class="mt-2">
+        <a-tabs class="mt-2" v-model:activeKey="activeKey" @change="tabActive">
           <a-tab-pane key="1" tab="Thông tin chung">
             <a-row :gutter="20">
               <a-col :span="24">
@@ -226,7 +271,7 @@ const handleChange = (data) => {
                   <a-textarea v-model:value="formState.short_description" placeholder="Nhập..." :rows="4"/>
                 </a-form-item>
                 <a-form-item label="Mô tả">
-                  <jodit-editor style="height: 50vh" v-model="formState.description" :config="{
+                  <jodit-editor v-if="!loading" style="height: 50vh" v-model="formState.description" :config="{
                 iframe:true,
                  height: '50vh',
               }"/>
@@ -234,7 +279,11 @@ const handleChange = (data) => {
               </a-col>
             </a-row>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="Thông tin thêm">
+          <a-tab-pane key="2" tab="Sản phẩm trong gói" >
+            <a-button type="primary" style="margin-bottom: 8px" @click="handleAdd" class="float-right" ghost>Thêm</a-button>
+            <a-table :dataSource="dataSource" :columns="columns"/>
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="Thông tin thêm">
             <a-row :gutter="20">
               <a-col :span="24">
                 <a-form-item label="Link SEO">
@@ -260,11 +309,15 @@ const handleChange = (data) => {
       </a-form>
     </SectionMain>
   </LayoutAuthenticated>
+
+  <a-modal v-model:open="isShowModal" width="70%" title="Danh sách sản phẩm" :footer="null">
+    <ProductList @submit="selectProduct"></ProductList>
+  </a-modal>
 </template>
 
 <style>
-.ant-input {
-  border-color: #d9d9d9 !important;
-  border-radius: 5px !important;
-}
+  .ant-input {
+    border-color: #d9d9d9 !important;
+    border-radius: 5px !important;
+  }
 </style>
