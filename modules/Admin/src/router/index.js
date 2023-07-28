@@ -16,6 +16,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Orders",
+    },
+    path: "/orders",
+    name: "orders",
+    component: () => import("@/views/orders/index.vue"),
+  },
+  {
+    meta: {
       title: "Products",
     },
     path: "/products",
@@ -29,6 +37,38 @@ const routes = [
     path: "/products/:id",
     name: "product-detail",
     component: () => import("@/views/products/ProductView.vue"),
+  },
+  {
+    meta: {
+      title: "Videos",
+    },
+    path: "/videos",
+    name: "videos",
+    component: () => import("@/views/videos/index.vue"),
+  },
+  {
+    meta: {
+      title: "Series",
+    },
+    path: "/series",
+    name: "series",
+    component: () => import("@/views/series/index.vue"),
+  },
+  {
+    meta: {
+      title: "Customers",
+    },
+    path: "/customers",
+    name: "customers",
+    component: () => import("@/views/customers/index.vue"),
+  },
+  {
+    meta: {
+      title: "Customer type",
+    },
+    path: "/customer-type",
+    name: "customer-type",
+    component: () => import("@/views/customer-type/index.vue"),
   },
   {
     meta: {

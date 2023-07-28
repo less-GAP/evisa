@@ -1,0 +1,90 @@
+<script setup>
+import {reactive, ref} from "vue";
+import Api from "@/utils/Api";
+
+const props = defineProps({
+  value: Object
+})
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    email: '${label} is not a valid email!',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
+
+const emit = defineEmits(["success", "cancel"]);
+const loading = ref(false)
+const formState = reactive(props.value || {
+  isNew: true,
+  full_name: "",
+  username: "",
+  email: "",
+  role: "user",
+  password: "",
+});
+
+const formConfig = reactive({
+  "validateTrigger": "submit",
+  "label-align": "top",
+  "model": formState,
+  labelCol: {span: 24},
+  wrapperCol: {span: 24},
+  "validate-messages": validateMessages,
+});
+
+const submit =async function () {
+  loading.value=true
+  const result = await Api.post('user',formState.value)
+  emit('success' ,result.data)
+}
+const cancel = function () {
+  emit('cancel')
+}
+
+
+</script>
+
+<template>
+
+  <a-form
+    v-bind="formConfig"
+    @finish="submit"
+  >
+    <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.full_name"/>
+    </a-form-item>
+    <a-form-item name="email" label="Email" :rules="[{ type: 'email',required: true  }]">
+      <a-input v-model:value="formState.email"/>
+    </a-form-item>
+    <a-form-item label="Role" name="role">
+      <a-radio-group v-model:value="formState.role">
+        <a-radio value="user" name="type">User</a-radio>
+        <a-radio value="admin" name="type">Admin</a-radio>
+      </a-radio-group>
+    </a-form-item>
+    <a-form-item
+      label="Password"
+      name="password"
+      :rules="[{ required: true, message: 'Please input your password!' }]"
+    >
+      <a-input-password v-model:value="formState.password">
+        <template #prefix>
+          <LockOutlined class="site-form-item-icon" />
+        </template>
+      </a-input-password>
+    </a-form-item>
+
+    <a-form-item>
+      <a-space>
+        <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
+        <a-button @click="cancel" html-type="button">Cancel</a-button>
+      </a-space>
+    </a-form-item>
+  </a-form>
+
+</template>
