@@ -15,6 +15,11 @@ class GetProductListAction
         if ($search = $request->input('search')) {
             $query->where('name', 'like', '%' . $search . '%');
         }
+
+        if ($request->input('type')) {
+            $query->where('type', $request->input('type'));
+        }
+
         return $query->paginate($request->input('perPage', 15));
     }
 }

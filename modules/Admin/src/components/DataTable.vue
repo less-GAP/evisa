@@ -1,97 +1,97 @@
 <script setup>
-import {computed, ref, h, toRaw} from "vue";
-import {useMainStore} from "@/stores/main";
-import {mdiEye, mdiTrashCan} from "@mdi/js";
-import {Button, Input} from "@/components/index";
-import BaseIcon from "@/components/BaseIcon.vue";
-import {DownOutlined} from "@ant-design/icons-vue";
+  import {computed, ref, h, toRaw} from "vue";
+  import {useMainStore} from "@/stores/main";
+  import {mdiEye, mdiTrashCan} from "@mdi/js";
+  import {Button, Input} from "@/components/index";
+  import BaseIcon from "@/components/BaseIcon.vue";
+  import {DownOutlined} from "@ant-design/icons-vue";
 
-const props = defineProps({
-  config: {
-    type: Object,
-    default: {
-      item_key: 'id'
-      , rowSelect: true
-    }
-  },
-  pagination: {
-    type: Object,
-    default: {
-      page: 1,
-      total: 0,
-      perPage: 10
-    }
-  },
-  showSizeChanger: {
-    type: Boolean,
-    default: true
-  },
-  params: {
-    type: Object,
-    default: {
-    }
-  },
-  columns: Array,
-  selectionActions: {
-    type: Array,
-    default: []
-  },
-  itemActions: {
-    type: Array,
-    default: []
-  },
-  api: Function,
-  addAction: Function,
-});
-const tableConfig = {
-  item_key: 'id'
-  , rowSelect: true
-  , ...props.config
-}
-const tableData = ref({})
-const search = ref('')
-
-function reset() {
-  props.pagination.page = 1
-  reload()
-}
-
-function reload() {
-  if (props.api) {
-    loading.value = true
-    props.api({perPage: props.pagination.perPage, page: props.pagination.page, ...props.params,search:search.value}).then(rs => {
-      tableData.value = rs.data
-      props.pagination.total = rs.data?.total ? rs.data.total : 0
-    }).finally(() => {
-      checkAll.value = false
-      loading.value = false
-    })
+  const props = defineProps({
+    config: {
+      type: Object,
+      default: {
+        item_key: 'id'
+        , rowSelect: true
+      }
+    },
+    pagination: {
+      type: Object,
+      default: {
+        page: 1,
+        total: 0,
+        perPage: 10
+      }
+    },
+    showSizeChanger: {
+      type: Boolean,
+      default: true
+    },
+    params: {
+      type: Object,
+      default: {}
+    },
+    columns: Array,
+    selectionActions: {
+      type: Array,
+      default: []
+    },
+    itemActions: {
+      type: Array,
+      default: []
+    },
+    api: Function,
+    addAction: Function,
+  });
+  const tableConfig = {
+    item_key: 'id'
+    , rowSelect: true
+    , ...props.config
   }
-}
+  const tableData = ref({})
+  const search = ref('')
 
-const loading = ref(false);
-const checkAll = ref(false);
-const selectedKeys = ref([])
-const selectedItems = ref([])
-
-async function doSelectionAction(action) {
-  const selectedKeys = selectedItems.value.map(item => item[tableConfig.item_key])
-  await (action.action(selectedKeys, selectedItems.value))
-  if (action.complete) {
-    action.complete()
+  function reset() {
+    props.pagination.page = 1
+    reload()
   }
-  selectedItems.value = []
-  reload()
-}
 
-function toggleCheckAll() {
-  if (checkAll.value) {
-    selectedItems.value = toRaw(tableData?.value.data || [])
-  } else {
+  function reload() {
+    if (props.api) {
+      loading.value = true
+      props.api({perPage: props.pagination.perPage, page: props.pagination.page, ...props.params, search: search.value}).then(rs => {
+        tableData.value = rs.data
+        props.pagination.total = rs.data?.total ? rs.data.total : 0
+      }).finally(() => {
+        checkAll.value = false
+        loading.value = false
+      })
+    }
+  }
+
+  const loading = ref(false);
+  const checkAll = ref(false);
+  const selectedKeys = ref([])
+  const selectedItems = ref([])
+
+  async function doSelectionAction(action) {
+    const selectedKeys = selectedItems.value.map(item => item[tableConfig.item_key])
+    await (action.action(selectedKeys, selectedItems.value))
+    if (action.complete) {
+      action.complete()
+    }
     selectedItems.value = []
+    reload()
   }
-}
-reload()
+
+  function toggleCheckAll() {
+    if (checkAll.value) {
+      selectedItems.value = toRaw(tableData?.value.data || [])
+    } else {
+      selectedItems.value = []
+    }
+  }
+
+  reload()
 
 </script>
 
@@ -119,13 +119,13 @@ reload()
         placeholder="Enter to search..."
         :loading="loading"
       />
-      <a-space>
+      <a-space v-if="selectionActions.length > 0">
 
         <a-dropdown :disabled="!selectedItems.length">
           <template #overlay>
             <a-menu>
               <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
-                         >
+              >
                 {{ action.title }}
               </a-menu-item>
 
@@ -182,7 +182,7 @@ reload()
         </td>
 
         <td v-for="column in columns"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            :class="'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ' + (column.class ? column.class : '')">
           <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
             {{ item[column.key] }}
           </slot>
@@ -219,7 +219,7 @@ reload()
   </div>
 </template>
 <style scoped>
-.item-actions > :not(:first-child) {
-  margin-left: 10px
-}
+  .item-actions > :not(:first-child) {
+    margin-left: 10px
+  }
 </style>

@@ -10,7 +10,10 @@
 
   import Api from "@/utils/Api";
   import router from "@/router";
+
   import FormDetail from "./FormDetail.vue";
+
+  import {notification} from "ant-design-vue";
 
   const isShowModal = ref(false)
 
@@ -43,7 +46,14 @@
         icon: mdiDelete,
         key: 'delete',
         action(item, reload) {
-          Api.delete('user/' + item.id).then(reload)
+          Api.delete('product/' + item.id).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          }).finally(() => {
+            reload;
+          });
         }
       }
 
@@ -51,7 +61,7 @@
     columns: [
       {
         title: 'Hình ảnh',
-        key: 'image'
+        key: 'image',
       },
       {
         title: 'Loại sản phẩm',
@@ -63,15 +73,18 @@
       },
       {
         title: 'Giá niêm yết',
-        key: 'price'
+        key: 'price',
+        class: 'text-right'
       },
       {
         title: 'Giá sản phẩm',
-        key: 'price'
+        key: 'price',
+        class: 'text-right'
       },
       {
         title: 'Điểm thưởng(Point)',
-        key: 'point'
+        key: 'point',
+        class: 'text-right'
       },
       {
         title: 'Status',
@@ -80,29 +93,48 @@
     ],
     selectionActions: [
       {
-        title: 'Active',
+        title: 'Hoạt động',
         action(selectedKeys) {
-          return Api.post('user/activeList', selectedKeys)
-        }, complete() {
-          alert('success')
-        }
-      }
-      , {
-        title: 'DeActive', action(selectedKeys) {
-          return Api.post('user/activeList', selectedKeys)
-        }, complete() {
-          alert('success')
-        }
-      }
-      , {
-        title: 'Delete',
-        action(selectedKeys) {
-          return Api.post('user/deleteList', selectedKeys)
+          return Api.post('product/activeList', {
+            'items': selectedKeys,
+            'status': 'A'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
         },
-        complete() {
-          alert('success')
-        }
-      }
+        // complete() {
+        //   alert('success')
+        // }
+      },
+      {
+        title: 'Tắt',
+        action(selectedKeys) {
+          return Api.post('product/activeList', {
+            'items': selectedKeys,
+            'status': 'D'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
+        },
+        // complete() {
+        //   alert('success')
+        // }
+      },
+      // {
+      //   title: 'Delete',
+      //   action(selectedKeys) {
+      //     return Api.post('user/deleteList', selectedKeys)
+      //   },
+      //   complete() {
+      //     alert('success')
+      //   }
+      // }
     ]
   }
 
@@ -121,14 +153,13 @@
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
-            title="Are you sure delete this user?"
+            title="Bạn muốn xóa sản phẩm này?"
             ok-text="Yes"
             cancel-text="No"
             @confirm="actionMethod"
           >
             <a-button
               type="text"
-              v-if="item.role !== 'admin'"
               danger
               :icon="h(DeleteOutlined)"
               label=""
@@ -180,6 +211,5 @@
   </LayoutAuthenticated>
 
   <FormDetail :value="editProduct" :isShowModal="isShowModal"></FormDetail>
-
 
 </template>
