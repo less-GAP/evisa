@@ -14,6 +14,7 @@ import piniaPersist from 'pinia-plugin-persist'
 import Api from "@/utils/Api";
 import {useTranslation} from "@/utils/Translation";
 import Antd from 'ant-design-vue';
+import {useAppStateStore} from "@/stores/appState";
 
 /* Init Pinia */
 const pinia = createPinia();
@@ -24,10 +25,12 @@ const myApp = createApp(App).use(router).use(pinia)
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
 const authStore = useAuthStore();
+const appState = useAppStateStore();
 const tranlation = useTranslation();
 myApp.config.globalProperties.$auth = authStore;
 myApp.config.globalProperties.$api = Api;
 myApp.config.globalProperties.$style = styleStore;
+myApp.config.globalProperties.$appState = appState;
 myApp.config.globalProperties.__ = tranlation.__;
 myApp.use(Antd).mount("#app");
 /* Fetch sample data */

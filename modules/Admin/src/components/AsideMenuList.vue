@@ -2,6 +2,8 @@
 import AsideMenuItem from "@/components/AsideMenuItem.vue";
 import {computed} from "vue";
 import {mdiLogout} from "@mdi/js";
+import router from "@/router";
+import {useAuthStore} from "@/stores/auth";
 
 defineProps({
   isDropdownList: Boolean,
@@ -17,8 +19,9 @@ const logoutItem = computed(() => ({
   icon: mdiLogout,
   isLogout: true,
 }));
-const menuClick = (event, item) => {
-  emit("menu-click", event, item);
+const logout = (event, item) => {
+  useAuthStore().$reset()
+  router.push('login')
 };
 </script>
 
@@ -31,7 +34,7 @@ const menuClick = (event, item) => {
       :is-dropdown-list="isDropdownList"
       @menu-click="menuClick"
     />
-    <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
+    <AsideMenuItem :item="logoutItem" @menu-click="logout" />
 
   </ul>
 </template>

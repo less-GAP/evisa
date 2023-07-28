@@ -6,6 +6,7 @@ import {mdiMinus, mdiPlus} from "@mdi/js";
 import {getButtonColor} from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AsideMenuList from "@/components/AsideMenuList.vue";
+import {useAppStateStore} from "@/stores/appState";
 
 const props = defineProps({
   item: {
@@ -37,6 +38,8 @@ const componentClass = computed(() => [
 const hasDropdown = computed(() => !!props.item.menu);
 
 const menuClick = (event) => {
+  useAppStateStore().showMenu=false
+
   emit("menu-click", event, props.item);
 
   if (hasDropdown.value) {
@@ -72,13 +75,8 @@ const menuClick = (event) => {
         ]"
       >{{ item.label }}</span
       >
-      <BaseIcon
-        v-if="hasDropdown"
-        :path="isDropdownActive ? mdiMinus : mdiPlus"
-        class="icon inline-block w-32 h-32 text-center"
-        :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
-        w="w-12"
-      />
+
+      <span v-if="hasDropdown" class="toggle-menu absolute right-4 top-3 lg:top-5 cursor-pointer flex items-center justify-center w-6 h-6"><i class="fa fa-angle-down"></i></span>
     </component>
     <AsideMenuList
       v-if="hasDropdown"

@@ -13,8 +13,7 @@ export const useAuthStore = defineStore("auth", {
       this.user = user
     },
     logout() {
-      this.user = null
-      router.go('/login')
+
     },
     isLogin() {
       return this.user != null

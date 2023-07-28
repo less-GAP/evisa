@@ -32,13 +32,16 @@ const asideLgCloseClick = (event) => {
   <aside
     id="aside"
     style="width: 345px"
-    class="lg:py-2 lg:pl-2  fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
+    :class="[
+      { '-left-0': isAsideLgActive && $appState.showMenu },
+      { '-left-0 w-[45px]': !isAsideLgActive && $appState.showMenu },
+    ]"
+    class="  fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
   >
     <div
       :class="styleStore.asideStyle"
       class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
     >
-
       <div class="relative p-4 top-nav 2xl:p-8">
         <div class="flex items-center justify-center">
           <div class="logo">
@@ -47,7 +50,7 @@ const asideLgCloseClick = (event) => {
               <img id="logo-minimized" class="w-[60px] hidden" src="/src/img/logo-minimized.png" alt="Power of Five">
             </a>
           </div>
-          <button id="minimize-menu" class="ml-auto cursor-pointer hamburger-icon w-[32px] md:w-[40px] 2xl:w-auto">
+          <button  @click="$appState.showMenu = !$appState.showMenu" id="minimize-menu" class="ml-auto cursor-pointer hamburger-icon w-[32px] md:w-[40px] 2xl:w-auto">
             <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M25.6665 39.6665L44.3332 39.6665" stroke="#14082D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
               <path d="M11.6665 28H44.3332" stroke="#14082D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
