@@ -67,7 +67,7 @@
     formRef.value
       .validate()
       .then(() => {
-        Api.post('product', toRaw(formState)).then(rs => {
+        Api.post('product', toRaw(formState.value)).then(rs => {
           notification[rs.data.code == 0 ? 'error' : 'success']({
             message: 'Thông báo',
             description: rs.data.message,
