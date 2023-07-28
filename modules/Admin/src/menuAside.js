@@ -21,6 +21,7 @@ export default [
     label: "Bảng điều khiển",
   },
   {
+    to: "/orders",
     label: "Đơn hàng",
     icon: mdiViewList,
   },
@@ -34,9 +35,11 @@ export default [
     icon: mdiViewList,
     menu: [
       {
+        to: "/videos",
         label: "List Video",
       },
       {
+        to: "/series",
         label: "Series Video",
       },
     ],
@@ -46,9 +49,11 @@ export default [
     icon: mdiViewList,
     menu: [
       {
+        to: "/customers",
         label: "Danh sách khách hàng",
       },
       {
+        to: "/customer-type",
         label: "Loại khách hàng",
       },
     ],
