@@ -47,7 +47,7 @@ const asideLgCloseClick = (event) => {
           <div class="logo">
             <a href="/" class="">
               <img id="logo-normal" class="w-[80px] lg:w-[120px] 2xl:w-[165px]" src="@/assets/logo.png" alt="Power of Five">
-              <img id="logo-minimized" class="w-[60px] hidden" src="/src/img/logo-minimized.png" alt="Power of Five">
+              <img id="logo-minimized" class="w-[60px] hidden" src="@/assets/logo-minimized.png" alt="Power of Five">
             </a>
           </div>
           <button  @click="$appState.showMenu = !$appState.showMenu" id="minimize-menu" class="ml-auto cursor-pointer hamburger-icon w-[32px] md:w-[40px] 2xl:w-auto">
