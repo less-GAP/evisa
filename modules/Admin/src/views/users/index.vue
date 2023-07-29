@@ -43,16 +43,23 @@ const tableConfig = {
     showEditUser(null, reload)
   },
   itemActions: [
+    // {
+    //   label: 'View'
+    //   , key: 'view'
+    //   , icon: mdiEye
+    //   , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
+    //   , action(item, reload) {
+    //     router.push('/users/' + item.id)
+    //   }
+    // },
     {
-      label: 'View'
-      , key: 'view'
-      , icon: mdiEye
+      label: 'Edit User'
+      , key: 'edit'
       , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
       , action(item, reload) {
-        router.push('/users/' + item.id)
+        showEditUser(item, reload)
       }
     },
-
     {
       label: ''
       , class: 'font-medium text-red-600 dark:text-red-500 hover:underline'
@@ -65,7 +72,8 @@ const tableConfig = {
 
   ],
   columns: [
-    {title: 'Name', key: 'full_name'}
+    {title: 'Username', key: 'username'}
+   , {title: 'Name', key: 'full_name'}
     , {title: 'Role', key: 'role'}
     , {title: 'Status', key: 'status'}
   ],
@@ -138,9 +146,8 @@ const tableConfig = {
       </template>
     </DataTable>
 
-
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:open="modalState.visible">
+  <a-modal :title="modalState.value?.id?'Edit User':'Add User'" :footer="null" width="800px" v-model:open="modalState.visible">
     <FormUser  v-if="modalState.visible"
               @success="modalState.visible=false;modalState.success()" @cancel="modalState.visible=false"
               :value="modalState.value"></FormUser>

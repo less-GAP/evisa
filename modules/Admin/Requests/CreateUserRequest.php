@@ -26,10 +26,10 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required',
+            'username' => 'required|unique:users,username,' . $this->input('id'),
             'full_name' => 'required',
-            'email' => 'required|email',
-            'role' => 'required'
+            'email' => 'required|email|unique:users,email'. $this->input('id'),
+            'role' => 'required',
         ];
     }
 

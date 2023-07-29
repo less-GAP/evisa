@@ -6,7 +6,7 @@ const Api = axios.create({
   baseURL: import.meta.env.VITE_API_HOST + '/api/',
   withCredentials: true
 })
-const key = 'request_updatable';
+let key = 'request_updatable';
 let requestConfig = null;
 let hideMessage = null;
 
@@ -16,8 +16,8 @@ Api.interceptors.request.use(function (config) {
   if (requestConfig.method.toLowerCase() == 'post' || requestConfig.method.toLowerCase() == 'put') {
     message.loading({content: 'Submit...', key});
   }
-  if (requestConfig.method.toLowerCase() == 'get' ) {
-    hideMessage =   message.loading({content: 'Loading...', key, duration: 10});
+  if (requestConfig.method.toLowerCase() == 'get') {
+    hideMessage = message.loading({content: 'Loading...', key, duration: 10});
   }
   return config;
 }, function (error) {
@@ -26,15 +26,19 @@ Api.interceptors.request.use(function (config) {
 });
 
 Api.interceptors.response.use((response) => {
-  if (requestConfig.method.toLowerCase() == 'post' || requestConfig.method.toLowerCase() == 'put' || requestConfig.method.toLowerCase() == 'delete') {
-    message.success({content: 'Success!', key, duration: 1});
+  if (response?.data?.message && (requestConfig.method.toLowerCase() == 'post' || requestConfig.method.toLowerCase() == 'put')) {
+    message.success({content: response?.data?.message, duration: 3});
   }
-  if (requestConfig.method.toLowerCase() == 'get' ) {
+  if (requestConfig.method.toLowerCase() == 'delete')
+  {
+    message.info({content: response?.data?.message, duration: 3});
+  }
+  if (requestConfig.method.toLowerCase() == 'get') {
     hideMessage()
   }
   return response;
 }, (error) => {
-  message.error({content: 'Error!', key, duration: 1});
+  message.error({content: error.response?.data?.message || 'Error!', key, duration: 1});
   if (error.response.status == 401) {
     useAuthStore().logout()
   }

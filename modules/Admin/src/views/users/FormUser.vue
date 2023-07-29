@@ -55,11 +55,12 @@ const cancel = function () {
 <template>
 
   <a-form
+    autocomplete="off"
     v-bind="formConfig"
     @finish="submit"
   >
     <a-form-item name="username" label="UserName" :rules="[{ required: true }]">
-      <a-input v-model:value="formState.username"/>
+      <a-input  autocomplete="off" v-model:value="formState.username"/>
     </a-form-item>
     <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
       <a-input v-model:value="formState.full_name"/>
@@ -76,7 +77,7 @@ const cancel = function () {
     <a-form-item
       label="Password"
       name="password"
-      :rules="[{ required: true, message: 'Please input your password!' }]"
+      :rules="formState.isNew?[{ required: true, message: 'Please input your password!' }]:[]"
     >
       <a-input-password autocomplete="off" v-model:value="formState.password">
         <template #prefix>

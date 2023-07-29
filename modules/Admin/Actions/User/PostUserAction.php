@@ -16,7 +16,10 @@ class PostUserAction
         if(!empty($data['password'])){
             $data['password'] = \Hash::make( $data['password']);
         }
-       $result = User::create($data);
-        return $result;
+       $result = User::updateOrCreate(['id'=>$request->input('id')],$data);
+        return [
+          'result' =>  $result,
+          'message' =>  $request->input('id')?'Update User Successfully!':'Create User Successfully!'
+        ];
     }
 }
