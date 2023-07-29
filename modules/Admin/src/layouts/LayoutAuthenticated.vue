@@ -95,6 +95,7 @@ const menuClick = (event, item) => {
               </a>
             </div>
           </div>
+          <h1 class="hidden title-page md:block">{{$appState.title}}</h1>
           <nav class="flex items-center ml-auto" id="user-nav">
             <div class="notification">
               <button class="relative w-8 bell-icon 2xl:w-auto">

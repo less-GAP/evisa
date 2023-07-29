@@ -5,10 +5,13 @@ export const useAppStateStore = defineStore("appState", {
     /* User */
     showMenu: false,
     menuCollapsed: false,
+    title: '',
 
   }),
   actions: {
-
+    setTitle(title){
+      this.title = title
+    }
   },
   persist: {
   }

@@ -2,13 +2,14 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
+import {useAppStateStore} from "@/stores/appState";
 
 const publicPages = ['/login'];
 
 const routes = [
   {
     meta: {
-      title: "Select style",
+      title: "Dashboard",
     },
     path: "/",
     name: "dashboard",
@@ -155,9 +156,11 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const auth = useAuthStore();
+
   if (!to.meta.isPublic && !auth.isLogin()) {
     auth.returnUrl = to.fullPath;
     return '/login';
   }
+  useAppStateStore().setTitle(to.meta.title)
 });
 export default router;

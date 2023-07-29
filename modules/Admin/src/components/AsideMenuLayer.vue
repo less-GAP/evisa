@@ -32,7 +32,7 @@ const asideLgCloseClick = (event) => {
   <aside
     id="aside"
     :class="[
-            !$appState.menuCollapsed ? 'w-[365px]' : 'w-[365px] xl:w-[180px]',
+            !$appState.menuCollapsed ? 'w-[365px]' : 'w-[365px] xl:w-[165px]',
             $appState.showMenu ? 'left-0' : '-left-[365px] xl:left-0',
     ]"
     class="h-full xl:left-0 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
