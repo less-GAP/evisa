@@ -71,7 +71,7 @@ const menuClick = (event, item) => {
     }"
   >
     <div
-      :class="[!$appState.menuCollapsed?'xl:pl-[345px] l:pl-0':'xl:pl-[160px] l:pl-0', { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
+      :class="[!$appState.menuCollapsed?'xl:pl-[365px] l:pl-0':'xl:pl-[160px] l:pl-0', { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class=" min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
       <header class="relative z-10 p-4 bg-white shadow-sm 2xl:p-8">
@@ -142,7 +142,7 @@ const menuClick = (event, item) => {
       />
       <div id="main-site" class="p-[10px] 2xl:p-8">
         <div id="unify-content">
-          <div class="uni-main-container mb-5">
+          <div class="uni-main-container mb-5 ">
             <slot/>
           </div>
         </div>

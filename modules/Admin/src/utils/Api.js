@@ -1,4 +1,4 @@
-import axios from 'axios'
+0import axios from 'axios'
 import {useAuthStore} from "@/stores/auth";
 const Api = axios.create({
  baseURL : import.meta.env.VITE_API_HOST+'/api/',
@@ -10,6 +10,6 @@ Api.interceptors.response.use((response) => {
   if(error.response.status == 401){
     useAuthStore().logout()
   }
-  return Promise.resolve({ error });
+  return Promise.reject({ error });
 });
 export default Api

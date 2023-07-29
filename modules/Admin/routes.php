@@ -17,9 +17,8 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     });
     Route::prefix('/user')->group(function () {
         Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
-
         Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
-
+        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
         Route::delete('{id}', DeleteUserAction::class . '@handle');
     });
     Route::prefix('/product')->group(function () {
