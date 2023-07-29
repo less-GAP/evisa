@@ -1,7 +1,7 @@
 <script setup>
 import {reactive, ref} from "vue";
 import Api from "@/utils/Api";
-
+import { message } from 'ant-design-vue';
 const props = defineProps({
   value: Object
 })
@@ -37,16 +37,12 @@ const formConfig = reactive({
   wrapperCol: {span: 24},
   "validate-messages": validateMessages,
 });
-
 const submit = async function () {
   loading.value = true
   Api.post('user', formState).then(result => {
-    console.log('success', result)
+    emit('success', result)
   }).catch(e=>
   {
-    error.value = error.message
-    console.log(e)
-    alert('failed')
   }).finally(loading.value = false)
 }
 const cancel = function () {
@@ -62,7 +58,6 @@ const cancel = function () {
     v-bind="formConfig"
     @finish="submit"
   >
-    {{error}}
     <a-form-item name="username" label="UserName" :rules="[{ required: true }]">
       <a-input v-model:value="formState.username"/>
     </a-form-item>
