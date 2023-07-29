@@ -29,6 +29,7 @@ const asideMenuItemActiveStyle = computed(() =>
 const isDropdownActive = ref(false);
 
 const componentClass = computed(() => [
+  !useAppStateStore().menuCollapsed ? "flex" : "flex xl:inline-flex",
   props.isDropdownList ? "py-3 px-6 text-sm" : "py-3",
   hasColor.value
     ? getButtonColor(props.item.color, false, true)
@@ -51,7 +52,7 @@ const menuClick = (event) => {
 <template>
   <li class="menu-item block mb-2 lg:mb-3 relative ">
     <component
-      class="flex items-center px-4 py-2 text-left rounded-lg 2xl:rounded-2xl lg:p-4"
+      class=" items-center px-4 py-2 text-left rounded-lg 2xl:rounded-2xl lg:p-4"
       :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
       :to="item.to ?? null"
@@ -71,6 +72,7 @@ const menuClick = (event) => {
         class="pl-4 font-bold txt lg:pl-6 lg:text-lg"
         :class="[
           { 'pr-12': !hasDropdown },
+          !$appState.menuCollapsed?'':'xl:hidden',
           vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
         ]"
       >{{ item.label }}</span

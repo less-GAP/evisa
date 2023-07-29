@@ -4,12 +4,12 @@ export const useAppStateStore = defineStore("appState", {
   state: () => ({
     /* User */
     showMenu: false,
+    menuCollapsed: false,
 
   }),
   actions: {
 
   },
   persist: {
-    enabled: true
   }
 });

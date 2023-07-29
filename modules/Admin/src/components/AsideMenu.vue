@@ -27,9 +27,7 @@ const asideLgCloseClick = (event) => {
 <template>
   <AsideMenuLayer
     :menu="menu"
-    :class="[
-      $appState.showMenu ? 'left-0' : '-left-[365px] lg:left-0',
-    ]"
+    v-bind="$attrs"
     @menu-click="menuClick"
     @aside-lg-close-click="asideLgCloseClick"
   />
