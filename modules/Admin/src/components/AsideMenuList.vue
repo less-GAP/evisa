@@ -20,8 +20,7 @@ const logoutItem = computed(() => ({
   isLogout: true,
 }));
 const logout = (event, item) => {
-  useAuthStore().$reset()
-  router.push('login')
+  useAuthStore().logout()
 };
 </script>
 

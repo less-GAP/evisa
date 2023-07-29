@@ -26,13 +26,15 @@ const asideLgCloseClick = (event) => {
 
 <template>
   <AsideMenuLayer
+    class="h-full"
     :menu="menu"
     v-bind="$attrs"
     @menu-click="menuClick"
     @aside-lg-close-click="asideLgCloseClick"
   />
   <OverlayLayer
-    v-show="isAsideLgActive && $appState.showMenu "
+    v-show=" $appState.showMenu "
+    class="xl:hidden"
     z-index="z-30"
     @overlay-click="$appState.showMenu = !$appState.showMenu"
   />

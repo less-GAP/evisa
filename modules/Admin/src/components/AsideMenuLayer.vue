@@ -32,14 +32,14 @@ const asideLgCloseClick = (event) => {
   <aside
     id="aside"
     :class="[
-            !$appState.menuCollapsed ? 'w-[365px]' : 'w-[365px] xl:w-[160px]',
+            !$appState.menuCollapsed ? 'w-[365px]' : 'w-[365px] xl:w-[180px]',
             $appState.showMenu ? 'left-0' : '-left-[365px] xl:left-0',
     ]"
-    class=" xl:left-0 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
+    class="h-full xl:left-0 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
   >
     <div
       :class="styleStore.asideStyle"
-      class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
+      class="lg:rounded-2xl w-full h-screen flex flex-col overflow-hidden dark:bg-slate-900"
     >
       <div class="relative p-4 top-nav 2xl:p-8">
         <div class="flex items-center justify-center">
@@ -69,7 +69,7 @@ const asideLgCloseClick = (event) => {
             ? 'aside-scrollbars-[slate]'
             : styleStore.asideScrollbarsStyle
         "
-        class="p-4 main-nav 2xl:py-6 2xl:px-8"
+        class="p-4 flex-1 main-nav overflow-y-auto 2xl:py-6 2xl:px-8"
       >
         <AsideMenuList :menu="menu" @menu-click="menuClick" />
       </div>
