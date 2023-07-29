@@ -5,6 +5,7 @@ import {
   mdiVideoOutline,
   mdiAccountSupervisorOutline,
   mdiAccountCircleOutline,
+  mdiImageMultiple,
   mdiCogOutline
 } from "@mdi/js";
 
@@ -95,16 +96,14 @@ export default [
   //   icon: mdiAlertCircle,
   // },
   {
+    label: "Media",
+    icon: mdiImageMultiple,
+    to: "/medias",
+  },
+  {
     label: "Cấu hình",
     icon: mdiCogOutline,
-    menu: [
-      {
-        label: "Hệ thống",
-      },
-      {
-        label: "Email",
-      },
-    ],
+    to: "/configs",
   },
   // {
   //   href: "https://github.com/justboil/admin-one-vue-tailwind",

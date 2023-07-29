@@ -81,28 +81,29 @@ const routes = [
   },
   {
     meta: {
+      title: "Medias",
+    },
+    path: "/medias",
+    name: "medias",
+    component: () => import("@/views/medias/index.vue"),
+  },
+  {
+    meta: {
+      title: "Configs",
+    },
+    path: "/configs",
+    name: "configs",
+    component: () => import("@/views/configs/index.vue"),
+  },
+  {
+    meta: {
       title: "User Detail",
     },
     path: "/users/:id",
     name: "user-detail",
     component: () => import("@/views/users/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "Tables",
-    },
-    path: "/tables",
-    name: "tables",
-    component: () => import("@/views/TablesView.vue"),
-  },
-  {
-    meta: {
-      title: "Forms",
-    },
-    path: "/forms",
-    name: "forms",
-    component: () => import("@/views/FormsView.vue"),
-  },
+
   {
     meta: {
       title: "Profile",
@@ -111,22 +112,7 @@ const routes = [
     name: "profile",
     component: () => import("@/views/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "Ui",
-    },
-    path: "/ui",
-    name: "ui",
-    component: () => import("@/views/UiView.vue"),
-  },
-  {
-    meta: {
-      title: "Responsive layout",
-    },
-    path: "/responsive",
-    name: "responsive",
-    component: () => import("@/views/ResponsiveView.vue"),
-  },
+
   {
     meta: {
       title: "Login",
