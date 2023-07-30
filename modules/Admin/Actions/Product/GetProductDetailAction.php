@@ -5,6 +5,7 @@ namespace Modules\Admin\Actions\Product;
 
 
 use App\Models\Product;
+use App\Models\ProductPackage;
 use App\Providers\AbstractModuleProvider;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,16 @@ class GetProductDetailAction
         $id = $request->route('id');
         if($id > 0){
             $product = Product::where('id',$id)->first();
+            if($product->type == 'package'){
+                $packages = ProductPackage::where('package_id',$id)->select('product_descr')->get();
+                if(!empty($packages)){
+                    $pas = [];
+                    foreach ($packages as $k => $v){
+                        $pas[] = $v->product_descr;
+                    }
+                    $product->packages = $pas;
+                }
+            }
         }
         return [
             'code' => 1,

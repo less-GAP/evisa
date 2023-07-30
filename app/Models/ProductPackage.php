@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductPackage extends Model
 {
 
     /**
@@ -16,25 +16,14 @@ class Product extends Model
      */
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'product_package';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
-        'image',
-        'name',
-        'type',
-        'slug',
-        'short_description',
-        'description',
-        'price',
-        'sale_price',
-        'point',
-        'status',
-        'title',
-        'meta_description',
-        'meta_keyword',
-        'stock'
+        'product_id',
+        'package_id',
+        'product_descr',
     ];
 
     /**
@@ -53,19 +42,18 @@ class Product extends Model
      * @var array<string, string>
      */
     protected $casts = [
-//        'email_verified_at' => 'datetime',
-//        'password' => 'hashed',
+       'product_descr' => 'array',
     ];
 
     protected $appends = [
-        'image_url'
+        //'image_url'
     ];
 
-    public function getImageUrlAttribute()
-    {
-        if ($this->image != '') {
-            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
-        }
-        return '';
-    }
+//    public function getImageUrlAttribute()
+//    {
+//        if ($this->image != '') {
+//            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
+//        }
+//        return '';
+//    }
 }

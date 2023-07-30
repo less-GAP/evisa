@@ -14,7 +14,7 @@
 
   import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
-  import {PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+  import {PlusOutlined, LoadingOutlined, DeleteOutlined} from '@ant-design/icons-vue';
 
   import router from "@/router";
 
@@ -60,6 +60,10 @@
       fileList.value = [...(fileList.value || []), file];
       loading.value = false
 
+      if(product.type == 'package'){
+        dataSource.value = product.packages;
+      }
+      console.log(dataSource.value)
     });
   }
 
@@ -67,6 +71,9 @@
     formRef.value
       .validate()
       .then(() => {
+        if(formState.value.type == 'package'){
+          formState.value.packages = dataSource.value;
+        }
         Api.post('product', toRaw(formState.value)).then(rs => {
           notification[rs.data.code == 0 ? 'error' : 'success']({
             message: 'Thông báo',
@@ -165,10 +172,28 @@
     isShowModal.value = true;
   };
 
-  const selectProduct = (selects) => {
-    console.log(selects);
+  const selectProduct = (selectItem) => {
+    //console.log(selectItem);
+    if(dataSource.value.length > 0){
+      dataSource.value.forEach((value, index) => {
+        if(value.id != selectItem.id){
+          dataSource.value.push(selectItem);
+        }
+      });
+    }else{
+      dataSource.value.push(selectItem);
+    }
+    isShowModal.value = false;
   }
 
+  const removeSelect = (item) => {
+    dataSource.value.forEach((value, index) => {
+      if(value.id == item.id){
+        dataSource.value.splice(index,1);
+      }
+    });
+    //console.log(dataSource.value);
+  }
 
 </script>
 
@@ -266,6 +291,13 @@
                   />
                 </a-form-item>
               </a-col>
+              <a-col :span="8">
+                <a-form-item label="Tồn kho">
+                  <a-input-number v-model:value="formState.stock" placeholder="Nhập.." class="text-xs" style="width: 100%"
+
+                  />
+                </a-form-item>
+              </a-col>
               <a-col :span="24">
                 <a-form-item label="Mô tả ngắn">
                   <a-textarea v-model:value="formState.short_description" placeholder="Nhập..." :rows="4"/>
@@ -279,9 +311,31 @@
               </a-col>
             </a-row>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="Sản phẩm trong gói" >
+          <a-tab-pane key="2" tab="Sản phẩm trong gói" v-if="formState.type == 'package'">
             <a-button type="primary" style="margin-bottom: 8px" @click="handleAdd" class="float-right" ghost>Thêm</a-button>
-            <a-table :dataSource="dataSource" :columns="columns"/>
+            <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0" >
+              <template #bodyCell="{ column, record }">
+                <template v-if="column.key === 'image'">
+                  <img class="w-20 h-auto float-left rounded-full" :src="record.image_url"
+                       :alt="record.name"/>
+                </template>
+                <template v-else-if="column.key === 'action'">
+                  <a-popconfirm
+                    title="Bạn muốn xóa sản phẩm ra khỏi gói này?"
+                    ok-text="Yes"
+                    cancel-text="No"
+                    @confirm="removeSelect(record)"
+                  >
+                    <a-button
+                      type="text"
+                      danger
+                    >
+                      Xoá
+                    </a-button>
+                  </a-popconfirm>
+                </template>
+              </template>
+            </a-table>
           </a-tab-pane>
           <a-tab-pane key="3" tab="Thông tin thêm">
             <a-row :gutter="20">
