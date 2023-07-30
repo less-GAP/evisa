@@ -21,6 +21,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
         Route::delete('{id}', DeleteUserAction::class . '@handle');
     });
+
     Route::prefix('/product')->group(function () {
         Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
         Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');
@@ -31,6 +32,15 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
 
         Route::delete('{id}', \Modules\Admin\Actions\Product\DeleteProductAction::class . '@handle');
+    });
+
+    Route::prefix('/video')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Video\GetVideoListAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Video\GetVideoDetailAction::class . '@handle');
+        Route::post('uploadVideo', \Modules\Admin\Actions\Video\PostUploadVideoAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Video\PostVideoAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Video\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\Video\DeleteVideoAction::class . '@handle');
     });
 
 

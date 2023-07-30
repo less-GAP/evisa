@@ -49,6 +49,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Video Detail",
+    },
+    path: "/videos/:id",
+    name: "video-detail",
+    component: () => import("@/views/videos/VideoView.vue"),
+  },
+  {
+    meta: {
       title: "Series",
     },
     path: "/series",
