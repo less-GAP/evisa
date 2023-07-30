@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {useAuthStore} from "@/stores/auth";
 import {message} from 'ant-design-vue';
-
+console.log('api host',import.meta.env.VITE_API_HOST)
 const Api = axios.create({
   baseURL: import.meta.env.VITE_API_HOST?import.meta.env.VITE_API_HOST:'' + '/api/',
   withCredentials: true
