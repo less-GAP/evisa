@@ -16,6 +16,7 @@ services:
         depends_on:
             - app
         volumes:
+            - ./public:/var/www/public
             - ./storage/uploads:/var/www/public/uploads
         environment:
             NGINX_NO_CACHE: ${NGINX_NO_CACHE}

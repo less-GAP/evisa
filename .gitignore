@@ -15,6 +15,7 @@ npm-debug.log
 yarn-error.log
 /.fleet
 /.idea
+/database.sqlite
 /.vscode
 /modules/Frontend/node_modules/
 /modules/Admin/node_modules/
