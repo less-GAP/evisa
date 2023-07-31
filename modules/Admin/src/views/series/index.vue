@@ -1,161 +1,201 @@
 <script setup>
-import {reactive, ref, h} from "vue";
-import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
-import FormFilePicker from "@/components/FormFilePicker.vue";
-import FormField from "@/components/FormField.vue";
-import FormControl from "@/components/FormControl.vue";
-import BaseDivider from "@/components/BaseDivider.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
-import {Modal, DataTable} from "@/components";
-import {DeleteOutlined} from '@ant-design/icons-vue';
+  import {reactive, ref, h} from "vue";
+  import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
+  import SectionMain from "@/components/SectionMain.vue";
+  import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
-import Api from "@/utils/Api";
-import router from "@/router";
-import FormUser from "./FormUser.vue";
+  import {Modal, DataTable} from "@/components";
+  import {DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
 
+  import Api from "@/utils/Api";
+  import router from "@/router";
+  import {notification} from "ant-design-vue";
 
-
-const modalState = ref({
-  visible:false,
-  value:null,
-  success:()=>{},
-  cancel:()=>{},
-});
-
-function showEditUser(value, success) {
-  modalState.value.visible = true;
-  modalState.value.value = value;
-  modalState.value.success = success;
-}
-
-const tableConfig = {
-  api: (params) => Api.get('user/list', {params}),
-  addAction: (reload) => {
-    showEditUser(null, reload)
-  },
-  itemActions: [
-    {
-      label: 'View'
-      , key: 'view'
-      , icon: mdiEye
-      , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-      , action(item, reload) {
-        router.push('/users/' + item.id)
-      }
+  const tableConfig = {
+    api: (params) => Api.get('series/list', {params}),
+    addAction: (reload) => {
+      router.push('/series/0')
     },
-    {
-      label: 'Edit User'
-      , key: 'edit'
-      , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-      , action(item, reload) {
-        showEditUser(item, reload)
-      }
-    },
-    {
-      label: ''
-      , class: 'font-medium text-red-600 dark:text-red-500 hover:underline'
-      , icon: mdiDelete
-      , key: 'delete'
-      , action(item, reload) {
-        Api.delete('user/' + item.id).then(reload)
-      }
-    }
-
-  ],
-  columns: [
-    {title: 'Name', key: 'full_name'}
-    , {title: 'Role', key: 'role'}
-    , {title: 'Status', key: 'status'}
-  ],
-  selectionActions: [
-    {
-      title: 'Active',
-      action(selectedKeys) {
-        return Api.post('user/activeList', selectedKeys)
-      }, complete() {
-        alert('success')
-      }
-    }
-    , {
-      title: 'DeActive', action(selectedKeys) {
-        return Api.post('user/activeList', selectedKeys)
-      }, complete() {
-        alert('success')
-      }
-    }
-    , {
-      title: 'Delete',
-      action(selectedKeys) {
-        return Api.post('user/deleteList', selectedKeys)
+    itemActions: [
+      {
+        label: '',
+        class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline',
+        icon: mdiDelete,
+        key: 'edit',
+        action(item, reload) {
+          router.push('/series/' + item.id)
+        }
       },
-      complete() {
-        alert('success')
+      {
+        label: '',
+        class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
+        icon: mdiDelete,
+        key: 'delete',
+        action(item, reload) {
+          Api.delete('series/' + item.id).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          }).finally(() => {
+            reload();
+          });
+        }
       }
-    }
-  ]
-}
+
+    ],
+    columns: [
+      {title: 'Nhóm khách hàng', key: 'customer_group_name'},
+      {title: 'Tên', key: 'name'},
+      {title: 'Danh sách Video', key: 'video'},
+      {title: 'Tình trạng', key: 'status'}
+    ],
+    selectionActions: [
+      {
+        title: 'Hoạt động',
+        action(selectedKeys) {
+          return Api.post('series/activeList', {
+            'items': selectedKeys,
+            'status': 'A'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
+        },
+      },
+      {
+        title: 'Tắt',
+        action(selectedKeys) {
+          return Api.post('series/activeList', {
+            'items': selectedKeys,
+            'status': 'D'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
+        },
+      },
+    ]
+  }
+
+  const previewVisible = ref(false);
+  const previewUrl = ref('');
+  const previewTitle = ref('');
+
+
+  const handleCancel = () => {
+    previewVisible.value = false;
+    previewTitle.value = '';
+  };
+
+  const handlePreview = (item) => {
+    previewVisible.value = true;
+    previewUrl.value = item.path_full;
+    previewTitle.value = item.name;
+  };
+
+  const previewVisibleList = ref(false);
+  const previewTitleList = ref('');
+
+  const handlePreviewList = (item) => {
+    previewVisibleList.value = true;
+    previewTitleList.value = item.name;
+    dataSource.value = item.videos;
+  };
+
+  const handleCancelList = () => {
+    previewVisibleList.value = false;
+    previewTitleList.value = '';
+    dataSource.value = false;
+  };
+
+  const dataSource = ref([]);
+
+  const columns = ref([
+    {
+      title: 'Tên video',
+      dataIndex: 'name',
+      key: 'name',
+      class: 'text-left'
+    },
+    {
+      title: 'Chi tiết',
+      key: 'action',
+    },
+  ]);
+
 
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton
-        :icon="mdiBallotOutline"
-        title="User Management"
-        main
-      >
-      </SectionTitleLineWithButton>
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
-            title="Are you sure delete this user?"
+            title="Bạn muốn xóa sản phẩm này?"
             ok-text="Yes"
             cancel-text="No"
             @confirm="actionMethod"
           >
             <a-button
               type="text"
-              v-if="item.role !== 'admin'"
               danger
               :icon="h(DeleteOutlined)"
               label=""
               :outline="true"
             >
-
             </a-button>
-
           </a-popconfirm>
         </template>
-        <template #cell[full_name]="{item,column}">
-          <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-               :alt="item.full_name">
-          <div class="pl-3 float-left">
-            <div class="text-base font-semibold">{{ item.full_name }}</div>
-            <div class="font-normal text-gray-500">{{ item.email }}</div>
-          </div>
+        <template #cellAction[edit]="{item,actionMethod}">
+          <a-button
+            type="text"
+            :icon="h(FormOutlined)"
+            label=""
+            :outline="true"
+            @click="actionMethod"
+          >
+          </a-button>
         </template>
-        <template #cell[status]>
-          <div class="flex items-center">
+        <template #cell[name]="{item,column}">
+          {{item.name}}
+        </template>
+        <template #cell[video]="{item,column}">
+          <a-button type="link" @click="handlePreviewList(item)">Xem chi tiết ({{item.videos.length}})</a-button>
+        </template>
+        <template #cell[status]="{item,column}">
+          <div class="flex items-center" v-if="item.status == 'D'">
             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-            Offline
+            Tắt
+          </div>
+          <div class="flex items-center" v-else>
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+            Hoạt động
           </div>
         </template>
       </DataTable>
-
     </SectionMain>
-
   </LayoutAuthenticated>
-  <a-modal :footer="null" width="800px" v-model:open="modalState.visible">
-    <FormUser v-if="modalState.visible" @success="isShowModal=false;modalState.reload()" @cancel="modalState.visible=false"
-              :value="modalState.value"></FormUser>
+  <a-modal :open="previewVisibleList" :title="previewTitleList" :footer="null" @cancel="handleCancelList" width="50%">
+    <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'name'">
+          {{record.name}}
+        </template>
+        <template v-else-if="column.key === 'action'">
+          <a-button type="link" @click="handlePreview(record)">Xem video</a-button>
+        </template>
+      </template>
+    </a-table>
+  </a-modal>
+  <a-modal :open="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
+    <video controls>
+      <source :src="previewUrl">
+    </video>
   </a-modal>
 </template>

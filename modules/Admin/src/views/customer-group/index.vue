@@ -1,34 +1,23 @@
 <script setup>
   import {reactive, ref, h} from "vue";
-  import {mdiBallotOutline, mdiDelete} from "@mdi/js";
+  import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
   import SectionMain from "@/components/SectionMain.vue";
   import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-  import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-  import {Modal, DataTable} from "@/components";
 
-  import {PlusOutlined, LoadingOutlined, DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
+  import {Modal, DataTable} from "@/components";
+  import {DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
 
   import Api from "@/utils/Api";
   import router from "@/router";
 
-  import FormDetail from "./FormDetail.vue";
-
   import {notification} from "ant-design-vue";
 
-  const isShowModal = ref(false)
-
-  const editProduct = ref(null);
-
-  function showEditUser(user, reload) {
-    isShowModal.value = true;
-    editProduct.value = user;
-  }
 
   const tableConfig = {
-    api: (params) => Api.get('product/list', {params}),
+    api: (params) => Api.get('customer-group/list', {params}),
     addAction: (reload) => {
       //showEditUser({}, reload)
-      router.push('/products/0')
+      router.push('/customer-group/0')
     },
     itemActions: [
       {
@@ -37,7 +26,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/products/' + item.id)
+          router.push('/customer-group/' + item.id)
         }
       },
       {
@@ -46,7 +35,7 @@
         icon: mdiDelete,
         key: 'delete',
         action(item, reload) {
-          Api.delete('product/' + item.id).then(rs => {
+          Api.delete('customer-group/' + item.id).then(rs => {
             notification[rs.data.code == 0 ? 'error' : 'success']({
               message: 'Thông báo',
               description: rs.data.message,
@@ -56,46 +45,16 @@
           });
         }
       }
-
     ],
     columns: [
-      {
-        title: 'Hình ảnh',
-        key: 'image',
-      },
-      {
-        title: 'Loại sản phẩm',
-        key: 'type'
-      },
-      {
-        title: 'Tên sản phẩm',
-        key: 'name'
-      },
-      {
-        title: 'Giá niêm yết',
-        key: 'price',
-        class: 'text-right'
-      },
-      {
-        title: 'Giá sản phẩm',
-        key: 'price',
-        class: 'text-right'
-      },
-      {
-        title: 'Điểm thưởng(Point)',
-        key: 'point',
-        class: 'text-right'
-      },
-      {
-        title: 'Status',
-        key: 'status'
-      }
+      {title: 'Tên nhóm', key: 'name'},
+      {title: 'Tình trạng', key: 'status'}
     ],
     selectionActions: [
       {
         title: 'Hoạt động',
         action(selectedKeys) {
-          return Api.post('product/activeList', {
+          return Api.post('customer-group/activeList', {
             'items': selectedKeys,
             'status': 'A'
           }).then(rs => {
@@ -105,14 +64,11 @@
             });
           })
         },
-        // complete() {
-        //   alert('success')
-        // }
       },
       {
         title: 'Tắt',
         action(selectedKeys) {
-          return Api.post('product/activeList', {
+          return Api.post('customer-group/activeList', {
             'items': selectedKeys,
             'status': 'D'
           }).then(rs => {
@@ -122,19 +78,7 @@
             });
           })
         },
-        // complete() {
-        //   alert('success')
-        // }
-      },
-      // {
-      //   title: 'Delete',
-      //   action(selectedKeys) {
-      //     return Api.post('user/deleteList', selectedKeys)
-      //   },
-      //   complete() {
-      //     alert('success')
-      //   }
-      // }
+      }
     ]
   }
 
@@ -145,21 +89,21 @@
     <SectionMain>
       <SectionTitleLineWithButton
         :icon="mdiBallotOutline"
-        title="Quản lý sản phẩm"
+        title="User Management"
         main
       >
-
       </SectionTitleLineWithButton>
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
-            title="Bạn muốn xóa sản phẩm này?"
+            title="Are you sure delete this user?"
             ok-text="Yes"
             cancel-text="No"
             @confirm="actionMethod"
           >
             <a-button
               type="text"
+              v-if="item.role !== 'admin'"
               danger
               :icon="h(DeleteOutlined)"
               label=""
@@ -178,21 +122,8 @@
           >
           </a-button>
         </template>
-        <template #cell[image]="{item,column}">
-          <img class="w-20 h-auto float-left rounded-full" :src="item.image_url"
-               :alt="item.name"/>
-        </template>
-        <template #cell[type]="{item,column}">
-          {{item.type == 'product' ? 'Sản phẩm' : 'Gói sản phẩm'}}
-        </template>
-        <template #cell[name]="{item,column}">
-          {{item.name}}
-        </template>
-        <template #cell[price]="{item,column}">
-          {{item.price}}
-        </template>
-        <template #cell[sale_price]="{item,column}">
-          {{item.sale_price}}
+        <template #cell[full_name]="{item,column}">
+          {{ item.name }}
         </template>
         <template #cell[status]="{item,column}">
           <div class="flex items-center" v-if="item.status == 'D'">
@@ -207,5 +138,4 @@
       </DataTable>
     </SectionMain>
   </LayoutAuthenticated>
-
 </template>
