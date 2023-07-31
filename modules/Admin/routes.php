@@ -35,6 +35,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     });
 
     Route::prefix('/video')->group(function () {
+
         Route::get('list', \Modules\Admin\Actions\Video\GetListAction::class . '@handle');
         Route::get('{id}', \Modules\Admin\Actions\Video\GetDetailAction::class . '@handle');
         Route::post('uploadVideo', \Modules\Admin\Actions\Video\PostUploadVideoAction::class . '@handle');
