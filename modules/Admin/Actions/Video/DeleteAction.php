@@ -7,7 +7,7 @@ namespace Modules\Admin\Actions\Video;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class DeleteVideoAction
+class DeleteAction
 {
     public function handle(Request $request)
     {

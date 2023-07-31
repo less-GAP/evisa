@@ -9,7 +9,7 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
 
-class PostVideoAction
+class PostAction
 {
     public function handle(Request $request)
     {

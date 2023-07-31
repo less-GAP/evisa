@@ -59,10 +59,6 @@ if (id > 0) {
     fileList.value = [...(fileList.value || []), file];
     loading.value = false
 
-    if (product.type == 'package') {
-      dataSource.value = product.packages;
-    }
-    console.log(dataSource.value)
   });
 }
 
@@ -90,7 +86,7 @@ const onFinish = () => {
 };
 
 const back = () => {
-  router.push('/products');
+  router.push('/videos');
 };
 
 
@@ -98,10 +94,6 @@ const beforeUpload: UploadProps['beforeUpload'] = file => {
   fileList.value = [...(fileList.value || []), file];
   return false;
 };
-
-const handlePreview = (data) => {
-
-}
 
 const handleChange = (data) => {
   //console.log(data.file)

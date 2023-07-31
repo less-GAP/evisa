@@ -188,7 +188,7 @@
           {{record.name}}
         </template>
         <template v-else-if="column.key === 'action'">
-          <a-button type="link" @click="handlePreview(record)">Chi tiết</a-button>
+          <a-button type="link" @click="handlePreview(record)">Xem video</a-button>
         </template>
       </template>
     </a-table>

@@ -99,7 +99,7 @@
   };
 
   const back = () => {
-    router.push('/products');
+    router.push('/series');
   };
 
   const dataSource = ref([]);

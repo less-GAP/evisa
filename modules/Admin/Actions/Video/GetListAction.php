@@ -7,7 +7,7 @@ namespace Modules\Admin\Actions\Video;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class GetVideoListAction
+class GetListAction
 {
     public function handle(Request $request)
     {

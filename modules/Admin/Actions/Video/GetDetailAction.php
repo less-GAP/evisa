@@ -8,7 +8,7 @@ use App\Models\Video;
 use App\Providers\AbstractModuleProvider;
 use Illuminate\Http\Request;
 
-class GetVideoDetailAction
+class GetDetailAction
 {
     public function handle(Request $request)
     {
