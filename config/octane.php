@@ -35,8 +35,13 @@ return [
     | Supported: "roadrunner", "swoole"
     |
     */
-
-    'server' => env('OCTANE_SERVER', 'roadrunner'),
+    'swoole' => [
+        'options' => [
+            'package_max_length' => 1024 * 1024 * 1000,
+        ],
+    ],
+    'server' => env('OCTANE_SERVER', 'swoole'),
+    //'server' => env('OCTANE_SERVER', 'roadrunner'),
 
     /*
     |--------------------------------------------------------------------------
