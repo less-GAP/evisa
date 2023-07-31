@@ -193,7 +193,6 @@
       </template>
     </a-table>
   </a-modal>
-
   <a-modal :open="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
     <video controls>
       <source :src="previewUrl">
