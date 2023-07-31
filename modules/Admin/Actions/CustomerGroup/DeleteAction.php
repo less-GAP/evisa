@@ -26,7 +26,6 @@ class DeleteAction
                 'data' => $request->route('id')
             ];
         }
-
         return $output;
     }
 }
