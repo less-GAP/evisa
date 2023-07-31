@@ -59,13 +59,6 @@ if (id > 0) {
     fileList.value = [...(fileList.value || []), file];
     loading.value = false
 
-<<<<<<< HEAD
-    if (product.type == 'package') {
-      dataSource.value = product.packages;
-    }
-    console.log(dataSource.value)
-=======
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
   });
 }
 
@@ -93,11 +86,7 @@ const onFinish = () => {
 };
 
 const back = () => {
-<<<<<<< HEAD
-  router.push('/products');
-=======
   router.push('/videos');
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
 };
 
 
@@ -106,13 +95,6 @@ const beforeUpload: UploadProps['beforeUpload'] = file => {
   return false;
 };
 
-<<<<<<< HEAD
-const handlePreview = (data) => {
-
-}
-
-=======
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
 const handleChange = (data) => {
   //console.log(data.file)
   const formData = new FormData();

@@ -57,11 +57,7 @@ const routes = [
   },
   {
     meta: {
-<<<<<<< HEAD
-      title: "Series",
-=======
       title: "Series Video",
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
     },
     path: "/series",
     name: "series",

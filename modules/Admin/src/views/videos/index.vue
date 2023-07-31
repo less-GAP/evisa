@@ -62,10 +62,7 @@ const tableConfig = {
 
   ],
   columns: [
-<<<<<<< HEAD
-=======
     {title: 'Video', key: 'video'},
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
     {title: 'Name', key: 'name'},
     {title: 'Status', key: 'status'}
   ],
@@ -134,16 +131,11 @@ const tableConfig = {
           >
           </a-button>
         </template>
-<<<<<<< HEAD
-        <template #cell[name]="{item,column}">
-          <a-button type="link" @click="handlePreview(item)">{{item.name}}</a-button>
-=======
         <template #cell[video]="{item,column}">
           <a-button type="link" @click="handlePreview(item)">Xem video</a-button>
         </template>
         <template #cell[name]="{item,column}">
           {{item.name}}
->>>>>>> 57ad49e378b3e0443297835a8d92024411263723
         </template>
         <template #cell[status]="{item,column}">
           <div class="flex items-center" v-if="item.status == 'D'">

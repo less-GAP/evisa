@@ -1,0 +1,406 @@
+html {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+body {
+    font-family: 'Poppins';
+    background: #faf7f2;
+    position: relative;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #000;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: #fff;
+}
+
+.text-2xl {
+    line-height: 1.5 !important;
+}
+
+.lessgap-po5 {
+
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .font-title {
+        font-family: 'Francois One', sans-serif;
+    }
+
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media screen and (min-width: 768px) {
+        .container {
+            min-width: 704px;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .container {
+            min-width: 928px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .container {
+            min-width: 1136px;
+        }
+    }
+
+    @media screen and (min-width: 1464px) {
+        .container {
+            min-width: 1400px;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+
+    .col {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .btn {
+        background: linear-gradient(90deg, #84BD00 0%, #04A7E9 100%);
+        border-radius: 32px;
+        padding: 10px;
+        display: block;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+
+    .product_packages {
+
+        .product-package-name,
+        .product-package-price {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 30px;
+            text-transform: uppercase;
+        }
+
+        .product-package-description {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        @media screen and (min-width: 768px) {
+
+            .product-package-name,
+            .product-package-price {
+                font-size: 32px;
+                line-height: 36px;
+            }
+
+            .product-package-description {
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (min-width: 1280px) {
+
+            .product-package-name,
+            .product-package-price {
+                font-size: 40px;
+                line-height: 48px;
+            }
+
+            .product-package-description {
+                font-size: 20px;
+                line-height: 32px;
+            }
+        }
+
+        .box::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: .3s all ease-in-out;
+            border-radius: 20px;
+        }
+
+        @media screen and (min-width: 768px) {
+            .box::before {
+                border-radius: 24px;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .box::before {
+                border-radius: 36px;
+            }
+        }
+
+        @media screen and (min-width: 1280px) {
+            .box::before {
+                border-radius: 50px;
+            }
+
+            .product-package-name {
+                transition: .3s all ease-in-out;
+            }
+
+            .box:hover .product-package-name {
+                color: #52BE3E;
+            }
+        }
+    }
+
+    .animation {
+        &--bounce-in:before {
+            animation-name: bounceZoomIn;
+            animation-duration: .6s;
+            animation-fill-mode: both;
+        }
+
+        &--bounce-out:before {
+            animation-name: bounceZoomOut;
+            animation-duration: .6s;
+            animation-fill-mode: both;
+        }
+    }
+
+    @keyframes bounceZoomIn {
+
+        from,
+        20%,
+        40%,
+        60%,
+        80%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+
+        0% {
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+        }
+
+        33% {
+            transform: translate(-50%, -50%) scale3d(1.17, 1.17, 1.17);
+        }
+
+        66% {
+            transform: translate(-50%, -50%) scale3d(1.1, 1.1, 1.1);
+        }
+
+        to {
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+        }
+    }
+
+    @keyframes bounceZoomOut {
+
+        from,
+        20%,
+        40%,
+        60%,
+        80%,
+        to {
+            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+
+        0% {
+            transform: translate(-50%, -50%) scale3d(1.2, 1.2, 1.2);
+        }
+
+        33% {
+            transform: translate(-50%, -50%) scale3d(1.1, 1.1, 1.1);
+        }
+
+        66% {
+            transform: translate(-50%, -50%) scale3d(1.17, 1.17, 1.17);
+        }
+
+        to {
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+        }
+    }
+
+    #menu-footer {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    #navigation-main {
+        transition: .3s all ease-in-out;
+        transform: translateX(100%);
+
+        &.open {
+            transform: translateX(0);
+        }
+
+        a {
+            font-size: 18px;
+
+            @media screen and (min-width: 768px) {
+                font-size: 26px;
+            }
+        }
+
+        // a:hover{
+        //     color: #04A7E9;
+        // }
+    }
+}
+
+.swiper-button::after {
+    display: none !important;
+}
+
+.swiper-pagination-bullet {
+    background: #C8C6C2;
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    margin: 0 6px;
+}
+
+.swiper-pagination-bullet-active {
+    background: #FFFFFF;
+    transform: scale(1.5);
+}
+
+.package_includes {
+    #product-nav {
+        img {
+            border: 1px solid #f1f1f1;
+            border-radius: 16px;
+        }
+
+        .swiper {
+            &::before {
+                content: '';
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+                position: absolute;
+                left: 0;
+                top: 140px;
+            }
+
+            a.active {
+                position: relative;
+                font-weight: 700;
+
+                @media screen and (min-width: 1024px) {
+                    &::before {
+                        content: '';
+                        display: block;
+                        width: 100%;
+                        border-bottom: 2px solid rgba($color: #000000, $alpha: 1);
+                        margin-top: -1px;
+                        position: absolute;
+                        left: 0;
+                        top: 140px;
+                    }
+                }
+            }
+        }
+    }
+
+    .tab {
+        overflow: hidden;
+        transition: height 0.3s ease;
+        height: 0;
+    }
+
+    .tab.active {
+        height: max-content
+    }
+}
+
+.product {
+    background: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    .product-name {
+        font-weight: 700;
+        font-size: 20px;
+        color: #231F20;
+        transition: .2s all ease-in-out;
+
+        @media screen and (min-width: 768px) {
+            font-size: 24px;
+        }
+    }
+
+    .product-price {
+        font-weight: 700;
+        font-size: 18px;
+        color: #666666;
+
+        @media screen and (min-width: 768px) {
+            font-size: 24px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            font-size: 35px;
+        }
+    }
+
+    &:hover .product-name {
+        color: #52BE3E;
+    }
+}
+
+.btn-handleToggle {
+    background: rgb(229 231 235);
+    transition: .2s all ease-in-out;
+
+    .node {
+        transform: translateX(28px);
+        transition: .2s all ease-in-out;
+    }
+
+    &.active {
+        background: linear-gradient(90deg, #84BD00 0%, #04A7E9 100%);
+
+        .node {
+            transform: translateX(0);
+        }
+    }
+}
