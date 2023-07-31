@@ -17,6 +17,7 @@ services:
             - app
         volumes:
             - ./public:/var/www/public
+            - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
             - ./storage/uploads:/var/www/public/uploads
         environment:
             NGINX_NO_CACHE: ${NGINX_NO_CACHE}
