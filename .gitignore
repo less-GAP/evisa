@@ -20,3 +20,4 @@ yarn-error.log
 /modules/Admin/node_modules/
 /storage/logs/
 /storage/upload/
+/storage/upload/
