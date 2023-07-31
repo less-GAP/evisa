@@ -1,140 +1,86 @@
 <script setup>
-import {reactive, ref, h} from "vue";
-import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
-import FormFilePicker from "@/components/FormFilePicker.vue";
-import FormField from "@/components/FormField.vue";
-import FormControl from "@/components/FormControl.vue";
-import BaseDivider from "@/components/BaseDivider.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
-import {Modal, DataTable} from "@/components";
-import {DeleteOutlined} from '@ant-design/icons-vue';
+  import {reactive, ref, h} from "vue";
+  import {mdiBallotOutline, mdiAccount, mdiMail, mdiGithub, mdiDelete, mdiEye} from "@mdi/js";
+  import SectionMain from "@/components/SectionMain.vue";
+  import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+  import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+  import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
+  import {Modal, DataTable} from "@/components";
+  import {DeleteOutlined} from '@ant-design/icons-vue';
 
-import Api from "@/utils/Api";
-import router from "@/router";
-import FormUser from "./FormUser.vue";
+  import Api from "@/utils/Api";
+  import router from "@/router";
+  import FormUser from "./FormUser.vue";
+  import {notification} from "ant-design-vue";
 
 
-
-const modalState = ref({
-  visible:false,
-  value:null,
-  success:()=>{},
-  cancel:()=>{},
-});
-
-function showEditUser(value, success) {
-  modalState.value.visible = true;
-  modalState.value.value = value;
-  modalState.value.success = success;
-}
-
-const tableConfig = {
-  api: (params) => Api.get('user/list', {params}),
-  addAction: (reload) => {
-    showEditUser(null, reload)
-  },
-  itemActions: [
-    {
-      label: 'View'
-      , key: 'view'
-      , icon: mdiEye
-      , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-      , action(item, reload) {
-        router.push('/users/' + item.id)
-      }
+  const modalState = ref({
+    visible: false,
+    value: null,
+    success: () => {
     },
-    {
-      label: 'Edit User'
-      , key: 'edit'
-      , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-      , action(item, reload) {
-        showEditUser(item, reload)
-      }
+    cancel: () => {
     },
-    {
-      label: ''
-      , class: 'font-medium text-red-600 dark:text-red-500 hover:underline'
-      , icon: mdiDelete
-      , key: 'delete'
-      , action(item, reload) {
-        Api.delete('user/' + item.id).then(reload)
-      }
-    }
+  });
 
-  ],
-  columns: [
-    {title: 'Name', key: 'full_name'}
-    , {title: 'Role', key: 'role'}
-    , {title: 'Status', key: 'status'}
-  ],
-  selectionActions: [
-    {
-      title: 'Active',
-      action(selectedKeys) {
-        return Api.post('user/activeList', selectedKeys)
-      }, complete() {
-        alert('success')
-      }
-    }
-    , {
-      title: 'DeActive', action(selectedKeys) {
-        return Api.post('user/activeList', selectedKeys)
-      }, complete() {
-        alert('success')
-      }
-    }
-    , {
-      title: 'Delete',
-      action(selectedKeys) {
-        return Api.post('user/deleteList', selectedKeys)
+  function showEditUser(value, success) {
+    modalState.value.visible = true;
+    modalState.value.value = value;
+    modalState.value.success = success;
+  }
+
+  const tableConfig = {
+    api: (params) => Api.get('customer/list', {params}),
+    // addAction: (reload) => {
+    //   showEditUser(null, reload)
+    // },
+    itemActions: [],
+    columns: [
+      {title: 'Nhóm khách hàng', key: 'customer_group_name'},
+      {title: 'Tên', key: 'name'},
+      {title: 'Email', key: 'email'},
+      {title: 'Điện thoại', key: 'phone'},
+      {title: 'Ngày xác nhận', key: 'email_verified_at'},
+      {title: 'Tình trạng', key: 'status'}
+    ],
+    selectionActions: [
+      {
+        title: 'Hoạt động',
+        action(selectedKeys) {
+          return Api.post('customer/activeList', {
+            'items': selectedKeys,
+            'status': 'A'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
+        },
       },
-      complete() {
-        alert('success')
-      }
-    }
-  ]
-}
+      {
+        title: 'Tắt',
+        action(selectedKeys) {
+          return Api.post('customer/activeList', {
+            'items': selectedKeys,
+            'status': 'D'
+          }).then(rs => {
+            notification[rs.data.code == 0 ? 'error' : 'success']({
+              message: 'Thông báo',
+              description: rs.data.message,
+            });
+          })
+        },
+      },
+    ]
+  }
 
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton
-        :icon="mdiBallotOutline"
-        title="User Management"
-        main
-      >
-      </SectionTitleLineWithButton>
       <DataTable v-bind="tableConfig">
-        <template #cellAction[delete]="{item,actionMethod}">
-          <a-popconfirm
-            title="Are you sure delete this user?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="actionMethod"
-          >
-            <a-button
-              type="text"
-              v-if="item.role !== 'admin'"
-              danger
-              :icon="h(DeleteOutlined)"
-              label=""
-              :outline="true"
-            >
-
-            </a-button>
-
-          </a-popconfirm>
-        </template>
         <template #cell[full_name]="{item,column}">
           <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
                :alt="item.full_name">
@@ -143,14 +89,17 @@ const tableConfig = {
             <div class="font-normal text-gray-500">{{ item.email }}</div>
           </div>
         </template>
-        <template #cell[status]>
-          <div class="flex items-center">
+        <template #cell[status]="{item,column}">
+          <div class="flex items-center" v-if="item.status == 'D'">
             <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-            Offline
+            Tắt
+          </div>
+          <div class="flex items-center" v-if="item.status == 'A'">
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+            Hoạt động
           </div>
         </template>
       </DataTable>
-
     </SectionMain>
 
   </LayoutAuthenticated>

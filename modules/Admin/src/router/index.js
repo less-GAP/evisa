@@ -73,7 +73,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Customers",
+      title: "Danh sách khách hàng",
     },
     path: "/customers",
     name: "customers",
@@ -81,11 +81,19 @@ const routes = [
   },
   {
     meta: {
-      title: "Customer type",
+      title: "Nhóm khách hàng",
     },
-    path: "/customer-type",
-    name: "customer-type",
-    component: () => import("@/views/customer-type/index.vue"),
+    path: "/customer-group",
+    name: "customer-group",
+    component: () => import("@/views/customer-group/index.vue"),
+  },
+  {
+    meta: {
+      title: "Nhóm khách hàng",
+    },
+    path: "/customer-group/:id",
+    name: "customer-group-detail",
+    component: () => import("@/views/customer-group/Detail.vue"),
   },
   {
     meta: {

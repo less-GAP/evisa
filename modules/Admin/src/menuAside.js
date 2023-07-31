@@ -49,8 +49,8 @@ export default [
         label: "Danh sách khách hàng",
       },
       {
-        to: "/customer-type",
-        label: "Loại khách hàng",
+        to: "/customer-group",
+        label: "Nhóm khách hàng",
       },
     ],
   },

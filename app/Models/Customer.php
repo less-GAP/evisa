@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Series extends Model
+class Customer extends Model
 {
 
     /**
@@ -16,16 +16,17 @@ class Series extends Model
      */
     use HasFactory;
 
-    protected $table = 'series';
+    protected $table = 'customers';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
-        'short_description',
-        'description',
-        'customer_group',
-        'status'
+        'email',
+        'phone',
+        'email_verified_at',
+        'status',
+        'customer_group'
     ];
 
     /**
@@ -44,13 +45,11 @@ class Series extends Model
      * @var array<string, string>
      */
     protected $casts = [
-//        'email_verified_at' => 'datetime',
-//        'password' => 'hashed',
+        //'product_descr' => 'array',
     ];
 
     protected $appends = [
         'customer_group_name',
-        'videos'
     ];
 
     public function getCustomerGroupNameAttribute()
@@ -59,15 +58,11 @@ class Series extends Model
         return $cus->name;
     }
 
-    public function getVideosAttribute()
-    {
-        $vi = [];
-        $videos = SeriesVideo::where('series_id', $this->id)->get();
-        if(!empty($videos)){
-            foreach($videos as $v){
-                $vi[] = $v->video_descr;
-            }
-        }
-        return $vi;
-    }
+//    public function getImageUrlAttribute()
+//    {
+//        if ($this->image != '') {
+//            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
+//        }
+//        return '';
+//    }
 }

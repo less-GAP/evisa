@@ -53,5 +53,18 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::delete('{id}', \Modules\Admin\Actions\Series\DeleteSeriesAction::class . '@handle');
     });
 
+    Route::prefix('/customer')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Customer\GetListAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Customer\PostActiveListAction::class . '@handle');
+    });
+
+    Route::prefix('/customer-group')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\CustomerGroup\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\CustomerGroup\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\CustomerGroup\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\CustomerGroup\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\CustomerGroup\DeleteAction::class . '@handle');
+    });
+
 
 });
