@@ -160,7 +160,7 @@ reload()
         </th>
 
         <th v-if="itemActions.length" scope="col" class="px-6 py-3">
-          {{ __('Action') }}
+          Hành động
         </th>
       </tr>
       </thead>

@@ -41,7 +41,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Videos",
+      title: "List Videos",
     },
     path: "/videos",
     name: "videos",
@@ -57,11 +57,19 @@ const routes = [
   },
   {
     meta: {
-      title: "Series",
+      title: "Series Video",
     },
     path: "/series",
     name: "series",
     component: () => import("@/views/series/index.vue"),
+  },
+  {
+    meta: {
+      title: "Series Detail",
+    },
+    path: "/series/:id",
+    name: "series-detail",
+    component: () => import("@/views/series/SeriesView.vue"),
   },
   {
     meta: {
