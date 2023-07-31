@@ -27,6 +27,7 @@ import {
   initTooltips
 } from 'flowbite'
 import {useAuthStore} from "@/stores/auth";
+import {useAppStateStore} from "@/stores/appState";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -38,7 +39,6 @@ onMounted(() => {
 })
 
 
-const layoutAsidePadding = "xl:pl-[345px]";
 
 const styleStore = useStyleStore();
 
@@ -71,14 +71,14 @@ const menuClick = (event, item) => {
     }"
   >
     <div
-      :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
+      :class="[!$appState.menuCollapsed?'xl:pl-[365px] l:pl-0':'xl:pl-[160px] l:pl-0', { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class=" min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
       <header class="relative z-10 p-4 bg-white shadow-sm 2xl:p-8">
         <div class="flex items-center">
           <div class="flex items-center mr-10 2xl:hidden">
             <button id="open-menu"
-                    @click="$appState.showMenu = !$appState.showMenu"
+                    @click="$appState.showMenu = true"
                     class="cursor-pointer hamburger-icon w-[32px] md:w-[40px] 2xl:w-auto mr-5 rotate-180">
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M25.6665 39.6665L44.3332 39.6665" stroke="#14082D" stroke-width="3" stroke-linecap="round"
@@ -95,6 +95,7 @@ const menuClick = (event, item) => {
               </a>
             </div>
           </div>
+          <h1 class="hidden title-page md:block">{{$appState.title}}</h1>
           <nav class="flex items-center ml-auto" id="user-nav">
             <div class="notification">
               <button class="relative w-8 bell-icon 2xl:w-auto">
@@ -132,6 +133,7 @@ const menuClick = (event, item) => {
         </div>
       </header>
       <AsideMenu
+        class="bg-white"
         :is-aside-mobile-expanded="isAsideMobileExpanded"
         :is-aside-lg-active="isAsideLgActive"
         :menu="menuAside"
@@ -140,7 +142,7 @@ const menuClick = (event, item) => {
       />
       <div id="main-site" class="p-[10px] 2xl:p-8">
         <div id="unify-content">
-          <div class="uni-main-container mb-5">
+          <div class="uni-main-container mb-5 ">
             <slot/>
           </div>
         </div>

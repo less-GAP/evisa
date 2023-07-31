@@ -9,6 +9,7 @@
 
   import {PlusOutlined, LoadingOutlined, DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
 
+  const emit = defineEmits(['submit']);
 
   const tableConfig = {
     api: (params) => Api.get('product/list', {params:{...params,type: 'product'}}),
@@ -19,7 +20,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          //
+          emit('submit',item);
         }
       },
     ],
@@ -63,12 +64,10 @@
   <DataTable v-bind="tableConfig">
     <template #cellAction[edit]="{item,actionMethod}">
       <a-button
-        type="text"
-        :icon="h(FormOutlined)"
-        label=""
+        type="link"
         :outline="true"
         @click="actionMethod"
-      >
+      >Chọn
       </a-button>
     </template>
     <template #cell[image]="{item,column}">

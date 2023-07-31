@@ -2,13 +2,14 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
+import {useAppStateStore} from "@/stores/appState";
 
 const publicPages = ['/login'];
 
 const routes = [
   {
     meta: {
-      title: "Select style",
+      title: "Dashboard",
     },
     path: "/",
     name: "dashboard",
@@ -48,6 +49,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Video Detail",
+    },
+    path: "/videos/:id",
+    name: "video-detail",
+    component: () => import("@/views/videos/VideoView.vue"),
+  },
+  {
+    meta: {
       title: "Series",
     },
     path: "/series",
@@ -80,28 +89,29 @@ const routes = [
   },
   {
     meta: {
+      title: "Medias",
+    },
+    path: "/medias",
+    name: "medias",
+    component: () => import("@/views/medias/index.vue"),
+  },
+  {
+    meta: {
+      title: "Configs",
+    },
+    path: "/configs",
+    name: "configs",
+    component: () => import("@/views/configs/index.vue"),
+  },
+  {
+    meta: {
       title: "User Detail",
     },
     path: "/users/:id",
     name: "user-detail",
     component: () => import("@/views/users/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "Tables",
-    },
-    path: "/tables",
-    name: "tables",
-    component: () => import("@/views/TablesView.vue"),
-  },
-  {
-    meta: {
-      title: "Forms",
-    },
-    path: "/forms",
-    name: "forms",
-    component: () => import("@/views/FormsView.vue"),
-  },
+
   {
     meta: {
       title: "Profile",
@@ -110,22 +120,7 @@ const routes = [
     name: "profile",
     component: () => import("@/views/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "Ui",
-    },
-    path: "/ui",
-    name: "ui",
-    component: () => import("@/views/UiView.vue"),
-  },
-  {
-    meta: {
-      title: "Responsive layout",
-    },
-    path: "/responsive",
-    name: "responsive",
-    component: () => import("@/views/ResponsiveView.vue"),
-  },
+
   {
     meta: {
       title: "Login",
@@ -155,9 +150,11 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const auth = useAuthStore();
+
   if (!to.meta.isPublic && !auth.isLogin()) {
     auth.returnUrl = to.fullPath;
     return '/login';
   }
+  useAppStateStore().setTitle(to.meta.title)
 });
 export default router;

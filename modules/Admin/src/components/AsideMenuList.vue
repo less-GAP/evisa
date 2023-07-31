@@ -20,13 +20,12 @@ const logoutItem = computed(() => ({
   isLogout: true,
 }));
 const logout = (event, item) => {
-  useAuthStore().$reset()
-  router.push('login')
+  useAuthStore().logout()
 };
 </script>
 
 <template>
-  <ul>
+  <ul class="p-0 m-0 text-center list-none">
     <AsideMenuItem
       v-for="(item, index) in menu"
       :key="index"

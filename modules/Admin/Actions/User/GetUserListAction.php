@@ -18,6 +18,7 @@ class GetUserListAction
                 ->orWhere('full_name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%');
         }
+        $query->orderBy('id','DESC');
         return $query->paginate($request->input('perPage',15));
     }
 }

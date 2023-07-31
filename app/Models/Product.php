@@ -33,7 +33,8 @@ class Product extends Model
         'status',
         'title',
         'meta_description',
-        'meta_keyword'
+        'meta_keyword',
+        'stock'
     ];
 
     /**
