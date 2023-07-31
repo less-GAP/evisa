@@ -41,7 +41,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Videos",
+      title: "List Videos",
     },
     path: "/videos",
     name: "videos",
@@ -57,7 +57,11 @@ const routes = [
   },
   {
     meta: {
+<<<<<<< HEAD
       title: "Series",
+=======
+      title: "Series Video",
+>>>>>>> 57ad49e378b3e0443297835a8d92024411263723
     },
     path: "/series",
     name: "series",
@@ -65,7 +69,15 @@ const routes = [
   },
   {
     meta: {
-      title: "Customers",
+      title: "Series Detail",
+    },
+    path: "/series/:id",
+    name: "series-detail",
+    component: () => import("@/views/series/SeriesView.vue"),
+  },
+  {
+    meta: {
+      title: "Danh sách khách hàng",
     },
     path: "/customers",
     name: "customers",
@@ -73,11 +85,19 @@ const routes = [
   },
   {
     meta: {
-      title: "Customer type",
+      title: "Nhóm khách hàng",
     },
-    path: "/customer-type",
-    name: "customer-type",
-    component: () => import("@/views/customer-type/index.vue"),
+    path: "/customer-group",
+    name: "customer-group",
+    component: () => import("@/views/customer-group/index.vue"),
+  },
+  {
+    meta: {
+      title: "Nhóm khách hàng",
+    },
+    path: "/customer-group/:id",
+    name: "customer-group-detail",
+    component: () => import("@/views/customer-group/Detail.vue"),
   },
   {
     meta: {
