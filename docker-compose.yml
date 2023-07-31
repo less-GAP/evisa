@@ -8,6 +8,7 @@ services:
         command: 'bash -c "php artisan octane:start  --server=swoole --host=0.0.0.0 --port=80"'
         volumes:
             - ./:/var/www
+            - ./database.sqlite:/var/www/database.sqlite
             - ./public/index.php:/var/www/public/index.php
     nginx:
         build: ./docker/nginx
