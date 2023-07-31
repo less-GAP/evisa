@@ -27,6 +27,7 @@ import {
   initTooltips
 } from 'flowbite'
 import {useAuthStore} from "@/stores/auth";
+import {useAppStateStore} from "@/stores/appState";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -38,7 +39,6 @@ onMounted(() => {
 })
 
 
-const layoutAsidePadding = "xl:pl-[350px]";
 
 const styleStore = useStyleStore();
 
@@ -71,13 +71,14 @@ const menuClick = (event, item) => {
     }"
   >
     <div
-      :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
+      :class="[!$appState.menuCollapsed?'xl:pl-[365px] l:pl-0':'xl:pl-[160px] l:pl-0', { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class=" min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
       <header class="relative z-10 p-4 bg-white shadow-sm 2xl:p-8">
         <div class="flex items-center">
           <div class="flex items-center mr-10 2xl:hidden">
             <button id="open-menu"
+                    @click="$appState.showMenu = true"
                     class="cursor-pointer hamburger-icon w-[32px] md:w-[40px] 2xl:w-auto mr-5 rotate-180">
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M25.6665 39.6665L44.3332 39.6665" stroke="#14082D" stroke-width="3" stroke-linecap="round"
@@ -90,11 +91,11 @@ const menuClick = (event, item) => {
             </button>
             <div class="logo">
               <a href="https://po5.usa-server.com/admincp/" class="">
-                <img class="w-[100px] lg:w-[120px] 2xl:w-[165px]" src="/src/img/logo.png" alt="Power of Five">
+                <img class="w-[100px] lg:w-[120px] 2xl:w-[165px]" src="@/assets/logo.png" alt="Power of Five">
               </a>
             </div>
           </div>
-          <h1 class="hidden title-page md:block">Create Product</h1>
+          <h1 class="hidden title-page md:block">{{$appState.title}}</h1>
           <nav class="flex items-center ml-auto" id="user-nav">
             <div class="notification">
               <button class="relative w-8 bell-icon 2xl:w-auto">
@@ -114,11 +115,12 @@ const menuClick = (event, item) => {
               <div class="avatar">
                 <!-- <img src="https://secure.gravatar.com/avatar/bb90dcb0ceabfc8bf10c550f1ee95ee7?s=96&d=mm&r=g" alt=""> -->
                 <img class="object-cover w-10 h-10 rounded-lg 2xl:w-[60px] 2xl:h-[60px] 2xl:rounded-2xl"
-                     src="@/assets/avartar.png" alt="user-1">
+                     :src="$auth.user.profile_photo_url" alt="user-1">
               </div>
               <div class="hidden ml-5 md:block">
                 <div class="user-hi text-[#737791] font-medium text-sm">Hi,</div>
-                <div class="user-name font-bold text-[#151D48]">Power of Five</div>
+
+                <div class="user-name font-bold text-[#151D48]">{{$auth.user.full_name}}</div>
               </div>
               <div class="ml-2 btn-toggle md:ml-4 2xl:ml-8">
                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,6 +133,7 @@ const menuClick = (event, item) => {
         </div>
       </header>
       <AsideMenu
+        class="bg-white"
         :is-aside-mobile-expanded="isAsideMobileExpanded"
         :is-aside-lg-active="isAsideLgActive"
         :menu="menuAside"
@@ -139,7 +142,7 @@ const menuClick = (event, item) => {
       />
       <div id="main-site" class="p-[10px] 2xl:p-8">
         <div id="unify-content">
-          <div class="uni-main-container mb-5">
+          <div class="uni-main-container mb-5 ">
             <slot/>
           </div>
         </div>

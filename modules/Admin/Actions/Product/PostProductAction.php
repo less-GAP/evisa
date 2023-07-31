@@ -4,14 +4,15 @@
 namespace Modules\Admin\Actions\Product;
 
 use App\Models\Product;
+use App\Models\ProductPackage;
 use Illuminate\Http\Request;
+use Modules\Admin\Middleware\AdminIsAuthenticated;
 
 class PostProductAction
 {
     public function handle(Request $request)
     {
         $data = $request->all();
-
         try {
             $product = new Product();
             if (isset($data['id']) && $data['id'] > 0) {
@@ -24,6 +25,22 @@ class PostProductAction
 
             $product->fill($data);
             $product->save();
+
+            if($data['type'] == 'package'){
+                if(isset($data['id']) && $data['id'] > 0){
+                    ProductPackage::where('package_id',$data['id'])->delete();
+                }
+                if(!empty($data['packages'])){
+                    foreach($data['packages'] as $v){
+                        $pa = [
+                            'package_id' => $product->id,
+                            'product_id' => $v['id'],
+                            'product_descr' => $v
+                        ];
+                        ProductPackage::create($pa);
+                    }
+                }
+            }
 
             $output = [
                 'code' => 1,

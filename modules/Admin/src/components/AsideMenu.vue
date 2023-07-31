@@ -1,6 +1,7 @@
 <script setup>
 import AsideMenuLayer from "@/components/AsideMenuLayer.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
+import {useAppStateStore} from "@/stores/appState";
 
 defineProps({
   menu: {
@@ -14,6 +15,7 @@ defineProps({
 const emit = defineEmits(["menu-click", "aside-lg-close-click"]);
 
 const menuClick = (event, item) => {
+  useAppStateStore().showMenu=false
   emit("menu-click", event, item);
 };
 
@@ -24,17 +26,16 @@ const asideLgCloseClick = (event) => {
 
 <template>
   <AsideMenuLayer
+    class="h-full"
     :menu="menu"
-    :class="[
-      isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0',
-      { 'lg:hidden xl:flex': !isAsideLgActive },
-    ]"
+    v-bind="$attrs"
     @menu-click="menuClick"
     @aside-lg-close-click="asideLgCloseClick"
   />
   <OverlayLayer
-    v-show="isAsideLgActive"
+    v-show=" $appState.showMenu "
+    class="xl:hidden"
     z-index="z-30"
-    @overlay-click="asideLgCloseClick"
+    @overlay-click="$appState.showMenu = !$appState.showMenu"
   />
 </template>

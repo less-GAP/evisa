@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('slug')->index();
-            $table->string('type')->default('single')->index();
             $table->string('path');
+            $table->string('status');
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
             $table->string('created_by')->nullable();

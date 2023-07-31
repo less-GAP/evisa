@@ -1,7 +1,7 @@
 <script setup>
 import {reactive, ref} from "vue";
 import Api from "@/utils/Api";
-
+import { message } from 'ant-design-vue';
 const props = defineProps({
   value: Object
 })
@@ -19,6 +19,7 @@ const validateMessages = {
 
 const emit = defineEmits(["success", "cancel"]);
 const loading = ref(false)
+const error = ref(null)
 const formState = reactive(props.value || {
   isNew: true,
   full_name: "",
@@ -36,11 +37,13 @@ const formConfig = reactive({
   wrapperCol: {span: 24},
   "validate-messages": validateMessages,
 });
-
-const submit =async function () {
-  loading.value=true
-  const result = await Api.post('user',formState.value)
-  emit('success' ,result.data)
+const submit = async function () {
+  loading.value = true
+  Api.post('user', formState).then(result => {
+    emit('success', result)
+  }).catch(e=>
+  {
+  }).finally(loading.value = false)
 }
 const cancel = function () {
   emit('cancel')
@@ -52,9 +55,13 @@ const cancel = function () {
 <template>
 
   <a-form
+    autocomplete="off"
     v-bind="formConfig"
     @finish="submit"
   >
+    <a-form-item name="username" label="UserName" :rules="[{ required: true }]">
+      <a-input  autocomplete="off" v-model:value="formState.username"/>
+    </a-form-item>
     <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
       <a-input v-model:value="formState.full_name"/>
     </a-form-item>
@@ -70,11 +77,11 @@ const cancel = function () {
     <a-form-item
       label="Password"
       name="password"
-      :rules="[{ required: true, message: 'Please input your password!' }]"
+      :rules="formState.isNew?[{ required: true, message: 'Please input your password!' }]:[]"
     >
-      <a-input-password v-model:value="formState.password">
+      <a-input-password autocomplete="off" v-model:value="formState.password">
         <template #prefix>
-          <LockOutlined class="site-form-item-icon" />
+          <LockOutlined class="site-form-item-icon"/>
         </template>
       </a-input-password>
     </a-form-item>

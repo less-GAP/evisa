@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Video extends Model
 {
 
     /**
@@ -16,25 +16,17 @@ class Product extends Model
      */
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'videos';
 
     public $timestamps = true;
 
     protected $fillable = [
-        'image',
         'name',
-        'type',
         'slug',
         'short_description',
         'description',
-        'price',
-        'sale_price',
-        'point',
-        'status',
-        'title',
-        'meta_description',
-        'meta_keyword',
-        'stock'
+        'path',
+        'status'
     ];
 
     /**
@@ -58,13 +50,13 @@ class Product extends Model
     ];
 
     protected $appends = [
-        'image_url'
+        'path_full'
     ];
 
-    public function getImageUrlAttribute()
+    public function getPathFullAttribute()
     {
-        if ($this->image != '') {
-            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
+        if ($this->path != '') {
+            return url('upload/' . $this->path, '', env('APP_ENV') == 'local' ? false : true);
         }
         return '';
     }

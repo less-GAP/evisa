@@ -52,7 +52,7 @@
               description: rs.data.message,
             });
           }).finally(() => {
-            reload;
+            reload();
           });
         }
       }
@@ -205,11 +205,7 @@
           </div>
         </template>
       </DataTable>
-
     </SectionMain>
-
   </LayoutAuthenticated>
-
-  <FormDetail :value="editProduct" :isShowModal="isShowModal"></FormDetail>
 
 </template>

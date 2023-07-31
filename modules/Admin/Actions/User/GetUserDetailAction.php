@@ -7,7 +7,7 @@ namespace Modules\Admin\Actions\User;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class GetUserListAction
+class GetUserDetailAction
 {
     public function handle(Request $request)
     {
