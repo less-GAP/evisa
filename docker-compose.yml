@@ -13,7 +13,7 @@ services:
     nginx:
         build: ./docker/nginx
         user: ${MY_UID}:${MY_GID}
-        links:
+        depends_on:
             - app
         volumes:
             - ./storage/uploads:/var/www/public/uploads
