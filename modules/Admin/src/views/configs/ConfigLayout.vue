@@ -110,33 +110,34 @@ const items = ref([
     key: 'General',
     icon: () => h(MailOutlined),
     label: 'General',
-    href:'/config/general',
+    href:'/configs/general',
     title: 'General',
   },
-  {
-    key: 'shop_config',
-    icon: () => h(AppstoreOutlined),
-
-    label: 'Shop config',
-    title: 'Shop config',
-  },
-  {
-    key: 'payment_method',
-    icon: () => h(AppstoreOutlined),
-
-    label: 'Payment method',
-    title: 'Payment method',
-  },
-  {
-    key: 'referral_config',
-    icon: () => h(AppstoreOutlined),
-
-    label: 'Referral config',
-    title: 'Referral config',
-  },
+  // {
+  //   key: 'shop_config',
+  //   icon: () => h(AppstoreOutlined),
+  //
+  //   label: 'Shop config',
+  //   title: 'Shop config',
+  // },
+  // {
+  //   key: 'payment_method',
+  //   icon: () => h(AppstoreOutlined),
+  //
+  //   label: 'Payment method',
+  //   title: 'Payment method',
+  // },
+  // {
+  //   key: 'referral_config',
+  //   icon: () => h(AppstoreOutlined),
+  //
+  //   label: 'Referral config',
+  //   title: 'Referral config',
+  // },
   {
     key: 'smtp',
     icon: () => h(AppstoreOutlined),
+    href:'/configs/smtp',
     label: 'SMTP',
     title: 'SMTP',
   },
@@ -153,14 +154,18 @@ const items = ref([
   },
 
 ]);
+function menuClick({item}){
+  if(item.href){
+    router.push(item.href)
+  }
+}
 </script>
 
 <template>
   <LayoutAuthenticated>
     <a-layout>
       <a-layout-sider  style="width:300px;background: #fff;max-width:40vw;">
-        <a-menu  mode="vertical" :items="items">
-          <template #label>3242342</template>
+        <a-menu @click="menuClick"  mode="vertical" :items="items">
         </a-menu>
       </a-layout-sider>
       <a-layout-content

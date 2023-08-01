@@ -126,7 +126,7 @@ export default [
   {
     label: "Cấu hình",
     icon: mdiCogOutline,
-    to: "/configs",
+    to: "/configs/general",
   },
   // {
   //   href: "https://github.com/justboil/admin-one-vue-tailwind",

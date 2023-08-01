@@ -191,6 +191,14 @@ const routes = [
         name: "config-general",
         component: () => import("@/views/configs/GeneralConfig.vue"),
       },
+      {
+        meta: {
+          title: "SMTP Configuration",
+        },
+        path: "/configs/smtp",
+        name: "config-smtp",
+        component: () => import("@/views/configs/SMTPConfig.vue"),
+      },
     ]
   },
   {
