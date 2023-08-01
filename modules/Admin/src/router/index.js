@@ -145,6 +145,38 @@ const routes = [
   },
   {
     meta: {
+      title: "Quận/huyện",
+    },
+    path: "/districts",
+    name: "districts",
+    component: () => import("@/views/districts/index.vue"),
+  },
+  {
+    meta: {
+      title: "Thông tin quận/huyện",
+    },
+    path: "/districts/:id",
+    name: "districts-detail",
+    component: () => import("@/views/districts/Detail.vue"),
+  },
+  {
+    meta: {
+      title: "Phường/xã",
+    },
+    path: "/wards",
+    name: "wards",
+    component: () => import("@/views/wards/index.vue"),
+  },
+  {
+    meta: {
+      title: "Thông tin phường/xã",
+    },
+    path: "/wards/:id",
+    name: "wards-detail",
+    component: () => import("@/views/wards/Detail.vue"),
+  },
+  {
+    meta: {
       title: "Configs",
     },
     path: "/configs",
