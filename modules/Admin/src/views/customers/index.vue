@@ -37,10 +37,12 @@
     itemActions: [],
     columns: [
       {title: 'Nhóm khách hàng', key: 'customer_group_name'},
+      {title: 'Tên đăng nhập', key: 'username'},
       {title: 'Tên', key: 'name'},
       {title: 'Email', key: 'email'},
       {title: 'Điện thoại', key: 'phone'},
       {title: 'Ngày xác nhận', key: 'email_verified_at'},
+      {title: 'Mã giới thiệu', key: 'referral_code'},
       {title: 'Tình trạng', key: 'status'}
     ],
     selectionActions: [
