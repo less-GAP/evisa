@@ -18,7 +18,7 @@ class Config extends Model
 
     protected $table = 'configs';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'name',

@@ -14,6 +14,6 @@ class GetListAction
 
         $names=$request->input('names',[]);
         $query = Config::whereIn('name',$names);
-        return $query->limit(500)->get();
+        return $query->limit(500)->pluck('value','name');
     }
 }

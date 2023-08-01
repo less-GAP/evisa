@@ -56,6 +56,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 
     Route::prefix('/config')->group(function () {
         Route::get('/', \Modules\Admin\Actions\Config\GetListAction::class . '@handle');
+        Route::post('/', \Modules\Admin\Actions\Config\PostAction::class . '@handle');
     });
     Route::prefix('/file')->group(function () {
         Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');

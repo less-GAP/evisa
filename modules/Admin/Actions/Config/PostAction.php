@@ -1,45 +1,29 @@
 <?php
 
 
-namespace Modules\Admin\Actions\Video;
+namespace Modules\Admin\Actions\Config;
 
-use App\Models\Product;
-use App\Models\ProductPackage;
-use App\Models\Video;
+use App\Models\Config;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Modules\Admin\Middleware\AdminIsAuthenticated;
 
 class PostAction
 {
     public function handle(Request $request)
     {
         $data = $request->all();
-
-        try {
-            $video = new Video();
-            if (isset($data['id']) && $data['id'] > 0) {
-                $video = Video::find($data['id']);
-            }
-
-            if (!isset($data['slug']) || $data['slug'] == '') {
-                $data['slug'] = \Str::slug($data['name']);
-            }
-
-            $video->fill($data);
-            $video->save();
-
-            $output = [
-                'code' => 1,
-                'message' => 'Thành công!',
-                'data' => $video
-            ];
-        } catch (\Throwable $e) {
-            $output = [
-                'code' => 0,
-                'message' => $e->getMessage(),
-                'data' => []
+        $insertData = [];
+        foreach ($data as $name=>$value){
+            $insertData[]=[
+                'name'=>$name,
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now(),
+                'value'=>$value
             ];
         }
-        return $output;
+        return [
+            'result'=>Config::upsert($insertData,['name']),
+            'message'=>'Update configuration successfully!'
+        ];
     }
 }

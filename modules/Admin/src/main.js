@@ -12,10 +12,10 @@ import "./css/main.css";
 import {useAuthStore} from "@/stores/auth";
 import piniaPersist from 'pinia-plugin-persist'
 import Api from "@/utils/Api";
+import {url} from "@/utils/Url";
 import {useTranslation} from "@/utils/Translation";
 import Antd from 'ant-design-vue';
 import {useAppStateStore} from "@/stores/appState";
-
 /* Init Pinia */
 const pinia = createPinia();
 pinia.use(piniaPersist)
@@ -32,6 +32,7 @@ myApp.config.globalProperties.$api = Api;
 myApp.config.globalProperties.$style = styleStore;
 myApp.config.globalProperties.$appState = appState;
 myApp.config.globalProperties.__ = tranlation.__;
+myApp.config.globalProperties.$url = url;
 myApp.use(Antd).mount("#app");
 /* Fetch sample data */
 // mainStore.fetch("clients");

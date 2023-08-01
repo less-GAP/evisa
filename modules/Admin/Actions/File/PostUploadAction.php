@@ -1,5 +1,6 @@
 <?php
 
+namespace Modules\Admin\Actions\File;
 
 use App\Models\File;
 use Illuminate\Http\Request;

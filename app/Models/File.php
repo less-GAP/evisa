@@ -3,17 +3,19 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Model;
 /**
  * Class Role
  * @package CustomerApp\Models
  */
-class File extends BaseModel
+class File extends Model
 {
     protected $table = 'files';
     public $timestamps = true;
 
     protected $appends = [
         'file_url'
+        ,'site_path'
     ];
 
     protected $fillable = [
@@ -27,6 +29,9 @@ class File extends BaseModel
     ];
     public function getFileUrlAttribute(){
         return \Storage::disk('upload')->url($this->file_dir.'/'.$this->file_path);
+    }
+    public function getSitePathAttribute(){
+        return 'upload/'.($this->file_dir?$this->file_dir.'/':'').$this->file_path;
     }
 
 }

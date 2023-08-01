@@ -26,7 +26,7 @@ const formConfig = reactive({
 const fetch =  function () {
   loading.value = true
   Api.get('config', {params:{names:configNames}}).then(result => {
-    console.log(444,result)
+    Object.assign(formState,result.data)
   }).catch(e=>
   {
   }).finally(loading.value = false)
@@ -34,7 +34,7 @@ const fetch =  function () {
 fetch();
 const submit = async function () {
   loading.value = true
-  Api.post('user', formState).then(result => {
+  Api.post('config', formState).then(result => {
     emit('success', result)
   }).catch(e=>
   {
@@ -62,7 +62,8 @@ const cancel = function () {
       <a-textarea  autocomplete="off" v-model:value="formState.site_description"/>
     </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
-      <InputUpload  autocomplete="off" v-model:value="formState.site_logo"/>
+      <InputUpload alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
+      </InputUpload>
     </a-form-item>
 
     <a-form-item>

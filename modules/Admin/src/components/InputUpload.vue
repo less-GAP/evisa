@@ -1,19 +1,22 @@
 <template>
-  <a-upload
-    v-bind="$attrs"
-    :customRequest="upload"
-    :openFileDialogOnClick="true"
-    :withCredentials="true"
-    v-model:file-list="fileList"
-    list-type="picture"
-    :action="action"
-    :accept="accept"
-  >
-    <a-button type="primary">
-      <upload-outlined></upload-outlined>
-      Upload
-    </a-button>
-  </a-upload>
+    <slot></slot>
+    <a-image :width="width" :height="height" v-if="value" :src="$url(value)" :alt="alt"/>
+    <br>
+    <a-upload
+      v-bind="$attrs"
+      :customRequest="upload"
+      :openFileDialogOnClick="true"
+      :withCredentials="true"
+      :list-type="listType"
+      :action="action"
+      :accept="accept"
+      :showUploadList="false"
+    >
+      <a-button size="mini" :loading="loading" >
+        <upload-outlined></upload-outlined>
+        Upload
+      </a-button>
+    </a-upload>
 
 </template>
 <script lang="ts">
@@ -28,7 +31,24 @@ export default defineComponent({
   props: {
     value: Object,
     accept: String,
+    alt: String,
     action: {
+      type: String,
+      default: '/file/Upload'
+    },
+    height: {
+      type: Number,
+      default: 'auto'
+    },
+    width: {
+      type: Number,
+      default: 200
+    },
+    listType: {
+      type: String,
+      default: 'picture'
+    },
+    dir: {
       type: String,
       default: '/file/Upload'
     },
@@ -36,9 +56,9 @@ export default defineComponent({
   emits: ['change', 'delete', 'preview-delete', 'update:value'],
 
   setup(props, {emit, attrs}) {
-    // 上传modal
     const fileList = ref<string[]>([]);
-
+    const file = ref(null);
+    const loading = ref(false);
     const showPreview = computed(() => {
       const {emptyHidePreview} = props;
       if (!emptyHidePreview) return true;
@@ -68,21 +88,27 @@ export default defineComponent({
 
     return {
       async upload(options) {
-        const res = await Api.post(props.action, {
+        loading.value = true
+        let formData = new FormData();
+        formData.append("file", options.file);
+        formData.append("dir", props.dir);
+        const res = await Api.post(props.action, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
           url: options.action,
-          file: options.file
         })
+        file.value = res.data
+        emit('update:value', res.data.site_path);
+        emit('change', res.data.site_path);
+        loading.value = false
 
-        emit('update:value', res);
-        emit('change', res);
         return res
       },
       fileList: ref([]),
       handleChange,
-      handlePreviewChange,
+      loading,
+      file,
       showPreview,
       bindValue,
     };
