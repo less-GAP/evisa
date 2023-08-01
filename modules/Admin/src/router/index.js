@@ -113,6 +113,38 @@ const routes = [
   },
   {
     meta: {
+      title: "Quốc gia",
+    },
+    path: "/countries",
+    name: "countries",
+    component: () => import("@/views/countries/index.vue"),
+  },
+  {
+    meta: {
+      title: "Thông tin quốc gia",
+    },
+    path: "/countries/:id",
+    name: "country-detail",
+    component: () => import("@/views/countries/Detail.vue"),
+  },
+  {
+    meta: {
+      title: "Tỉnh/Thành phố",
+    },
+    path: "/provinces",
+    name: "provinces",
+    component: () => import("@/views/provinces/index.vue"),
+  },
+  {
+    meta: {
+      title: "Thông tin tỉnh/thành phố",
+    },
+    path: "/provinces/:id",
+    name: "provinces-detail",
+    component: () => import("@/views/provinces/Detail.vue"),
+  },
+  {
+    meta: {
       title: "Configs",
     },
     path: "/configs",
