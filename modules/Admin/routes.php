@@ -67,5 +67,22 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::delete('{id}', \Modules\Admin\Actions\CustomerGroup\DeleteAction::class . '@handle');
     });
 
+    Route::prefix('/countries')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Countries\GetListAction::class . '@handle');
+        Route::get('all', \Modules\Admin\Actions\Countries\GetAllAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Countries\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Countries\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Countries\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\Countries\DeleteAction::class . '@handle');
+    });
+
+    Route::prefix('/provinces')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Provinces\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Provinces\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Provinces\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Provinces\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\Provinces\DeleteAction::class . '@handle');
+    });
+
 
 });

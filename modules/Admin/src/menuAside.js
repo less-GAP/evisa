@@ -6,7 +6,8 @@ import {
   mdiAccountSupervisorOutline,
   mdiAccountCircleOutline,
   mdiImageMultiple,
-  mdiCogOutline
+  mdiCogOutline,
+  mdiMapMarkerOutline
 } from "@mdi/js";
 
 export default [
@@ -99,6 +100,20 @@ export default [
     label: "Media",
     icon: mdiImageMultiple,
     to: "/medias",
+  },
+  {
+    label: "Vị trí",
+    icon: mdiMapMarkerOutline,
+    menu: [
+      {
+        to: "/countries",
+        label: "Quốc gia",
+      },
+      {
+        to: "/provinces",
+        label: "Tỉnh/Thành phố",
+      },
+    ],
   },
   {
     label: "Cấu hình",
