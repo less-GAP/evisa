@@ -110,6 +110,7 @@ const items = ref([
     key: 'General',
     icon: () => h(MailOutlined),
     label: 'General',
+    href:'/config/general',
     title: 'General',
   },
   {
@@ -157,57 +158,17 @@ const items = ref([
 <template>
   <LayoutAuthenticated>
     <a-layout>
-
-      <a-layout-sider width="200" style="background: #fff">
-        <a-menu mode="vertical" :items="items"/>
+      <a-layout-sider  style="width:300px;background: #fff;max-width:40vw;">
+        <a-menu  mode="vertical" :items="items">
+          <template #label>3242342</template>
+        </a-menu>
       </a-layout-sider>
       <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
-
-        <DataTable v-bind="tableConfig">
-          <template #cellAction[delete]="{item,actionMethod}">
-            <a-popconfirm
-              title="Are you sure delete this user?"
-              ok-text="Yes"
-              cancel-text="No"
-              @confirm="actionMethod"
-            >
-              <a-button
-                type="text"
-                v-if="item.role !== 'admin'"
-                danger
-                :icon="h(DeleteOutlined)"
-                label=""
-                :outline="true"
-              >
-
-              </a-button>
-
-            </a-popconfirm>
-          </template>
-          <template #cell[full_name]="{item,column}">
-            <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-                 :alt="item.full_name">
-            <div class="pl-3 float-left">
-              <div class="text-base font-semibold">{{ item.full_name }}</div>
-              <div class="font-normal text-gray-500">{{ item.email }}</div>
-            </div>
-          </template>
-          <template #cell[status]>
-            <div class="flex items-center">
-              <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-              Offline
-            </div>
-          </template>
-        </DataTable>
+        <router-view />
       </a-layout-content>
     </a-layout>
   </LayoutAuthenticated>
-  <a-modal :title="modalState.value?.id?'Edit User':'Add User'" :footer="null" width="800px"
-           v-model:open="modalState.visible">
-    <FormUser v-if="modalState.visible"
-              @success="modalState.visible=false;modalState.success()" @cancel="modalState.visible=false"
-              :value="modalState.value"></FormUser>
-  </a-modal>
+
 </template>
