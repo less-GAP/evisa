@@ -113,6 +113,14 @@ export default [
         to: "/provinces",
         label: "Tỉnh/Thành phố",
       },
+      {
+        to: "/districts",
+        label: "Quận/Huyện",
+      },
+      {
+        to: "/wards",
+        label: "Phường/xã",
+      },
     ],
   },
   {

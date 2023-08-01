@@ -85,10 +85,29 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 
     Route::prefix('/provinces')->group(function () {
         Route::get('list', \Modules\Admin\Actions\Provinces\GetListAction::class . '@handle');
+        Route::get('all', \Modules\Admin\Actions\Provinces\GetAllAction::class . '@handle');
         Route::post('', \Modules\Admin\Actions\Provinces\PostAction::class . '@handle');
         Route::get('{id}', \Modules\Admin\Actions\Provinces\GetDetailAction::class . '@handle');
         Route::post('activeList', \Modules\Admin\Actions\Provinces\PostActiveListAction::class . '@handle');
         Route::delete('{id}', \Modules\Admin\Actions\Provinces\DeleteAction::class . '@handle');
+    });
+
+    Route::prefix('/districts')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Districts\GetListAction::class . '@handle');
+        Route::get('all', \Modules\Admin\Actions\Districts\GetAllAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Districts\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Districts\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Districts\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\Districts\DeleteAction::class . '@handle');
+    });
+
+
+    Route::prefix('/wards')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Wards\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Wards\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Wards\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Wards\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\Wards\DeleteAction::class . '@handle');
     });
 
 
