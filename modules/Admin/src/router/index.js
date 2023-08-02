@@ -17,7 +17,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Orders",
+      title: "Đơn hàng",
     },
     path: "/orders",
     name: "orders",
@@ -174,6 +174,38 @@ const routes = [
     path: "/wards/:id",
     name: "wards-detail",
     component: () => import("@/views/wards/Detail.vue"),
+  },
+  {
+    meta: {
+      title: "Phương thức vận chuyển",
+    },
+    path: "/shipping-method",
+    name: "shipping-method",
+    component: () => import("@/views/shipping-method/index.vue"),
+  },
+  {
+    meta: {
+      title: "Phương thức vận chuyển",
+    },
+    path: "/shipping-method/:id",
+    name: "shipping-method-detail",
+    component: () => import("@/views/shipping-method/Detail.vue"),
+  },
+  {
+    meta: {
+      title: "Phương thức thanh toán",
+    },
+    path: "/payment-method",
+    name: "payment-method",
+    component: () => import("@/views/payment-method/index.vue"),
+  },
+  {
+    meta: {
+      title: "Phương thức thanh toán",
+    },
+    path: "/payment-method/:id",
+    name: "payment-method-detail",
+    component: () => import("@/views/payment-method/Detail.vue"),
   },
   {
     meta: {
