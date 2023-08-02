@@ -21,6 +21,11 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
         Route::delete('{id}', DeleteUserAction::class . '@handle');
     });
+    Route::prefix('/email-template')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\EmailTemplate\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\EmailTemplate\PostAction::class. '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\EmailTemplate\DeleteAction::class . '@handle');
+    });
 
     Route::prefix('/product')->group(function () {
         Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
@@ -57,6 +62,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::prefix('/config')->group(function () {
         Route::get('/', \Modules\Admin\Actions\Config\GetListAction::class . '@handle');
         Route::post('/', \Modules\Admin\Actions\Config\PostAction::class . '@handle');
+        Route::post('/testSmtp', \Modules\Admin\Actions\Config\PostTestSmtpAction::class . '@handle');
     });
     Route::prefix('/file')->group(function () {
         Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');

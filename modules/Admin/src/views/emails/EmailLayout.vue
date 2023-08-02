@@ -6,21 +6,19 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 const items = ref([
   {
-    key: 'General',
-    icon: () => h(MailOutlined),
-    label: 'General',
-    href:'/configs/general',
-    title: 'General',
-  },
-
-  {
-    key: 'smtp',
+    key: 'templates',
     icon: () => h(AppstoreOutlined),
-    href:'/configs/smtp',
-    label: 'SMTP',
-    title: 'SMTP',
+    href:'/email/templates',
+    label: 'Templates',
+    title: 'Templates',
   },
-
+  {
+    key: 'History',
+    icon: () => h(MailOutlined),
+    label: 'History',
+    href:'/email/history',
+    title: 'History',
+  },
 
 ]);
 function menuClick({item}){

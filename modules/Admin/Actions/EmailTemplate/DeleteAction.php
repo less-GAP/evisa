@@ -1,21 +1,20 @@
 <?php
 
 
-namespace Modules\Admin\Actions\User;
+namespace Modules\Admin\Actions\EmailTemplate;
 
 
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class DeleteUserAction
+class DeleteAction
 {
     public function handle(Request $request)
     {
 
-        $query = User::query();
+        $query = EmailTemplate::query();
         return [
             'result' =>$query->find($request->route('id'))->delete(),
-            'message' => 'Delete User Successfully!'
+            'message' => 'Delete Successfully!'
         ];
     }
 }
