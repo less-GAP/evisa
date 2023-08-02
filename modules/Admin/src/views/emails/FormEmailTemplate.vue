@@ -4,6 +4,7 @@ import Api from "@/utils/Api";
 import {message} from 'ant-design-vue';
 import 'jodit/es5/jodit.css';
 import {JoditEditor} from 'jodit-vue';
+import router from "@/router";
 
 const props = defineProps({
   value: Object
@@ -31,6 +32,7 @@ const formState = reactive(props.value || {
   role: "user",
   password: "",
 });
+const id = router.currentRoute.value.params.id;
 
 const formConfig = reactive({
   "validateTrigger": "submit",
@@ -40,10 +42,20 @@ const formConfig = reactive({
   wrapperCol: {span: 24},
   "validate-messages": validateMessages,
 });
+const fetch = function (id) {
+  loading.value = true
+  Api.get('email-template/' + id).then(result => {
+    Object.assign(formState, result.data)
+  }).catch(e => {
+  }).finally(loading.value = false)
+}
+if (id) {
+  fetch(id)
+}
 const submit = async function () {
   loading.value = true
-  Api.post('user', formState).then(result => {
-    emit('success', result)
+  Api.post('email-template', formState).then(result => {
+    router.push('/email/templates')
   }).catch(e => {
   }).finally(loading.value = false)
 }
@@ -67,13 +79,13 @@ const cancel = function () {
           <a-input autocomplete="off" v-model:value="formState.email_title"/>
         </a-form-item>
         <a-form-item class="w-full" name="email_reply_to" label="Reply to">
-          <a-select mode="tags" autocomplete="off" v-model:value="formState.email_reply_to"/>
+          <a-input  autocomplete="off" v-model:value="formState.email_reply_to"/>
         </a-form-item>
         <a-form-item class="w-full" name="email_cc" label="Mail cc">
-          <a-select mode="tags" autocomplete="off" v-model:value="formState.email_cc"/>
+          <a-input placeholder="Split with ;" autocomplete="off" v-model:value="formState.email_cc"/>
         </a-form-item>
         <a-form-item class="w-full" name="email_bcc" label="Mail bcc">
-          <a-select mode="tags" autocomplete="off" v-model:value="formState.email_bcc"/>
+          <a-input  placeholder="Split with ;"  autocomplete="off" v-model:value="formState.email_bcc"/>
         </a-form-item>
       </a-col>
       <a-col :span="16">
@@ -86,10 +98,9 @@ const cancel = function () {
       </a-col>
       <div class="min-w-full text-center mt-20">
         <a-button class="mr-5" :loading="loading" type="primary" html-type="submit">Submit</a-button>
-        <a-button @click="cancel" html-type="button">Back</a-button>
+        <router-link to="/email/templates" @click="cancel" html-type="button">Back</router-link>
       </div>
     </a-row>
-
 
 
   </a-form>

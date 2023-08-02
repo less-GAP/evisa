@@ -7,15 +7,15 @@ namespace Modules\Admin\Actions\EmailTemplate;
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 
-class DeleteAction
+class GetDetailAction
 {
     public function handle(Request $request)
     {
 
         $query = EmailTemplate::query();
-        return [
-            'result' =>$query->find($request->route('id'))->delete(),
-            'message' => 'Delete Successfully!'
-        ];
+        if ($search = $request->input('search')) {
+            $query->where('email_title', 'like', '%' . $search . '%');
+        }
+        return $query->paginate($request->input('perPage', 15));
     }
 }

@@ -62,7 +62,7 @@ function reload() {
     props.api({
       perPage: props.pagination.perPage,
       page: props.pagination.page, ...props.params,
-      search: search.value
+      "filter[search]": search.value
     }).then(rs => {
       tableData.value = rs.data
       props.pagination.total = rs.data?.total ? rs.data.total : 0
