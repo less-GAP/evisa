@@ -7,7 +7,9 @@ import {
   mdiAccountCircleOutline,
   mdiImageMultiple,
   mdiCogOutline,
-  mdiMapMarkerOutline
+  mdiMapMarkerOutline,
+  mdiCarOutline,
+  mdiCreditCardOutline
 } from "@mdi/js";
 
 export default [
@@ -123,6 +125,16 @@ export default [
       },
     ],
   },
+  {
+    label: "Vận chuyển",
+    icon: mdiCarOutline,
+    to: "/shipping-method",
+  },{
+    label: "Thanh toán",
+    icon: mdiCreditCardOutline,
+    to: "/payment-method",
+  },
+
   {
     label: "Cấu hình",
     icon: mdiCogOutline,

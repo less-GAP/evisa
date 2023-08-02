@@ -110,5 +110,21 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::delete('{id}', \Modules\Admin\Actions\Wards\DeleteAction::class . '@handle');
     });
 
+    Route::prefix('/shipping-method')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\ShippingMethod\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\ShippingMethod\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\ShippingMethod\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\ShippingMethod\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\ShippingMethod\DeleteAction::class . '@handle');
+    });
+
+    Route::prefix('/payment-method')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\PaymentMethod\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\PaymentMethod\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\PaymentMethod\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\PaymentMethod\PostActiveListAction::class . '@handle');
+        Route::delete('{id}', \Modules\Admin\Actions\PaymentMethod\DeleteAction::class . '@handle');
+    });
+
 
 });

@@ -13,9 +13,9 @@
 
 
   const tableConfig = {
-    api: (params) => Api.get('wards/list', {params}),
+    api: (params) => Api.get('payment-method/list', {params}),
     addAction: (reload) => {
-      router.push('/wards/0')
+      router.push('/payment-method/0')
     },
     itemActions: [
       {
@@ -24,7 +24,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/wards/' + item.id)
+          router.push('/payment-method/' + item.id)
         }
       },
       {
@@ -33,7 +33,7 @@
         icon: mdiDelete,
         key: 'delete',
         action(item, reload) {
-          Api.delete('wards/' + item.id).then(rs => {
+          Api.delete('payment-method/' + item.id).then(rs => {
             notification[rs.data.code == 0 ? 'error' : 'success']({
               message: 'Thông báo',
               description: rs.data.message,
@@ -46,18 +46,16 @@
 
     ],
     columns: [
-      {title: 'Mã quận/huyện', key: 'code'},
-      {title: 'Tên quận/huyện', key: 'name'},
-      {title: 'Quận/huyện', key: 'district_name'},
-      {title: 'Tỉnh/thành phố', key: 'province_name'},
-      {title: 'Quốc gia', key: 'country_name'},
-      {title: 'Status', key: 'status'}
+      {title: 'Mã phương thức', key: 'code'},
+      {title: 'Tên phương thức', key: 'name'},
+      {title: 'Mô tả ngắn', key: 'short_description'},
+      {title: 'Tình trạng', key: 'status'}
     ],
     selectionActions: [
       {
         title: 'Hoạt động',
         action(selectedKeys) {
-          return Api.post('wards/activeList', {
+          return Api.post('payment-method/activeList', {
             'items': selectedKeys,
             'status': 'A'
           }).then(rs => {
@@ -71,7 +69,7 @@
       {
         title: 'Tắt',
         action(selectedKeys) {
-          return Api.post('wards/activeList', {
+          return Api.post('payment-method/activeList', {
             'items': selectedKeys,
             'status': 'D'
           }).then(rs => {
@@ -93,7 +91,7 @@
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
-            title="Bạn muốn xóa sản phẩm này?"
+            title="Bạn muốn xóa phương thức thanh toán này?"
             ok-text="Yes"
             cancel-text="No"
             @confirm="actionMethod"
