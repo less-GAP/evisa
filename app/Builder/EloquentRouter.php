@@ -30,12 +30,11 @@ class EloquentRouter
 
     public function handle($model, array $config)
     {
-        $this->model = $model;
+        $this->model = new $model;
         $this->config = $config;
         $prefix = $this->prefix;
-        $routes = $this->routes;
 
-        Route::prefix($prefix)->group(function () use ($routes) {
+        Route::prefix($prefix)->group(function () {
 
             Route::get('list', function (Request $request) {
                 return $this->getList($request);
@@ -55,11 +54,9 @@ class EloquentRouter
 
     public function getList(Request $request)
     {
-        $query = $this->model::query();
-        if ($search = $request->input('search')) {
-            $query->where('email_title', 'like', '%' . $search . '%');
-        }
+
         return QueryBuilder::for($this->model)
+            ->defaultSort($this->config['defaultSort'] ?? '-id')
             ->allowedFilters($this->config['allowedFilters'] ?? [])
             ->allowedSorts($this->config['allowedSorts'] ?? 'id')
             ->paginate($request->input('perPage', 15))
