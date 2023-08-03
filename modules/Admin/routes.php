@@ -161,5 +161,12 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::delete('{id}', \Modules\Admin\Actions\PaymentMethod\DeleteAction::class . '@handle');
     });
 
+    Route::prefix('/orders')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Orders\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Orders\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Orders\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Orders\PostActiveListAction::class . '@handle');
+    });
+
 
 });
