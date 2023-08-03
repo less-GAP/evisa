@@ -5,6 +5,7 @@ namespace App\Builder;
 
 
 use App\Models\EmailTemplate;
+use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -15,24 +16,25 @@ class EloquentRouter
     private $config;
     private $routes;
 
-    public function __construct(private $prefix ,$routes)
+    public function __construct(private $prefix, $routes)
     {
     }
 
-    public static function routes(string $prefix ,array $routes)
+    public static function routes(string $prefix, Closure|null $routes = null)
     {
-        $handler = new static($prefix ,$routes);
+        $handler = new static($prefix, $routes);
         return $handler;
     }
 
-    public function handle($model , array $config)
+    public function handle($model, array $config)
     {
         $this->model = $model;
+        $this->config = $config;
         $prefix = $this->prefix;
         $routes = $this->routes;
         Route::prefix($prefix)->group(function () use ($routes) {
-            foreach ( $routes as $route){
-
+            if ($routes) {
+                $routes();
             }
             Route::get('list', function (Request $request) {
                 return $this->getList($request);

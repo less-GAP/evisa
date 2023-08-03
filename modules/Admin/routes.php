@@ -1,5 +1,8 @@
 <?php
 
+use App\Builder\EloquentRouter;
+use App\Models\EmailTemplate;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Actions\GetUserInfoAction;
 use Modules\Admin\Actions\User\DeleteUserAction;
@@ -14,7 +17,6 @@ Route::post('auth/login', \Modules\Admin\Actions\Auth\PostLoginAction::class . '
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::prefix('/auth')->group(function () {
         Route::get('userInfo', GetUserInfoAction::class . '@handle');
-
     });
 //    Route::prefix('/user')->group(function () {
 //        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
@@ -22,21 +24,31 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
 //        Route::delete('{id}', DeleteUserAction::class . '@handle');
 //    });
-    (new \App\Builder\EloquentRouter(\App\Models\User::class, [
-        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'full_name,username')]
-    ]))->handle('/user');
+    EloquentRouter::routes('user')
+        ->handle(\App\Models\User::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
+            ]
+        );
 
-    (new \App\Builder\EloquentRouter(\App\Models\EmailTemplate::class, [
-        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'email_title,email_content')]
-    ]))->handle('/email-template');
+    EloquentRouter::routes('email-template')
+        ->handle(\App\Models\EmailTemplate::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_content')]
+            ]
+        );
 
-    (new \App\Builder\EloquentRouter(\App\Models\Product::class, [
-        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'name')]
-    ]))->handle('/product')
-        ->addRoute(function () {
-            Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
-            Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
-        });
+    EloquentRouter::routes('product', function () {
+        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+    })
+        ->handle(\App\Models\Product::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
+            ]
+        );
+
+
 //    Route::prefix('/product')->group(function () {
 //        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
 //        Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');

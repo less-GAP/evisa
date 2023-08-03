@@ -7,7 +7,7 @@ namespace App\Builder\Filters;
 use Spatie\QueryBuilder\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
-class GlobalSearchFields implements Filter
+class SearchLikeMultipleField implements Filter
 {
     public function __invoke(Builder $query, $value, string $property)
     {
