@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Admin\Actions\GetUserInfoAction;
 use Modules\Admin\Actions\User\DeleteUserAction;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
+use Spatie\QueryBuilder\AllowedFilter;
 
 Route::get('/', function () {
     return 'admin api';
@@ -15,29 +16,38 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::get('userInfo', GetUserInfoAction::class . '@handle');
 
     });
-    Route::prefix('/user')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
-        Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
-        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
-        Route::delete('{id}', DeleteUserAction::class . '@handle');
-    });
-    Route::prefix('/email-template')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\EmailTemplate\GetListAction::class . '@handle');
-        Route::post('', \Modules\Admin\Actions\EmailTemplate\PostAction::class. '@handle');
-        Route::delete('{id}', \Modules\Admin\Actions\EmailTemplate\DeleteAction::class . '@handle');
-    });
+//    Route::prefix('/user')->group(function () {
+//        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
+//        Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
+//        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
+//        Route::delete('{id}', DeleteUserAction::class . '@handle');
+//    });
+    (new \App\Builder\EloquentRouter(\App\Models\User::class, [
+        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'full_name,username')]
+    ]))->handle('/user');
 
-    Route::prefix('/product')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
-        Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');
+    (new \App\Builder\EloquentRouter(\App\Models\EmailTemplate::class, [
+        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'email_title,email_content')]
+    ]))->handle('/email-template');
 
-        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
-        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
-
-        Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
-
-        Route::delete('{id}', \Modules\Admin\Actions\Product\DeleteProductAction::class . '@handle');
-    });
+    (new \App\Builder\EloquentRouter(\App\Models\Product::class, [
+        'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\GlobalSearchFields, 'name')]
+    ]))->handle('/product')
+        ->addRoute(function () {
+            Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+            Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+        });
+//    Route::prefix('/product')->group(function () {
+//        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+//        Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');
+//
+//        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+//        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
+//
+//        Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+//
+//        Route::delete('{id}', \Modules\Admin\Actions\Product\DeleteProductAction::class . '@handle');
+//    });
 
     Route::prefix('/video')->group(function () {
 

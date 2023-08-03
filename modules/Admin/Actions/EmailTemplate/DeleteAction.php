@@ -4,6 +4,7 @@
 namespace Modules\Admin\Actions\EmailTemplate;
 
 
+use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 
 class DeleteAction

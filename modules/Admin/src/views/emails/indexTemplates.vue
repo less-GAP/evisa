@@ -59,10 +59,8 @@ const tableConfig = {
 
   ],
   columns: [
-    {title: 'Name', key: 'name'}
-    , {title: 'Type', key: 'type'}
+     {title: 'Title', key: 'email_title'}
     , {title: 'Status', key: 'status'}
-    , {title: 'Title', key: 'email_title'}
     , {title: 'Updated By', key: 'updated_by'}
     , {title: 'Updated At', key: 'updated_at'}
   ],
@@ -100,7 +98,7 @@ const tableConfig = {
   <DataTable v-bind="tableConfig">
     <template #cellAction[delete]="{item,actionMethod}">
       <a-popconfirm
-        title="Are you sure delete this user?"
+        title="Are you sure?"
         ok-text="Yes"
         cancel-text="No"
         @confirm="actionMethod"
