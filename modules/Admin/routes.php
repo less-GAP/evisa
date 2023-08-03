@@ -1,9 +1,13 @@
 <?php
 
+use App\Builder\EloquentRouter;
+use App\Models\EmailTemplate;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Actions\GetUserInfoAction;
 use Modules\Admin\Actions\User\DeleteUserAction;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
+use Spatie\QueryBuilder\AllowedFilter;
 
 Route::get('/', function () {
     return 'admin api';
@@ -13,26 +17,49 @@ Route::post('auth/login', \Modules\Admin\Actions\Auth\PostLoginAction::class . '
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::prefix('/auth')->group(function () {
         Route::get('userInfo', GetUserInfoAction::class . '@handle');
-
     });
-    Route::prefix('/user')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
-        Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
-        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
-        Route::delete('{id}', DeleteUserAction::class . '@handle');
-    });
+//    Route::prefix('/user')->group(function () {
+//        Route::get('list', \Modules\Admin\Actions\User\GetUserListAction::class . '@handle');
+//        Route::post('activeList', \Modules\Admin\Actions\User\PostImageAction::class . '@handle');
+//        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
+//        Route::delete('{id}', DeleteUserAction::class . '@handle');
+//    });
+    EloquentRouter::routes('user')
+        ->handle(\App\Models\User::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
+            ]
+        );
 
-    Route::prefix('/product')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
-        Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');
+    EloquentRouter::routes('email-template')
+        ->handle(\App\Models\EmailTemplate::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_content')]
+            ]
+        );
 
+    EloquentRouter::routes('product', function () {
         Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
-        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
-
         Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+    })
+        ->handle(\App\Models\Product::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
+            ]
+        );
 
-        Route::delete('{id}', \Modules\Admin\Actions\Product\DeleteProductAction::class . '@handle');
-    });
+
+//    Route::prefix('/product')->group(function () {
+//        Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+//        Route::get('{id}', \Modules\Admin\Actions\Product\GetProductDetailAction::class . '@handle');
+//
+//        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+//        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
+//
+//        Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+//
+//        Route::delete('{id}', \Modules\Admin\Actions\Product\DeleteProductAction::class . '@handle');
+//    });
 
     Route::prefix('/video')->group(function () {
 
@@ -57,6 +84,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::prefix('/config')->group(function () {
         Route::get('/', \Modules\Admin\Actions\Config\GetListAction::class . '@handle');
         Route::post('/', \Modules\Admin\Actions\Config\PostAction::class . '@handle');
+        Route::post('/testSmtp', \Modules\Admin\Actions\Config\PostTestSmtpAction::class . '@handle');
     });
     Route::prefix('/file')->group(function () {
         Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');

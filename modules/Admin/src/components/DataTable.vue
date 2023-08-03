@@ -62,7 +62,7 @@ function reload() {
     props.api({
       perPage: props.pagination.perPage,
       page: props.pagination.page, ...props.params,
-      search: search.value
+      "filter[search]": search.value
     }).then(rs => {
       tableData.value = rs.data
       props.pagination.total = rs.data?.total ? rs.data.total : 0
@@ -114,13 +114,13 @@ reload()
       />
       <span></span>
 
-      <a-space v-if="selectionActions.length > 0">
+      <a-space>
         <a-button>
           <template #icon>
             <reload-outlined @click="reload"/>
           </template>
         </a-button>
-        <a-dropdown :disabled="!selectedItems.length">
+        <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">
           <template #overlay>
             <a-menu>
               <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
@@ -140,7 +140,7 @@ reload()
 
       </a-space>
     </div>
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
+    <table v-if="tableData.data?.length" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
         <th v-if="config.rowSelect" scope="col" class="p-4">
@@ -205,8 +205,10 @@ reload()
       </tr>
       </tbody>
     </table>
+    <a-empty v-else />
     <br>
-    <a-pagination :showSizeChanger="showSizeChanger" @change="reload" v-model:current="pagination.page"
+    <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
+                  v-model:current="pagination.page"
                   v-model:pageSize="pagination.perPage" :total="pagination.total">
       <template #itemRender="{ type, originalElement }">
         <a v-if="type === 'prev'">Previous</a>

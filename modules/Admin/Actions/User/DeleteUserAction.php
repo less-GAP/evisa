@@ -15,7 +15,7 @@ class DeleteUserAction
         $query = User::query();
         return [
             'result' =>$query->find($request->route('id'))->delete(),
-            'message' => 'User were deleted!'
+            'message' => 'Delete User Successfully!'
         ];
     }
 }

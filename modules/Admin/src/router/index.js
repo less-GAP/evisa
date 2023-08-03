@@ -235,6 +235,40 @@ const routes = [
   },
   {
     meta: {
+      title: "Emails",
+    },
+    path: "/emails",
+    name: "emails",
+    component: () => import("@/views/emails/EmailLayout.vue"),
+    children: [
+      {
+        meta: {
+          title: "Email Templates",
+        },
+        path: "/email/templates",
+        name: "email-templates",
+        component: () => import("@/views/emails/indexTemplates.vue"),
+      },
+      {
+        meta: {
+          title: "Email Templates",
+        },
+        path: "/email/templates/form/:id?",
+        name: "email-templates-form",
+        component: () => import("@/views/emails/FormEmailTemplate.vue"),
+      },
+      {
+        meta: {
+          title: "Email History",
+        },
+        path: "/email/history",
+        name: "email-history",
+        component: () => import("@/views/emails/indexHistory.vue"),
+      },
+    ]
+  },
+  {
+    meta: {
       title: "User Detail",
     },
     path: "/users/:id",

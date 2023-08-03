@@ -69,7 +69,6 @@ const cancel = function () {
     <a-form-item>
       <a-space>
         <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
-        <a-button @click="cancel" html-type="button">Cancel</a-button>
       </a-space>
     </a-form-item>
   </a-form>

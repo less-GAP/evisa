@@ -4,6 +4,9 @@ import { darkModeKey, styleKey } from "@/config";
 
 export const useStyleStore = defineStore("style", {
   state: () => ({
+    menu:{
+      iconSize:28
+    },
     antdv:{
       autoInsertSpaceInButton: true,
       componentSize: "large",
