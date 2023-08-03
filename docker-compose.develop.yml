@@ -7,6 +7,8 @@ services:
     image: node:19
     working_dir: /var/www
     command: bash -c "npm i && npm run dev --host"
+    environment:
+      - "USER=${USER}"
     volumes:
       - ./modules/Admin:/var/www
     ports:
@@ -21,6 +23,8 @@ services:
     image: node:19
     working_dir: /var/www
     command: bash -c "npm i && npm run dev --host"
+    environment:
+      - "USER=${USER}"
     volumes:
       - ./:/var/www
     ports:
@@ -29,7 +33,8 @@ services:
     build: .
     working_dir: /var/www
     command: 'bash -c "composer install && php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
-    user: ${MY_UID}:${MY_GID}
+    environment:
+      - "USER=${USER}"
     volumes:
       - ./:/var/www
       - ./modules/Frontend/public:/var/www/public
