@@ -132,8 +132,6 @@
             </a-form-item>
           </a-col>
         </a-row>
-
-
         <a-space align="center">
           <a-button type="primary" html-type="submit">Lưu</a-button>
           <a-button type="primary" ghost @click="back()">Trở về</a-button>
