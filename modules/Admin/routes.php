@@ -39,6 +39,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         );
 
     EloquentRouter::routes('product', function () {
+        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
         Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
         Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
     })
