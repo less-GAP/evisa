@@ -58,9 +58,11 @@ import {
   useToast
 } from "flowbite-vue"
 import DataTable from "./DataTable.vue"
+import FileManager from "./FileManager.vue"
 import InputUpload from "./InputUpload.vue"
 export {
   InputUpload,
+  FileManager,
   DataTable,
   Accordion,
   AccordionContent,

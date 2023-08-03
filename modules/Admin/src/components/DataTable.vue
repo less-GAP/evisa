@@ -2,7 +2,7 @@
 import {computed, ref, h, toRaw} from "vue";
 import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
-import {Button, Input} from "@/components/index";
+import {Button, Input, InputUpload} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
 import {DownOutlined, ReloadOutlined} from "@ant-design/icons-vue";
 
@@ -103,6 +103,8 @@ reload()
   <div class="relative text-center overflow-x-auto sm:rounded-lg">
 
     <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
+      <a-space>
+
       <a-input
         v-if="tableConfig.globalSearch"
         allow-clear
@@ -112,6 +114,8 @@ reload()
         placeholder="Enter to search..."
         :loading="loading"
       />
+        <InputUpload @change="upload"></InputUpload>
+      </a-space>
       <span></span>
 
       <a-space>
@@ -160,7 +164,8 @@ reload()
         </th>
 
         <th v-if="itemActions.length" scope="col" class="px-6 py-3">
-          Hành động
+          {{ __('Action') }}
+
         </th>
       </tr>
       </thead>
@@ -182,7 +187,7 @@ reload()
         <td v-for="column in columns"
             :class="'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ' + (column.class ? column.class : '')">
           <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
-            {{ item[column.key] }}
+            {{ $style['format'][column.key]?$style['format'][column.key](item[column.key]):item[column.key] }}
           </slot>
 
         </td>

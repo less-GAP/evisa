@@ -15,6 +15,5 @@ export const useAppStateStore = defineStore("appState", {
   },
   persist: {
     enabled: true
-
   }
 });

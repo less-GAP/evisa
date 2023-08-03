@@ -30,6 +30,12 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
+    EloquentRouter::routes('files')
+        ->handle(\App\Models\File::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
+            ]
+        );
 
     EloquentRouter::routes('email-template')
         ->handle(\App\Models\EmailTemplate::class,

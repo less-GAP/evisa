@@ -105,11 +105,11 @@ const routes = [
   },
   {
     meta: {
-      title: "Medias",
+      title: "File Manager",
     },
-    path: "/medias",
-    name: "medias",
-    component: () => import("@/views/medias/index.vue"),
+    path: "/files",
+    name: "files",
+    component: () => import("@/views/files/index.vue"),
   },
   {
     meta: {
