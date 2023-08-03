@@ -91,7 +91,6 @@ class EloquentRouter
         ];
     }
 
-
     public function addRoute($callback)
     {
         Route::prefix($this->prefix)->group($callback);
