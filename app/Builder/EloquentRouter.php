@@ -16,13 +16,15 @@ class EloquentRouter
     private $config;
     private $routes;
 
-    public function __construct(private $prefix, $routes)
+    public function __construct(private $prefix,   $routes = null)
     {
     }
 
-    public static function routes(string $prefix, Closure|null $routes = null)
+    public static function routes(string $prefix, $routes = null)
     {
+
         $handler = new static($prefix, $routes);
+        Route::prefix($prefix)->group($routes);
         return $handler;
     }
 
@@ -32,10 +34,9 @@ class EloquentRouter
         $this->config = $config;
         $prefix = $this->prefix;
         $routes = $this->routes;
+
         Route::prefix($prefix)->group(function () use ($routes) {
-            if ($routes) {
-                $routes();
-            }
+
             Route::get('list', function (Request $request) {
                 return $this->getList($request);
             });
