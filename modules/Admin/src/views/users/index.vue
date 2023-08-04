@@ -39,10 +39,10 @@ function showEditUser(value, success) {
 
 const tableConfig = {
   tableConfig: {
-    sticky: true
-    , scroll: "{ x: 1500, y: 300 }"
-    , bordered: true
-    , showHeader: true
+    sticky: true,
+    scroll: "{ x: 1500, y: 300 }",
+    bordered: true,
+    showHeader: true
   },
   api: (params) => Api.get('user/list', {params}),
   addAction: (reload) => {

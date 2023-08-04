@@ -25,6 +25,12 @@
   }
 
   const tableConfig = {
+    tableConfig: {
+      sticky: true,
+      scroll: "{ x: 1500, y: 300 }",
+      bordered: true,
+      showHeader: true
+    },
     api: (params) => Api.get('product/list', {params}),
     addAction: (reload) => {
       //showEditUser({}, reload)
@@ -74,22 +80,22 @@
       {
         title: 'Giá niêm yết',
         key: 'price',
-        class: 'text-right'
+        align: 'right',
       },
       {
         title: 'Giá sản phẩm',
         key: 'price',
-        class: 'text-right'
+        align: 'right',
       },
       {
         title: 'Điểm thưởng(Point)',
         key: 'point',
-        class: 'text-right'
+        align: 'right',
       },
       {
-        title: 'Status',
+        title: 'Tình trạng',
         key: 'status'
-      }
+      },
     ],
     selectionActions: [
       {
@@ -143,13 +149,6 @@
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton
-        :icon="mdiBallotOutline"
-        title="Quản lý sản phẩm"
-        main
-      >
-
-      </SectionTitleLineWithButton>
       <DataTable v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
@@ -189,10 +188,13 @@
           {{item.name}}
         </template>
         <template #cell[price]="{item,column}">
-          {{item.price}}
+          {{$format.formatMoney(item.price)}}
         </template>
         <template #cell[sale_price]="{item,column}">
-          {{item.sale_price}}
+          {{$format.formatMoney(item.sale_price)}}
+        </template>
+        <template #cell[point]="{item,column}">
+          {{$format.formatNumber(item.point)}}
         </template>
         <template #cell[status]="{item,column}">
           <div class="flex items-center" v-if="item.status == 'D'">
