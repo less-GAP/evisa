@@ -8,6 +8,8 @@
 
   import {PlusOutlined, LoadingOutlined, DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
 
+  import {InputUpload} from "@/components";
+
   import Api from "@/utils/Api";
   import router from "@/router";
 

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import {reactive, ref, toRaw} from "vue";
+
   import {useMainStore} from "@/stores/main";
   import {
     mdiAccount,
@@ -8,6 +9,7 @@
     mdiFormTextboxPassword,
     mdiGithub,
   } from "@mdi/js";
+
   import SectionMain from "@/components/SectionMain.vue";
 
   import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -15,6 +17,8 @@
   import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
   import {PlusOutlined, LoadingOutlined, DeleteOutlined} from '@ant-design/icons-vue';
+
+  import {InputUpload} from "@/components";
 
   import router from "@/router";
 
@@ -46,32 +50,29 @@
 
   const isShowModal = ref(false)
 
-  var id = router.currentRoute.value.params.id;
-  if (id > 0) {
-    loading.value = true
-    Api.get('product/' + id).then(rs => {
-      var product = rs.data.data;
-      formState.value = product
-      var file = {
-        uid: '-1',
-        name: product.image,
-        url: product.image_url,
-      };
-      fileList.value = [...(fileList.value || []), file];
+  const fetch = function () {
+    loading.value = true;
+    var id = router.currentRoute.value.params.id;
+    if (id > 0) {
+      loading.value = true
+      Api.get('product/' + id).then(rs => {
+        var product = rs.data;
+        formState.value = product;
+        if (product.type == 'package') {
+          dataSource.value = product.packages;
+        }
+      }).finally(loading.value = false);
+    } else {
       loading.value = false
-
-      if(product.type == 'package'){
-        dataSource.value = product.packages;
-      }
-      console.log(dataSource.value)
-    });
+    }
   }
+  fetch();
 
   const onFinish = () => {
     formRef.value
       .validate()
       .then(() => {
-        if(formState.value.type == 'package'){
+        if (formState.value.type == 'package') {
           formState.value.packages = dataSource.value;
         }
         Api.post('product', toRaw(formState.value)).then(rs => {
@@ -174,13 +175,13 @@
 
   const selectProduct = (selectItem) => {
     //console.log(selectItem);
-    if(dataSource.value.length > 0){
+    if (dataSource.value.length > 0) {
       dataSource.value.forEach((value, index) => {
-        if(value.id != selectItem.id){
+        if (value.id != selectItem.id) {
           dataSource.value.push(selectItem);
         }
       });
-    }else{
+    } else {
       dataSource.value.push(selectItem);
     }
     isShowModal.value = false;
@@ -188,8 +189,8 @@
 
   const removeSelect = (item) => {
     dataSource.value.forEach((value, index) => {
-      if(value.id == item.id){
-        dataSource.value.splice(index,1);
+      if (value.id == item.id) {
+        dataSource.value.splice(index, 1);
       }
     });
     //console.log(dataSource.value);
@@ -201,7 +202,7 @@
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiAccount" :title="id == '0' ? 'Thêm sản phẩm' : 'Cập nhật sản phẩm'" main></SectionTitleLineWithButton>
-      <a-form layout="vertical"
+      <a-form v-if="formState" layout="vertical"
               ref="formRef"
               :model="formState"
               @finish="onFinish"
@@ -211,34 +212,14 @@
             <a-row :gutter="20">
               <a-col :span="24">
                 <a-form-item label="Hình ảnh">
-                  <div class="clearfix">
-                    <a-upload
-                      v-model:file-list="fileList"
-                      name="avatar"
-                      list-type="picture-card"
-                      :before-upload="beforeUpload"
-                      @change="handleChange"
-                      @preview="handlePreview"
-                      :max-count="1"
-                      :show-upload-list="true"
-                    >
-
-                      <div>
-                        <loading-outlined v-if="loading"></loading-outlined>
-                        <plus-outlined v-else></plus-outlined>
-                        <div style="margin-top: 8px">Tải lên</div>
-                      </div>
-                    </a-upload>
-                  </div>
+                  <InputUpload alt="" autocomplete="off" v-model:value="formState.image"></InputUpload>
                 </a-form-item>
               </a-col>
               <a-col :span="12">
                 <a-form-item label="Loại sản phẩm" name="type"
                              :rules="[{ required: true, message: 'Vui lòng chọn loại sản phẩm!' }]"
                 >
-                  <a-select v-model:value="formState.type" placeholder=""
-
-                  >
+                  <a-select v-model:value="formState.type" placeholder="">
                     <a-select-option value="product">Sản phẩm</a-select-option>
                     <a-select-option value="package">Gói sản phẩm</a-select-option>
                   </a-select>
@@ -313,7 +294,7 @@
           </a-tab-pane>
           <a-tab-pane key="2" tab="Sản phẩm trong gói" v-if="formState.type == 'package'">
             <a-button type="primary" style="margin-bottom: 8px" @click="handleAdd" class="float-right" ghost>Thêm</a-button>
-            <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0" >
+            <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0">
               <template #bodyCell="{ column, record }">
                 <template v-if="column.key === 'image'">
                   <img class="w-20 h-auto float-left rounded-full" :src="record.image_url"
@@ -356,7 +337,7 @@
             </a-row>
           </a-tab-pane>
         </a-tabs>
-        <a-space align="center">
+        <a-space align="center" :loading="loading">
           <a-button type="primary" html-type="submit">Lưu</a-button>
           <a-button type="primary" ghost @click="back()">Trở về</a-button>
         </a-space>
