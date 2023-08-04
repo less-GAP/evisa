@@ -25,7 +25,15 @@ const routes = [
   },
   {
     meta: {
-      title: "Products",
+      title: "Thông tin đơn hàng",
+    },
+    path: "/orders/:id",
+    name: "orders-detail",
+    component: () => import("@/views/orders/Detail.vue"),
+  },
+  {
+    meta: {
+      title: "Sản phẩm",
     },
     path: "/products",
     name: "products",
@@ -33,7 +41,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Product Detail",
+      title: "Thông tin sản phẩm",
     },
     path: "/products/:id",
     name: "product-detail",
