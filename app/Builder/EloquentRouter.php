@@ -16,16 +16,20 @@ class EloquentRouter
     private $config;
     private $routes;
 
-    public function __construct(private $prefix,   $routes = null)
+    public function __construct(private $prefix, $routes = null)
     {
     }
 
-    public static function routes(string $prefix, $routes = null)
+    public static function prefix(string $prefix)
     {
-
-        $handler = new static($prefix, $routes);
-        Route::prefix($prefix)->group($routes);
+        $handler = new static($prefix);
         return $handler;
+    }
+
+    public function routes($routes = null)
+    {
+        Route::prefix($this->prefix)->group($routes);
+        return $this;
     }
 
     public function handle($model, array $config)

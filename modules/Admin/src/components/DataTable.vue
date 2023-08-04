@@ -7,11 +7,9 @@ import BaseIcon from "@/components/BaseIcon.vue";
 import {DownOutlined, ReloadOutlined} from "@ant-design/icons-vue";
 
 const props = defineProps({
-  config: {
+  tableConfig: {
     type: Object,
     default: {
-      item_key: 'id'
-      , rowSelect: true
     }
   },
   pagination: {
@@ -46,7 +44,7 @@ const tableConfig = {
   item_key: 'id'
   , rowSelect: true
   , globalSearch: true
-  , ...props.config
+  , ...props.tableConfig
 }
 const tableData = ref({})
 const search = ref('')
@@ -55,6 +53,24 @@ function reset() {
   props.pagination.page = 1
   reload()
 }
+
+const tableColumns = computed(() => {
+  const result = props.columns.map(item => {
+    return {
+      dataIndex: item.dataIndex ? item.dataIndex : item.key,
+      ...item
+    }
+  })
+  if (props.itemActions.length) {
+    result.push({
+      title: 'Action'
+      , key: 'action'
+      , width: 200
+      , dataIndex: 'action'
+    })
+  }
+  return result;
+})
 
 function reload() {
   if (props.api) {
@@ -96,6 +112,20 @@ function toggleCheckAll() {
   }
 }
 
+const rowSelection = computed(() => {
+  if (!props.selectionActions || !props.selectionActions.length) {
+    return false;
+  }
+  return {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: (record) => ({
+      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
+})
 reload()
 </script>
 
@@ -105,16 +135,17 @@ reload()
     <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
       <a-space>
 
-      <a-input
-        v-if="tableConfig.globalSearch"
-        allow-clear
-        @keyup.enter="reload"
-        style="max-width: 300px"
-        v-model:value="search"
-        placeholder="Enter to search..."
-        :loading="loading"
-      />
-        <InputUpload @change="upload"></InputUpload>
+        <a-input
+          v-if="tableConfig.globalSearch"
+          allow-clear
+          @search="reload"
+          @keyup.enter="reload"
+          style="max-width: 300px"
+          v-model:value="search"
+          placeholder="Enter to search..."
+          :loading="loading"
+        />
+        <slot name="filter"></slot>
       </a-space>
       <span></span>
 
@@ -144,60 +175,18 @@ reload()
 
       </a-space>
     </div>
-    <table v-if="tableData.data?.length" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      <tr>
-        <th v-if="config.rowSelect" scope="col" class="p-4">
-          <div class="flex items-center">
-            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">
-              <label
-                class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
-                @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
-                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              </label>
-            </div>
-          </div>
-        </th>
-
-        <th v-for="column in columns" scope="col" class="px-6 py-3">
-          {{ __(column.title) }}
-        </th>
-
-        <th v-if="itemActions.length" scope="col" class="px-6 py-3">
-          {{ __('Action') }}
-
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(item,index) in tableData.data" :key="item[config.item_key]" v-bind:class="{'border-b':(index%2===0)}"
-          class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td v-if="config.rowSelect" class="w-4 p-4">
-          <div class="flex items-center">
-            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">
-              <label :for="'checkbox-table-search-'+item[config.item_key]"
-                     class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
-                v-model="selectedItems" :id="item[config.item_key]" :value="item" type="checkbox"
-                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              </label>
-            </div>
-          </div>
-        </td>
-
-        <td v-for="column in columns"
-            :class="'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ' + (column.class ? column.class : '')">
-          <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
-            {{ $style['format'][column.key]?$style['format'][column.key](item[column.key]):item[column.key] }}
-          </slot>
-
-        </td>
-        <td v-if="itemActions.length" class="px-6 item-actions py-2">
-          <!-- Modal toggle -->
+    <a-table v-bind="tableConfig" :row-selection="rowSelection" class="mt-12" v-if="tableData.data?.length" :pagination="false"
+             :data-source="tableData.data" :columns="tableColumns">
+      <template #bodyCell="{ text ,record, column }">
+        <slot :name="'cell['+column.key+']'" v-bind="{item:record,column,index}">
+          {{ $style['format'][column.key] ? $style['format'][column.key](record[column.key]) : record[column.key] }}
+        </slot>
+        <template v-if="column.key == 'action'">
           <template v-for="itemAction in itemActions">
             <slot :name="'cellAction['+itemAction.key+']'"
-                  v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
+                  v-bind="{item:record ,itemAction, actionMethod(){itemAction.action(record,reload)}}">
               <a-button
-                @click="itemAction.action(item,reload)"
+                @click="itemAction.action(record,reload)"
                 :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
                 type="link"
               >
@@ -206,11 +195,10 @@ reload()
 
             </slot>
           </template>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <a-empty v-else />
+        </template>
+      </template>
+    </a-table>
+    <a-empty v-else/>
     <br>
     <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
                   v-model:current="pagination.page"
@@ -221,6 +209,73 @@ reload()
         <component :is="originalElement" v-else></component>
       </template>
     </a-pagination>
+<!--    <table v-if="tableData.data?.length" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">-->
+<!--      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">-->
+<!--      <tr>-->
+<!--        <th v-if="config.rowSelect" scope="col" class="p-4">-->
+<!--          <div class="flex items-center">-->
+<!--            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">-->
+<!--              <label-->
+<!--                class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input-->
+<!--                @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"-->
+<!--                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </th>-->
+
+<!--        <th v-for="column in columns" scope="col" class="px-6 py-3">-->
+<!--          {{ __(column.title) }}-->
+<!--        </th>-->
+
+<!--        <th v-if="itemActions.length" scope="col" class="px-6 py-3">-->
+<!--          {{ __('Action') }}-->
+
+<!--        </th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr v-for="(item,index) in tableData.data" :key="item[config.item_key]" v-bind:class="{'border-b':(index%2===0)}"-->
+<!--          class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">-->
+<!--        <td v-if="config.rowSelect" class="w-4 p-4">-->
+<!--          <div class="flex items-center">-->
+<!--            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">-->
+<!--              <label :for="'checkbox-table-search-'+item[config.item_key]"-->
+<!--                     class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input-->
+<!--                v-model="selectedItems" :id="item[config.item_key]" :value="item" type="checkbox"-->
+<!--                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </td>-->
+
+<!--        <td v-for="column in columns"-->
+<!--            :class="'px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ' + (column.class ? column.class : '')">-->
+<!--          <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">-->
+<!--            {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}-->
+<!--          </slot>-->
+
+<!--        </td>-->
+<!--        <td v-if="itemActions.length" class="px-6 item-actions py-2">-->
+<!--          &lt;!&ndash; Modal toggle &ndash;&gt;-->
+<!--          <template v-for="itemAction in itemActions">-->
+<!--            <slot :name="'cellAction['+itemAction.key+']'"-->
+<!--                  v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">-->
+<!--              <a-button-->
+<!--                @click="itemAction.action(item,reload)"-->
+<!--                :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"-->
+<!--                type="link"-->
+<!--              >-->
+<!--                {{ itemAction.label }}-->
+<!--              </a-button>-->
+
+<!--            </slot>-->
+<!--          </template>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+
   </div>
 </template>
 <style scoped>
