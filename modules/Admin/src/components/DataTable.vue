@@ -114,7 +114,6 @@ reload()
         placeholder="Enter to search..."
         :loading="loading"
       />
-        <InputUpload @change="upload"></InputUpload>
       </a-space>
       <span></span>
 
