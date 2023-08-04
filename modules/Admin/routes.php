@@ -24,36 +24,36 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //        Route::post('', \Modules\Admin\Actions\User\PostUserAction::class . '@handle');
 //        Route::delete('{id}', DeleteUserAction::class . '@handle');
 //    });
-    EloquentRouter::routes('user')
+    EloquentRouter::prefix('user')
         ->handle(\App\Models\User::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
-    EloquentRouter::routes('files')
+    EloquentRouter::prefix('files')
         ->handle(\App\Models\File::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
             ]
         );
 
-    EloquentRouter::routes('email-template')
+    EloquentRouter::prefix('email-template')
         ->handle(\App\Models\EmailTemplate::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_content')]
             ]
         );
 
-    EloquentRouter::routes('product', function () {
-        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
-        Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
-        Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
-    })
+    EloquentRouter::prefix('product')
         ->handle(\App\Models\Product::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
             ]
-        );
+        )->routes(function () {
+            Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
+            Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
+            Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+        });
 
 
 //    Route::prefix('/product')->group(function () {

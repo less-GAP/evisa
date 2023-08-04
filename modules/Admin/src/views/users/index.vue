@@ -38,6 +38,12 @@ function showEditUser(value, success) {
 }
 
 const tableConfig = {
+  tableConfig: {
+    sticky: true
+    , scroll: "{ x: 1500, y: 300 }"
+    , bordered: true
+    , showHeader: true
+  },
   api: (params) => Api.get('user/list', {params}),
   addAction: (reload) => {
     showEditUser(null, reload)
@@ -72,8 +78,8 @@ const tableConfig = {
 
   ],
   columns: [
-    {title: 'Username', key: 'username'}
-   , {title: 'Name', key: 'full_name'}
+    {title: 'Username',width:200, key: 'username'}
+    , {title: 'Name', key: 'full_name'}
     , {title: 'Role', key: 'role'}
     , {title: 'Status', key: 'status'}
   ],
@@ -147,8 +153,9 @@ const tableConfig = {
     </DataTable>
 
   </LayoutAuthenticated>
-  <a-modal :title="modalState.value?.id?'Edit User':'Add User'" :footer="null" width="800px" v-model:open="modalState.visible">
-    <FormUser  v-if="modalState.visible"
+  <a-modal :title="modalState.value?.id?'Edit User':'Add User'" :footer="null" width="800px"
+           v-model:open="modalState.visible">
+    <FormUser v-if="modalState.visible"
               @success="modalState.visible=false;modalState.success()" @cancel="modalState.visible=false"
               :value="modalState.value"></FormUser>
   </a-modal>
