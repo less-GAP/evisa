@@ -1,9 +1,13 @@
 import { defineStore } from "pinia";
 import * as styles from "@/styles";
 import { darkModeKey, styleKey } from "@/config";
-
+import Format from "@/utils/Format";
 export const useStyleStore = defineStore("style", {
   state: () => ({
+    format:{
+      'created_at':Format.formatDateTime
+      ,'updated_at':Format.formatDateTime
+    },
     menu:{
       iconSize:28
     },
@@ -62,4 +66,7 @@ export const useStyleStore = defineStore("style", {
       }
     },
   },
+  persist: {
+    enabled: true
+  }
 });

@@ -30,6 +30,12 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
+    EloquentRouter::routes('files')
+        ->handle(\App\Models\File::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
+            ]
+        );
 
     EloquentRouter::routes('email-template')
         ->handle(\App\Models\EmailTemplate::class,
@@ -39,6 +45,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         );
 
     EloquentRouter::routes('product', function () {
+        Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
         Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
         Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
     })
@@ -152,6 +159,13 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::get('{id}', \Modules\Admin\Actions\PaymentMethod\GetDetailAction::class . '@handle');
         Route::post('activeList', \Modules\Admin\Actions\PaymentMethod\PostActiveListAction::class . '@handle');
         Route::delete('{id}', \Modules\Admin\Actions\PaymentMethod\DeleteAction::class . '@handle');
+    });
+
+    Route::prefix('/orders')->group(function () {
+        Route::get('list', \Modules\Admin\Actions\Orders\GetListAction::class . '@handle');
+        Route::post('', \Modules\Admin\Actions\Orders\PostAction::class . '@handle');
+        Route::get('{id}', \Modules\Admin\Actions\Orders\GetDetailAction::class . '@handle');
+        Route::post('activeList', \Modules\Admin\Actions\Orders\PostActiveListAction::class . '@handle');
     });
 
 

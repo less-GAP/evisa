@@ -13,9 +13,9 @@
 
 
   const tableConfig = {
-    api: (params) => Api.get('wards/list', {params}),
+    api: (params) => Api.get('orders/list', {params}),
     addAction: (reload) => {
-      router.push('/wards/0')
+      router.push('/orders/0')
     },
     itemActions: [
       {
@@ -24,26 +24,9 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/wards/' + item.id)
+          router.push('/orders/' + item.id)
         }
       },
-      {
-        label: '',
-        class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
-        icon: mdiDelete,
-        key: 'delete',
-        action(item, reload) {
-          Api.delete('wards/' + item.id).then(rs => {
-            notification[rs.data.code == 0 ? 'error' : 'success']({
-              message: 'Thông báo',
-              description: rs.data.message,
-            });
-          }).finally(() => {
-            reload();
-          });
-        }
-      }
-
     ],
     columns: [
       {title: 'Mã quận/huyện', key: 'code'},
@@ -57,7 +40,7 @@
       {
         title: 'Hoạt động',
         action(selectedKeys) {
-          return Api.post('wards/activeList', {
+          return Api.post('orders/activeList', {
             'items': selectedKeys,
             'status': 'A'
           }).then(rs => {
@@ -71,7 +54,7 @@
       {
         title: 'Tắt',
         action(selectedKeys) {
-          return Api.post('wards/activeList', {
+          return Api.post('orders/activeList', {
             'items': selectedKeys,
             'status': 'D'
           }).then(rs => {
@@ -91,23 +74,6 @@
   <LayoutAuthenticated>
     <SectionMain>
       <DataTable v-bind="tableConfig">
-        <template #cellAction[delete]="{item,actionMethod}">
-          <a-popconfirm
-            title="Bạn muốn xóa sản phẩm này?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="actionMethod"
-          >
-            <a-button
-              type="text"
-              danger
-              :icon="h(DeleteOutlined)"
-              label=""
-              :outline="true"
-            >
-            </a-button>
-          </a-popconfirm>
-        </template>
         <template #cellAction[edit]="{item,actionMethod}">
           <a-button
             type="text"

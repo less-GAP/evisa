@@ -99,9 +99,9 @@ export default [
   //   icon: mdiAlertCircle,
   // },
   {
-    label: "Media",
+    label: "File Manager",
     icon: mdiImageMultiple,
-    to: "/medias",
+    to: "/files",
   },
   {
     label: "Vị trí",

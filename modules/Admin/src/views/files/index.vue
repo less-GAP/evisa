@@ -14,7 +14,7 @@ import SectionTitle from "@/components/SectionTitle.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
-import {Modal, DataTable} from "@/components";
+import {Modal, DataTable, FileManager} from "@/components";
 import {DeleteOutlined} from '@ant-design/icons-vue';
 import { InboxOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
@@ -22,7 +22,6 @@ import { message } from 'ant-design-vue';
 import Api from "@/utils/Api";
 import router from "@/router";
 import FormUser from "./FormUser.vue";
-
 
 const modalState = ref({
   visible: false,
@@ -125,64 +124,8 @@ function handleDrop(e) {
 
 <template>
   <LayoutAuthenticated>
-    <a-upload-dragger
-      v-model:fileList="fileList"
-      name="file"
-      :multiple="true"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      @change="handleChange"
-      @drop="handleDrop"
-    >
-      <p class="ant-upload-drag-icon">
-        <inbox-outlined></inbox-outlined>
-      </p>
-      <p class="ant-upload-text">Click or drag file to this area to upload</p>
-      <p class="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-        band files
-      </p>
-    </a-upload-dragger>
-    <DataTable v-bind="tableConfig">
-      <template #cellAction[delete]="{item,actionMethod}">
-        <a-popconfirm
-          title="Are you sure delete this user?"
-          ok-text="Yes"
-          cancel-text="No"
-          @confirm="actionMethod"
-        >
-          <a-button
-            type="text"
-            v-if="item.role !== 'admin'"
-            danger
-            :icon="h(DeleteOutlined)"
-            label=""
-            :outline="true"
-          >
-
-          </a-button>
-
-        </a-popconfirm>
-      </template>
-      <template #cell[full_name]="{item,column}">
-        <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-             :alt="item.full_name">
-        <div class="pl-3 float-left">
-          <div class="text-base font-semibold">{{ item.full_name }}</div>
-          <div class="font-normal text-gray-500">{{ item.email }}</div>
-        </div>
-      </template>
-      <template #cell[status]>
-        <div class="flex items-center">
-          <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-          Offline
-        </div>
-      </template>
-    </DataTable>
+    <FileManager></FileManager>
 
   </LayoutAuthenticated>
-  <a-modal :title="modalState.value?.id?'Edit User':'Add User'" :footer="null" width="800px" v-model:open="modalState.visible">
-    <FormUser  v-if="modalState.visible"
-              @success="modalState.visible=false;modalState.success()" @cancel="modalState.visible=false"
-              :value="modalState.value"></FormUser>
-  </a-modal>
+
 </template>

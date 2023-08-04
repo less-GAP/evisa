@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\CreatedUpdatedByAdmin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class EmailTemplate extends Model
+class EmailTemplate extends BaseModel
 {
 
     /**
@@ -14,7 +14,7 @@ class EmailTemplate extends Model
      *
      * @var array<int, string>
      */
-    use HasFactory;
+    use HasFactory ,CreatedUpdatedByAdmin;
 
     protected $table = 'email_templates';
 

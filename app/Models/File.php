@@ -3,13 +3,15 @@
 namespace App\Models;
 
 
+use App\Traits\CreatedUpdatedByAdmin;
 use Illuminate\Database\Eloquent\Model;
 /**
  * Class Role
  * @package CustomerApp\Models
  */
-class File extends Model
+class File extends BaseModel
 {
+    use CreatedUpdatedByAdmin;
     protected $table = 'files';
     public $timestamps = true;
 
@@ -20,6 +22,9 @@ class File extends Model
 
     protected $fillable = [
         'file_path'
+        , 'title'
+        , 'caption'
+        , 'description'
         , 'file_ext'
         , 'type'
         , 'uuid'
