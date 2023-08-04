@@ -139,7 +139,6 @@
       </a-form>
     </SectionMain>
   </LayoutAuthenticated>
-
 </template>
 
 <style>

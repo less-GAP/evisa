@@ -29,12 +29,15 @@
       },
     ],
     columns: [
-      {title: 'Mã quận/huyện', key: 'code'},
-      {title: 'Tên quận/huyện', key: 'name'},
-      {title: 'Quận/huyện', key: 'district_name'},
-      {title: 'Tỉnh/thành phố', key: 'province_name'},
-      {title: 'Quốc gia', key: 'country_name'},
-      {title: 'Status', key: 'status'}
+      {title: 'Mã đơn hàng', key: 'id'},
+      {title: 'Khách hàng', key: 'customer_name'},
+      {title: 'Điện thoại', key: 'customer_phone'},
+      {title: 'Vận chuyển', key: 'shipping'},
+      {title: 'Thanh toán', key: 'payment'},
+      {title: 'Thành tiền', key: 'subtotal'},
+      {title: 'Phí vận chuyển', key: 'shipping_cost'},
+      {title: 'Giảm giá', key: 'discount'},
+      {title: 'Tổng tiền', key: 'total'},
     ],
     selectionActions: [
       {
@@ -84,21 +87,26 @@
           >
           </a-button>
         </template>
-        <template #cell[video]="{item,column}">
-          <a-button type="link" @click="handlePreview(item)">Xem video</a-button>
+        <template #cell[id]="{item,column}">
+          #{{item.id}}
         </template>
-        <template #cell[name]="{item,column}">
-          {{item.name}}
+        <template #cell[shipping]="{item,column}">
+          {{item.shipping_name}}
         </template>
-        <template #cell[status]="{item,column}">
-          <div class="flex items-center" v-if="item.status == 'D'">
-            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-            Tắt
-          </div>
-          <div class="flex items-center" v-else>
-            <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-            Hoạt động
-          </div>
+        <template #cell[payment]="{item,column}">
+          {{item.payment_name}}
+        </template>
+        <template #cell[subtotal]="{item,column}">
+          {{$format.formatMoney(item.subtotal)}}
+        </template>
+        <template #cell[shipping_cost]="{item,column}">
+          {{$format.formatMoney(item.shipping_cost)}}
+        </template>
+        <template #cell[discount]="{item,column}">
+          {{$format.formatMoney(item.discount)}}
+        </template>
+        <template #cell[total]="{item,column}">
+          {{$format.formatMoney(item.total)}}
         </template>
       </DataTable>
     </SectionMain>

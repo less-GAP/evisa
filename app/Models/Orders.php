@@ -66,25 +66,58 @@ class Orders extends Model
     ];
 
     protected $appends = [
-//        'customer_group_name',
-//        'videos'
+        'shipping_name',
+        'payment_name',
+        'country_name',
+        'province_name',
+        'district_name',
+        'ward_name',
     ];
 
-//    public function getCustomerGroupNameAttribute()
-//    {
-//        $cus = CustomerGroup::where('id', $this->customer_group)->first();
-//        return $cus->name;
-//    }
-//
-//    public function getVideosAttribute()
-//    {
-//        $vi = [];
-//        $videos = SeriesVideo::where('series_id', $this->id)->get();
-//        if(!empty($videos)){
-//            foreach($videos as $v){
-//                $vi[] = $v->video_descr;
-//            }
-//        }
-//        return $vi;
-//    }
+    public function getShippingNameAttribute()
+    {
+        $data = ShippingMethod::where('id', $this->shipping_id)->first();
+        return $data->name;
+    }
+
+    public function getPaymentNameAttribute()
+    {
+        $data = PaymentMethod::where('id', $this->payment_id)->first();
+        return $data->name;
+    }
+
+    public function getCountryNameAttribute()
+    {
+        $data = Countries::where('code', $this->s_country)->first();
+        return $data->name;
+    }
+
+    public function getProvinceNameAttribute()
+    {
+        $data = Provinces::where('code', $this->s_province)
+            ->where('country_code', $this->s_country)
+            ->first();
+        return $data->name;
+    }
+
+    public function getDistrictNameAttribute()
+    {
+        $data = Districts::where('code', $this->s_district)
+            ->where('province_code', $this->s_province)
+            ->where('country_code', $this->s_country)
+            ->first();
+        return $data->name;
+    }
+
+    public function getWardNameAttribute()
+    {
+        $data = Wards::where('code', $this->s_ward)
+            ->where('province_code', $this->s_province)
+            ->where('country_code', $this->s_country)
+            ->where('district_code', $this->s_district)
+            ->first();
+        return $data->name;
+    }
+
+
 }
