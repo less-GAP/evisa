@@ -50,7 +50,9 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
             ]
         )->routes(function () {
-            Route::post('', \Modules\Admin\Actions\Product\PostProductAction::class . '@handle');
+            Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+            Route::get('{id}', \Modules\Admin\Actions\Product\GetDetailAction::class . '@handle');
+            Route::post('', \Modules\Admin\Actions\Product\PostAction::class . '@handle');
             Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
             Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
         });

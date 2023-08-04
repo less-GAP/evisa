@@ -13,8 +13,6 @@
   import Api from "@/utils/Api";
   import router from "@/router";
 
-  import FormDetail from "./FormDetail.vue";
-
   import {notification} from "ant-design-vue";
 
   const isShowModal = ref(false)

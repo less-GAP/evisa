@@ -180,7 +180,7 @@
         <slot :name="'cell['+column.key+']'" v-bind="{item:record,column,index}">
           {{ $style['format'][column.key] ? $style['format'][column.key](record[column.key]) : record[column.key] }}
         </slot>
-        <template v-if="column.key == 'action'">
+        <template v-if="column.key == 'action'" fixed="right">
           <template v-for="itemAction in itemActions">
             <slot :name="'cellAction['+itemAction.key+']'"
                   v-bind="{item:record ,itemAction, actionMethod(){itemAction.action(record,reload)}}">

@@ -8,11 +8,12 @@ use App\Models\ProductPackage;
 use Illuminate\Http\Request;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
 
-class PostProductAction
+class PostAction
 {
     public function handle(Request $request)
     {
         $data = $request->all();
+
         try {
             $product = new Product();
             if (isset($data['id']) && $data['id'] > 0) {

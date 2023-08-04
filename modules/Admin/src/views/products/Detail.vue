@@ -46,7 +46,7 @@
 
   const fileList = ref<UploadProps['fileList']>([]);
 
-  const uploading = ref<boolean>(false);
+  const dataSource = ref([]);
 
   const isShowModal = ref(false)
 
@@ -56,12 +56,13 @@
     if (id > 0) {
       loading.value = true
       Api.get('product/' + id).then(rs => {
-        var product = rs.data;
+        var product = rs.data.data;
         formState.value = product;
         if (product.type == 'package') {
           dataSource.value = product.packages;
         }
-      }).finally(loading.value = false);
+        loading.value = false
+      });
     } else {
       loading.value = false
     }
@@ -99,37 +100,6 @@
   };
 
 
-  const beforeUpload: UploadProps['beforeUpload'] = file => {
-    fileList.value = [...(fileList.value || []), file];
-    return false;
-  };
-
-  const handlePreview = (data) => {
-
-  }
-
-  const handleChange = (data) => {
-    //console.log(data.file)
-    const formData = new FormData();
-    formData.append('image', data.file);
-    loading.value = true;
-    Api.post('product/uploadImage', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(rs => {
-      if (rs.data.url != '') {
-        formState.value.file = rs.data;
-        formState.value.image = rs.data.name;
-        //imageUrl.value = rs.data.url;
-      }
-      loading.value = false;
-      //fileList.value = [];
-    });
-  };
-
-
-  const dataSource = ref([]);
 
   const columns = ref([
     {
@@ -142,22 +112,28 @@
       title: 'Tên sản phẩm',
       dataIndex: 'name',
       key: 'name',
-
+      align: 'right'
+    },
+    {
+      title: 'Giá niêm yết',
+      dataIndex: 'price',
+      key: 'price',
+      align: 'right'
     },
     {
       title: 'Giá bán',
       dataIndex: 'sale_price',
       key: 'sale_price',
-
+      align: 'right'
     },
     {
       title: 'Điểm thưởng',
       dataIndex: 'point',
       key: 'point',
-
+      align: 'right'
     },
     {
-      title: 'Action',
+      title: 'Hành động',
       key: 'action',
 
     },
@@ -201,7 +177,6 @@
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton :icon="mdiAccount" :title="id == '0' ? 'Thêm sản phẩm' : 'Cập nhật sản phẩm'" main></SectionTitleLineWithButton>
       <a-form v-if="formState" layout="vertical"
               ref="formRef"
               :model="formState"
@@ -250,8 +225,8 @@
                              :rules="[{ required: true, message: 'Vui lòng nhập giá bán sản phẩm!' }]"
                 >
                   <a-input-number v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')"
+                                  :parser="value => value.replace(/\$\s?|(.*)/g, '')"
                                   style="width: 100%"
                   />
                 </a-form-item>
@@ -259,16 +234,16 @@
               <a-col :span="8">
                 <a-form-item label="Giá niêm yết">
                   <a-input-number v-model:value="formState.price" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')"
+                                  :parser="value => value.replace(/\$\s?|(.*)/g, '')"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="Điểm thưởng">
                   <a-input-number v-model:value="formState.point" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')"
+                                  :parser="value => value.replace(/\$\s?|(.*)/g, '')"
                   />
                 </a-form-item>
               </a-col>
@@ -293,12 +268,22 @@
             </a-row>
           </a-tab-pane>
           <a-tab-pane key="2" tab="Sản phẩm trong gói" v-if="formState.type == 'package'">
+
             <a-button type="primary" style="margin-bottom: 8px" @click="handleAdd" class="float-right" ghost>Thêm</a-button>
             <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0">
               <template #bodyCell="{ column, record }">
                 <template v-if="column.key === 'image'">
                   <img class="w-20 h-auto float-left rounded-full" :src="record.image_url"
                        :alt="record.name"/>
+                </template>
+                <template v-if="column.key === 'price'">
+                  {{$format.formatMoney(record.price)}}
+                </template>
+                <template v-if="column.key === 'sale_price'">
+                  {{$format.formatMoney(record.sale_price)}}
+                </template>
+                <template v-if="column.key === 'point'">
+                  {{$format.formatNumber(record.point)}}
                 </template>
                 <template v-else-if="column.key === 'action'">
                   <a-popconfirm

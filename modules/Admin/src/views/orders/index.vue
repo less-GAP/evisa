@@ -13,6 +13,12 @@
 
 
   const tableConfig = {
+    tableConfig: {
+      sticky: true,
+      scroll: "{ x: 1500, y: 300 }",
+      bordered: true,
+      showHeader: true
+    },
     api: (params) => Api.get('orders/list', {params}),
     addAction: (reload) => {
       router.push('/orders/0')
@@ -29,15 +35,67 @@
       },
     ],
     columns: [
-      {title: 'Mã đơn hàng', key: 'id'},
-      {title: 'Khách hàng', key: 'customer_name'},
-      {title: 'Điện thoại', key: 'customer_phone'},
-      {title: 'Vận chuyển', key: 'shipping'},
-      {title: 'Thanh toán', key: 'payment'},
-      {title: 'Thành tiền', key: 'subtotal'},
-      {title: 'Phí vận chuyển', key: 'shipping_cost'},
-      {title: 'Giảm giá', key: 'discount'},
-      {title: 'Tổng tiền', key: 'total'},
+      {
+        title: 'Mã đơn hàng',
+        key: 'id',
+        dataIndex: 'id',
+        fixed: 'left',
+        width: '120px'
+      },
+      {
+        title: 'Khách hàng',
+        key: 'customer_name',
+        dataIndex: 'customer_name',
+        fixed: 'left',
+        width: '200px'
+      },
+      {
+        title: 'Điện thoại',
+        key: 'customer_phone',
+        dataIndex: 'customer_phone',
+        width: '160px'
+      },
+      {
+        title: 'Vận chuyển',
+        key: 'shipping',
+        dataIndex: 'shipping',
+        width: '250px'
+      },
+      {
+        title: 'Thanh toán',
+        key: 'payment',
+        dataIndex: 'payment',
+        width: '250px'
+      },
+      {
+        title: 'Thành tiền',
+        key: 'subtotal',
+        dataIndex: 'subtotal',
+        width: '150px',
+        align: 'right'
+      },
+      {
+        title: 'Phí vận chuyển',
+        key: 'shipping_cost',
+        dataIndex: 'shipping_cost',
+        width: '150px',
+        align: 'right'
+      },
+      {
+        title: 'Giảm giá',
+        key: 'discount',
+        dataIndex: 'discount',
+        width: '150px',
+        align: 'right'
+      },
+      {
+        title: 'Tổng tiền',
+        key: 'total',
+        dataIndex: 'total',
+        width: '150px',
+        align: 'right',
+        fixed: 'left',
+      },
     ],
     selectionActions: [
       {

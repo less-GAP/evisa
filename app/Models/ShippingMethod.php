@@ -26,7 +26,8 @@ class ShippingMethod extends Model
         'short_description',
         'description',
         'cost',
-        'status'
+        'status',
+        'image'
     ];
 
     /**
@@ -49,27 +50,16 @@ class ShippingMethod extends Model
 //        'password' => 'hashed',
     ];
 
+
     protected $appends = [
-//        'country_name',
-//        'province_name',
-//        'district_name',
+        'image_url'
     ];
 
-//    public function getCountryNameAttribute()
-//    {
-//        $cus = Countries::where('code', $this->country_code)->first();
-//        return $cus->name;
-//    }
-//
-//    public function getProvinceNameAttribute()
-//    {
-//        $cus = Provinces::where('code', $this->province_code)->first();
-//        return $cus->name;
-//    }
-//
-//    public function getDistrictNameAttribute()
-//    {
-//        $cus = Districts::where('code', $this->district_code)->first();
-//        return $cus->name;
-//    }
+    public function getImageUrlAttribute()
+    {
+        if ($this->image != '') {
+            return url($this->image, '', env('APP_ENV') == 'local' ? false : true);
+        }
+        return '';
+    }
 }

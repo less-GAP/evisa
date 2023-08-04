@@ -46,6 +46,7 @@
 
     ],
     columns: [
+      {title: 'Hình đại diện', key: 'image'},
       {title: 'Mã phương thức', key: 'code'},
       {title: 'Tên phương thức', key: 'name'},
       {title: 'Phí vận chuyển', key: 'cost'},
@@ -117,11 +118,15 @@
           >
           </a-button>
         </template>
-        <template #cell[video]="{item,column}">
-          <a-button type="link" @click="handlePreview(item)">Xem video</a-button>
+        <template #cell[image]="{item,column}">
+          <img class="w-20 h-auto float-left rounded-full" :src="item.image_url"
+               :alt="item.name"/>
         </template>
         <template #cell[name]="{item,column}">
           {{item.name}}
+        </template>
+        <template #cell[cost]="{item,column}">
+          {{$format.formatMoney(item.cost)}}
         </template>
         <template #cell[status]="{item,column}">
           <div class="flex items-center" v-if="item.status == 'D'">

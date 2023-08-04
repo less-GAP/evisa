@@ -46,6 +46,7 @@
 
     ],
     columns: [
+      {title: 'Hình đại diện', key: 'image'},
       {title: 'Mã phương thức', key: 'code'},
       {title: 'Tên phương thức', key: 'name'},
       {title: 'Mô tả ngắn', key: 'short_description'},
@@ -116,8 +117,9 @@
           >
           </a-button>
         </template>
-        <template #cell[video]="{item,column}">
-          <a-button type="link" @click="handlePreview(item)">Xem video</a-button>
+        <template #cell[image]="{item,column}">
+          <img class="w-20 h-auto float-left rounded-full" :src="item.image_url"
+               :alt="item.name"/>
         </template>
         <template #cell[name]="{item,column}">
           {{item.name}}

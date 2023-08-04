@@ -16,6 +16,8 @@
 
   import {PlusOutlined, LoadingOutlined, DeleteOutlined} from '@ant-design/icons-vue';
 
+  import {InputUpload} from "@/components";
+
   import router from "@/router";
 
   import Api from "@/utils/Api";
@@ -83,6 +85,11 @@
               @finish="onFinish"
       >
         <a-row :gutter="20">
+          <a-col :span="24">
+            <a-form-item label="Hình ảnh">
+              <InputUpload alt="" autocomplete="off" v-model:value="formState.image"></InputUpload>
+            </a-form-item>
+          </a-col>
           <a-col :span="12">
             <a-form-item label="Tình trạng"
                          name="status"

@@ -45,7 +45,7 @@ const routes = [
     },
     path: "/products/:id",
     name: "product-detail",
-    component: () => import("@/views/products/ProductView.vue"),
+    component: () => import("@/views/products/Detail.vue"),
   },
   {
     meta: {

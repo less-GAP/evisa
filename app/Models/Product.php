@@ -64,7 +64,7 @@ class Product extends Model
     public function getImageUrlAttribute()
     {
         if ($this->image != '') {
-            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
+            return url($this->image, '', env('APP_ENV') == 'local' ? false : true);
         }
         return '';
     }

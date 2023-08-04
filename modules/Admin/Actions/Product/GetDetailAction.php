@@ -9,7 +9,7 @@ use App\Models\ProductPackage;
 use App\Providers\AbstractModuleProvider;
 use Illuminate\Http\Request;
 
-class GetProductDetailAction
+class GetDetailAction
 {
     public function handle(Request $request)
     {
@@ -28,6 +28,7 @@ class GetProductDetailAction
                 }
             }
         }
+
         return [
             'code' => 1,
             'message' => 'Thành công !',
