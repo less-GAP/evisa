@@ -247,7 +247,7 @@ reload()
     title="File Detail"
     placement="right"
   >
-    <FileViewDetail  :value="fileDetail"></FileViewDetail>
+    <FileDetailForm @delete="fileDetail = false;reload()" :value="fileDetail"></FileDetailForm>
   </a-drawer>
 </template>
 <style scoped>

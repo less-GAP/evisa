@@ -225,8 +225,6 @@
                              :rules="[{ required: true, message: 'Vui lòng nhập giá bán sản phẩm!' }]"
                 >
                   <a-input-number v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')"
-                                  :parser="value => value.replace(/\$\s?|(.*)/g, '')"
                                   style="width: 100%"
                   />
                 </a-form-item>
@@ -234,8 +232,6 @@
               <a-col :span="8">
                 <a-form-item label="Giá niêm yết">
                   <a-input-number v-model:value="formState.price" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.')"
-                                  :parser="value => value.replace(/\$\s?|(.*)/g, '')"
                   />
                 </a-form-item>
               </a-col>
