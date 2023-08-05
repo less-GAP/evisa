@@ -61,7 +61,7 @@
       <a-textarea autocomplete="off" v-model:value="formState.site_description"/>
     </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
-      <InputUpload alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
+      <InputUpload width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
       </InputUpload>
     </a-form-item>
 

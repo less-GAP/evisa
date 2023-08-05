@@ -2,8 +2,9 @@
 import {computed, ref, h, toRaw} from "vue";
 import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
-import {Button, Input} from "@/components/index";
+import {Button, Input} from "@/components";
 import BaseIcon from "@/components/BaseIcon.vue";
+import FileDetailForm from "./FileDetailForm.vue";
 import {DownOutlined, FolderOpenOutlined, ReloadOutlined, UploadOutlined} from "@ant-design/icons-vue";
 import Api from "@/utils/Api";
 
@@ -59,7 +60,7 @@ function reset() {
 
 function reload() {
   loading.value = true
-  Api.get('files/list', {
+  Api.get('file/list', {
     params: {
       perPage: props.pagination.perPage,
       page: props.pagination.page, ...props.params,
@@ -228,14 +229,15 @@ reload()
     </a-pagination>
   </div>
   <a-drawer
+    style="max-width: 100vw"
     appendTo="body"
     v-model:open="fileDetail"
     class="custom-class"
-    width="600px"
+    width="800px"
     title="File Detail"
     placement="right"
   >
-
+    <FileDetailForm @delete="fileDetail = false;reload()" :value="fileDetail"></FileDetailForm>
   </a-drawer>
 </template>
 <style scoped>

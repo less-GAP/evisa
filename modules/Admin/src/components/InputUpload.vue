@@ -1,22 +1,22 @@
 <template>
-    <slot></slot>
-    <a-image :width="width" :height="height" v-if="value" :src="$url(value)" :alt="alt"/>
-    <br>
-    <a-upload
-      v-bind="$attrs"
-      :customRequest="upload"
-      :openFileDialogOnClick="true"
-      :withCredentials="true"
-      :list-type="listType"
-      :action="action"
-      :accept="accept"
-      :showUploadList="false"
-    >
-      <a-button size="mini" :loading="loading" >
-        <upload-outlined></upload-outlined>
-        Upload
-      </a-button>
-    </a-upload>
+  <slot></slot>
+  <a-image :width="width" :height="height" v-if="value" :src="$url(value)" :alt="alt"/>
+  <br>
+  <a-upload
+    v-bind="$attrs"
+    :customRequest="upload"
+    :openFileDialogOnClick="true"
+    :withCredentials="true"
+    :list-type="listType"
+    :action="action"
+    :accept="accept"
+    :showUploadList="false"
+  >
+    <a-button v-bind="buttonConfig" :loading="loading">
+      <upload-outlined></upload-outlined>
+      {{ label }}
+    </a-button>
+  </a-upload>
 
 </template>
 <script lang="ts">
@@ -36,13 +36,27 @@ export default defineComponent({
       type: String,
       default: '/file/Upload'
     },
+    id: {
+      type: String, Number
+    },
+    buttonConfig: {
+      type: Object,
+      default: {
+        type: 'primary'
+        , size: 'mini'
+      }
+    },
+    label: {
+      type: String,
+      default: 'Upload'
+    },
     height: {
       type: Number,
       default: 'auto'
     },
     width: {
       type: Number,
-      default: 200
+      default: '100%'
     },
     listType: {
       type: String,
@@ -50,7 +64,7 @@ export default defineComponent({
     },
     dir: {
       type: String,
-      default: '/file/Upload'
+      default: ''
     },
   },
   emits: ['change', 'delete', 'preview-delete', 'update:value'],
@@ -92,6 +106,7 @@ export default defineComponent({
         let formData = new FormData();
         formData.append("file", options.file);
         formData.append("dir", props.dir);
+        formData.append("id", props.id);
         const res = await Api.post(props.action, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'

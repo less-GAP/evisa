@@ -58,7 +58,7 @@ import {
   useToast
 } from "flowbite-vue"
 import DataTable from "./DataTable.vue"
-import FileManager from "./FileManager.vue"
+import FileManager from "./Files/FileManager.vue"
 import InputUpload from "./InputUpload.vue"
 export {
   InputUpload,

@@ -30,12 +30,15 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
-    EloquentRouter::prefix('files')
+    EloquentRouter::prefix('file')
         ->handle(\App\Models\File::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
             ]
-        );
+        )->routes(function(){
+            Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');
+            Route::post('/Info', \Modules\Admin\Actions\File\PostInfoAction::class . '@handle');
+        });
 
     EloquentRouter::prefix('email-template')
         ->handle(\App\Models\EmailTemplate::class,
@@ -94,9 +97,6 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::get('/', \Modules\Admin\Actions\Config\GetListAction::class . '@handle');
         Route::post('/', \Modules\Admin\Actions\Config\PostAction::class . '@handle');
         Route::post('/testSmtp', \Modules\Admin\Actions\Config\PostTestSmtpAction::class . '@handle');
-    });
-    Route::prefix('/file')->group(function () {
-        Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');
     });
     Route::prefix('/customer')->group(function () {
         Route::get('list', \Modules\Admin\Actions\Customer\GetListAction::class . '@handle');

@@ -17,6 +17,7 @@ import {useTranslation} from "@/utils/Translation";
 import Antd from 'ant-design-vue';
 import {useAppStateStore} from "@/stores/appState";
 import Format from "@/utils/Format";
+import * as config from "@/config";
 /* Init Pinia */
 const pinia = createPinia();
 pinia.use(piniaPersist)
@@ -28,6 +29,7 @@ const styleStore = useStyleStore(pinia);
 const authStore = useAuthStore();
 const appState = useAppStateStore();
 const tranlation = useTranslation();
+myApp.config.globalProperties.$config = config;
 myApp.config.globalProperties.$auth = authStore;
 myApp.config.globalProperties.$api = Api;
 myApp.config.globalProperties.$format = Format;

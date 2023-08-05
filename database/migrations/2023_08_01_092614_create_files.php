@@ -15,11 +15,13 @@ return new class extends Migration {
             $table->string('uuid')->index();
             $table->string('title')->nullable();
             $table->string('caption')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
+            $table->text('alternative_text')->nullable();
             $table->string('file_name');
-            $table->string('file_ext');
+            $table->string('file_ext')->nullable();
+            $table->string('file_dimension')->nullable();
             $table->integer('file_size')->default(0);
-            $table->string('file_dir')->index();
+            $table->string('file_dir')->nullable()->index();
             $table->string('file_path');
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

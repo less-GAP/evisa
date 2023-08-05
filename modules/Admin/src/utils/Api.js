@@ -27,11 +27,11 @@ Api.interceptors.request.use(function (config) {
 
 Api.interceptors.response.use((response) => {
   if (response?.data?.message && (requestConfig.method.toLowerCase() == 'post' || requestConfig.method.toLowerCase() == 'put')) {
-    message.success({content: response?.data?.message,key, duration: 3});
+    message.success({content: response?.data?.message,key, duration: 1});
   }
   if (requestConfig.method.toLowerCase() == 'delete')
   {
-    message.info({content: response?.data?.message,key, duration: 3});
+    message.info({content: response?.data?.message,key, duration: 1});
   }
   if (requestConfig.method.toLowerCase() == 'get') {
     hideMessage()
