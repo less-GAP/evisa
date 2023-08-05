@@ -30,7 +30,7 @@ const handleDelete = async function () {
 
   <a-row :gutter="20">
     <a-col :span="12">
-      <InputUpload :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" class="w-full"
+      <InputUpload width="100%" :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" class="w-full"
                    v-model:value="value.site_path"></InputUpload>
     </a-col>
     <a-col :span="12">
@@ -44,6 +44,9 @@ const handleDelete = async function () {
         <a-descriptions-item label="File type"><b>{{ value.file_ext }}</b></a-descriptions-item>
         <a-descriptions-item label="File size">
           <b>{{ $format.humanFileSize(value.file_size) }}</b>
+        </a-descriptions-item>
+        <a-descriptions-item label="">
+          <a-button type="link"  target="_blank" :download="value.file_name" :href="value.file_url">Download</a-button>
         </a-descriptions-item>
 
       </a-descriptions>

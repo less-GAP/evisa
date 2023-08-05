@@ -5,7 +5,7 @@ import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input} from "@/components";
 import BaseIcon from "@/components/BaseIcon.vue";
 import FileDetailForm from "./FileDetailForm.vue";
-import {DownOutlined, FolderOpenOutlined, ReloadOutlined, UploadOutlined} from "@ant-design/icons-vue";
+import {DownOutlined,FileOutlined, FolderOpenOutlined, ReloadOutlined, UploadOutlined} from "@ant-design/icons-vue";
 import Api from "@/utils/Api";
 
 const props = defineProps({
@@ -130,7 +130,9 @@ async function onFilesSelect(option) {
   await upload()
   // inProgressFiles.value.forEach(upload)
 }
-
+function isImageUrl(url) {
+  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+}
 reload()
 </script>
 
@@ -206,11 +208,19 @@ reload()
       <div @click="fileDetail = image" v-for="image in tableData.data" :key="image.id"
            class=" cursor-pointer relative border-2 border-gray-100 hover:border-blue-700 h-[150px]  mb-[50px] rounded-lg overflow:hidden">
         <img
+          v-if="isImageUrl(image.file_url)"
           style="max-width:auto;max-height:auto"
           :title="image.file_name"
           class="h-full object-contain object-center w-full max-w-full "
           :src="image.file_url"
         />
+        <div
+          v-else
+          :title="image.file_name"
+          class="h-full flex items-center text-center object-contain object-center w-full max-w-full "
+        >
+          <file-outlined style="margin:0 auto;font-size: 30px" />
+        </div>
         <div class="absolute whitespace-nowrap text-center overflow-hidden text-ellipsis -bottom-[40px] bg-white w-full pl-2 pr-2 ">
           {{ image.file_name }}
         </div>
@@ -237,7 +247,7 @@ reload()
     title="File Detail"
     placement="right"
   >
-    <FileDetailForm @delete="fileDetail = false;reload()" :value="fileDetail"></FileDetailForm>
+    <FileViewDetail  :value="fileDetail"></FileViewDetail>
   </a-drawer>
 </template>
 <style scoped>

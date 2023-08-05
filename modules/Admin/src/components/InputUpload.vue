@@ -1,33 +1,32 @@
 <template>
   <slot></slot>
-  <a-image :width="width" :height="height" v-if="value" :src="$url(value)" :alt="alt"/>
+  <a-image v-if="value && isImageUrl(value)" :width="width" :height="height" :src="$url(value)" :alt="alt"/>
+  <a-card shadow="none" style="padding:50px;width:200px;height:200px" v-if="value && !isImageUrl(value)" :width="width"
+          :height="height">
+    <file-outlined style="font-size: 30px"/>
+  </a-card>
   <br>
-  <a-upload
-    v-bind="$attrs"
-    :customRequest="upload"
-    :openFileDialogOnClick="true"
-    :withCredentials="true"
-    :list-type="listType"
-    :action="action"
-    :accept="accept"
-    :showUploadList="false"
-  >
-    <a-button v-bind="buttonConfig" :loading="loading">
-      <upload-outlined></upload-outlined>
-      {{ label }}
-    </a-button>
-  </a-upload>
 
+  <a-button @click="open=true" v-bind="buttonConfig" :loading="loading">
+    <upload-outlined></upload-outlined>
+    {{ label }}
+  </a-button>
+  <a-modal v-model:open="open" top="5vh" height="90vh" width="90vw" title="Select file">
+    <FilePicker @close="open=false" @select="onSelect"></FilePicker>
+    <template #footer>
+    </template>
+  </a-modal>
 </template>
 <script lang="ts">
 import {defineComponent, ref, watch, unref, computed} from 'vue';
 import {Tooltip, Space} from 'ant-design-vue';
-import {UploadOutlined} from "@ant-design/icons-vue";
+import {UploadOutlined, FileOutlined} from "@ant-design/icons-vue";
 import Api from "@/utils/Api";
+import {FilePicker} from "./index";
 
 export default defineComponent({
   name: 'InputUpload',
-  components: {UploadOutlined},
+  components: {UploadOutlined, FilePicker, FileOutlined},
   props: {
     value: Object,
     accept: String,
@@ -56,7 +55,7 @@ export default defineComponent({
     },
     width: {
       type: Number,
-      default: '100%'
+      default: '200px'
     },
     listType: {
       type: String,
@@ -73,6 +72,7 @@ export default defineComponent({
     const fileList = ref<string[]>([]);
     const file = ref(null);
     const loading = ref(false);
+    const open = ref(false);
     const showPreview = computed(() => {
       const {emptyHidePreview} = props;
       if (!emptyHidePreview) return true;
@@ -99,6 +99,9 @@ export default defineComponent({
       emit('change', fileList.value);
     }
 
+    function isImageUrl(url) {
+      return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+    }
 
     return {
       async upload(options) {
@@ -120,11 +123,18 @@ export default defineComponent({
 
         return res
       },
+      async onSelect(file) {
+        emit('update:value', file.site_path);
+        emit('change', file.site_path);
+        open.value = false
+      },
       fileList: ref([]),
       handleChange,
       loading,
+      open,
       file,
       showPreview,
+      isImageUrl,
       bindValue,
     };
   },

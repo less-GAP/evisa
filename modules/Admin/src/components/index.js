@@ -59,8 +59,10 @@ import {
 } from "flowbite-vue"
 import DataTable from "./DataTable.vue"
 import FileManager from "./Files/FileManager.vue"
+import FilePicker from "./Files/FilePicker.vue"
 import InputUpload from "./InputUpload.vue"
 export {
+  FilePicker,
   InputUpload,
   FileManager,
   DataTable,
