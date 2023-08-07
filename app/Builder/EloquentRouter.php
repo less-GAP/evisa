@@ -14,9 +14,8 @@ class EloquentRouter
 {
     private $model;
     private $config;
-    private $routes;
 
-    public function __construct(private $prefix, $routes = null)
+    public function __construct(private $prefix)
     {
     }
 
