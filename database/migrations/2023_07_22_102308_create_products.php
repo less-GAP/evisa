@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->index();
             $table->string('name')->index();
             $table->string('slug')->index();
             $table->text('short_description')->nullable();

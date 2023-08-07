@@ -20,6 +20,6 @@ class GetProductListAction
             $query->where('type', $request->input('type'));
         }
 
-        return $query->paginate($request->input('perPage', 15));
+        return $query->with('images')->paginate($request->input('perPage', 15));
     }
 }

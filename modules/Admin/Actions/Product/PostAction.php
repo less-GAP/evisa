@@ -26,7 +26,13 @@ class PostAction
 
             $product->fill($data);
             $product->save();
-
+            if($request->input('images')){
+                $syncImages = [];
+                foreach($request->input('images') as $imageData){
+                    $syncImages[$imageData['id']]=['type'=>$imageData['type']??'image'];
+                }
+                $product->images()->sync($syncImages);
+            }
             if($data['type'] == 'package'){
                 if(isset($data['id']) && $data['id'] > 0){
                     ProductPackage::where('package_id',$data['id'])->delete();

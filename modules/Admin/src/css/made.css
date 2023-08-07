@@ -1,16 +1,16 @@
-:root {
-  --text-primary: #444A6D;
-  --text-light: #fff;
-  --border-heading: #3333333a;
-  --button-primary: #F2F2F2;
-  --button-primary-hover: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);
-  --button-secondary: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);
-  --button-secondary-hover: #ffffff;
-  --button-white: #fff;
-  --button-white-hover: #81a1d9;
-  --bg-input: #e0ebfc;
-  --bg-main: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);
-}
+/*:root {*/
+/*  --text-primary: #444A6D;*/
+/*  --text-light: #fff;*/
+/*  --border-heading: #3333333a;*/
+/*  --button-primary: #F2F2F2;*/
+/*  --button-primary-hover: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);*/
+/*  --button-secondary: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);*/
+/*  --button-secondary-hover: #ffffff;*/
+/*  --button-white: #fff;*/
+/*  --button-white-hover: #81a1d9;*/
+/*  --bg-input: #e0ebfc;*/
+/*  --bg-main: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);*/
+/*}*/
 
 dd,
 li {
@@ -73,39 +73,7 @@ a:focus .plugin-icon {
   height: unset;
   position: relative;
 }
-.madelab-ui .button#plupload-browse-button,
-.madelab-ui .button#post-query-submit,
-.madelab-ui .button.select-mode-toggle-button,
-.madelab-ui .ac-table-button,
-.madelab-ui .ac-table-actions .ac-table-button,
-.madelab-ui .button,
-.madelab-ui .button-primary {
-  text-transform: uppercase;
-  background: var(--button-primary);
-  box-shadow: none;
-  color: var(--text-primary);
-  text-decoration: none;
-  text-shadow: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-.madelab-ui .button#plupload-browse-button:hover,
-.madelab-ui .button#post-query-submit:hover,
-.madelab-ui .button.select-mode-toggle-button:hover,
-.madelab-ui .ac-table-button:hover,
-.madelab-ui .ac-table-actions .ac-table-button:hover,
-.madelab-ui .button:hover,
-.madelab-ui .button-primary:hover {
-  background: var(--button-primary-hover);
-  box-shadow: none;
-  color: var(--text-light);
-  text-decoration: none;
-  text-shadow: none;
-}
+
 .madelab-ui .wrap {
   margin: 0;
 }
@@ -574,11 +542,11 @@ p {
   border-radius: 20px;
   padding: 20px;
 }
-.uni-main-container button:hover,
-.uni-main-container button.active {
-  color: #fff;
-  background: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);
-}
+/*.uni-main-container button:hover,*/
+/*.uni-main-container button.active {*/
+/*  color: #fff;*/
+/*  background: linear-gradient(122.97deg, #2CB34A 35.82%, #52BE3E 47.92%, #8DCE2C 67.09%, #BCDC1E 85.24%, #DEE514 100.37%, #F3EB0D 113.48%, #FAED0B 122.56%);*/
+/*}*/
 
 .uni-heading-inline {
   width: 100%;

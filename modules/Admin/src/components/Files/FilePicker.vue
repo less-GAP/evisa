@@ -136,11 +136,18 @@ async function upload() {
   tableData.value.data.unshift(res.data);
   await upload()
 }
-
+let uploadTimeout = null
 async function onFilesSelect(option) {
   option.percent = 0
   inProgressFiles.value.push(option)
-  await upload()
+  if(uploadTimeout){
+    clearTimeout(uploadTimeout)
+    uploadTimeout = null;
+  }
+  uploadTimeout = setTimeout(async ()=>{
+    await upload()
+  },200)
+
   // inProgressFiles.value.forEach(upload)
 }
 
@@ -263,7 +270,7 @@ reload()
 
       </div>
     </a-col>
-    <a-col flex="300px" v-if="fileDetail">
+    <a-col  flex="300px" v-if="fileDetail">
       <FileViewDetail v-if="fileDetail" :value="fileDetail"></FileViewDetail>
 
     </a-col>

@@ -186,8 +186,8 @@
           <a-tab-pane key="1" tab="Thông tin chung">
             <a-row :gutter="20">
               <a-col :span="24">
-                <a-form-item label="Hình ảnh">
-                  <InputUpload :multiple="true" alt="" autocomplete="off" v-model:value="formState.image"></InputUpload>
+                <a-form-item style="width:100%" label="Hình ảnh">
+                  <InputUpload :multiple="true" alt="" autocomplete="off" v-model:value="formState.images"></InputUpload>
                 </a-form-item>
               </a-col>
               <a-col :span="12">

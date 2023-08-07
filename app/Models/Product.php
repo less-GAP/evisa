@@ -68,4 +68,7 @@ class Product extends Model
         }
         return '';
     }
+    public function images(){
+        return $this->belongsToMany(File::class,'product_images','product_id','file_id');
+    }
 }

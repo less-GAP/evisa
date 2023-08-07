@@ -60,6 +60,7 @@ class EloquentRouter
 
         return QueryBuilder::for($this->model)
             ->defaultSort($this->config['defaultSort'] ?? '-id')
+            ->allowedIncludes($this->config['allowedIncludes'] ?? [])
             ->allowedFilters($this->config['allowedFilters'] ?? [])
             ->allowedSorts($this->config['allowedSorts'] ?? 'id')
             ->paginate($request->input('perPage', 15))
@@ -72,7 +73,7 @@ class EloquentRouter
         if ($id = $request->route('id')) {
             $query->where('id', $id);
         }
-        return $query->first();
+        return $query->with($this->config['allowedIncludes']??[])->first();
     }
 
     public function delete(Request $request)

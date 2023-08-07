@@ -32,7 +32,7 @@ class GetDetailAction
         return [
             'code' => 1,
             'message' => 'Thành công !',
-            'data' => $product
+            'data' => $product->load('images')
         ];
     }
 }

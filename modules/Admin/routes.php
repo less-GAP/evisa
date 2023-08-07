@@ -50,7 +50,8 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     EloquentRouter::prefix('product')
         ->handle(\App\Models\Product::class,
             [
-                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')],
+                'allowedIncludes' => ['images']
             ]
         )->routes(function () {
             Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');

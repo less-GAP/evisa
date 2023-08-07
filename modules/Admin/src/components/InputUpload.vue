@@ -1,16 +1,21 @@
 <template>
   <slot></slot>
-  <a-image-preview-group>
-    <a-space>
-      <template v-for="file in getItems()">
-        <a-image v-if="isImageUrl(file.site_path)" :width="width" :height="height" :src="$url(file.site_path)"
-                 :alt="alt"/>
-        <a-card shadow="none" style="padding:50px;width:200px;height:200px" v-else :width="width"
-                :height="height">
-          <file-outlined style="font-size: 30px"/>
+  <a-image-preview-group style="width:100%;overflow: auto;gap:8px" v-if="value">
+      <template v-for="(file,index) in getItems" :key="file.id">
+        <a-card  shadow="none" style="display:inline-block;margin-right:5px;text-align: center;width:200px;height:200px;position:relative">
+          <template #cover>
+            <a-image  style="width:200px;height:200px;object-fit:contain" v-if="isImageUrl(file.site_path)" :src="$url(file.site_path)"
+                     :alt="alt"/>
+            <file-outlined v-else style="margin:50px;font-size: 30px"/>
+          </template>
+          <a-button @click="deleteItem(index)" type="link" danger
+                    style="position: absolute;right:2px;bottom:2px" size="compact">
+            <template #icon>
+              <DeleteOutlined></DeleteOutlined>
+            </template>
+          </a-button>
         </a-card>
       </template>
-    </a-space>
   </a-image-preview-group>
   <br>
   <a-space class="mt-2">
@@ -42,15 +47,15 @@
   </a-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, watch, unref, computed} from 'vue';
+import {defineComponent, ref, watch, unref, computed, toRaw} from 'vue';
 import {Tooltip, Space} from 'ant-design-vue';
-import {UploadOutlined, FileOutlined, SelectOutlined} from "@ant-design/icons-vue";
+import {UploadOutlined, FileOutlined, SelectOutlined, DeleteOutlined} from "@ant-design/icons-vue";
 import Api from "@/utils/Api";
 import {FilePicker} from "./index";
 
 export default defineComponent({
   name: 'InputUpload',
-  components: {UploadOutlined, SelectOutlined, FilePicker, FileOutlined},
+  components: {UploadOutlined, SelectOutlined, FilePicker, FileOutlined, DeleteOutlined},
   props: {
     value: Object,
     accept: String,
@@ -78,7 +83,7 @@ export default defineComponent({
       default: 'Upload'
     },
     height: {
-      type: Number,
+      type: Number, String,
       default: 'auto'
     },
     width: {
@@ -172,13 +177,23 @@ export default defineComponent({
       },
       fileList: ref([]),
       handleChange,
-      getItems() {
+      getItems:computed(()=> {
         if (props.multiple) {
           return props.value
         } else if (props.value) {
           return [props.value]
         }
         return []
+      })
+      , deleteItem(index) {
+        let tmp = props.value;
+        if (props.multiple) {
+           tmp.splice(index, 1)
+        } else  {
+          tmp = null
+        }
+        emit('change', tmp);
+        emit('update:value', tmp);
       },
       loading,
       open,

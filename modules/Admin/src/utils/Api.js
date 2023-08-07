@@ -14,7 +14,7 @@ Api.interceptors.request.use(function (config) {
   // Do something before request is sent
   requestConfig = config
   if (requestConfig.method.toLowerCase() == 'post' || requestConfig.method.toLowerCase() == 'put') {
-    message.loading({content: 'Submit...', key});
+    message.loading({content: 'Submit...', key, duration: 1});
   }
   if (requestConfig.method.toLowerCase() == 'get') {
     hideMessage = message.loading({content: 'Loading...', key, duration: 10});
