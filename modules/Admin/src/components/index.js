@@ -62,7 +62,9 @@ import FileManager from "./Files/FileManager.vue"
 import FilePicker from "./Files/FilePicker.vue"
 import InputUpload from "./InputUpload.vue"
 import InputCopy from "./InputCopy.vue"
+import InputUploadGetPath from "./InputUploadGetPath.vue"
 export {
+  InputUploadGetPath,
   InputCopy,
   FilePicker,
   InputUpload,

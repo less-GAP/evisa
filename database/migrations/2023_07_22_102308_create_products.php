@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->index();
             $table->string('slug')->index();
+            $table->string('image')->nullable();
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price',11,2)->default(0);

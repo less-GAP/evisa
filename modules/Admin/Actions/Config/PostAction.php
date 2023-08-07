@@ -18,7 +18,7 @@ class PostAction
                 'name'=>$name,
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now(),
-                'value'=>$value
+                'value'=>is_array($value)?json_encode($value):$value
             ];
         }
         return [

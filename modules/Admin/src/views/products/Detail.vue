@@ -33,6 +33,7 @@
   import type {UploadProps} from 'ant-design-vue';
 
   import ProductList from "./ProductList.vue";
+  import InputUploadGetPath from "../../components/InputUploadGetPath.vue";
 
   const mainStore = useMainStore();
 
@@ -171,7 +172,6 @@
     });
     //console.log(dataSource.value);
   }
-
 </script>
 
 <template>
@@ -186,6 +186,10 @@
           <a-tab-pane key="1" tab="Thông tin chung">
             <a-row :gutter="20">
               <a-col :span="24">
+                <a-form-item style="width:100%" label="Feature image">
+                  <InputUploadGetPath width="200px"  autocomplete="off" v-model:value="formState.image">
+                  </InputUploadGetPath>
+                </a-form-item>
                 <a-form-item style="width:100%" label="Hình ảnh">
                   <InputUpload :multiple="true" alt="" autocomplete="off" v-model:value="formState.images"></InputUpload>
                 </a-form-item>

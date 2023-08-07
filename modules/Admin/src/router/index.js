@@ -113,6 +113,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Profile",
+    },
+    path: "/user/profile",
+    name: "user-profile",
+    component: () => import("@/views/users/ProfileView.vue"),
+  },
+  {
+    meta: {
       title: "File Manager",
     },
     path: "/files",

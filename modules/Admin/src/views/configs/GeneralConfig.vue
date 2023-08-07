@@ -4,7 +4,7 @@
 
   import Api from "@/utils/Api";
   import validateMessages from "@/utils/validateMessages";
-  import {InputUpload} from "@/components";
+  import {InputUpload, InputUploadGetPath} from "@/components";
 
   const configNames = [
     'site_title',
@@ -44,7 +44,6 @@
     emit('cancel')
   }
 
-
 </script>
 
 <template>
@@ -61,8 +60,8 @@
       <a-textarea autocomplete="off" v-model:value="formState.site_description"/>
     </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
-      <InputUpload width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
-      </InputUpload>
+      <InputUploadGetPath width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
+      </InputUploadGetPath>
     </a-form-item>
 
     <a-form-item>

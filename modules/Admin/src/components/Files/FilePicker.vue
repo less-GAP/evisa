@@ -238,8 +238,8 @@ reload()
             :class="selectedItems.indexOf(image)!=-1?'!border-blue-700':''"
             @click="addSelectedFile(image)" v-for="image in tableData.data" :key="image.id"
             class=" cursor-pointer relative border-2 border-gray-100 hover:border-blue-700 h-[150px]  mb-[50px] rounded-lg overflow:hidden">
-            <a-button size="sm" v-if="selectedItems.indexOf(image)!=-1"
-                      style="position: absolute;right:2px;top:2px;background:white" type="primary" ghost>
+            <a-button size="compact" type="success" v-if="selectedItems.indexOf(image)!=-1"
+                      style="position: absolute;right:2px;top:2px;background:white"  ghost>
               <template #icon>
                 <CheckOutlined></CheckOutlined>
               </template>

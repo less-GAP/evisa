@@ -1,21 +1,23 @@
 <template>
   <slot></slot>
   <a-image-preview-group style="width:100%;overflow: auto;gap:8px" v-if="value">
-      <template v-for="(file,index) in getItems" :key="file.id">
-        <a-card  shadow="none" style="display:inline-block;margin-right:5px;text-align: center;width:200px;height:200px;position:relative">
-          <template #cover>
-            <a-image  style="width:200px;height:200px;object-fit:contain" v-if="isImageUrl(file.site_path)" :src="$url(file.site_path)"
-                     :alt="alt"/>
-            <file-outlined v-else style="margin:50px;font-size: 30px"/>
+    <template v-for="(file,index) in fileList" :key="file.id">
+      <a-card shadow="none"
+              style="display:inline-block;margin-right:5px;text-align: center;width:200px;height:200px;position:relative">
+        <template #cover>
+          <a-image style="width:200px;height:200px;object-fit:contain" v-if="isImageUrl(file.site_path)"
+                   :src="$url(file.site_path)"
+                   :alt="alt"/>
+          <file-outlined v-else style="margin:auto;margin-top:80px;font-size: 30px"/>
+        </template>
+        <a-button @click="deleteItem(index)" type="link" danger
+                  style="position: absolute;right:2px;bottom:2px" size="compact">
+          <template #icon>
+            <DeleteOutlined></DeleteOutlined>
           </template>
-          <a-button @click="deleteItem(index)" type="link" danger
-                    style="position: absolute;right:2px;bottom:2px" size="compact">
-            <template #icon>
-              <DeleteOutlined></DeleteOutlined>
-            </template>
-          </a-button>
-        </a-card>
-      </template>
+        </a-button>
+      </a-card>
+    </template>
   </a-image-preview-group>
   <br>
   <a-space class="mt-2">
@@ -35,12 +37,13 @@
         Upload
       </a-button>
     </a-upload>
-    <a-button @click="open=true" v-bind="buttonConfig" :loading="loading">
+    <a-button v-if="showSelect" type="primary" success @click="open=true" v-bind="buttonConfig" :loading="loading">
       <SelectOutlined></SelectOutlined>
       Or Select
     </a-button>
   </a-space>
-  <a-modal append-to-body v-model:open="open" top="2%" height="96vh" width="90vw" title="Select file">
+  <a-modal append-to-body v-model:open="open" style="top: 2vh;height:98vh" height="96vh" width="90vw"
+           title="Select file">
     <FilePicker :multiple="multiple" @close="open=false" @select="onSelect"></FilePicker>
     <template #footer>
     </template>
@@ -63,6 +66,14 @@ export default defineComponent({
     multiple: {
       type: Boolean,
       default: false
+    },
+    load_file_id: {
+      type: Boolean,
+      default: false
+    },
+    showSelect: {
+      type: Boolean,
+      default: true
     },
     action: {
       type: String,
@@ -102,7 +113,7 @@ export default defineComponent({
   emits: ['change', 'delete', 'preview-delete', 'update:value'],
 
   setup(props, {emit, attrs}) {
-    const fileList = ref<string[]>([]);
+    const fileList = ref([]);
     const file = ref(null);
     const loading = ref(false);
     const open = ref(false);
@@ -114,6 +125,17 @@ export default defineComponent({
     if (!Array.isArray(props.value) && props.multiple) {
       emit('update:value', []);
     }
+    function updateFileList(){
+      if (props.multiple) {
+        fileList.value = toRaw(props.value)
+      }else{
+        fileList.value = [props.value]
+      }
+    }
+    watch(() => props.value, async () => {
+      updateFileList(props.value)
+    })
+    updateFileList(props.value)
     const bindValue = computed(() => {
       const value = {...attrs, ...props};
       return emit(value, 'onChange');
@@ -175,9 +197,9 @@ export default defineComponent({
 
         open.value = false
       },
-      fileList: ref([]),
+      fileList,
       handleChange,
-      getItems:computed(()=> {
+      getItems: computed(() => {
         if (props.multiple) {
           return props.value
         } else if (props.value) {
@@ -188,8 +210,8 @@ export default defineComponent({
       , deleteItem(index) {
         let tmp = props.value;
         if (props.multiple) {
-           tmp.splice(index, 1)
-        } else  {
+          tmp.splice(index, 1)
+        } else {
           tmp = null
         }
         emit('change', tmp);

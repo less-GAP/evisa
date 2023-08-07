@@ -1,6 +1,6 @@
 <script setup>
 
-import {InputUpload} from "@/components";
+import {InputUpload, InputUploadGetPath} from "@/components";
 import {watch, ref} from "vue";
 import Api from "@/utils/Api";
 const emit = defineEmits(["delete"]);
@@ -30,8 +30,8 @@ const handleDelete = async function () {
 
   <a-row :gutter="20">
     <a-col :span="12">
-      <InputUpload width="100%" :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" class="w-full"
-                   v-model:value="value.site_path"></InputUpload>
+      <InputUploadGetPath width="100%" :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" class="w-full"
+                   v-model:value="value.site_path"></InputUploadGetPath>
     </a-col>
     <a-col :span="12">
       <a-descriptions size="small" :column="1">
