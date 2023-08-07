@@ -5,7 +5,14 @@ import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input} from "@/components";
 import BaseIcon from "@/components/BaseIcon.vue";
 import FileViewDetail from "./FileViewDetail.vue";
-import {DownOutlined, FileOutlined, FolderOpenOutlined, ReloadOutlined, UploadOutlined} from "@ant-design/icons-vue";
+import {
+  DownOutlined,
+  CheckOutlined,
+  FileOutlined,
+  FolderOpenOutlined,
+  ReloadOutlined,
+  UploadOutlined
+} from "@ant-design/icons-vue";
 import Api from "@/utils/Api";
 
 const emit = defineEmits(["close", "select"]);
@@ -29,6 +36,10 @@ const props = defineProps({
   showSizeChanger: {
     type: Boolean,
     default: true
+  },
+  multiple: {
+    type: Boolean,
+    default: false
   },
   params: {
     type: Object,
@@ -97,7 +108,7 @@ function toggleCheckAll() {
   if (checkAll.value) {
     selectedItems.value = toRaw(tableData?.value.data || [])
   } else {
-    selectedItem.value = []
+    selectedItems.value = []
   }
 }
 
@@ -141,8 +152,21 @@ function close() {
   emit('close')
 }
 
-function selectFile(file) {
-  emit('select', file)
+function selectFile() {
+    emit('select', toRaw(selectedItems.value))
+}
+
+function addSelectedFile(file) {
+  if (selectedItems.value.indexOf(file) == -1) {
+    if (!props.multiple) {
+      selectedItems.value = [file]
+    } else {
+      selectedItems.value.push(file)
+    }
+  } else {
+    selectedItems.value.splice(selectedItems.value.indexOf(file), 1)
+  }
+  fileDetail.value = file
 }
 
 reload()
@@ -150,10 +174,21 @@ reload()
 
 <template>
   <a-row :gutter="20">
-    <a-col :span="18">
+    <a-col flex="1">
       <div class="relative text-center overflow-x-auto sm:rounded-lg">
-
         <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
+          <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
+                        v-model:current="pagination.page"
+                        v-model:pageSize="pagination.perPage" :total="pagination.total">
+            <template #itemRender="{ type, originalElement }">
+              <a v-if="type === 'prev'">Previous</a>
+              <a v-else-if="type === 'next'">Next</a>
+              <component :is="originalElement" v-else></component>
+            </template>
+          </a-pagination>
+          <span>
+
+      </span>
           <a-space>
 
             <a-input
@@ -184,46 +219,25 @@ reload()
               </a-button>
             </a-upload>
           </a-space>
-          <span>
 
-      </span>
 
-          <a-space>
-            <a-button>
-              <template #icon>
-                <reload-outlined @click="reload"/>
-              </template>
-            </a-button>
-            <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">
-              <template #overlay>
-                <a-menu>
-                  <a-menu-item @click="doSelectionAction(action)" :key="index"
-                               v-for="(action,index) in selectionActions"
-                  >
-                    {{ action.title }}
-                  </a-menu-item>
-
-                </a-menu>
-              </template>
-              <a-button>
-                Hành động
-                <DownOutlined/>
-              </a-button>
-            </a-dropdown>
-
-            <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
-
-          </a-space>
         </div>
-        <div style="max-height:60vh;overflow:auto" class="mt-12 mb-12 grid grid-cols-3 lg:grid-cols-4  gap-4">
+        <div style="max-height:60vh;overflow:auto" class="mt-12 mb-12 grid grid-cols-4 lg:grid-cols-6  gap-4">
           <div v-for="file in inProgressFiles"
                class="cursor-pointer border-2 border-gray-100  hover:border-blue-700  h-[150px] mb-5  rounded-lg overflow:hidden">
             <a-progress type="circle" :percent="file.percent"/>
           </div>
           <div
-            v-class="fileDetail && fileDetail.id == image.id?'!border-blue-700':''"
-            @click="fileDetail = image" v-for="image in tableData.data" :key="image.id"
+            :class="selectedItems.indexOf(image)!=-1?'!border-blue-700':''"
+            @click="addSelectedFile(image)" v-for="image in tableData.data" :key="image.id"
             class=" cursor-pointer relative border-2 border-gray-100 hover:border-blue-700 h-[150px]  mb-[50px] rounded-lg overflow:hidden">
+            <a-button size="sm" v-if="selectedItems.indexOf(image)!=-1"
+                      style="position: absolute;right:2px;top:2px;background:white" type="primary" ghost>
+              <template #icon>
+                <CheckOutlined></CheckOutlined>
+              </template>
+            </a-button>
+
             <img
               v-if="isImageUrl(image.file_url)"
               style="max-width:auto;max-height:auto"
@@ -245,26 +259,21 @@ reload()
           </div>
         </div>
         <!--     <a-empty v-else/>-->
-        <br>
-        <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
-                      v-model:current="pagination.page"
-                      v-model:pageSize="pagination.perPage" :total="pagination.total">
-          <template #itemRender="{ type, originalElement }">
-            <a v-if="type === 'prev'">Previous</a>
-            <a v-else-if="type === 'next'">Next</a>
-            <component :is="originalElement" v-else></component>
-          </template>
-        </a-pagination>
+
+
       </div>
     </a-col>
-    <a-col v-if="fileDetail" :span="6">
-      <FileViewDetail :value="fileDetail"></FileViewDetail>
-      <a-divider></a-divider>
-      <a-space class="text-center w-full flex items-center">
-        <a-button @click="selectFile(fileDetail)" type="primary" :disabled="!fileDetail">Select this file</a-button>
-        <a-button @click="close">Cancel</a-button>
-      </a-space>
+    <a-col flex="300px" v-if="fileDetail">
+      <FileViewDetail v-if="fileDetail" :value="fileDetail"></FileViewDetail>
+
     </a-col>
+  </a-row>
+  <a-divider></a-divider>
+  <a-row align="center" class="mt-5">
+    <a-space>
+      <a-button @click="selectFile" type="primary" :disabled="!selectedItems.length">Select this file</a-button>
+      <a-button @click="close">Cancel</a-button>
+    </a-space>
   </a-row>
 </template>
 <style scoped>

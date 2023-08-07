@@ -61,7 +61,9 @@ import DataTable from "./DataTable.vue"
 import FileManager from "./Files/FileManager.vue"
 import FilePicker from "./Files/FilePicker.vue"
 import InputUpload from "./InputUpload.vue"
+import InputCopy from "./InputCopy.vue"
 export {
+  InputCopy,
   FilePicker,
   InputUpload,
   FileManager,

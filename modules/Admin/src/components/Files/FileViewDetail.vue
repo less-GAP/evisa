@@ -1,6 +1,6 @@
 <script setup>
 import {FileOutlined} from "@ant-design/icons-vue";
-import {InputUpload} from "@/components";
+import {InputUpload,InputCopy} from "@/components";
 import {watch, ref} from "vue";
 import Api from "@/utils/Api";
 
@@ -46,6 +46,9 @@ function isImageUrl(url) {
     <a-descriptions-item label="File type"><b>{{ value.file_ext }}</b></a-descriptions-item>
     <a-descriptions-item label="File size">
       <b>{{ $format.humanFileSize(value.file_size) }}</b>
+    </a-descriptions-item>
+    <a-descriptions-item label="File Url">
+      <InputCopy :value="value.file_url"></InputCopy>
     </a-descriptions-item>
     <a-descriptions-item label="">
       <a-button type="link" target="_blank" :download="value.file_name" :href="value.file_url">Download</a-button>

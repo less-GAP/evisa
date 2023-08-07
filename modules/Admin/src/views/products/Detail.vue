@@ -187,7 +187,7 @@
             <a-row :gutter="20">
               <a-col :span="24">
                 <a-form-item label="Hình ảnh">
-                  <InputUpload alt="" autocomplete="off" v-model:value="formState.image"></InputUpload>
+                  <InputUpload :multiple="true" alt="" autocomplete="off" v-model:value="formState.image"></InputUpload>
                 </a-form-item>
               </a-col>
               <a-col :span="12">
