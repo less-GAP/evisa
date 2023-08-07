@@ -17,91 +17,35 @@ const routes = [
   },
   {
     meta: {
-      title: "Đơn hàng",
+      title: "Kanban",
     },
-    path: "/orders",
-    name: "orders",
-    component: () => import("@/views/orders/index.vue"),
+    path: "/kanban",
+    name: "kanban",
+    component: () => import("@/views/kanban/index.vue"),
   },
   {
     meta: {
-      title: "Thông tin đơn hàng",
+      title: "Inbox",
     },
-    path: "/orders/:id",
-    name: "orders-detail",
-    component: () => import("@/views/orders/Detail.vue"),
+    path: "/inbox",
+    name: "inbox",
+    component: () => import("@/views/inbox/index.vue"),
   },
   {
     meta: {
-      title: "Sản phẩm",
+      title: "Visa Documents",
     },
-    path: "/products",
-    name: "products",
-    component: () => import("@/views/products/index.vue"),
+    path: "/visa-documents",
+    name: "visa-documents",
+    component: () => import("@/views/visa-documents/index.vue"),
   },
   {
     meta: {
-      title: "Thông tin sản phẩm",
+      title: "Pages",
     },
-    path: "/products/:id",
-    name: "product-detail",
-    component: () => import("@/views/products/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "List Videos",
-    },
-    path: "/videos",
-    name: "videos",
-    component: () => import("@/views/videos/index.vue"),
-  },
-  {
-    meta: {
-      title: "Video Detail",
-    },
-    path: "/videos/:id",
-    name: "video-detail",
-    component: () => import("@/views/videos/VideoView.vue"),
-  },
-  {
-    meta: {
-      title: "Series Video",
-    },
-    path: "/series",
-    name: "series",
-    component: () => import("@/views/series/index.vue"),
-  },
-  {
-    meta: {
-      title: "Series Detail",
-    },
-    path: "/series/:id",
-    name: "series-detail",
-    component: () => import("@/views/series/SeriesView.vue"),
-  },
-  {
-    meta: {
-      title: "Danh sách khách hàng",
-    },
-    path: "/customers",
-    name: "customers",
-    component: () => import("@/views/customers/index.vue"),
-  },
-  {
-    meta: {
-      title: "Nhóm khách hàng",
-    },
-    path: "/customer-group",
-    name: "customer-group",
-    component: () => import("@/views/customer-group/index.vue"),
-  },
-  {
-    meta: {
-      title: "Nhóm khách hàng",
-    },
-    path: "/customer-group/:id",
-    name: "customer-group-detail",
-    component: () => import("@/views/customer-group/Detail.vue"),
+    path: "/pages",
+    name: "pages",
+    component: () => import("@/views/visa-documents/index.vue"),
   },
   {
     meta: {
@@ -119,102 +63,9 @@ const routes = [
     name: "user-profile",
     component: () => import("@/views/users/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "File Manager",
-    },
-    path: "/files",
-    name: "files",
-    component: () => import("@/views/files/index.vue"),
-  },
-  {
-    meta: {
-      title: "Quốc gia",
-    },
-    path: "/countries",
-    name: "countries",
-    component: () => import("@/views/countries/index.vue"),
-  },
-  {
-    meta: {
-      title: "Thông tin quốc gia",
-    },
-    path: "/countries/:id",
-    name: "country-detail",
-    component: () => import("@/views/countries/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "Tỉnh/Thành phố",
-    },
-    path: "/provinces",
-    name: "provinces",
-    component: () => import("@/views/provinces/index.vue"),
-  },
-  {
-    meta: {
-      title: "Thông tin tỉnh/thành phố",
-    },
-    path: "/provinces/:id",
-    name: "provinces-detail",
-    component: () => import("@/views/provinces/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "Quận/huyện",
-    },
-    path: "/districts",
-    name: "districts",
-    component: () => import("@/views/districts/index.vue"),
-  },
-  {
-    meta: {
-      title: "Thông tin quận/huyện",
-    },
-    path: "/districts/:id",
-    name: "districts-detail",
-    component: () => import("@/views/districts/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "Phường/xã",
-    },
-    path: "/wards",
-    name: "wards",
-    component: () => import("@/views/wards/index.vue"),
-  },
-  {
-    meta: {
-      title: "Thông tin phường/xã",
-    },
-    path: "/wards/:id",
-    name: "wards-detail",
-    component: () => import("@/views/wards/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "Phương thức vận chuyển",
-    },
-    path: "/shipping-method",
-    name: "shipping-method",
-    component: () => import("@/views/shipping-method/index.vue"),
-  },
-  {
-    meta: {
-      title: "Phương thức vận chuyển",
-    },
-    path: "/shipping-method/:id",
-    name: "shipping-method-detail",
-    component: () => import("@/views/shipping-method/Detail.vue"),
-  },
-  {
-    meta: {
-      title: "Phương thức thanh toán",
-    },
-    path: "/payment-method",
-    name: "payment-method",
-    component: () => import("@/views/payment-method/index.vue"),
-  },
+
+
+
   {
     meta: {
       title: "Phương thức thanh toán",
