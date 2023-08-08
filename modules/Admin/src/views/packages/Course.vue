@@ -26,12 +26,13 @@
 
   const formState = ref({});
 
-  formState.value = props.value;
-
-  const dataSource = reactive(props.value.products || []);
+  const dataSource = ref([]);
 
   const isShowModal = ref(false);
 
+  formState.value = props.value;
+
+  dataSource.value = props.value.products;
 
 
   const close = () => {
@@ -81,8 +82,8 @@
 
   const selectProduct = (selectItem) => {
     var check = false;
-    if (dataSource.length > 0) {
-      dataSource.forEach((value) => {
+    if (dataSource.value.length > 0) {
+      dataSource.value.forEach((value) => {
         if (parseInt(value.id) == parseInt(selectItem.id)) {
           check = true;
         }
@@ -91,15 +92,15 @@
       check = false;
     }
     if (check == false) {
-      dataSource.push(selectItem);
+      dataSource.value.push(selectItem);
     }
     isShowModal.value = false;
   }
 
   const removeSelect = (item) => {
-    dataSource.forEach((value, index) => {
+    dataSource.value.forEach((value, index) => {
       if (parseInt(value.id) == parseInt(item.id)) {
-        dataSource.splice(index, 1);
+        dataSource.value.splice(index, 1);
       }
     });
     //console.log(dataSource.value);
@@ -109,7 +110,7 @@
     formRef.value
       .validate()
       .then(() => {
-        formState.value.packages = dataSource;
+        formState.value.packages = dataSource.value;
         emit('submit', formState.value);
       }).catch(error => {
       console.log(error);
@@ -120,8 +121,9 @@
     });
   };
 
-  watch(()=>props.value, async () => {
-    formState.value = props.value
+  watch(() => props.value, async () => {
+    formState.value = props.value;
+    dataSource.value = props.value.products;
   })
 
 </script>
