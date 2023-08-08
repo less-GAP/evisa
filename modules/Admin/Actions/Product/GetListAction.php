@@ -7,17 +7,13 @@ namespace Modules\Admin\Actions\Product;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class GetProductListAction
+class GetListAction
 {
     public function handle(Request $request)
     {
-        $query = Product::query();
+        $query = Product::where('type','product');
         if ($search = $request->input('search')) {
             $query->where('name', 'like', '%' . $search . '%');
-        }
-
-        if ($request->input('type')) {
-            $query->where('type', $request->input('type'));
         }
 
         return $query->with('images')->paginate($request->input('perPage', 15));

@@ -35,7 +35,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
             ]
-        )->routes(function(){
+        )->routes(function () {
             Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');
             Route::post('/Info', \Modules\Admin\Actions\File\PostInfoAction::class . '@handle');
         });
@@ -54,11 +54,25 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedIncludes' => ['images']
             ]
         )->routes(function () {
-            Route::get('list', \Modules\Admin\Actions\Product\GetProductListAction::class . '@handle');
+            Route::get('list', \Modules\Admin\Actions\Product\GetListAction::class . '@handle');
             Route::get('{id}', \Modules\Admin\Actions\Product\GetDetailAction::class . '@handle');
             Route::post('', \Modules\Admin\Actions\Product\PostAction::class . '@handle');
             Route::post('uploadImage', \Modules\Admin\Actions\Product\PostUploadImageAction::class . '@handle');
             Route::post('activeList', \Modules\Admin\Actions\Product\PostActiveListAction::class . '@handle');
+        });
+
+    EloquentRouter::prefix('package')
+        ->handle(\App\Models\Product::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')],
+                'allowedIncludes' => ['images']
+            ]
+        )->routes(function () {
+            Route::get('list', \Modules\Admin\Actions\Package\GetListAction::class . '@handle');
+            Route::get('{id}', \Modules\Admin\Actions\Package\GetDetailAction::class . '@handle');
+            Route::post('', \Modules\Admin\Actions\Package\PostAction::class . '@handle');
+            Route::post('uploadImage', \Modules\Admin\Actions\Package\PostUploadImageAction::class . '@handle');
+            Route::post('activeList', \Modules\Admin\Actions\Package\PostActiveListAction::class . '@handle');
         });
 
 

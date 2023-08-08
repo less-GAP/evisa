@@ -32,6 +32,10 @@
 
   import type {UploadProps} from 'ant-design-vue';
 
+  import ProductList from "./ProductList.vue";
+
+  import Course from "./Course.vue";
+
   import InputUploadGetPath from "../../components/InputUploadGetPath.vue";
 
   const mainStore = useMainStore();
@@ -43,21 +47,29 @@
   const formRef = ref();
 
   const formState = ref({
-    type: 'product'
+    type: 'package',
   });
 
-  const fileList = ref<UploadProps['fileList']>([]);
+  const packages = ref([]);
 
   const dataSource = ref([]);
 
-  const isShowModal = ref(false)
+  const isShowModal = ref(false);
+
+  const isShowCourse = ref(false);
+
+  const courseData = ref({});
 
   const fetch = function () {
     loading.value = true;
     var id = router.currentRoute.value.params.id;
     if (id > 0) {
-      Api.get('product/' + id).then(rs => {
-        formState.value = rs.data.data;
+      Api.get('package/' + id).then(rs => {
+        var product = rs.data.data;
+        formState.value = product;
+        if (product.packages) {
+          dataSource.value = product.packages;
+        }
         loading.value = false
       });
     } else {
@@ -70,17 +82,15 @@
     formRef.value
       .validate()
       .then(() => {
-        if (formState.value.type == 'package') {
-          formState.value.packages = dataSource.value;
-        }
-        Api.post('product', toRaw(formState.value)).then(rs => {
+        formState.value.packages = dataSource.value;
+        Api.post('package', toRaw(formState.value)).then(rs => {
           notification[rs.data.code == 0 ? 'error' : 'success']({
             message: 'Thông báo',
             description: rs.data.message,
           });
 
           if (rs.data.code == 1) {
-            router.push('/products');
+            router.push('/packages');
           }
         });
       })
@@ -93,7 +103,7 @@
   };
 
   const back = () => {
-    router.push('/products');
+    router.push('/packages');
   };
 
 
@@ -102,24 +112,18 @@
       title: 'Hình ảnh',
       dataIndex: 'image',
       key: 'image',
-      class: 'text-left'
+      align: 'left'
     },
     {
-      title: 'Tên sản phẩm',
+      title: 'Tên lộ trình',
       dataIndex: 'name',
       key: 'name',
-      align: 'right'
-    },
-    {
-      title: 'Giá niêm yết',
-      dataIndex: 'price',
-      key: 'price',
-      align: 'right'
+      align: 'left'
     },
     {
       title: 'Giá bán',
-      dataIndex: 'sale_price',
-      key: 'sale_price',
+      dataIndex: 'price',
+      key: 'price',
       align: 'right'
     },
     {
@@ -129,44 +133,57 @@
       align: 'right'
     },
     {
+      title: 'Mô tả',
+      dataIndex: 'short_description',
+      key: 'short_description',
+      align: 'left',
+      width: '300px'
+    },
+    {
       title: 'Hành động',
       key: 'action',
-
     },
   ]);
-
-  const tabActive = (val) => {
-    if (val == 2) { //load danh sach san pham
-
-    }
-  };
 
   const handleAdd = () => {
     isShowModal.value = true;
   };
 
-  const selectProduct = (selectItem) => {
-    //console.log(selectItem);
+  const addCourse = (item) => {
+    courseData.value = item;
+    isShowCourse.value = true;
+  };
+
+  const submitCourse = (courseData) => {
+    var check = false;
     if (dataSource.value.length > 0) {
-      dataSource.value.forEach((value, index) => {
-        if (value.id != selectItem.id) {
-          dataSource.value.push(selectItem);
+      dataSource.value.forEach((value) => {
+        if (parseInt(value.id) == parseInt(courseData.id)) {
+          check = true;
         }
       });
     } else {
-      dataSource.value.push(selectItem);
+      check = false;
     }
-    isShowModal.value = false;
+    if (check == false) {
+      dataSource.value.push(courseData);
+    }
+    isShowCourse.value = false;
   }
 
-  const removeSelect = (item) => {
+
+  const removeCourse = (item) => {
     dataSource.value.forEach((value, index) => {
       if (value.id == item.id) {
         dataSource.value.splice(index, 1);
       }
     });
-    //console.log(dataSource.value);
   }
+
+  const closeCourse = () => {
+    isShowCourse.value = false;
+  }
+
 </script>
 
 <template>
@@ -191,47 +208,11 @@
               </a-col>
 
               <a-col :span="24">
-                <a-form-item label="Tên sản phẩm"
+                <a-form-item label="Tên gói sản phẩm"
                              name="name"
-                             :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
+                             :rules="[{ required: true, message: 'Vui lòng nhập tên gói sản phẩm!' }]"
                 >
                   <a-input v-model:value="formState.name" placeholder="Nhập.." class="text-xs"/>
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item label="Giá bán"
-                             name="sale_price"
-                             :rules="[{ required: true, message: 'Vui lòng nhập giá bán sản phẩm!' }]"
-                >
-                  <a-input-number v-model:value="formState.sale_price" placeholder="Nhập.." class="text-xs"
-                                  style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item label="Giá niêm yết">
-                  <a-input-number v-model:value="formState.price" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item label="Điểm thưởng">
-                  <a-input-number v-model:value="formState.point" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item label="Tồn kho">
-                  <a-input-number v-model:value="formState.stock" placeholder="Nhập.." class="text-xs" style="width: 100%"
-                                  :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-                                  :parser="value => value.replace(/\$\s?|(,*)/g, '')"
-                  />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
@@ -258,6 +239,51 @@
               </a-col>
             </a-row>
           </a-tab-pane>
+          <a-tab-pane key="2" tab="Lộ trình">
+            <a-row :gutter="20">
+              <a-col :span="24">
+                <a-button type="primary" style="margin-bottom: 8px" @click="addCourse({})" class="float-right" ghost>Thêm</a-button>
+                <a-table :dataSource="dataSource" :columns="columns" v-if="dataSource.length > 0" :pagination="false" style="width: 100%">
+                  <template #bodyCell="{ column, record }">
+                    <template v-if="column.key === 'image'">
+                      <img class="w-20 h-auto float-left rounded-full" :src="record.image_url"
+                           :alt="record.name"/>
+                    </template>
+                    <template v-if="column.key === 'price'">
+                      {{$format.formatMoney(record.price)}}
+                    </template>
+                    <template v-if="column.key === 'sale_price'">
+                      {{$format.formatMoney(record.sale_price)}}
+                    </template>
+                    <template v-if="column.key === 'point'">
+                      {{$format.formatNumber(record.point)}}
+                    </template>
+                    <template v-else-if="column.key === 'action'">
+                      <a-button
+                        type="link"
+                        @click="addCourse(record)"
+                      >
+                        Cập nhật
+                      </a-button>
+                      <a-popconfirm
+                        title="Bạn muốn xóa lộ trình này?"
+                        ok-text="Yes"
+                        cancel-text="No"
+                        @confirm="removeCourse(record)"
+                      >
+                        <a-button
+                          type="text"
+                          danger
+                        >
+                          Xoá
+                        </a-button>
+                      </a-popconfirm>
+                    </template>
+                  </template>
+                </a-table>
+              </a-col>
+            </a-row>
+          </a-tab-pane>
           <a-tab-pane key="3" tab="Thông tin thêm">
             <a-row :gutter="20">
               <a-col :span="24">
@@ -277,13 +303,21 @@
             </a-row>
           </a-tab-pane>
         </a-tabs>
-        <a-space align="center" :loading="loading">
+        <a-space align="center" :loading="loading" class="mt-5">
           <a-button type="primary" html-type="submit">Lưu</a-button>
           <a-button type="primary" ghost @click="back()">Trở về</a-button>
         </a-space>
       </a-form>
     </SectionMain>
   </LayoutAuthenticated>
+
+  <a-modal v-model:open="isShowModal" width="70%" title="Danh sách sản phẩm" :footer="null">
+    <ProductList @submit="selectProduct"></ProductList>
+  </a-modal>
+
+  <a-drawer v-model:open="isShowCourse" width="70%" title="Chi tiết lộ trình" :footer="null" placement="right">
+    <Course @submit="submitCourse" @close="closeCourse" :value="courseData"></Course>
+  </a-drawer>
 </template>
 
 <style>

@@ -15,20 +15,9 @@ class GetDetailAction
     {
         $product = [];
         $id = $request->route('id');
-        if($id > 0){
-            $product = Product::where('id',$id)->first();
-            if($product->type == 'package'){
-                $packages = ProductPackage::where('package_id',$id)->select('product_descr')->get();
-                if(!empty($packages)){
-                    $pas = [];
-                    foreach ($packages as $k => $v){
-                        $pas[] = $v->product_descr;
-                    }
-                    $product->packages = $pas;
-                }
-            }
+        if ($id > 0) {
+            $product = Product::where('id', $id)->first();
         }
-
         return [
             'code' => 1,
             'message' => 'Thành công !',

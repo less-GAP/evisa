@@ -5,9 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\PackageCourse;
 
-class Product extends Model
+class PackageCourse extends Model
 {
 
     /**
@@ -17,25 +16,19 @@ class Product extends Model
      */
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'package_course';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'image',
+        'product_id',
         'name',
-        'type',
-        'slug',
-        'short_description',
-        'description',
+        'time',
         'price',
-        'sale_price',
         'point',
-        'status',
-        'title',
-        'meta_description',
-        'meta_keyword',
-        'stock'
+        'stock',
+        'short_description',
     ];
 
     /**
@@ -54,33 +47,19 @@ class Product extends Model
      * @var array<string, string>
      */
     protected $casts = [
-//        'email_verified_at' => 'datetime',
-//        'password' => 'hashed',
+        //'product_descr' => 'array',
     ];
 
     protected $appends = [
-        'image_url',
-        'packages',
+        'image_url'
     ];
 
     public function getImageUrlAttribute()
     {
+
         if ($this->image != '') {
             return url($this->image, '', env('APP_ENV') == 'local' ? false : true);
         }
         return '';
-    }
-
-    public function getPackagesAttribute()
-    {
-        if ($this->type == 'package') {
-            return PackageCourse::where('product_id',$this->id)->get();
-        }
-        return '';
-    }
-
-    public function images()
-    {
-        return $this->belongsToMany(File::class, 'product_images', 'product_id', 'file_id');
     }
 }

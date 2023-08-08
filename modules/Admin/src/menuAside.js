@@ -24,9 +24,19 @@ export default [
     icon: mdiCartOutline,
   },
   {
-    to: "/products",
+
     label: "Sản phẩm",
     icon: mdiArchiveOutline,
+    menu: [
+      {
+        to: "/products",
+        label: "Danh sách sản phẩm",
+      },
+      {
+        to: "/packages",
+        label: "Gói sản phẩm",
+      },
+    ],
   },
 
   {
@@ -129,7 +139,7 @@ export default [
     label: "Vận chuyển",
     icon: mdiCarOutline,
     to: "/shipping-method",
-  },{
+  }, {
     label: "Thanh toán",
     icon: mdiCreditCardOutline,
     to: "/payment-method",
@@ -147,7 +157,7 @@ export default [
       {
         to: "/email/templates",
         label: "Email",
-      } ,
+      },
       {
         to: "/invoice/templates",
         label: "Invoice",

@@ -49,6 +49,22 @@ const routes = [
   },
   {
     meta: {
+      title: "Gói sản phẩm",
+    },
+    path: "/packages",
+    name: "packages",
+    component: () => import("@/views/packages/index.vue"),
+  },
+  {
+    meta: {
+      title: "Thông tin gói sản phẩm",
+    },
+    path: "/packages/:id",
+    name: "package-detail",
+    component: () => import("@/views/packages/Detail.vue"),
+  },
+  {
+    meta: {
       title: "List Videos",
     },
     path: "/videos",
