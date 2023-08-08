@@ -17,7 +17,7 @@ services:
         user: ${MY_UID}:${MY_GID}
         container_name: evisa
         depends_on:
-            - app
+            - evisa_app
         volumes:
             - ./public:/var/www/public
             - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
