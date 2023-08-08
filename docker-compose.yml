@@ -6,7 +6,7 @@ services:
         container_name: evisa_app
         working_dir: /var/www
         user: ${MY_UID}:${MY_GID}
-        command: 'bash -c "composer install && php artisan octane:start  --server=swoole --host=0.0.0.0 --port=8002"'
+        command: 'bash -c "php artisan octane:start  --server=swoole --host=0.0.0.0 --port=8002"'
         volumes:
             - ./:/var/www
             - ./database.sqlite:/var/www/database.sqlite
