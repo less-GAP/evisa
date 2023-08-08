@@ -64,7 +64,7 @@
       result.push({
         title: 'Hành động',
         key: 'action',
-        width: 150,
+        width: 200,
         dataIndex: 'action'
       })
     }
