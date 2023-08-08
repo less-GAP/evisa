@@ -10,9 +10,12 @@ services:
             - ./:/var/www
             - ./database.sqlite:/var/www/database.sqlite
             - ./public/index.php:/var/www/public/index.php
+        networks:
+            - apisix
     nginx:
         build: ./docker/nginx
         user: ${MY_UID}:${MY_GID}
+        container_name: evisa
         depends_on:
             - app
         volumes:
@@ -25,7 +28,12 @@ services:
             NGINX_PAGESPEED_IMG: 1
             NGINX_PAGESPEED_JS: 1
             NGINX_PAGESPEED_CSS: 1
-        ports:
-            - ${APP_PORT}:9100
         restart: on-failure
+        networks:
+            - apisix
+networks:
+    apisix:
+        external: true
+
+
 
