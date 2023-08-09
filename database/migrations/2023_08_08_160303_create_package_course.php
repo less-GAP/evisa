@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('point')->nullable();
             $table->integer('stock')->nullable();
             $table->text('short_description')->nullable();
+            
             $table->timestamps();
         });
     }

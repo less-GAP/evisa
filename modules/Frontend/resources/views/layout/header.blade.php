@@ -1,10 +1,15 @@
+@php
+    use App\Models\Product;
+      $query = Product::where('type', 'package')->where('status', 'A');
+      $menus = $query->get()->toArray();
+@endphp
 <header id="header-main" class="fixed top-0 left-0 z-40 w-full bg-white">
     <x-splade-toggle>
         <div class="py-4 header-inner">
             <div class="xl:px-[100px] px-5 md:px-10">
                 <div class="flex items-center">
                     <div class="logo w-[80px] md:w-[100px] xl:w-[180px]" id="logo">
-                        <a  href="/">
+                        <a href="/">
                             <img
                                 src="/data/img/logo.png?ver=1" alt="logo"/>
                         </a>
@@ -27,7 +32,7 @@
              class="navigation-main  side-nav fixed z-50 right-0 top-0 w-full md:w-[635px] h-full bg-black text-white flex flex-col justify-between">
             <div
                 class="flex justify-end px-10 py-5 nav-top lg:px-24 h-[63px] md:h-[71px] xl:h-[103px] border-b border-white border-solid">
-                <button @click.prevent="toggle"  id="close-menu" class="ml-8 w-[26px] md:w-auto">
+                <button @click.prevent="toggle" id="close-menu" class="ml-8 w-[26px] md:w-auto">
                     <svg width="41" height="32" viewBox="0 0 41 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="7.41895" width="41" height="4" rx="2" transform="rotate(45 7.41895 0)" fill="white"/>
                         <rect x="4.58984" y="29" width="41" height="4" rx="2" transform="rotate(-45 4.58984 29)"
@@ -50,10 +55,12 @@
                             </span>
                         </a>
                     </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/detox-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Detox Package</span>
-                            <span class="ml-auto">
+                    @if(!empty($menus))
+                        @foreach($menus as $me)
+                            <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
+                                <a href="{{url('product/'.$me['slug'])}}" class="h-[40px] xl:h-[60px] flex items-center">
+                                    <span class="mr-2 txt">{{$me['name']}}</span>
+                                    <span class="ml-auto">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -61,48 +68,50 @@
                                           fill="#BFBCB9"/>
                                 </svg>
                             </span>
-                        </a>
-                    </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Recovery Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/transformation-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Transformation Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/revitalization-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Revitalization Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
-                    </li>
-                    <!-- <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
+                                </a>
+                            </li>
+                    @endforeach
+                @endif
+                {{--                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">--}}
+                {{--                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">--}}
+                {{--                            <span class="mr-2 txt">Recovery Package</span>--}}
+                {{--                            <span class="ml-auto">--}}
+                {{--                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"--}}
+                {{--                                     xmlns="http://www.w3.org/2000/svg">--}}
+                {{--                                    <path fill-rule="evenodd" clip-rule="evenodd"--}}
+                {{--                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"--}}
+                {{--                                          fill="#BFBCB9"/>--}}
+                {{--                                </svg>--}}
+                {{--                            </span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">--}}
+                {{--                        <a href="/product/transformation-package" class="h-[40px] xl:h-[60px] flex items-center">--}}
+                {{--                            <span class="mr-2 txt">Transformation Package</span>--}}
+                {{--                            <span class="ml-auto">--}}
+                {{--                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"--}}
+                {{--                                     xmlns="http://www.w3.org/2000/svg">--}}
+                {{--                                    <path fill-rule="evenodd" clip-rule="evenodd"--}}
+                {{--                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"--}}
+                {{--                                          fill="#BFBCB9"/>--}}
+                {{--                                </svg>--}}
+                {{--                            </span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">--}}
+                {{--                        <a href="/product/revitalization-package" class="h-[40px] xl:h-[60px] flex items-center">--}}
+                {{--                            <span class="mr-2 txt">Revitalization Package</span>--}}
+                {{--                            <span class="ml-auto">--}}
+                {{--                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"--}}
+                {{--                                     xmlns="http://www.w3.org/2000/svg">--}}
+                {{--                                    <path fill-rule="evenodd" clip-rule="evenodd"--}}
+                {{--                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"--}}
+                {{--                                          fill="#BFBCB9"/>--}}
+                {{--                                </svg>--}}
+                {{--                            </span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                <!-- <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
                         <a href="/about-us/" class="h-[40px] xl:h-[60px] flex items-center">
                             <span class="mr-2 txt">About us</span>
                             <span class="ml-auto">

@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\TestFormAction;
+use Modules\Frontend\Actions\HomeAction;
 
 
 Route::middleware(['splade'])->group(function () {
-    Route::get('/', TestFormAction::class.'@handle')->name('home');
-    Route::get('/product/{slug}/', PackageDetailPage::class.'@handle')->name('product');
-    Route::get('/docs', fn () => view('docs'))->name('docs');
+    Route::get('/', HomeAction::class . '@handle')->name('home');
+    Route::get('/product/{slug}', PackageDetailPage::class . '@handle')->name('product');
+    Route::get('/docs', fn() => view('docs'))->name('docs');
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();

@@ -46,14 +46,16 @@ class PackageCourseProduct extends Model
     ];
 
     protected $appends = [
-        //'image_url'
+        'product_detail'
     ];
 
-//    public function getImageUrlAttribute()
-//    {
-//        if ($this->image != '') {
-//            return url('upload/' . $this->image, '', env('APP_ENV') == 'local' ? false : true);
-//        }
-//        return '';
-//    }
+    public function getProductDetailAttribute()
+    {
+        $product = Product::where('id', $this->product_id)->first()->toArray();
+        if (!empty($product)) {
+            return $product;
+        } else {
+            return $this->product_descr;
+        }
+    }
 }
