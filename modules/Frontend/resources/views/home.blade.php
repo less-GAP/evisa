@@ -1,7 +1,7 @@
 @extends("Frontend::layout.index")
 @section('content')
     @if(!empty($packages))
-        @foreach($packages as $package)
+        @foreach($packages as $pa => $package)
             <section id="section-package-{{$package['id']}}" class="product_packages" style="background: {{$package['background']}}">
                 <div class="container relative py-12 lg:py-16">
                     <div class="items-center row">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div
-                        class="absolute hidden translate-x-1/2 -translate-y-1/2 pointer-events-none model right-full top-1/2 w-max xl:block"
+                        class="absolute hidden translate-x-1/2 -translate-y-1/2 pointer-events-none model @if($pa%2 == 0) right-full @else left-full @endif top-1/2 w-max xl:block"
                         id="model-1">
                         <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
                     </div>
