@@ -1,5 +1,6 @@
-/*:root {*/
-/*  --text-primary: #444A6D;*/
+:root {
+  --text-primary: #444A6D;
+}
 /*  --text-light: #fff;*/
 /*  --border-heading: #3333333a;*/
 /*  --button-primary: #F2F2F2;*/
@@ -508,11 +509,11 @@ body h3 {
   /* color of the scrollbar handle */
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-primary);
-  /* color of the scrollbar handle on hover */
-}
+/*!* Handle on hover *!*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*  background: var(--text-primary);*/
+/*  !* color of the scrollbar handle on hover *!*/
+/*}*/
 
 /* Track */
 ::-webkit-scrollbar-track {

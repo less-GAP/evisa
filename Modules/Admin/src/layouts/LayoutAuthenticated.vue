@@ -77,21 +77,17 @@ const menuClick = (event, item) => {
 </script>
 
 <template>
-  <Header></Header>
-  <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-    <Sidebar></Sidebar>
+  <Header class="bg-dark" :style="{height:$style.theme.headerHeight}"></Header>
+  <div :style="{'height':'calc(100vh - '+$style.theme.headerHeight+')'}"
+       class="overflow-hidden flex relative w-full bg-gray-50 dark:bg-gray-900">
+    <Sidebar :style="{width:$style.theme.sidebarWidth}" class="h-full  d-inline"></Sidebar>
 
-    <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+    <main
+          class="relative p-5 bg-white flex-1 w-full h-full h-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
+      <slot/>
 
-    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-      <main>
-        <div class="px-4 pt-6">
-          <slot/>
-        </div>
-      </main>
-      <Footer></Footer>
-
-    </div>
+    </main>
+    <Footer></Footer>
 
   </div>
 

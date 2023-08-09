@@ -4,6 +4,10 @@ import { darkModeKey, styleKey } from "@/config";
 import Format from "@/utils/Format";
 export const useStyleStore = defineStore("style", {
   state: () => ({
+    theme:{
+      headerHeight:'64px',
+      sidebarWidth:'255px'
+    },
     format:{
       'created_at':Format.formatDateTime
       ,'updated_at':Format.formatDateTime

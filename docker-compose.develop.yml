@@ -10,7 +10,7 @@ services:
     environment:
       - "USER=${USER}"
     volumes:
-      - ./modules/Admin:/var/www
+      - ./Modules/Admin:/var/www
     ports:
       - 9200:9200
   #    frontend_dev:
@@ -37,7 +37,7 @@ services:
       - "USER=${USER}"
     volumes:
       - ./:/var/www
-      - ./modules/Frontend/public:/var/www/public
+      - ./Modules/Frontend/public:/var/www/public
       - ./public/index.php:/var/www/public/index.php
       - ./public/build:/var/www/public/build
       - ./storage/upload:/var/www/public/upload

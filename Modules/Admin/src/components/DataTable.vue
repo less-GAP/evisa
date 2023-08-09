@@ -1,137 +1,136 @@
 <script setup>
-  import {computed, ref, h, toRaw} from "vue";
-  import {useMainStore} from "@/stores/main";
-  import {mdiEye, mdiTrashCan} from "@mdi/js";
-  import {Button, Input, InputUpload} from "@/components/index";
-  import BaseIcon from "@/components/BaseIcon.vue";
-  import {DownOutlined, ReloadOutlined} from "@ant-design/icons-vue";
+import {computed, ref, h, toRaw} from "vue";
+import {useMainStore} from "@/stores/main";
+import {mdiEye, mdiTrashCan} from "@mdi/js";
+import {Button, Input, InputUpload} from "@/components/index";
+import BaseIcon from "@/components/BaseIcon.vue";
+import {DownOutlined, ReloadOutlined} from "@ant-design/icons-vue";
 
-  const props = defineProps({
-    tableConfig: {
-      type: Object,
-      default: {}
-    },
-    pagination: {
-      type: Object,
-      default: {
-        page: 1,
-        total: 0,
-        perPage: 10
-      }
-    },
-    showSizeChanger: {
-      type: Boolean,
-      default: true
-    },
-    params: {
-      type: Object,
-      default: {}
-    },
-    columns: Array,
-    selectionActions: {
-      type: Array,
-      default: []
-    },
-    itemActions: {
-      type: Array,
-      default: []
-    },
-    api: Function,
-    addAction: Function,
-  });
-  const tableConfig = {
-    item_key: 'id'
-    , rowSelect: true
-    , globalSearch: true
-    , ...props.tableConfig
-  }
-  const tableData = ref({})
-  const search = ref('')
-
-  function reset() {
-    props.pagination.page = 1
-    reload()
-  }
-
-  const tableColumns = computed(() => {
-    const result = props.columns.map(item => {
-      return {
-        dataIndex: item.dataIndex ? item.dataIndex : item.key,
-        ...item
-      }
-    })
-    if (props.itemActions.length) {
-      result.push({
-        title: 'Hành động',
-        key: 'action',
-        width: 200,
-        dataIndex: 'action'
-      })
+const props = defineProps({
+  tableConfig: {
+    type: Object,
+    default: {}
+  },
+  pagination: {
+    type: Object,
+    default: {
+      page: 1,
+      total: 0,
+      perPage: 10
     }
-    return result;
-  })
+  },
+  showSizeChanger: {
+    type: Boolean,
+    default: true
+  },
+  params: {
+    type: Object,
+    default: {}
+  },
+  columns: Array,
+  selectionActions: {
+    type: Array,
+    default: []
+  },
+  itemActions: {
+    type: Array,
+    default: []
+  },
+  api: Function,
+  addAction: Function,
+});
+const tableConfig = {
+  item_key: 'id'
+  , rowSelect: true
+  , globalSearch: true
+  , ...props.tableConfig
+}
+const tableData = ref({})
+const search = ref('')
 
-  function reload() {
-    if (props.api) {
-      loading.value = true
-      props.api({
-        perPage: props.pagination.perPage,
-        page: props.pagination.page, ...props.params,
-        "filter[search]": search.value
-      }).then(rs => {
-        tableData.value = rs.data
-        props.pagination.total = rs.data?.total ? rs.data.total : 0
-      }).finally(() => {
-        checkAll.value = false
-        loading.value = false
-      })
-    }
-  }
-
-  const loading = ref(false);
-  const checkAll = ref(false);
-  const selectedKeys = ref([])
-  const selectedItems = ref([])
-
-  async function doSelectionAction(action) {
-    const selectedKeys = selectedItems.value.map(item => item[tableConfig.item_key])
-    await (action.action(selectedKeys, selectedItems.value))
-    if (action.complete) {
-      action.complete()
-    }
-    selectedItems.value = []
-    reload()
-  }
-
-  function toggleCheckAll() {
-    if (checkAll.value) {
-      selectedItems.value = toRaw(tableData?.value.data || [])
-    } else {
-      selectedItems.value = []
-    }
-  }
-
-  const rowSelection = computed(() => {
-    if (!props.selectionActions || !props.selectionActions.length) {
-      return false;
-    }
-    return {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      },
-      getCheckboxProps: (record) => ({
-        disabled: record.name === 'Disabled User', // Column configuration not to be checked
-        name: record.name,
-      }),
-    };
-  })
+function reset() {
+  props.pagination.page = 1
   reload()
+}
+
+const tableColumns = computed(() => {
+  const result = props.columns.map(item => {
+    return {
+      dataIndex: item.dataIndex ? item.dataIndex : item.key,
+      ...item
+    }
+  })
+  if (props.itemActions.length) {
+    result.push({
+      title: 'Hành động',
+      key: 'action',
+      width: 200,
+      dataIndex: 'action'
+    })
+  }
+  return result;
+})
+
+function reload() {
+  if (props.api) {
+    loading.value = true
+    props.api({
+      perPage: props.pagination.perPage,
+      page: props.pagination.page, ...props.params,
+      "filter[search]": search.value
+    }).then(rs => {
+      tableData.value = rs.data
+      props.pagination.total = rs.data?.total ? rs.data.total : 0
+    }).finally(() => {
+      checkAll.value = false
+      loading.value = false
+    })
+  }
+}
+
+const loading = ref(false);
+const checkAll = ref(false);
+const selectedKeys = ref([])
+const selectedItems = ref([])
+
+async function doSelectionAction(action) {
+  const selectedKeys = selectedItems.value.map(item => item[tableConfig.item_key])
+  await (action.action(selectedKeys, selectedItems.value))
+  if (action.complete) {
+    action.complete()
+  }
+  selectedItems.value = []
+  reload()
+}
+
+function toggleCheckAll() {
+  if (checkAll.value) {
+    selectedItems.value = toRaw(tableData?.value.data || [])
+  } else {
+    selectedItems.value = []
+  }
+}
+
+const rowSelection = computed(() => {
+  if (!props.selectionActions || !props.selectionActions.length) {
+    return false;
+  }
+  return {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: (record) => ({
+      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
+})
+reload()
 </script>
 
 <template>
-  <div class="relative text-center overflow-x-auto sm:rounded-lg">
-
-    <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
+  <div class="flex flex-col text-center h-full sm:rounded-lg">
+    <div :loading="loading" class="flex items-center pb-2 justify-between  bg-white dark:bg-gray-800">
       <a-space>
 
         <a-input
@@ -174,31 +173,74 @@
 
       </a-space>
     </div>
-    <a-table v-bind="tableConfig" :row-selection="rowSelection" class="mt-12" v-if="tableData.data?.length" :pagination="false"
-             :data-source="tableData.data" :columns="tableColumns">
-      <template #bodyCell="{ text ,record, column }">
-        <slot :name="'cell['+column.key+']'" v-bind="{item:record,column,index}">
-          {{ $style['format'][column.key] ? $style['format'][column.key](record[column.key]) : record[column.key] }}
-        </slot>
-        <template v-if="column.key == 'action'" fixed="right">
-          <template v-for="itemAction in itemActions">
-            <slot :name="'cellAction['+itemAction.key+']'"
-                  v-bind="{item:record ,itemAction, actionMethod(){itemAction.action(record,reload)}}">
-              <a-button
-                @click="itemAction.action(record,reload)"
-                :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
-                type="link"
-              >
-                {{ itemAction.label }}
-              </a-button>
+
+    <div class="overflow-auto scroll-smooth flex-1 w-full h-full">
+      <table v-if="tableData.data?.length" class="table-auto w-full mt-5">
+        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+        <tr>
+          <th v-if="selectionActions.length > 0" scope="col" class="p-2 whitespace-nowrap">
+            <label
+              class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
+              @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
+              class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            </label>
+          </th>
+
+          <th v-for="column in columns" scope="col" class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">
+              {{ __(column.title) }}
+            </div>
+          </th>
+
+          <th v-if="itemActions.length" scope="col" class="p-2 whitespace-nowrap">
+            {{ __('Action') }}
+
+          </th>
+        </tr>
+        </thead>
+        <tbody class="text-sm divide-y divide-gray-100">
+        <tr v-for="(item,index) in tableData.data" :key="item[tableConfig.item_key]"
+            v-bind:class="{'border-b':(index%2===0)}">
+          <td v-if="tableConfig.rowSelect" class="p-2 whitespace-nowrap">
+            <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
+                   class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
+              v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
+              class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            </label>
+          </td>
+
+          <td v-for="column in columns"
+              :class="'p-2 whitespace-nowrap' + (column.class ? column.class : '')">
+            <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+              {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
             </slot>
-          </template>
-        </template>
-      </template>
-    </a-table>
-    <a-empty v-else/>
-    <br>
-    <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
+
+          </td>
+          <td v-if="itemActions.length" class="p-2 whitespace-nowrap">
+            <!-- Modal toggle -->
+            <template v-for="itemAction in itemActions">
+              <slot :name="'cellAction['+itemAction.key+']'"
+                    v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
+                <a-button
+                  @click="itemAction.action(item,reload)"
+                  :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                  type="link"
+                >
+                  {{ itemAction.label }}
+                </a-button>
+
+              </slot>
+            </template>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <a-empty v-else/>
+      <br>
+    </div>
+
+    <a-pagination style="height:40px" class="pt-2" v-if="pagination?.total" :showSizeChanger="showSizeChanger"
+                  @change="reload"
                   v-model:current="pagination.page"
                   v-model:pageSize="pagination.perPage" :total="pagination.total">
       <template #itemRender="{ type, originalElement }">
@@ -277,7 +319,7 @@
   </div>
 </template>
 <style scoped>
-  .item-actions > :not(:first-child) {
-    margin-left: 10px
-  }
+.item-actions > :not(:first-child) {
+  margin-left: 10px
+}
 </style>
