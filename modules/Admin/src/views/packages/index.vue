@@ -209,5 +209,4 @@
       </DataTable>
     </SectionMain>
   </LayoutAuthenticated>
-
 </template>
