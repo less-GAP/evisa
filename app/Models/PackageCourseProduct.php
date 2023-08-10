@@ -51,11 +51,15 @@ class PackageCourseProduct extends Model
 
     public function getProductDetailAttribute()
     {
-        $product = Product::where('id', $this->product_id)->first()->toArray();
-        if (!empty($product)) {
-            return $product;
+        if ($this->product_id != '') {
+            $product = Product::where('id', $this->product_id)->first()->toArray();
+            if (!empty($product)) {
+                return $product;
+            } else {
+                return $this->product_descr;
+            }
         } else {
-            return $this->product_descr;
+            return '';
         }
     }
 }

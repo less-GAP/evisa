@@ -226,6 +226,25 @@
                   </a-select>
                 </a-form-item>
               </a-col>
+              <a-col :span="8">
+                <a-form-item label="Vị trí trang chủ"
+                             name="position"
+                             :rules="[{ required: true, message: 'Vui lòng chọn vị trí!' }]"
+                >
+                  <a-select v-model:value="formState.position" placeholder="">
+                    <a-select-option value="left">Trái</a-select-option>
+                    <a-select-option value="right">Phải</a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :span="8">
+                <a-form-item label="Màu nền"
+                             name="background"
+                             :rules="[{ required: true, message: 'Vui lòng nhập màu nền!' }]"
+                >
+                  <a-input v-model:value="formState.background" placeholder="Nhập.." class="text-xs"/>
+                </a-form-item>
+              </a-col>
               <a-col :span="24">
                 <a-form-item label="Mô tả ngắn">
                   <a-textarea v-model:value="formState.short_description" placeholder="Nhập..." :rows="4"/>

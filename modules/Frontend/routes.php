@@ -21,7 +21,6 @@ Route::middleware(['splade'])->group(function () {
 
     Route::post('/login', LoginAction::class . '@login')->name('login.post');
 
-
     Route::get('/docs', fn() => view('docs'))->name('docs');
 
     Route::middleware([FrontendIsAuthenticated::class])->group(function () {
