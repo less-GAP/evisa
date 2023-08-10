@@ -38,14 +38,14 @@ class PostAction
                 if (!empty($data['packages'])) {
                     foreach ($data['packages'] as $v) {
                         $course = [
-                            'image' => $v['image'],
+                            'image' => $v['image'] ?? null,
                             'name' => $v['name'],
-                            'point' => $v['point'],
+                            'point' => $v['point'] ?? 0,
                             'price' => $v['price'],
-                            'short_description' => $v['short_description'],
-                            'stock' => $v['stock'],
+                            'short_description' => $v['short_description'] ?? '',
+                            'stock' => $v['stock'] ?? 0,
                             'product_id' => $product->id,
-                            'time' => $v['time']
+                            'time' => $v['time'] ?? ''
                         ];
                         if (isset($v['id']) && $v['id'] > 0) {
                             $id = $v['id'];

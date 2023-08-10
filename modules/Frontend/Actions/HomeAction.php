@@ -37,9 +37,7 @@ class HomeAction
 //                }
             }
         }
-//        echo '<pre>';
-//        print_r($packages);
-//        exit;
+
         return view('Frontend::home', [
             'packages' => $packages,
         ]);

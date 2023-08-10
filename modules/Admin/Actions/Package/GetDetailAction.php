@@ -34,10 +34,12 @@ class GetDetailAction
                         }
                     }
                     $product['packages'] = $pas;
+                }else{
+                    $product['packages'] = [];
                 }
             }
         }
-        
+
         return [
             'code' => 1,
             'message' => 'Thành công !',

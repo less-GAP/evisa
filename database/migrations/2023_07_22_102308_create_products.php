@@ -28,7 +28,8 @@ return new class extends Migration {
             $table->string('meta_keyword')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
-            $table->text('background')->nullable();
+            $table->string('background')->nullable();
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }

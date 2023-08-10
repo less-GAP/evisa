@@ -36,7 +36,8 @@ class Product extends Model
         'meta_description',
         'meta_keyword',
         'stock',
-        'background'
+        'background',
+        'position'
     ];
 
     /**

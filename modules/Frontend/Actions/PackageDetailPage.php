@@ -33,10 +33,27 @@ class PackageDetailPage
                 }
             }
             $package['courses'] = $courses;
+            $other_packages = [];
+
+            $others = Product::where('id', '<>', $package['id'])->select('*')->get()->toArray();
+            if (!empty($others)) {
+                foreach ($others as $ot) {
+                    $courses = PackageCourse::where('product_id', $ot['id'])->select('*')->get()->toArray();
+                    if (!empty($courses)) {
+                        foreach ($courses as $k => $v) {
+                            $v['package_name'] = $ot['name'];
+                            $v['slug'] = $ot['slug'];
+                            $other_packages[] = $v;
+                        }
+                    }
+                }
+            }
         }
+
 
         return view('Frontend::package_detail', [
             'package' => $package,
+            'other_packages' => $other_packages
         ]);
     }
 }

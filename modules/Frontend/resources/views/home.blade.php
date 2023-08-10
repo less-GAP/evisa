@@ -2,94 +2,181 @@
 @section('content')
     @if(!empty($packages))
         @foreach($packages as $pa => $package)
-            <section id="section-package-{{$package['id']}}" class="product_packages" style="background: {{$package['background']}}">
-                <div class="container relative py-12 lg:py-16">
-                    <div class="items-center row">
-                        <div class="w-full col md:w-1/2">
-                            <div class="package-course" id="package-{{$package['id']}}">
-                                <div class="package-course-img">
-                                    <div class="swiper-package">
-                                        <div class="swiper">
-                                            <div class="swiper-wrapper">
-                                                @foreach($package['courses'] as $key => $cur)
-                                                    <div class="swiper-slide">
-                                                        <a href="{{url('product/'.$package['slug'])}}" title="Detox">
-                                                            <img
-                                                                class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
-                                                                src="{{$cur['image_url']}}" alt="Detox">
-                                                        </a>
-                                                        <p class="product-package-price mt-2 md:mt-4 text-center">{{$cur['name']}}: {{number_format($cur['price'], -3,',','.')}}
-                                                            <span style="text-transform: none">đ</span></p>
-                                                    </div>
-                                                @endforeach
+            @if($package['position'] == 'right')
+                <section id="section-package-{{$package['id']}}" class="product_packages" style="background: {{$package['background']}}">
+                    <div class="container relative py-12 lg:py-16">
+                        <div class="items-center row">
+                            <div class="w-full col md:w-1/2">
+                                <div class="package-course" id="package-{{$package['id']}}">
+                                    <div class="package-course-img">
+                                        <div class="swiper-package">
+                                            <div class="swiper">
+                                                <div class="swiper-wrapper">
+                                                    @foreach($package['courses'] as $key => $cur)
+                                                        <div class="swiper-slide">
+                                                            <a href="{{url('product/'.$package['slug'])}}" title="Detox">
+                                                                <img
+                                                                    class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
+                                                                    src="{{$cur['image_url']}}" alt="Detox">
+                                                            </a>
+                                                            <p class="product-package-price mt-2 md:mt-4 text-center">{{$cur['name']}}: {{number_format($cur['price'], -3,',','.')}}
+                                                                <span style="text-transform: none">đ</span></p>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="flex items-center justify-center package-course-control mt-5">
+                                        <div class="text-sm font-medium">On Course:</div>
+                                        @foreach($package['courses'] as $key => $cur)
+                                            @if($key == 0)
+                                                <div class="text-sm font-semibold ml-5">{{$cur['time']}}</div>
+                                            @endif
+                                            @if($key > 0)
+                                                <div
+                                                    class="flex items-center px-1 mx-3 rounded-full w-14 h-7 btn-handleToggle cursor-pointer active"
+                                                    data-current="4" id="handleToggle-{{$package['id']}}">
+                                                    <div class="w-5 h-5 transform bg-white rounded-full shadow-md node"></div>
+                                                </div>
+                                                <div class="text-sm font-semibold">{{$cur['time']}}</div>
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="flex items-center justify-center package-course-control mt-5">
-                                    <div class="text-sm font-medium">On Course:</div>
-                                    @foreach($package['courses'] as $key => $cur)
-                                        @if($key == 0)
-                                            <div class="text-sm font-semibold ml-5">{{$cur['time']}}</div>
-                                        @endif
-                                        @if($key > 0)
-                                            <div
-                                                class="flex items-center px-1 mx-3 rounded-full w-14 h-7 btn-handleToggle cursor-pointer active"
-                                                data-current="4" id="handleToggle-{{$package['id']}}">
-                                                <div class="w-5 h-5 transform bg-white rounded-full shadow-md node"></div>
+                            </div>
+                            <div class="w-full mt-5 col md:w-1/2 md:order-first md:mt-0">
+                                <div class="box info-product relative max-w-[460px] mx-auto px-5 md:px-8 py-4 md:py-12">
+                                    <div class="relative z-10 inner">
+                                        <h4 class="mb-2 product-package-name font-title">
+                                            <a href="{{url('product/'.$package['slug'])}}"
+                                               title="{{$package['name']}}">{{$package['name']}}
+                                            </a>
+                                        </h4>
+                                        <p class="mb-3 product-package-description md:mb-6">{{$package['short_description']}}</p>
+                                        <a href="{{url('product/'.$package['slug'])}}" title="{{$package['name']}}" class="btn">xem thêm</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute hidden translate-x-1/2 -translate-y-1/2 pointer-events-none model right-full top-1/2 w-max xl:block"
+                            id="model-1">
+                            <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
+                        </div>
+                    </div>
+                    <script>
+                        window.document.addEventListener('DOMContentLoaded', () => {
+                            if (document.getElementById('package-{{$package['id']}}')) {
+                                var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
+                                    slidesPerView: 1,
+                                    spaceBetween: 30,
+                                    loop: true,
+                                    simulateTouch: false,
+                                });
+                                let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
+                                btn_{{$package['id']}}.addEventListener('click', () => {
+                                    let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
+                                    if (current_{{$package['id']}} == 7) {
+                                        btn_{{$package['id']}}.setAttribute('data-current', 4);
+                                        btn_{{$package['id']}}.classList.add('active');
+                                        swiper_{{$package['id']}}.slideTo(0);
+                                    } else {
+                                        btn_{{$package['id']}}.setAttribute('data-current', 7);
+                                        btn_{{$package['id']}}.classList.remove('active');
+                                        swiper_{{$package['id']}}.slideTo(1);
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+                </section>
+            @elseif($package['position'] == 'left')
+                <section id="section-package-{{$package['id']}}" class="product_packages" style="background: {{$package['background']}}">
+                    <div class="container relative py-12 lg:py-16">
+                        <div class="items-center row">
+                            <div class="w-full col md:w-1/2">
+                                <div class="package-course" id="package-{{$package['id']}}">
+                                    <div class="package-course-img">
+                                        <div class="swiper-package">
+                                            <div class="swiper">
+                                                <div class="swiper-wrapper">
+                                                    @foreach($package['courses'] as $key => $cur)
+                                                        <div class="swiper-slide">
+                                                            <a href="{{url('product/'.$package['slug'])}}" title="Detox">
+                                                                <img
+                                                                    class="block h-[300px] w-[300px] object-contain mx-auto xl:h-[600px] xl:w-auto"
+                                                                    src="{{$cur['image_url']}}" alt="Detox">
+                                                            </a>
+                                                            <p class="product-package-price mt-2 md:mt-4 text-center">{{$cur['name']}}: {{number_format($cur['price'], -3,',','.')}}
+                                                                <span style="text-transform: none">đ</span></p>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                            <div class="text-sm font-semibold">{{$cur['time']}}</div>
-                                        @endif
-                                    @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-center package-course-control mt-5">
+                                        <div class="text-sm font-medium">On Course:</div>
+                                        @foreach($package['courses'] as $key => $cur)
+                                            @if($key == 0)
+                                                <div class="text-sm font-semibold ml-5">{{$cur['time']}}</div>
+                                            @endif
+                                            @if($key > 0)
+                                                <div
+                                                    class="flex items-center px-1 mx-3 rounded-full w-14 h-7 btn-handleToggle cursor-pointer active"
+                                                    data-current="4" id="handleToggle-{{$package['id']}}">
+                                                    <div class="w-5 h-5 transform bg-white rounded-full shadow-md node"></div>
+                                                </div>
+                                                <div class="text-sm font-semibold">{{$cur['time']}}</div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full mt-5 col md:w-1/2 md:mt-0">
+                                <div class="box info-product relative max-w-[460px] mx-auto px-5 md:px-8 py-4 md:py-12">
+                                    <div class="relative z-10 inner">
+                                        <h4 class="mb-2 product-package-name font-title">{{$package['name']}}</h4>
+                                        <p class="mb-3 product-package-description md:mb-6">{{$package['short_description']}}</p>
+                                        <a href="{{url('product/'.$package['slug'])}}" title="{{$package['name']}}" class="btn">xem thêm</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full mt-5 col md:w-1/2 md:order-first md:mt-0">
-                            <div class="box info-product relative max-w-[460px] mx-auto px-5 md:px-8 py-4 md:py-12">
-                                <div class="relative z-10 inner">
-                                    <h4 class="mb-2 product-package-name font-title">
-                                        <a href="{{url('product/'.$package['slug'])}}"
-                                           title="Detox">{{$package['name']}}
-                                        </a>
-                                    </h4>
-                                    <p class="mb-3 product-package-description md:mb-6">{{$package['short_description']}}</p>
-                                    <a href="{{url('product/'.$package['slug'])}}" title="Detox" class="btn">xem thêm</a>
-                                </div>
-                            </div>
+                        <div
+                            class="absolute hidden -translate-x-1/2 -translate-y-1/2 pointer-events-none model left-full top-1/2 w-max xl:block"
+                            id="model-2">
+                            <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
                         </div>
                     </div>
-                    <div
-                        class="absolute hidden translate-x-1/2 -translate-y-1/2 pointer-events-none model @if($pa%2 == 0) right-full @else left-full @endif top-1/2 w-max xl:block"
-                        id="model-1">
-                        <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
-                    </div>
-                </div>
-                <script>
-                    window.document.addEventListener('DOMContentLoaded', () => {
-                        if (document.getElementById('package-{{$package['id']}}')) {
-                            var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
-                                slidesPerView: 1,
-                                spaceBetween: 30,
-                                loop: true,
-                                simulateTouch: false,
-                            });
-                            let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
-                            btn_{{$package['id']}}.addEventListener('click', () => {
-                                let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
-                                if (current_{{$package['id']}} == 7) {
-                                    btn_{{$package['id']}}.setAttribute('data-current', 4);
-                                    btn_{{$package['id']}}.classList.add('active');
-                                    swiper_{{$package['id']}}.slideTo(0);
-                                } else {
-                                    btn_{{$package['id']}}.setAttribute('data-current', 7);
-                                    btn_{{$package['id']}}.classList.remove('active');
-                                    swiper_{{$package['id']}}.slideTo(1);
-                                }
-                            });
-                        }
-                    });
-                </script>
-            </section>
+                    <script>
+                        window.document.addEventListener('DOMContentLoaded', () => {
+                            if (document.getElementById('package-{{$package['id']}}')) {
+                                var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
+                                    slidesPerView: 1,
+                                    spaceBetween: 30,
+                                    loop: true,
+                                    simulateTouch: false,
+                                });
+                                let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
+                                btn_{{$package['id']}}.addEventListener('click', () => {
+                                    let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
+                                    if (current_{{$package['id']}} == 7) {
+                                        btn_{{$package['id']}}.setAttribute('data-current', 4);
+                                        btn_{{$package['id']}}.classList.add('active');
+                                        swiper_{{$package['id']}}.slideTo(0);
+                                    } else {
+                                        btn_{{$package['id']}}.setAttribute('data-current', 7);
+                                        btn_{{$package['id']}}.classList.remove('active');
+                                        swiper_{{$package['id']}}.slideTo(1);
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+                </section>
+            @endif
         @endforeach
     @endif
     {{--    <section id="section-package-74747" class="product_packages"--}}
