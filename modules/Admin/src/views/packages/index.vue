@@ -79,6 +79,16 @@
         align: 'left',
       },
       {
+        title: 'Vị trí trang chủ',
+        key: 'position',
+        align: 'left',
+      },
+      {
+        title: 'Màu nền',
+        key: 'background',
+        align: 'left',
+      },
+      {
         title: 'Tình trạng',
         key: 'status'
       },
@@ -172,8 +182,19 @@
         </template>
         <template #cell[package]="{item,column}">
           <div v-for="(value, index) in item.packages" :key="index">
-            <b>{{value.name}} - {{value.time}}</b>:  {{$format.formatMoney(value.price)}}
+            <b>{{value.name}} - {{value.time}}</b>: {{$format.formatMoney(value.price)}}
           </div>
+        </template>
+        <template #cell[position]="{item,column}">
+          <div class="flex items-center" v-if="item.position == 'left'">
+            Trái
+          </div>
+          <div class="flex items-center" v-else>
+            Phải
+          </div>
+        </template>
+        <template #cell[background]="{item,column}">
+          <span :style="'background:'+ item.background+'; width: 100px;height: 50px;display:inline-block'"></span>
         </template>
         <template #cell[status]="{item,column}">
           <div class="flex items-center" v-if="item.status == 'D'">
