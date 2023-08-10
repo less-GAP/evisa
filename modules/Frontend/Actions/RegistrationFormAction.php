@@ -3,27 +3,37 @@
 namespace Modules\Frontend\Actions;
 
 
-use App\Models\PackageCourse;
-use App\Models\PackageCourseProduct;
-use App\Models\Product;
-use ProtoneMedia\Splade\FormBuilder\Input;
-use ProtoneMedia\Splade\FormBuilder\Password;
-use ProtoneMedia\Splade\FormBuilder\Submit;
-use ProtoneMedia\Splade\SpladeForm;
+use App\Models\Customer;
+use Illuminate\Http\Request;
+use ProtoneMedia\Splade\Facades\Splade;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationFormAction
 {
     public function handle()
     {
-        $form = SpladeForm::make()
-            ->fields([
-                Input::make('name')->label('User Name'),
-                Password::make('password')->label('Password'),
-                Submit::make()->label('Create'),
-            ]);
+        return view('Frontend::registration');
+    }
 
-        return view('Frontend::registration', [
-            'form' => $form,
-        ]);
+    public function register(Request $request)
+    {
+        $validate = $request->validate([
+                'username' => 'required|unique:customers',
+                'password' => 'required',
+                'password_confirmation' => 'required|same:password',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'referral_code' => 'required|exists:customers,username'
+            ]
+        );
+        $data = $request->all();
+        $data['password'] = Hash::make($request->input('password'));
+        $customer = new Customer();
+        $customer->fill($data);
+        $customer->save();
+
+        Splade::toast('Register successfull!');
+
+        return redirect()->route('home');
     }
 }

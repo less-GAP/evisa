@@ -15,7 +15,6 @@ export const useAuthStore = defineStore("auth", {
     logout() {
       this.$reset()
       router.push('login')
-
     },
     isLogin() {
       return this.user != null

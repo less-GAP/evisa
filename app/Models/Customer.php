@@ -3,11 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasProfilePhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
+    use HasApiTokens, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -21,12 +26,15 @@ class Customer extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'username',
         'name',
         'email',
         'phone',
         'email_verified_at',
         'status',
-        'customer_group'
+        'customer_group',
+        'password',
+        'referral_code'
     ];
 
     /**
@@ -35,7 +43,7 @@ class Customer extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-//        'password',
+        'password',
 //        'remember_token',
     ];
 
@@ -45,7 +53,7 @@ class Customer extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        //'product_descr' => 'array',
+        'password' => 'hashed',
     ];
 
     protected $appends = [
@@ -54,8 +62,11 @@ class Customer extends Model
 
     public function getCustomerGroupNameAttribute()
     {
-        $cus = CustomerGroup::where('id', $this->customer_group)->first();
-        return $cus->name;
+        if ($this->customer_group != '') {
+            $cus = CustomerGroup::where('id', $this->customer_group)->first();
+            return $cus->name;
+        }
+        return '';
     }
 
 //    public function getImageUrlAttribute()

@@ -329,3 +329,7 @@ body {
 .btn-handleToggle.active .node {
   transform: translateX(0);
 }
+
+.disabled input{
+    background-color: #F3F4F6;
+}
