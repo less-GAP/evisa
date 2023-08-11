@@ -7,6 +7,7 @@ use Modules\Frontend\Actions\HomeAction;
 use Modules\Frontend\Actions\RegistrationFormAction;
 use Modules\Frontend\Actions\LoginAction;
 use Modules\Frontend\Actions\ProfileAction;
+use Modules\Frontend\Actions\ProductAction;
 use Modules\Frontend\Middleware\FrontendIsAuthenticated;
 
 Route::middleware(['splade'])->group(function () {
@@ -26,6 +27,10 @@ Route::middleware(['splade'])->group(function () {
     Route::middleware([FrontendIsAuthenticated::class])->group(function () {
 
         Route::get('/profile', ProfileAction::class . '@handle')->name('profile');
+
+        Route::post('/profile', ProfileAction::class . '@update')->name('profile.update');
+
+        Route::get('profile/product', ProductAction::class . '@handle')->name('profile.product');
 
     });
 

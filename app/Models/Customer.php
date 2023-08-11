@@ -34,7 +34,10 @@ class Customer extends Authenticatable
         'status',
         'customer_group',
         'password',
-        'referral_code'
+        'referral_code',
+        'photo',
+        'sex',
+        'birthday'
     ];
 
     /**

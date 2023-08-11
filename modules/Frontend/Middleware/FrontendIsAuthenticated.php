@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
 
 class FrontendIsAuthenticated
@@ -18,7 +19,7 @@ class FrontendIsAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         if (!Auth::guard('frontend')->check()) {
-            return \response(0, 401);
+            return Redirect::route('home');
         }
         return $next($request);
     }

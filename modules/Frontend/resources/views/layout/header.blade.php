@@ -70,8 +70,13 @@
                             </span>
                                 </a>
                             </li>
-                    @endforeach
-                @endif
+                        @endforeach
+                    @endif
+                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
+                        <a href="{{route('login.get')}}" class="h-[40px] xl:h-[60px] flex items-center">
+                            <span class="mr-2 txt">Login</span>
+                        </a>
+                    </li>
                 {{--                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">--}}
                 {{--                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">--}}
                 {{--                            <span class="mr-2 txt">Recovery Package</span>--}}
