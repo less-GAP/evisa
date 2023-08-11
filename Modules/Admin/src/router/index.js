@@ -33,11 +33,19 @@ const routes = [
   },
   {
     meta: {
-      title: "Visa Documents",
+      title: "Visa Applications",
     },
-    path: "/visa-documents",
-    name: "visa-documents",
-    component: () => import("@/views/visa-documents/index.vue"),
+    path: "/visa-applications",
+    name: "visa-applications",
+    component: () => import("@/views/visa-applications/index.vue"),
+  },
+  {
+    meta: {
+      title: "Visa Applications",
+    },
+    path: "/visa-applications/:id",
+    name: "visa-applications-form",
+    component: () => import("@/views/visa-applications/FormPage.vue"),
   },
   {
     meta: {

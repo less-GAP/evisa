@@ -21,22 +21,19 @@ const props = defineProps({
 });
 
 const spanClass = computed(
-  () => `inline-flex justify-center items-center ${props.w} ${props.h}`
+  () => `class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" ${props.w} ${props.h}`
 );
 
 const iconSize = computed(() => props.size ?? 16);
 </script>
 
 <template>
-  <span :class="spanClass">
     <svg
+      :class="spanClass"
       viewBox="0 0 24 24"
       :width="iconSize"
       :height="iconSize"
-      class="inline-block"
     >
       <path fill="currentColor" :d="path" />
     </svg>
-    <slot />
-  </span>
 </template>

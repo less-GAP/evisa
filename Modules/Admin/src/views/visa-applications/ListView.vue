@@ -19,7 +19,6 @@ import {DeleteOutlined} from '@ant-design/icons-vue';
 
 import Api from "@/utils/Api";
 import router from "@/router";
-import FormUser from "./FormUser.vue";
 
 
 const modalState = ref({

@@ -6,12 +6,7 @@ import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import {useMainStore} from "@/stores/main.js";
 import {useStyleStore} from "@/stores/style.js";
-import BaseIcon from "@/components/BaseIcon.vue";
-import FormControl from "@/components/FormControl.vue";
-import NavBar from "@/components/NavBar.vue";
-import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/AsideMenu.vue";
-import FooterBar from "@/components/FooterBar.vue";
 import Header from "./Header.vue";
 import Sidebar from "./Sidebar.vue";
 import Footer from "./Footer.vue";
@@ -83,7 +78,7 @@ const menuClick = (event, item) => {
     <Sidebar :style="{width:$style.theme.sidebarWidth}" class="h-full  d-inline"></Sidebar>
 
     <main
-          class="relative p-5 bg-white flex-1 w-full h-full h-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
+          class="relative p-5 flex-1 w-full h-full h-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
       <slot/>
 
     </main>

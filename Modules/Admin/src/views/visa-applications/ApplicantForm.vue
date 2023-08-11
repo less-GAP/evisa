@@ -2,6 +2,7 @@
 import {reactive, ref} from "vue";
 import Api from "@/utils/Api";
 import { message } from 'ant-design-vue';
+import {InputUpload} from "@/components";
 const props = defineProps({
   value: Object
 })
@@ -59,39 +60,25 @@ const cancel = function () {
     v-bind="formConfig"
     @finish="submit"
   >
-    <a-form-item name="username" label="UserName" :rules="[{ required: true }]">
-      <a-input  autocomplete="off" v-model:value="formState.username"/>
+    <a-form-item class="w-1/2 inline-flex" name="username" label="Photo (4x6cm, white background)" :rules="[{ required: true }]">
+      <InputUpload placeholder="upload/photo.jpg" width="153px" height="230px" v-model:value="formState.profile_photo"></InputUpload>
     </a-form-item>
-    <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
+    <a-form-item class="w-1/2  inline-flex" name="username" label="Passport scan" :rules="[{ required: true }]">
+      <InputUpload placeholder="upload/passport.jpg" width="346px" height="230px" v-model:value="formState.passport_photo"></InputUpload>
+    </a-form-item>
+    <a-form-item name="full_name" label="Full name as in passport" :rules="[{ required: true }]">
       <a-input v-model:value="formState.full_name"/>
     </a-form-item>
-    <a-form-item name="email" label="Email" :rules="[{ type: 'email',required: true  }]">
+    <a-form-item name="full_name" label="Nationality" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.nationality"/>
+    </a-form-item>
+    <a-form-item name="full_name" label="Passport number" :rules="[{ required: true }]">
+      <a-input v-model:value="formState.passport_number"/>
+    </a-form-item>
+    <a-form-item name="full_name" label="Email" :rules="[{ required: true }]">
       <a-input v-model:value="formState.email"/>
     </a-form-item>
-    <a-form-item label="Role" name="role">
-      <a-radio-group v-model:value="formState.role">
-        <a-radio value="user" name="type">User</a-radio>
-        <a-radio value="admin" name="type">Admin</a-radio>
-      </a-radio-group>
-    </a-form-item>
-    <a-form-item
-      label="Password"
-      name="password"
-      :rules="formState.isNew?[{ required: true, message: 'Please input your password!' }]:[]"
-    >
-      <a-input-password autocomplete="off" v-model:value="formState.password">
-        <template #prefix>
-          <LockOutlined class="site-form-item-icon"/>
-        </template>
-      </a-input-password>
-    </a-form-item>
 
-    <a-form-item>
-      <a-space>
-        <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
-        <a-button @click="cancel" html-type="button">Cancel</a-button>
-      </a-space>
-    </a-form-item>
   </a-form>
 
 </template>

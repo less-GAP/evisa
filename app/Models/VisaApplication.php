@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class VisaApplication extends Model
+{
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    use HasFactory;
+
+    protected $table = 'visa_application';
+
+    public $timestamps = true;
+
+    protected $fillable = [
+        'number_of_visa',
+        'type_of_visa',
+        'date_arrival',
+        'entry_port',
+        'processing_time',
+        'est_delivery_time',
+        'total_amount',
+        'payment_method',
+        'payment_status',
+        'contact_name',
+        'contact_email',
+        'mobile_phone',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+//        'password',
+//        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+//        'email_verified_at' => 'datetime',
+//        'password' => 'hashed',
+    ];
+
+    protected $appends = [
+        'image_url'
+    ];
+
+
+}

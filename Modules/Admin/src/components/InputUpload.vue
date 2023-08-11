@@ -19,6 +19,14 @@
       </a-card>
     </template>
   </a-image-preview-group>
+  <a-card v-else-if="placeholder" shadow="none"
+          style="display:inline-block;margin-right:5px;text-align: center;position:relative">
+    <template #cover>
+      <img :width="width" :height="height" style="object-fit:contain"
+               :src="$url(placeholder)"
+               :alt="alt"/>
+    </template>
+  </a-card>
   <br>
   <a-space class="mt-2">
     <a-upload
@@ -62,6 +70,7 @@ export default defineComponent({
   props: {
     value: Object,
     accept: String,
+    placeholder: String,
     alt: String,
     multiple: {
       type: Boolean,
@@ -73,7 +82,7 @@ export default defineComponent({
     },
     showSelect: {
       type: Boolean,
-      default: true
+      default: false
     },
     action: {
       type: String,
@@ -95,7 +104,7 @@ export default defineComponent({
     },
     height: {
       type: Number, String,
-      default: 'auto'
+      default: '200px'
     },
     width: {
       type: Number,
