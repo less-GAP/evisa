@@ -65,7 +65,7 @@ const cancel = function () {
       </div>
     </div>
     <a-card class="mb-3 text-right">
-      <a-space>
+      <a-space class="float-right">
         <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
       </a-space>
     </a-card>
