@@ -19,6 +19,7 @@
 
 ```bash
 copy .env.example .env
+touch database.sqlite
 ```
 
 #### Run local development
