@@ -33,9 +33,11 @@ Route::middleware(['splade'])->group(function () {
 
         Route::get('profile/product', ProductAction::class . '@handle')->name('profile.product');
 
-        Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
 
     });
+
+    Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
+
 
 
     // Registers routes to support the interactive components...
