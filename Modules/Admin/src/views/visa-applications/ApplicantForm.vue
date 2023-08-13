@@ -57,11 +57,11 @@ const cancel = function () {
 
   <a-form-item  class="w-1/2 inline-flex"  label="Photo (4x6cm, white background)"
                :rules="[{ required: true }]">
-    <InputUploadGetPath placeholder="upload/photo.jpg" width="153px" height="230px"
+    <InputUploadGetPath placeholder="photo.jpg" width="153px" height="230px"
                  v-model:value="value.profile_photo"></InputUploadGetPath>
   </a-form-item>
   <a-form-item class="w-1/2  inline-flex" label="Passport scan" :rules="[{ required: true }]">
-    <InputUploadGetPath placeholder="upload/passport.jpg" width="346px" height="230px"
+    <InputUploadGetPath placeholder="passport.jpg" width="346px" height="230px"
                  v-model:value="value.passport_photo"></InputUploadGetPath>
   </a-form-item>
   <a-form-item label="Full name as in passport" :rules="[{ required: true }]">
