@@ -78,7 +78,7 @@ export default defineComponent({
     },
     dir: {
       type: String,
-      default: '/file/Upload'
+      default: ''
     },
   },
   emits: ['change', 'delete', 'preview-delete', 'update:value'],
