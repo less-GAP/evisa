@@ -32,7 +32,9 @@ class VisaApplication extends Model
         'payment_status',
         'contact_name',
         'contact_email',
-        'mobile_phone',
+        'contact_phone',
+        'status',
+        'approval_status',
     ];
 
     /**
@@ -51,13 +53,37 @@ class VisaApplication extends Model
      * @var array<string, string>
      */
     protected $casts = [
-//        'email_verified_at' => 'datetime',
+        'est_delivery_time' => 'datetime',
+        'date_arrival' => 'datetime',
 //        'password' => 'hashed',
     ];
 
     protected $appends = [
-        'image_url'
+        'assigned_users'
     ];
 
+    public function applicants()
+    {
+        return $this->hasMany(VisaApplicationApplicant::class, 'visa_application_id');
+    }
 
+    public function comments()
+    {
+        return $this->hasMany(VisaApplicationComment::class, 'visa_application_id');
+    }
+    public function history()
+    {
+        return $this->hasMany(VisaApplicationHistory::class, 'visa_application_id');
+    }
+
+    public function assignees()
+    {
+        return $this->belongsToMany(User::class, 'visa_application_assignee', 'visa_application_id', 'user','id','username');
+    }
+    public function getAssignedUsersAttribute(){
+        if($this->assignees->count()){
+            return $this->assignees->pluck('username');
+        }
+        return [];
+    }
 }

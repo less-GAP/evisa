@@ -14,7 +14,15 @@
       :accept="accept"
       :showUploadList="false"
     >
-
+      <a-card v-if="!value && placeholder" shadow="none"
+              style="display:inline-block;margin-right:5px;text-align: center;position:relative">
+        <template #cover>
+          <img :width="width" :height="height" style="object-fit:contain"
+               :src="$url(placeholder)"
+               :alt="alt"/>
+        </template>
+      </a-card>
+      <br>
       <a-button size="mini" :loading="loading">
         <upload-outlined></upload-outlined>
         Upload
@@ -54,9 +62,11 @@ export default defineComponent({
       type: Number,
       default: 'auto'
     },
+    placeholder: String,
+
     showSelect: {
       type: Boolean,
-      default: true
+      default: false
     },
     width: {
       type: Number,

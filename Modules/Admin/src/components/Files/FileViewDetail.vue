@@ -57,18 +57,3 @@ function isImageUrl(url) {
   </a-descriptions>
 
 </template>
-cat << EOF > $(pwd)/config.yaml
-deployment:
-role: traditional
-role_traditional:
-config_provider: etcd
-admin:
-allow_admin:
-- 192.168.128.0/20  # Please set it to the subnet address you obtained.
-# If not set, by default all IP access is allowed.
-etcd:
-host:
-- "http://etcd:2379"
-prefix: "/apisix"
-timeout: 30
-EOF

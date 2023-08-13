@@ -131,110 +131,115 @@ reload()
 <template>
   <div class="flex flex-col text-center h-full sm:rounded-lg">
     <div :loading="loading" class="flex items-center pb-2 justify-between  bg-white dark:bg-gray-800">
-      <a-space>
+      <slot name="header" v-bind="{tableConfig,reload}">
 
-        <a-input
-          v-if="tableConfig.globalSearch"
-          allow-clear
-          @search="reload"
-          @keyup.enter="reload"
-          style="max-width: 300px"
-          v-model:value="search"
-          placeholder="Enter to search..."
-          :loading="loading"
-        />
-        <slot name="filter"></slot>
-      </a-space>
-      <span></span>
+        <a-space>
 
-      <a-space>
-        <a-button>
-          <template #icon>
-            <reload-outlined @click="reload"/>
-          </template>
-        </a-button>
-        <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">
-          <template #overlay>
-            <a-menu>
-              <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
-              >
-                {{ action.title }}
-              </a-menu-item>
+          <a-input
+            v-if="tableConfig.globalSearch"
+            allow-clear
+            @search="reload"
+            @keyup.enter="reload"
+            style="max-width: 300px"
+            v-model:value="search"
+            placeholder="Enter to search..."
+            :loading="loading"
+          />
+          <slot name="filter"></slot>
+        </a-space>
+        <span></span>
 
-            </a-menu>
-          </template>
+        <a-space>
           <a-button>
-            Hành động
-            <DownOutlined/>
+            <template #icon>
+              <reload-outlined @click="reload"/>
+            </template>
           </a-button>
-        </a-dropdown>
+          <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">
+            <template #overlay>
+              <a-menu>
+                <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
+                >
+                  {{ action.title }}
+                </a-menu-item>
 
-        <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
+              </a-menu>
+            </template>
+            <a-button>
+              Hành động
+              <DownOutlined/>
+            </a-button>
+          </a-dropdown>
 
-      </a-space>
+          <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
+
+        </a-space>
+      </slot>
     </div>
 
     <div class="overflow-auto scroll-smooth flex-1 w-full h-full">
-      <table v-if="tableData.data?.length" class="table-auto w-full mt-5">
-        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-        <tr>
-          <th v-if="selectionActions.length > 0" scope="col" class="p-2 whitespace-nowrap">
-            <label
-              class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
-              @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
-              class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            </label>
-          </th>
+      <slot v-if="tableData.data?.length" name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
+        <table  class="table-auto w-full mt-5">
+          <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+          <tr>
+            <th v-if="selectionActions.length > 0" scope="col" class="p-2 whitespace-nowrap">
+              <label
+                class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
+                @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
+                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              </label>
+            </th>
 
-          <th v-for="column in columns" scope="col" class="p-2 whitespace-nowrap">
-            <div class="font-semibold text-left">
-              {{ __(column.title) }}
-            </div>
-          </th>
+            <th v-for="column in columns" scope="col" class="p-2 whitespace-nowrap">
+              <div class="font-semibold text-left">
+                {{ __(column.title) }}
+              </div>
+            </th>
 
-          <th v-if="itemActions.length" scope="col" class="p-2 whitespace-nowrap">
-            {{ __('Action') }}
+            <th v-if="itemActions.length" scope="col" class="p-2 whitespace-nowrap">
+              {{ __('Action') }}
 
-          </th>
-        </tr>
-        </thead>
-        <tbody class="text-sm divide-y divide-gray-100">
-        <tr v-for="(item,index) in tableData.data" :key="item[tableConfig.item_key]"
-            v-bind:class="{'border-b':(index%2===0)}">
-          <td v-if="tableConfig.rowSelect" class="p-2 whitespace-nowrap">
-            <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
-                   class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
-              v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
-              class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            </label>
-          </td>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="text-sm divide-y divide-gray-100">
+          <tr v-for="(item,index) in tableData.data" :key="item[tableConfig.item_key]"
+              v-bind:class="{'border-b':(index%2===0)}">
+            <td v-if="tableConfig.rowSelect" class="p-2 whitespace-nowrap">
+              <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
+                     class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
+                v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
+                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+              </label>
+            </td>
 
-          <td v-for="column in columns"
-              :class="'p-2 whitespace-nowrap' + (column.class ? column.class : '')">
-            <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
-              {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
-            </slot>
-
-          </td>
-          <td v-if="itemActions.length" class="p-2 whitespace-nowrap">
-            <!-- Modal toggle -->
-            <template v-for="itemAction in itemActions">
-              <slot :name="'cellAction['+itemAction.key+']'"
-                    v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
-                <a-button
-                  @click="itemAction.action(item,reload)"
-                  :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
-                  type="link"
-                >
-                  {{ itemAction.label }}
-                </a-button>
-
+            <td v-for="column in columns"
+                :class="'p-2 whitespace-nowrap' + (column.class ? column.class : '')">
+              <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+                {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
               </slot>
-            </template>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+
+            </td>
+            <td v-if="itemActions.length" class="p-2 whitespace-nowrap">
+              <!-- Modal toggle -->
+              <template v-for="itemAction in itemActions">
+                <slot :name="'cellAction['+itemAction.key+']'"
+                      v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
+                  <a-button
+                    @click="itemAction.action(item,reload)"
+                    :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                    type="link"
+                  >
+                    {{ itemAction.label }}
+                  </a-button>
+
+                </slot>
+              </template>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </slot>
       <a-empty v-else/>
       <br>
     </div>

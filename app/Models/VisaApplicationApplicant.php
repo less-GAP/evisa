@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VisaApplication extends Model
+class VisaApplicationApplicant extends Model
 {
 
     /**
@@ -16,25 +16,18 @@ class VisaApplication extends Model
      */
     use HasFactory;
 
-    protected $table = 'visa_application';
+    protected $table = 'visa_application_applicant';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
-        'image',
-        'name',
-        'type',
-        'slug',
-        'short_description',
-        'description',
-        'price',
-        'sale_price',
-        'point',
-        'status',
-        'title',
-        'meta_description',
-        'meta_keyword',
-        'stock'
+        'visa_application_id',
+        'full_name',
+        'nationality',
+        'passport_number',
+        'email',
+        'profile_photo',
+        'passport_photo',
     ];
 
     /**

@@ -4,7 +4,7 @@ import {BaseIcon} from "@/components";
 
 </script>
 <template>
-  <aside id="sidebar" class="top-0 left-0 bg-white z-20 flex flex-col flex-shrink-0 hidden w-64 h-full overflow-auto font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
+  <aside  :class="$appState.showMenu?'w-['+$style.theme.sidebarWidth+'] lg:flex':'lg:w-['+$style.theme.sidebarCollapsedWidth+'] collapsed lg:left-0 -left-['+$style.theme.sidebarWidth+']'" id="sidebar"  class="top-0 left-0 bg-white z-20 flex flex-col flex-shrink-0  h-full overflow-auto font-normal duration-75  transition-width" aria-label="Sidebar">
     <div class="relative flex flex-col flex-1 min-h-0 pt-0 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
         <div class="flex-1 px-3 space-y-1  divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
@@ -156,3 +156,10 @@ import {BaseIcon} from "@/components";
   </aside>
 
 </template>
+<style lang="scss" scoped>
+#sidebar.collapsed{
+  a :not(:first-child){
+    display: none;
+  }
+}
+</style>
