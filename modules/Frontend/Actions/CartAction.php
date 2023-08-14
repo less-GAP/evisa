@@ -16,9 +16,12 @@ class CartAction
 {
     public function handle()
     {
-        $products = [];
+        $cart = [];
+        $cart = Carts::where('customer_id', Auth::guard('frontend')->id())
+            ->get()->toArray();
         return view('Frontend::profile.cart', [
-            'products' => $products,
+            'cart' => $cart,
+            'form' => [],
         ]);
     }
 

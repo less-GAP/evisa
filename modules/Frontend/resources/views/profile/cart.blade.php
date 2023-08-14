@@ -1,224 +1,88 @@
 @extends("Frontend::layout.index")
 @section('content')
-    <div class="bg-white mt-4 xl:max-w-screen-xl lg:max-w-screen-lg mx-auto">
-        <div class="grid grid-cols-4 gap-4 bg-gray-50">
-            <div class="shadow-md rounded-lg">
-                @include("Frontend::profile.sidebar")
-            </div>
-            <div class="col-span-3">
-                <div class="grid grid-cols-3">
-                    <!-- My Cart -->
-                    <div class="w-full h-fit gap-4 p-4 col-span-3">
-                        <!-- Product -->
-                        <h2 class="text-blue-900 text-xl font-extrabold">Giỏ hàng</h2>
-                        <section>
-
-
-                        </section>
-                        <div class="flex flex-row text-lg font-semibold shadow-md border rounded-sm justify-between py-2 mt-4">
-                            <div class="text-gray-700 py-2 m-2">
-                                <!-- Product Information -->
-                                <div class="flex flex-row">
-                                    <div class="w-28 h-28">
-                                        <img class="w-full h-full" src="https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-masculino/09/NQQ-4635-309/NQQ-4635-309_zoom1.jpg?ts=1675445414&ims=544x">
+    @php
+        $subtotal = 0;
+    @endphp
+    <div class="grid grid-cols-4 max-w-screen-xl xl:mx-auto xl:grid-cols-4 gap-4 py-4">
+        <div>
+            @include("Frontend::profile.sidebar")
+        </div>
+        <div class="bg-white col-span-3 border-[1px] p-5">
+            <h2 class="text-4xl font-extrabold dark:text-white pb-3">Giỏ hàng</h2>
+            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-8">
+                @if(!empty($cart))
+                    <x-splade-form action="{{route('profile.product.cart')}}" method="POST" class="mt-3" :default="$form">
+                        <ul class="border-t border-b border-gray-300 w-full ">
+                            @foreach($cart as $k => $pro)
+                                @php
+                                    $subtotal += $pro['price'] + $pro['amount'];
+                                @endphp
+                                <li class="py-10 flex @if($k%2==1) border-t border-gray-300 @endif">
+                                    <div class="shrink-0">
+                                        <img src="{{$pro['package_course']['image_url']}}"
+                                             alt="{{$pro['product']}} {{$pro['package_course']['name']}} {{$pro['package_course']['time']}}" class="w-32 h-32 object-center object-cover rounded-lg">
                                     </div>
-                                    <div class="flex flex-col gap-1 text-left px-2 flex justify-center">
-                                        <p class="text-lg text-gray-800 font-semibold">Adidas Coreracer Men's Shoes</p>
-                                        <p class="text-xs text-gray-600 font-semibold">Color: <span class="font-normal">Black + Zinc</span></p>
-                                        <p class="text-xs text-gray-600 font-semibold">Size: <span class="font-normal">42</span></p>
+                                    <div class="flex-1 flex-col justify-between relative ml-6">
+                                        <div>
+                                            <div class="grid grid-cols-2 justify-between relative">
+                                                <div class="pr-6">
+                                                    <h3 class="text-sm"><a href="#" class="text-sm text-gray-700 font-semibold">{{$pro['product']}} {{$pro['package_course']['name']}}</a></h3>
+                                                    <p class="text-sm text-gray-500 mt-1">{{$pro['package_course']['time']}}</p>
+                                                </div>
+                                                <p class="text-sm text-right font-semibold">{{number_format($pro['price'],-3,',','.')}}<span style="text-transform: none">đ</span></p>
+                                            </div>
+                                            <div class="mt-0 block absolute top-0 inset-x-1/2">
+                                                <label for="quantity-{{$k}}" class="t">Số lượng</label>
+                                                <select id="quantity-{{$k}}" name="quantity-{{$pro['id']}}" class="text-sm shadow-sm rounded border-slate-400">
+                                                    @for($i = 1; $i <= 10; $i++)
+                                                        <option value="{{$i}}" @if($pro['amount'] == $i) selected="selected" @endif>{{$i}}</option>
+                                                    @endfor
+                                                </select>
+                                                <button type="button" class="mt-3 ml-0 text-sm text-blue-600"><span>Xóa</span></button>
+                                            </div>
+                                        </div>
+                                        <p class="flex text-sm mt-4 text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="flex-shrink-0 w-5 h-5 text-green-600">
+                                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                      clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Còn hàng</span>
+                                        </p>
                                     </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <div class="px-32 mt-8">
+                            <div class="p-8 bg-gray-100 rounded-lg">
+                                <h2 class="t">Tóm tắt</h2>
+                                <div class="flow-root">
+                                    <dl class="text-sm -mt-4 -mb-4">
+                                        <div class="pt-4 pb-4 flex justify-between justify-items-center border-b border-gray-300">
+                                            <dt class="text-gray-500">Thành tiền</dt>
+                                            <dd class="text-black">{{number_format($subtotal,-3,',','.')}}<span style="text-transform: none">đ</span></dd>
+                                        </div>
+                                        <div class="pt-4 pb-4 flex justify-between justify-items-center border-b border-gray-300">
+                                            <dt class="text-gray-500">Phí vận chuyển</dt>
+                                            <dd class="text-black">0<span style="text-transform: none">đ</span></dd>
+                                        </div>
+                                        <div class="pt-4 pb-4 flex justify-between justify-items-center text-base">
+                                            <dt class="font-semibold">Tổng tiền</dt>
+                                            <dd class="font-semibold">{{number_format($subtotal,-3,',','.')}}<span style="text-transform: none">đ</span></dd>
+                                        </div>
+                                    </dl>
                                 </div>
                             </div>
-                            <div class="text-gray-700 text-left px-4 py-2 m-2 flex flex-col justify-center">
-                                <p class="text-gray-600 font-normal text-sm line-through">
-                                    $99.99
-                                    <span class="text-emerald-500 ml-2">(-50% OFF)</span>
+                            <div class="mt-10">
+                                <button type="submit" class="text-base py-4 px-5 bg-blue-600 text-white rounded-md w-full font-semibold">Thanh toán</button>
+                            </div>
+                            <div class="text-sm text-center text-gray-300 mt-5">
+                                <p>or <a href="{{route('profile.product')}}" class="text-sm text-blue-500 font-semibold">Tiếp tục mua hàng <span aria-hidden="true"> →</span>
+                                    </a>
                                 </p>
-                                <p class="text-gray-800 font-normal text-xl">$49.99</p>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <div class="flex flex-column justify-center">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                    <input type="text" readonly="readonly" value="1" class="w-8 h-8 self-center text-gray-900 text-sm outline-none border border-gray-300 rounded-sm">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 5v14M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <button class="">
-                                    <svg class="" height="24px" width="24px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <g>
-                                                    <path
-                                                        d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/>
-                                                    <g>
-                                                        <rect height="241" width="14" x="249" y="160"/>
-                                                        <polygon points="320,160 305.4,160 294.7,401 309.3,401"/>
-                                                        <polygon points="206.5,160 192,160 202.7,401 217.3,401"/>
-                                                    </g>
-                                                </g>
-                                                </svg>
-                                </button>
                             </div>
                         </div>
-
-                        <div class="flex flex-row text-lg font-semibold shadow-md border rounded-sm justify-between py-2 mt-4">
-                            <div class="text-gray-700 py-2 m-2">
-                                <!-- Product Information -->
-                                <div class="flex flex-row">
-                                    <div class="w-28 h-28">
-                                        <img class="w-full h-full" src="https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-masculino/09/NQQ-4635-309/NQQ-4635-309_zoom1.jpg?ts=1675445414&ims=544x">
-                                    </div>
-                                    <div class="flex flex-col gap-1 text-left px-2 flex justify-center">
-                                        <p class="text-lg text-gray-800 font-semibold">Adidas Coreracer Men's Shoes</p>
-                                        <p class="text-xs text-gray-600 font-semibold">Color: <span class="font-normal">Black + Zinc</span></p>
-                                        <p class="text-xs text-gray-600 font-semibold">Size: <span class="font-normal">42</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-gray-700 text-left px-4 py-2 m-2 flex flex-col justify-center">
-                                <p class="text-gray-600 font-normal text-sm line-through">
-                                    $99.99
-                                    <span class="text-emerald-500 ml-2">(-50% OFF)</span>
-                                </p>
-                                <p class="text-gray-800 font-normal text-xl">$49.99</p>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <div class="flex flex-column justify-center">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                    <input type="text" readonly="readonly" value="1" class="w-8 h-8 self-center text-gray-900 text-sm outline-none border border-gray-300 rounded-sm">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 5v14M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <button class="">
-                                    <svg class="" height="24px" width="24px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <g>
-                                                    <path
-                                                        d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/>
-                                                    <g>
-                                                        <rect height="241" width="14" x="249" y="160"/>
-                                                        <polygon points="320,160 305.4,160 294.7,401 309.3,401"/>
-                                                        <polygon points="206.5,160 192,160 202.7,401 217.3,401"/>
-                                                    </g>
-                                                </g>
-                                                </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-row text-lg font-semibold shadow-md border rounded-sm justify-between py-2 mt-4">
-                            <div class="text-gray-700 py-2 m-2">
-                                <!-- Product Information -->
-                                <div class="flex flex-row">
-                                    <div class="w-28 h-28">
-                                        <img class="w-full h-full" src="https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-masculino/09/NQQ-4635-309/NQQ-4635-309_zoom1.jpg?ts=1675445414&ims=544x">
-                                    </div>
-                                    <div class="flex flex-col gap-1 text-left px-2 flex justify-center">
-                                        <p class="text-lg text-gray-800 font-semibold">Adidas Coreracer Men's Shoes</p>
-                                        <p class="text-xs text-gray-600 font-semibold">Color: <span class="font-normal">Black + Zinc</span></p>
-                                        <p class="text-xs text-gray-600 font-semibold">Size: <span class="font-normal">42</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-gray-700 text-left px-4 py-2 m-2 flex flex-col justify-center">
-                                <p class="text-gray-600 font-normal text-sm line-through">
-                                    $99.99
-                                    <span class="text-emerald-500 ml-2">(-50% OFF)</span>
-                                </p>
-                                <p class="text-gray-800 font-normal text-xl">$49.99</p>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <div class="flex flex-column justify-center">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                    <input type="text" readonly="readonly" value="1" class="w-8 h-8 self-center text-gray-900 text-sm outline-none border border-gray-300 rounded-sm">
-                                    <button class="w-5 h-5 self-center rounded-full border border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 5v14M5 12h14"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="text-gray-700 px-4 py-2 m-2 flex flex-row justify-center">
-                                <button class="">
-                                    <svg class="" height="24px" width="24px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <g>
-                                                    <path
-                                                        d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/>
-                                                    <g>
-                                                        <rect height="241" width="14" x="249" y="160"/>
-                                                        <polygon points="320,160 305.4,160 294.7,401 309.3,401"/>
-                                                        <polygon points="206.5,160 192,160 202.7,401 217.3,401"/>
-                                                    </g>
-                                                </g>
-                                                </svg>
-                                </button>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <!-- Purchase Resume -->
-                    <div class="flex flex-col w-full h-fit gap-4 p-4">
-                        <p class="text-blue-900 text-xl font-extrabold">Purchase Resume</p>
-                        <div class="flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
-                            <div class="flex flex-row justify-between">
-                                <p class="text-gray-600">Subtotal (2 Items)</p>
-                                <p class="text-end font-bold">$99.98</p>
-                            </div>
-                            <hr class="bg-gray-200 h-0.5">
-                            <div class="flex flex-row justify-between">
-                                <p class="text-gray-600">Freight</p>
-                                <div>
-                                    <p class="text-end font-bold">$3.90</p>
-                                    <p class="text-gray-600 text-sm font-normal">Arrives on Jul 16</p>
-                                </div>
-                            </div>
-                            <hr class="bg-gray-200 h-0.5">
-                            <div class="flex flex-row justify-between">
-                                <p class="text-gray-600">Discount Coupon</p>
-                                <a class="text-gray-500 text-base underline" href="#">Add</a>
-                            </div>
-                            <hr class="bg-gray-200 h-0.5">
-                            <div class="flex flex-row justify-between">
-                                <p class="text-gray-600">Total</p>
-                                <div>
-                                    <p class="text-end font-bold">$103.88</p>
-                                </div>
-                            </div>
-                            <div class="gap-2">
-                                <button class="transition-colors text-sm bg-blue-600 hover:bg-blue-700 p-2 rounded-sm w-full text-white text-hover shadow-md mb-5">
-                                    FINISH
-                                </button>
-                                <button class="transition-colors text-sm bg-white border border-gray-600 p-2 rounded-sm w-full text-gray-700 text-hover shadow-md">
-                                    ADD MORE PRODUCTS
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </x-splade-form>
+                @endif
             </div>
         </div>
     </div>

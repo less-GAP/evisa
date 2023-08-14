@@ -49,26 +49,29 @@ class Carts extends Model
 //        'password' => 'hashed',
     ];
 
-//    protected $appends = [
-//        'shipping_name',
-//        'payment_name',
-//        'country_name',
-//        'province_name',
-//        'district_name',
-//        'ward_name',
-//    ];
-//
-//    public function getShippingNameAttribute()
-//    {
-//        $data = ShippingMethod::where('id', $this->shipping_id)->first();
-//        return $data->name;
-//    }
-//
-//    public function getPaymentNameAttribute()
-//    {
-//        $data = PaymentMethod::where('id', $this->payment_id)->first();
-//        return $data->name;
-//    }
+    protected $appends = [
+        'product',
+        'package_course'
+    ];
+
+
+    public function getProductAttribute()
+    {
+        if ($this->product_id != '') {
+            $data = Product::where('id', $this->product_id)->first();
+            return $data->name;
+        }
+        return '';
+    }
+
+    public function getPackageCourseAttribute()
+    {
+        if ($this->package_course_id != '') {
+            return PackageCourse::where('id', $this->package_course_id)->first()->toArray();
+        }
+        return [];
+
+    }
 //
 //    public function getCountryNameAttribute()
 //    {

@@ -1,10 +1,10 @@
 @extends("Frontend::layout.index")
 @section('content')
-    <div class="grid grid-cols-4 max-w-screen-xl h-screen xl:mx-auto xl:grid-cols-4 gap-4 py-4">
+    <div class="grid grid-cols-4 max-w-screen-xl xl:mx-auto xl:grid-cols-4 gap-4 py-4">
         <div>
             @include("Frontend::profile.sidebar")
         </div>
-        <div class="bg-white h-screen col-span-3 border-[1px] p-5">
+        <div class="bg-white col-span-3 border-[1px] p-5">
             <h2 class="text-4xl font-extrabold dark:text-white pb-5">Danh sách sản phẩm</h2>
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
                 @if(!empty($products))
@@ -18,11 +18,12 @@
                                 {{$pro['products']['name']}}
                             </h3>
                             <span aria-hidden="true" class="text-gray-400 text-sm">{{$pro['name'].' '.$pro['time']}}</span>
-                            <p class="mt-1 text-lg font-medium text-gray-900">{{number_format($pro['price'],-3,',','.')}}</p>
+                            <p class="mt-1 text-lg font-medium text-gray-900">{{number_format($pro['price'],-3,',','.')}}<span style="text-transform: none">đ</span></p>
                         </a>
                     @endforeach
                 @endif
             </div>
         </div>
+    </div>
 @endsection
 

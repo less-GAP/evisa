@@ -33,44 +33,46 @@
                             </button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 gap-x-5 gap-y-10 xl:gap-x-4">
-                        <div class="relative py-12 lg:py-16 2xl:py-20 package_includes">
-                            <div id="product-nav-{{$customer_info['id']}}" class="product-nav">
-                                <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-                                    <div class="swiper-wrapper !h-auto" id="swiper-wrapper" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(335.143px, 0px, 0px);">
-                                        @foreach($product['pros'] as $k => $pro)
-                                            <div class="swiper-slide @if($k == 0) swiper-slide-active @endif" role="group" aria-label="{{$k+1}} / {{count($product['products'])}}" style="width: 163.429px; margin-right: 60px;">
-                                                <div class="product-include">
-                                                    <a data-target="#product-{{$customer_info['id']}}-{{$product['id']}}{{$k+1}}" @if($k == 0) class="active" @endif>
-                                                        <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
-                                                            <img src="{{$pro['image_url']}}" alt="{{$pro['name']}}">
-                                                        </div>
-                                                        <div class="w-full mt-4 text-center lg:mt-6 name">{{$product['name']}} - {{$pro['name']}}</div>
-                                                    </a>
+                    @if(!empty($product['pros']))
+                        <div class="grid grid-cols-1 gap-x-5 gap-y-10 xl:gap-x-4">
+                            <div class="relative py-12 lg:py-16 2xl:py-20 package_includes">
+                                <div id="product-nav-{{$customer_info['id']}}" class="product-nav">
+                                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                        <div class="swiper-wrapper !h-auto" id="swiper-wrapper" aria-live="polite" style="transition-duration: 0ms; transform: translate3d(335.143px, 0px, 0px);">
+                                            @foreach($product['pros'] as $k => $pro)
+                                                <div class="swiper-slide @if($k == 0) swiper-slide-active @endif" role="group" aria-label="{{$k+1}} / {{count($product['products'])}}" style="width: 163.429px; margin-right: 60px;">
+                                                    <div class="product-include">
+                                                        <a data-target="#product-{{$customer_info['id']}}-{{$product['id']}}{{$k+1}}" @if($k == 0) class="active" @endif>
+                                                            <div class="flex items-center justify-center w-12 h-12 mx-auto lg:w-32 lg:h-32 img">
+                                                                <img src="{{$pro['image_url']}}" alt="{{$pro['name']}}">
+                                                            </div>
+                                                            <div class="w-full mt-4 text-center lg:mt-6 name">{{$product['name']}} - {{$pro['name']}}</div>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                            </div>
-                            <div id="product-tab-{{$customer_info['id']}}" class="mt-10 text-xl product-info md:text-xl product-tab">
-                                @foreach($product['pros'] as $k => $pro)
-                                    <div class="tab @if($k == 0) active @endif" id="product-{{$customer_info['id']}}-{{$product['id']}}{{$k+1}}">
-                                        <div class="items-center row">
-                                            <div class="w-full col md:w-1/2">
-                                                <div class="product-detail xl:pr-10 text-sm" style="color: #666666;">
-                                                    {!! $pro['description'] !!}
+                                            @endforeach
+                                        </div>
+                                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                                </div>
+                                <div id="product-tab-{{$customer_info['id']}}" class="mt-10 text-xl product-info md:text-xl product-tab">
+                                    @foreach($product['pros'] as $k => $pro)
+                                        <div class="tab @if($k == 0) active @endif" id="product-{{$customer_info['id']}}-{{$product['id']}}{{$k+1}}">
+                                            <div class="items-center row">
+                                                <div class="w-full col md:w-1/2">
+                                                    <div class="product-detail xl:pr-10 text-sm" style="color: #666666;">
+                                                        {!! $pro['description'] !!}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="w-full mt-5 mt:md-0 col md:w-1/2">
-                                                <img src="{{$pro['image_url']}}" class="xl:rounded-[40px] rounded-2xl" alt="">
+                                                <div class="w-full mt-5 mt:md-0 col md:w-1/2">
+                                                    <img src="{{$pro['image_url']}}" class="xl:rounded-[40px] rounded-2xl" alt="">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </x-splade-form>
             @endif
         </div>
@@ -136,5 +138,6 @@
             });
             }
         </x-splade-script>
+    </div>
 @endsection
 
