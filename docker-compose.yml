@@ -17,8 +17,6 @@ services:
         container_name: evisa
         depends_on:
             - evisa_app
-        ports:
-            - 9100:9100
         volumes:
             - ./public:/var/www/public
             - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
