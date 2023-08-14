@@ -27,7 +27,11 @@ touch database.sqlite
 ```bash
 sh dev.sh
 ```
+#### Init database and data
 
+```bash
+sh init.sh
+```
 * [Frontend url] (http://localhost:9100/)
 * [Admin url] (http://localhost:9200/)
 

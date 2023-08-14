@@ -75,7 +75,7 @@ function calculateFee() {
             </div>
             <div class="bg-blue-100 " style="padding:50px">
                 <a-steps
-                    style="width:600px;margin:0 auto"
+                    class="w-full lg:w-[600px] m-auto"
                     v-model:current="current"
                     status="success"
                     :items="[
@@ -101,7 +101,7 @@ function calculateFee() {
                 <a-card>
 
                     <a-row v-show="current ==0" :gutter="50">
-                        <a-col :span="16">
+                        <a-col :xs="24" :xl="16">
                             <a-form-item props="number_of_visa" :rules="[{ required: true }]"
                                          label="Number of applicants">
                                 <a-input-number class="w-[200px] pl-5" :min="1" :max="5"
@@ -195,22 +195,24 @@ function calculateFee() {
                             </a-form-item>
 
                         </a-col>
-                        <a-col :span="8">
+                        <a-col :xs="24" :xl="8">
                             <a-descriptions title="SUMMARY" :column="1" bordered>
                                 <a-descriptions-item label="TOTAL E-VISA FEES:"><b>${{ calculateFee() }} US</b>
                                 </a-descriptions-item>
                             </a-descriptions>
-                            <button @click="current+=1" :disabled="!formState.date_arrival || !formState.entry_port"
-                                    style="margin-top:50px" type="button"
-                                    class="text-white disabled:!bg-blue-300 mt-50 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                Next Step
-                            </button>
+                            <p class="text-right">
+                                <button @click="current+=1" :disabled="!formState.date_arrival || !formState.entry_port"
+                                        style="margin-top:50px" type="button"
+                                        class="text-white disabled:!bg-blue-300 mt-50 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                    Next Step
+                                </button>
                             <div class="fS1_fe">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
+                            </p>
                         </a-col>
                     </a-row>
                     <a-row v-show="current ==1" :gutter="50">
 
-                        <a-col :span="16">
+                        <a-col :xs="24" :xl="16">
                             <a-form-item prop="contact_name" label="Contact Name"
                                          :rules="[{ required: true }]">
                                 <a-input v-model:value="formState.contact_name"/>
@@ -234,7 +236,7 @@ function calculateFee() {
                             </a-tabs>
 
                         </a-col>
-                        <a-col :span="8">
+                        <a-col :xs="24" :xl="8">
                             <a-descriptions title="SUMMARY" :column="1" bordered>
                                 <a-descriptions-item label="TOTAL E-VISA FEES:"><b>${{ calculateFee() }} US</b>
                                 </a-descriptions-item>
