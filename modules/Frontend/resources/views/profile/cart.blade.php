@@ -38,7 +38,7 @@
                                                         <option value="{{$i}}" @if($pro['amount'] == $i) selected="selected" @endif>{{$i}}</option>
                                                     @endfor
                                                 </select>
-                                                <button type="button" class="mt-3 ml-0 text-sm text-blue-600"><span>Xóa</span></button>
+                                                <a href="{{url('profile/cart/'.$pro['product_id'].'/'.$pro['package_course_id'])}}" class="inline-block mt-3 ml-0 text-sm text-blue-600"><span>Xóa</span></a>
                                             </div>
                                         </div>
                                         <p class="flex text-sm mt-4 text-gray-500">

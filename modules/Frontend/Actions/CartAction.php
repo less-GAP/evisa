@@ -18,13 +18,14 @@ class CartAction
     {
         $cart = [];
         $cart = Carts::where('customer_id', Auth::guard('frontend')->id())
-            ->get()->toArray();
+            ->orderBy('product_id', 'ASC')
+            ->get()
+            ->toArray();
         return view('Frontend::profile.cart', [
             'cart' => $cart,
             'form' => [],
         ]);
     }
-
 
     public function update(Request $request)
     {
@@ -49,6 +50,21 @@ class CartAction
         }
 
         Splade::toast('Thêm vào giỏ hàng thành công!');
+
+        return redirect()->back();
+    }
+
+    public function delete(Request $request)
+    {
+        $product_id = $request->route('product_id');
+        $package_course_id = $request->route('package_course_id');
+
+        $cart = Carts::where('customer_id', Auth::guard('frontend')->id())
+            ->where('product_id', $product_id)
+            ->where('package_course_id', $package_course_id)
+            ->delete();
+
+        Splade::toast('Xóa sản phẩm thành công!');
 
         return redirect()->back();
     }

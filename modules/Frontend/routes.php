@@ -38,6 +38,8 @@ Route::middleware(['splade'])->group(function () {
         Route::get('profile/product/{id}', ProductAction::class . '@detail')->name('profile.product.detail');
 
         Route::post('profile/cart', CartAction::class . '@update')->name('profile.product.cart');
+
+        Route::get('profile/cart/{product_id}/{package_course_id}', CartAction::class . '@delete')->name('profile.product.delete-cart');
     });
 
     Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
