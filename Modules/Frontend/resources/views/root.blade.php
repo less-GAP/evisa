@@ -5,51 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E VISA</title>
-    <style type="text/css">
-        img.wp-smiley,
-        img.emoji {
-            display: inline !important;
-            border: none !important;
-            box-shadow: none !important;
-            height: 1em !important;
-            width: 1em !important;
-            margin: 0 0.07em !important;
-            vertical-align: -0.1em !important;
-            background: none !important;
-            padding: 0 !important;
-        }
-    </style>
-    <link rel='stylesheet' id='wp-block-library-css'
-        href='https://evisa.usa-server.com/wp-includes/css/dist/block-library/style.min.css?ver=6.3' type='text/css'
-        media='all' />
-    <style id='classic-theme-styles-inline-css' type='text/css'>
-        /*! This file is auto-generated */
-        .wp-block-button__link {
-            color: #fff;
-            background-color: #32373c;
-            border-radius: 9999px;
-            box-shadow: none;
-            text-decoration: none;
-            padding: calc(.667em + 2px) calc(1.333em + 2px);
-            font-size: 1.125em
-        }
-
-        .wp-block-file__button {
-            background: #32373c;
-            color: #fff;
-            text-decoration: none
-        }
-    </style>
     <link rel="icon" href="/images/favicon.png" sizes="32x32">
     <link rel='stylesheet' id='lessGAP-theme-style-css' href='/static/style.css?ver=6.3' type='text/css' media='all' />
     <link rel='stylesheet' id='lessGAP-font-NeueKabel-css'
-        href='https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/webfonts/NeueKabel/stylesheet.css?ver=1691129927'
+        href='{{ asset('static/webfonts/NeueKabel/stylesheet.css') }}'
         type='text/css' media='all' />
     <link rel='stylesheet' id='lessGAP-font-Fontspring-DEMO-css'
-        href='https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/webfonts/Fontspring-DEMO/stylesheet.css?ver=1691132468'
+        href='{{ asset('static/webfonts/Fontspring-DEMO/stylesheet.css') }}'
         type='text/css' media='all' />
     <link rel='stylesheet' id='lessGAP-fontawesome-css'
-        href='https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/css/all.min.css?ver=1691127385'
+        href='{{ asset('static/css/all.min.css') }}'
         type='text/css' media='all' />
     <meta name="generator" content="WordPress 6.3" />
     <link rel="canonical" href="https://evisa.usa-server.com/" />
@@ -113,7 +78,7 @@
                             </div>
                             <ul
                                 class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <div class="relative lg:pr-6">
                                         <a href="#"
                                             class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Vietnam
@@ -121,20 +86,20 @@
                                         <!-- <span class="absolute right-[18px] lg:right-1 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i class="text-xs fa-solid fa-chevron-down"></i></span> -->
                                     </div>
                                     <!-- <ul class="top-0 z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:opacity-0 lg:pointer-events-none lg:w-max right-full">
-                                    <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                    <li class="relative bg-white">
                                         <a href="#" class="block px-5 py-2 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-[14px] whitespace-nowrap">E-visa fees</a>
                                     </li>
-                                    <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                    <li class="relative bg-white">
                                         <a href="#" class="block px-5 py-2 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-[14px] whitespace-nowrap">Visa on arrival fees</a>
                                     </li>
                                 </ul> -->
                                 </li>
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Visa
                                         on arrival</a>
                                 </li>
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Emergency
                                         visa</a>
@@ -151,12 +116,12 @@
                             </div>
                             <ul
                                 class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">E-visa
                                         fees</a>
                                 </li>
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Visa
                                         on arrival fees</a>
@@ -175,12 +140,12 @@
                             </div>
                             <ul
                                 class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Eligible
                                         ports of entry</a>
                                 </li>
-                                <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <li class="relative bg-white">
                                     <a href="#"
                                         class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Eligible
                                         countries</a>
@@ -188,7 +153,7 @@
                             </ul>
                         </li>
                         <li class="relative">
-                            <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">Apply online</a>
+                            <a href="{{ route('apply') }}" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">Apply online</a>
                         </li>
                         <li class="relative group navbar-toggle">
                             <button class="relative hidden overflow-hidden rounded-full outline-none lg:block">

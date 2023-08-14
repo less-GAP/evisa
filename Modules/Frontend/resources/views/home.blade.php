@@ -1,24 +1,22 @@
-
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
             <section class="relative banner">
                 <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
                     <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/banner.png"
-                         alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
+                        alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
                 </div>
                 <div class="container relative z-20 px-4 py-20 mx-auto content lg:py-32 xl:pt-32 xl:pb-56">
                     <!-- <legend class="text-white text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] 2xl:text-[100px] uppercase font-black italic leading-none">Make your dream</br>vacation happen!</legend> -->
-                    <form method="post" class="2xl:text-lg">
+                    <form method="post" action="{{ route('apply') }}" class="2xl:text-lg">
                         <div class="flex flex-wrap -mx-4">
                             <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                                 <div class="has-feedback">
                                     <label class="block mb-2 font-semibold uppercase" for="applicant">Number of
                                         applicants</label>
                                     <select name="applicant" id="applicant"
-                                            class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
-                                            placeholder="Select number of applicants">
-                                        <!-- <option></option> -->
+                                        class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
+                                        placeholder="Select number of applicants">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -45,97 +43,99 @@
                                     <label class="block mb-2 font-semibold uppercase" for="visatype">Type of
                                         visa</label>
                                     <select name="visatype" id="visatype"
-                                            class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
-                                            placeholder="Select type of visa">
+                                        class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
+                                        placeholder="Select type of visa">
                                         <!-- <option></option> -->
                                         <option value="evisa1m">E-Visa (1 Month Single Entry):</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0">
-                                <span class="font-semibold uppercase form-label">Processing Time</span>
-                                <label class="flex p-2 pl-0 cursor-pointer">
-                                    <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
-                                        <input type="radio" class="hidden peer" name="processing" checked
-                                               data-time="Delivery Time: 14:30 - Friday, August 11 2023">
-                                        <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
-                                             viewBox="0 0 172 172">
-                                            <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
-                                               font-weight="none" font-size="none" text-anchor="none"
-                                               style="mix-blend-mode:normal">
-                                                <path d="M0 172V0h172v172z"/>
-                                                <path
-                                                    d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
-                                                    fill="currentColor" stroke-width="1"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <span class="select-none">Standard processing (5-7 working days)</span>
-                                </label>
-                                <label class="flex p-2 pl-0 cursor-pointer">
-                                    <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
-                                        <input type="radio" class="hidden peer" name="processing"
-                                               data-time="Delivery Time: 14:30 - Friday, August 11 2023">
-                                        <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
-                                             viewBox="0 0 172 172">
-                                            <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
-                                               font-weight="none" font-size="none" text-anchor="none"
-                                               style="mix-blend-mode:normal">
-                                                <path d="M0 172V0h172v172z"/>
-                                                <path
-                                                    d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
-                                                    fill="currentColor" stroke-width="1"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <span class="select-none">Urgent 2 Working Days (Mon-Fri)</span>
-                                </label>
-                                <label class="flex p-2 pl-0 cursor-pointer">
-                                    <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
-                                        <input type="radio" class="hidden peer" name="processing"
-                                               data-time="Delivery Time: 14:30 - Friday, August 11 2023">
-                                        <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
-                                             viewBox="0 0 172 172">
-                                            <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
-                                               font-weight="none" font-size="none" text-anchor="none"
-                                               style="mix-blend-mode:normal">
-                                                <path d="M0 172V0h172v172z"/>
-                                                <path
-                                                    d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
-                                                    fill="currentColor" stroke-width="1"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <span class="select-none">Urgent 1 Working Day (Mon-Fri)</span>
-                                </label>
-                                <label class="flex p-2 pl-0 cursor-pointer">
-                                    <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
-                                        <input type="radio" class="hidden peer" name="processing"
-                                               data-time="Delivery Time: 14:30 - Friday, August 11 2023">
-                                        <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
-                                             viewBox="0 0 172 172">
-                                            <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
-                                               font-weight="none" font-size="none" text-anchor="none"
-                                               style="mix-blend-mode:normal">
-                                                <path d="M0 172V0h172v172z"/>
-                                                <path
-                                                    d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
-                                                    fill="currentColor" stroke-width="1"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <span class="select-none">Same Day (4-8 Working Hours)</span>
-                                </label>
+                            <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 xl:flex xl:justify-center">
+                                <div class="inner">
+                                    <span class="font-semibold uppercase form-label">Processing Time</span>
+                                    <label class="flex p-2 pl-0 cursor-pointer">
+                                        <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
+                                            <input type="radio" class="hidden peer" name="processing" checked
+                                                data-time="Delivery Time: 14:30 - Friday, August 11 2023">
+                                            <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
+                                                viewBox="0 0 172 172">
+                                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
+                                                    font-weight="none" font-size="none" text-anchor="none"
+                                                    style="mix-blend-mode:normal">
+                                                    <path d="M0 172V0h172v172z" />
+                                                    <path
+                                                        d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
+                                                        fill="currentColor" stroke-width="1" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span class="select-none">Standard processing (5-7 working days)</span>
+                                    </label>
+                                    <label class="flex p-2 pl-0 cursor-pointer">
+                                        <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
+                                            <input type="radio" class="hidden peer" name="processing"
+                                                data-time="Delivery Time: 14:30 - Friday, August 11 2023">
+                                            <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
+                                                viewBox="0 0 172 172">
+                                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
+                                                    font-weight="none" font-size="none" text-anchor="none"
+                                                    style="mix-blend-mode:normal">
+                                                    <path d="M0 172V0h172v172z" />
+                                                    <path
+                                                        d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
+                                                        fill="currentColor" stroke-width="1" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span class="select-none">Urgent 2 Working Days (Mon-Fri)</span>
+                                    </label>
+                                    <label class="flex p-2 pl-0 cursor-pointer">
+                                        <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
+                                            <input type="radio" class="hidden peer" name="processing"
+                                                data-time="Delivery Time: 14:30 - Friday, August 11 2023">
+                                            <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
+                                                viewBox="0 0 172 172">
+                                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
+                                                    font-weight="none" font-size="none" text-anchor="none"
+                                                    style="mix-blend-mode:normal">
+                                                    <path d="M0 172V0h172v172z" />
+                                                    <path
+                                                        d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
+                                                        fill="currentColor" stroke-width="1" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span class="select-none">Urgent 1 Working Day (Mon-Fri)</span>
+                                    </label>
+                                    <label class="flex p-2 pl-0 cursor-pointer">
+                                        <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
+                                            <input type="radio" class="hidden peer" name="processing"
+                                                data-time="Delivery Time: 14:30 - Friday, August 11 2023">
+                                            <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
+                                                viewBox="0 0 172 172">
+                                                <g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none"
+                                                    font-weight="none" font-size="none" text-anchor="none"
+                                                    style="mix-blend-mode:normal">
+                                                    <path d="M0 172V0h172v172z" />
+                                                    <path
+                                                        d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z"
+                                                        fill="currentColor" stroke-width="1" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span class="select-none">Same Day (4-8 Working Hours)</span>
+                                    </label>
+                                </div>
                             </div>
                             <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 lg:mt-0">
                                 <div class="font-semibold uppercase">Service fee:</div>
-                                <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px]"><span id="lblTotal"
-                                                                                                  class="">US$98.00</span>
+                                <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span
+                                        id="lblTotal" class="">US$98.00</span>
                                 </div>
                                 <div class="mt-2 text-base">*This fee excludes US $25 for the government e-visa fees.
                                 </div>
                                 <a href="/apply"
-                                   class="flex items-center justify-center p-4 mt-5 text-2xl text-white bg-black 2xl:text-3xl lg:mt-10">Apply
+                                    class="flex items-center justify-center p-4 mt-5 text-2xl text-white bg-black 2xl:text-3xl lg:mt-10">Apply
                                     Now</a>
                             </div>
                         </div>
@@ -150,19 +150,22 @@
                             class="box flex items-center bg-[#f6f6f6] transition  lg:rounded-2xl rounded-xl relative overflow-hidden cursor-pointer p-5 lg:px-10 lg:py-8 h-full">
                             <!-- <div class="number relative z-10 text-3xl md:text-[42px] 2xl:text-[80px] mr-5 -mb-1 md:-mb-2">1</div> -->
                             <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl lg:text-left">
-                                <strong>300K</strong> Happy Customers</p>
+                                <strong>300K</strong> Happy Customers
+                            </p>
                         </div>
                         <div
                             class="box flex items-center bg-[#f6f6f6] transition  lg:rounded-2xl rounded-xl relative overflow-hidden cursor-pointer p-5 lg:px-10 lg:py-8 h-full">
                             <!-- <div class="number relative z-10 text-3xl md:text-[42px] 2xl:text-[80px] mr-5 -mb-1 md:-mb-2">2</div> -->
                             <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl lg:text-left">
-                                <strong>99%</strong> On Time Delivery</p>
+                                <strong>99%</strong> On Time Delivery
+                            </p>
                         </div>
                         <div
                             class="box flex items-center bg-[#f6f6f6] transition  lg:rounded-2xl rounded-xl relative overflow-hidden cursor-pointer p-5 lg:px-10 lg:py-8 h-full">
                             <!-- <div class="number relative z-10 text-3xl md:text-[42px] 2xl:text-[80px] mr-5 -mb-1 md:-mb-2">3</div> -->
                             <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl lg:text-left">
-                                <strong>15</strong> Years of Experience</p>
+                                <strong>15</strong> Years of Experience
+                            </p>
                         </div>
                         <div
                             class="box flex items-center bg-[#f6f6f6] transition  lg:rounded-2xl rounded-xl relative overflow-hidden cursor-pointer p-5 lg:px-10 lg:py-8 h-full">
@@ -181,7 +184,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -190,7 +194,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     GET YOUR VISA</h2>
                             </div>
                         </div>
@@ -208,11 +213,11 @@
                             <div class="mt-5 tabs">
                                 <div class="flex flex-wrap -mx-2 tab-navs">
                                     <a href="javascript:void(0)"
-                                       class="block py-2 px-6 bg-[#f6f6f6] transition m-2 rounded-md js-tab active"
-                                       data-tab-id="tabevisa">E-visa</a>
+                                        class="block py-2 px-6 bg-[#f6f6f6] transition m-2 rounded-md js-tab active"
+                                        data-tab-id="tabevisa">E-visa</a>
                                     <a href="javascript:void(0)"
-                                       class="block py-2 px-6 bg-[#f6f6f6] transition m-2 rounded-md js-tab"
-                                       data-tab-id="tabvisaonarrival">Visa on arrival</a>
+                                        class="block py-2 px-6 bg-[#f6f6f6] transition m-2 rounded-md js-tab"
+                                        data-tab-id="tabvisaonarrival">Visa on arrival</a>
                                 </div>
                                 <div class="tab-contents">
                                     <div class="pt-4 js-tab-content" data-tab-id="tabevisa">
@@ -277,8 +282,7 @@
                             </div>
                         </div>
                         <div class="w-full px-4 mt-12 text-center xl:w-1/4 2xl:w-5/12 xl:text-left xl:mt-0">
-                            <img
-                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/passport.png"
+                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/passport.png"
                                 alt="passport-eVisa"
                                 class="w-[200px] md:w-[375px] xl:ml-32 max-w-full inline-block grayscale">
                         </div>
@@ -290,7 +294,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(35,171,169) 0%, rgb(228,204,55) 25%, rgb(179,36,107) 50%, rgb(228,204,55) 75%, rgb(35,171,169) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(35,171,169) 0%, rgb(228,204,55) 25%, rgb(179,36,107) 50%, rgb(228,204,55) 75%, rgb(35,171,169) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -299,7 +304,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     Visa information by countries</h2>
                             </div>
                         </div>
@@ -313,8 +319,8 @@
                                 <div class="relative h-40 overflow-hidden rounded-md top">
                                     <a href="#">
                                         <img class="absolute top-0 left-0 object-cover w-full h-full"
-                                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-states.webp"
-                                             alt="">
+                                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-states.webp"
+                                            alt="">
                                     </a>
                                 </div>
                                 <div class="relative p-3 bottom">
@@ -324,7 +330,7 @@
                                     <h4 class="text-lg font-black uppercase opacity-80 lg:text-xl"><a href="#">United
                                             States</a></h4>
                                     <a href="#"
-                                       class="transition border-b border-transparent border-solid group-hover:border-black">Learn
+                                        class="transition border-b border-transparent border-solid group-hover:border-black">Learn
                                         More</a>
                                 </div>
                                 <a href="#" class="absolute top-0 left-0 z-50 w-full h-full"></a>
@@ -336,8 +342,8 @@
                                 <div class="relative h-40 overflow-hidden rounded-md top">
                                     <a href="#">
                                         <img class="absolute top-0 left-0 object-cover w-full h-full"
-                                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-canada.webp"
-                                             alt="">
+                                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-canada.webp"
+                                            alt="">
                                     </a>
                                 </div>
                                 <div class="relative p-3 bottom">
@@ -347,7 +353,7 @@
                                     <h4 class="text-lg font-black uppercase opacity-80 lg:text-xl"><a
                                             href="#">Canada</a></h4>
                                     <a href="#"
-                                       class="transition border-b border-transparent border-solid group-hover:border-black">Learn
+                                        class="transition border-b border-transparent border-solid group-hover:border-black">Learn
                                         More</a>
                                 </div>
                                 <a href="#" class="absolute top-0 left-0 z-50 w-full h-full"></a>
@@ -359,8 +365,8 @@
                                 <div class="relative h-40 overflow-hidden rounded-md top">
                                     <a href="#">
                                         <img class="absolute top-0 left-0 object-cover w-full h-full"
-                                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-australia.webp"
-                                             alt="">
+                                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-australia.webp"
+                                            alt="">
                                     </a>
                                 </div>
                                 <div class="relative p-3 bottom">
@@ -370,7 +376,7 @@
                                     <h4 class="text-lg font-black uppercase opacity-80 lg:text-xl"><a
                                             href="#">Australia</a></h4>
                                     <a href="#"
-                                       class="transition border-b border-transparent border-solid group-hover:border-black">Learn
+                                        class="transition border-b border-transparent border-solid group-hover:border-black">Learn
                                         More</a>
                                 </div>
                                 <a href="#" class="absolute top-0 left-0 z-50 w-full h-full"></a>
@@ -382,8 +388,8 @@
                                 <div class="relative h-40 overflow-hidden rounded-md top">
                                     <a href="#">
                                         <img class="absolute top-0 left-0 object-cover w-full h-full"
-                                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-kingdom.webp"
-                                             alt="">
+                                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-kingdom.webp"
+                                            alt="">
                                     </a>
                                 </div>
                                 <div class="relative p-3 bottom">
@@ -393,7 +399,7 @@
                                     <h4 class="text-lg font-black uppercase opacity-80 lg:text-xl"><a href="#">United
                                             Kingdom</a></h4>
                                     <a href="#"
-                                       class="transition border-b border-transparent border-solid group-hover:border-black">Learn
+                                        class="transition border-b border-transparent border-solid group-hover:border-black">Learn
                                         More</a>
                                 </div>
                                 <a href="#" class="absolute top-0 left-0 z-50 w-full h-full"></a>
@@ -405,8 +411,8 @@
                                 <div class="relative h-40 overflow-hidden rounded-md top">
                                     <a href="#">
                                         <img class="absolute top-0 left-0 object-cover w-full h-full"
-                                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-india.webp"
-                                             alt="">
+                                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-india.webp"
+                                            alt="">
                                     </a>
                                 </div>
                                 <div class="relative p-3 bottom">
@@ -416,7 +422,7 @@
                                     <h4 class="text-lg font-black uppercase opacity-80 lg:text-xl"><a href="#">India</a>
                                     </h4>
                                     <a href="#"
-                                       class="transition border-b border-transparent border-solid group-hover:border-black">Learn
+                                        class="transition border-b border-transparent border-solid group-hover:border-black">Learn
                                         More</a>
                                 </div>
                                 <a href="#" class="absolute top-0 left-0 z-50 w-full h-full"></a>
@@ -426,7 +432,7 @@
                     <div class="mt-10">
                         <div class="text-center">
                             <a href="javascript:void(0)" data-toggle="list-country"
-                               class="inline-block px-6 pt-3 pb-2 text-lg font-semibold text-white uppercase bg-black md:px-12 xl:px-20 js-toggle">View
+                                class="inline-block px-6 pt-3 pb-2 text-lg font-semibold text-white uppercase bg-black md:px-12 xl:px-20 js-toggle">View
                                 more</a>
                         </div>
                         <div class="hidden js-toggle-content" data-toggle="list-country">
@@ -723,7 +729,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -732,7 +739,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     Why Apply with us</h2>
                             </div>
                         </div>
@@ -763,7 +771,7 @@
                     <div class="mt-10">
                         <div class="text-center">
                             <a href="/apply"
-                               class="inline-block px-6 pt-3 pb-2 text-lg font-semibold text-white uppercase bg-black md:px-12 xl:px-20">Apply
+                                class="inline-block px-6 pt-3 pb-2 text-lg font-semibold text-white uppercase bg-black md:px-12 xl:px-20">Apply
                                 now</a>
                         </div>
                     </div>
@@ -774,7 +782,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(222,255,67) 0%, rgb(0,85,193) 25%, rgb(115,255,87) 50%, rgb(0,85,193) 75%, rgb(222,255,67) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(222,255,67) 0%, rgb(0,85,193) 25%, rgb(115,255,87) 50%, rgb(0,85,193) 75%, rgb(222,255,67) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -783,7 +792,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     Visa information centre</h2>
                             </div>
                         </div>
@@ -797,16 +807,18 @@
                                     <div
                                         class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                         <a href="#">
-                                            <img
-                                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/e-visa.webp"
+                                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/e-visa.webp"
                                                 alt="news-eVisa"
                                                 class="absolute top-0 left-0 object-cover w-full h-full">
                                         </a>
                                     </div>
                                     <div class="mt-4 post-content">
-                                        <h4 class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
-                                            <a href="#" class="text-inherit">E-visa</a></h4>
-                                        <p class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
+                                        <h4
+                                            class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
+                                            <a href="#" class="text-inherit">E-visa</a>
+                                        </h4>
+                                        <p
+                                            class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
                                             The easiest and most convenient way to get a visa for Vietnam with a simple
                                             form to fill in.</p>
                                     </div>
@@ -819,16 +831,18 @@
                                     <div
                                         class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                         <a href="#">
-                                            <img
-                                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-on-arrival.webp"
+                                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-on-arrival.webp"
                                                 alt="news-eVisa"
                                                 class="absolute top-0 left-0 object-cover w-full h-full">
                                         </a>
                                     </div>
                                     <div class="mt-4 post-content">
-                                        <h4 class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
-                                            <a href="#" class="text-inherit">Visa On Arrival</a></h4>
-                                        <p class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
+                                        <h4
+                                            class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
+                                            <a href="#" class="text-inherit">Visa On Arrival</a>
+                                        </h4>
+                                        <p
+                                            class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
                                             Visa on arrival is an alternative way to get a visa for Vietnam for those
                                             who travel on a tour package with local operator...</p>
                                     </div>
@@ -841,16 +855,18 @@
                                     <div
                                         class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                         <a href="#">
-                                            <img
-                                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-update.webp"
+                                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-update.webp"
                                                 alt="news-eVisa"
                                                 class="absolute top-0 left-0 object-cover w-full h-full">
                                         </a>
                                     </div>
                                     <div class="mt-4 post-content">
-                                        <h4 class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
-                                            <a href="#" class="text-inherit">News & Updates</a></h4>
-                                        <p class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
+                                        <h4
+                                            class="mb-2 text-lg font-black uppercase post-title md:text-xl xl:text-2xl line-clamp-2">
+                                            <a href="#" class="text-inherit">News & Updates</a>
+                                        </h4>
+                                        <p
+                                            class="post-description text-lg lg:text-xl text-justify w-[650px] max-w-full line-clamp-2">
                                             Stay updated, stay informed with our latest and upcoming visa policy
                                             changes...</p>
                                     </div>
@@ -865,7 +881,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(35,171,169) 0%, rgb(228,204,55) 25%, rgb(179,36,107) 50%, rgb(228,204,55) 75%, rgb(35,171,169) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(35,171,169) 0%, rgb(228,204,55) 25%, rgb(179,36,107) 50%, rgb(228,204,55) 75%, rgb(35,171,169) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -874,7 +891,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     As Featured on</h2>
                             </div>
                         </div>
@@ -883,8 +901,8 @@
                 <div class="container px-4 py-10 mx-auto md:py-20 xl:py-32">
                     <div class="text-center">
                         <img class="inline-block"
-                             src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/clients-myvietnamvisa.webp"
-                             alt="As Featured on">
+                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/clients-myvietnamvisa.webp"
+                            alt="As Featured on">
                     </div>
                     <div class="max-w-3xl pt-8 mx-auto mt-8 border-t border-black border-solid xl:mt-20">
                         <div class="mb-10 post">
@@ -902,7 +920,8 @@
                                 services.
                                 <br>
                                 Best Wishes,
-                                John Wilfred FARRER</p>
+                                John Wilfred FARRER
+                            </p>
                             <a href="#" class="inline-block mt-2 underline">View our customer's testimonials</a>
                         </div>
                     </div>
@@ -913,7 +932,8 @@
                     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                         <div class="bg-white h-1/3"></div>
                         <div class="h-1/3"
-                             style="background: linear-gradient( to right, rgb(230,214,36) 0%, rgb(35,171,169) 25%, rgb(233,68,220) 50%, rgb(35,171,169) 75%, rgb(230,214,36) 100%); background-size: 200%; background-position: center;"></div>
+                            style="background: linear-gradient( to right, rgb(230,214,36) 0%, rgb(35,171,169) 25%, rgb(233,68,220) 50%, rgb(35,171,169) 75%, rgb(230,214,36) 100%); background-size: 200%; background-position: center;">
+                        </div>
                         <div class="bg-white h-1/3"></div>
                     </div>
                     <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
@@ -922,7 +942,8 @@
                             <div class="absolute bg-white h-1/3 mid-skew"></div>
                             <div class="hidden h-1/3"></div>
                             <div>
-                                <h2 class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                                <h2
+                                    class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
                                     FAQs</h2>
                             </div>
                         </div>
@@ -940,7 +961,7 @@
                                     policy changes in Vietnam for 2023?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-1">
+                                data-toggle="quest-1">
                                 <p class="mb-2">Here are a few updates on visa for Vietnam:</p>
                                 <ul class="mb-2">
                                     <li class="ml-4 list-disc list-item">For visa exemption: The gap between 2 visa-free
@@ -959,7 +980,7 @@
                                 </ul>
                                 <p>More news and updates:</p>
                                 <p><a class="hover:text-[#d75dd6]"
-                                      href="https://www.myvietnamvisa.com/vietnam-visa-policy-updates-news.html">https://www.myvietnamvisa.com/vietnam-visa-policy-updates-news.html</a>
+                                        href="https://www.myvietnamvisa.com/vietnam-visa-policy-updates-news.html">https://www.myvietnamvisa.com/vietnam-visa-policy-updates-news.html</a>
                                 </p>
                             </div>
                         </div>
@@ -973,12 +994,12 @@
                                     application for a Vietnam e-Visa?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-2">
+                                data-toggle="quest-2">
                                 <p class="mb-2">There are two options:</p>
                                 <ul class="mb-2">
                                     <li class="ml-4 list-disc list-item">1. Apply on the official website of the
                                         Immigration Department (<a class="hover:text-[#d75dd6]"
-                                                                   href="https://evisa.xuatnhapcanh.gov.vn/trang-chu-ttdt">https://evisa.xuatnhapcanh.gov.vn/trang-chu-ttdt</a>).
+                                            href="https://evisa.xuatnhapcanh.gov.vn/trang-chu-ttdt">https://evisa.xuatnhapcanh.gov.vn/trang-chu-ttdt</a>).
                                     </li>
                                     <li class="ml-4 list-disc list-item">2. Apply on our website:</li>
                                 </ul>
@@ -1008,7 +1029,7 @@
                                     visa?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-3">
+                                data-toggle="quest-3">
                                 <p class="">Currently, as of May 2023, visa extensions are not available. However,
                                     starting from June 2023, visitors will be able to extend their stay in Vietnam when
                                     the visa policy is eased.</p>
@@ -1024,7 +1045,7 @@
                                     get a visa to Vietnam?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-4">
+                                data-toggle="quest-4">
                                 <p class="">The standard processing time for a pre-approved visa letter normally takes
                                     2-3 working days, while for an e-visa, it usually takes 3-5 working days. However,
                                     urgent visa processing can be completed within 1 working day for both types of
@@ -1042,7 +1063,7 @@
                                     visa?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-5">
+                                data-toggle="quest-5">
                                 <p class="">The cost of a visa for Vietnam depends on the type of visa you are applying
                                     for. In general, a single-entry 30-day e-visa fee is $25 USD per person if you apply
                                     directly on the official immigration website.</p>
@@ -1058,7 +1079,7 @@
                                     Vietnam?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-6">
+                                data-toggle="quest-6">
                                 <p class="">Electronic visa (E-visa) is currently the simplest and easiest way to apply
                                     for a visa to visit Vietnam. E-visa allows citizens from 80 countries to register
                                     and use it at 33 international ports of entry including land, sea, and air
@@ -1074,7 +1095,7 @@
                                     Vietnam?</h3>
                             </div>
                             <div class="hidden mt-4 text-base lg:text-lg question-answer js-toggle-content"
-                                 data-toggle="quest-7">
+                                data-toggle="quest-7">
                                 <p class="mb-2">Vietnam is currently granting visa <strong>exemptions</strong> to <a
                                         class="text-[#d75dd6] underline font-bold" href="">25 countries</a>, including
                                     ASEAN countries, the UK, Spain, Germany, France, and some others. If you are <b>not
@@ -1083,163 +1104,182 @@
                                 <table
                                     class="w-full text-sm border-t border-l border-gray-500 border-solid lg:text-base">
                                     <thead>
-                                    <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
-                                        Country
-                                    </th>
-                                    <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
-                                        Duration (days)
-                                    </th>
-                                    <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
-                                        Note
-                                    </th>
-                                    <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
-                                        Purpose of entry
-                                    </th>
+                                        <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
+                                            Country
+                                        </th>
+                                        <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
+                                            Duration (days)
+                                        </th>
+                                        <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
+                                            Note
+                                        </th>
+                                        <th class="p-2 text-left border-b border-r border-gray-500 border-solid md:p-3">
+                                            Purpose of entry
+                                        </th>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Russia
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Japan</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">South
-                                            Korea
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Norway
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Finland
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Denmark
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Sweden
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">United
-                                            Kingdom
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">France
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Germany
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Spain</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Italia
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Belarus
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15</td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
-                                            Unilateral
-                                        </td>
-                                        <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
-                                            required
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Russia
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Japan
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">South
+                                                Korea
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Norway
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Finland
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Denmark
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Sweden
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">United
+                                                Kingdom
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">France
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Germany
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Spain
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Italia
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Belarus
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">15
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">
+                                                Unilateral
+                                            </td>
+                                            <td class="p-2 border-b border-r border-gray-500 border-solid md:p-3">Not
+                                                required
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -1252,8 +1292,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/alpha-delight.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/alpha-delight.png"
                                         alt="alpha-delight.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1261,8 +1300,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/buddha.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/buddha.png"
                                         alt="buddha.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1270,8 +1308,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/cobra.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/cobra.png"
                                         alt="cobra.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1279,8 +1316,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/craw-fish-7.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/craw-fish-7.png"
                                         alt="craw-fish-7.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1288,8 +1324,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/d360.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/d360.png"
                                         alt="d360.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1297,8 +1332,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/damtexas.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/damtexas.png"
                                         alt="damtexas.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1306,8 +1340,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ellipsis-360.svg"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ellipsis-360.svg"
                                         alt="ellipsis-360.svg-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1315,8 +1348,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/liftmar.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/liftmar.png"
                                         alt="liftmar.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1324,8 +1356,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/lpfbakery.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/lpfbakery.png"
                                         alt="lpfbakery.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1333,8 +1364,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/luxnailspa.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/luxnailspa.png"
                                         alt="luxnailspa.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1342,8 +1372,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/msrauma.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/msrauma.png"
                                         alt="msrauma.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1351,8 +1380,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nailsupplydiscount.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nailsupplydiscount.png"
                                         alt="nailsupplydiscount.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1360,8 +1388,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nikki.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nikki.png"
                                         alt="nikki.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1369,8 +1396,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/omega-flux.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/omega-flux.png"
                                         alt="omega-flux.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1378,8 +1404,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ongles.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ongles.png"
                                         alt="ongles.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1387,8 +1412,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/power-of-five.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/power-of-five.png"
                                         alt="power-of-five.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1396,8 +1420,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/qura.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/qura.png"
                                         alt="qura.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1405,8 +1428,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/thuan-chay.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/thuan-chay.png"
                                         alt="thuan-chay.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
@@ -1414,8 +1436,7 @@
                             <div class="swiper-slide">
                                 <div
                                     class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                    <img
-                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/titras.png"
+                                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/titras.png"
                                         alt="titras.png-eVisa"
                                         class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                 </div>
