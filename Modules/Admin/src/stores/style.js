@@ -5,8 +5,9 @@ import Format from "@/utils/Format";
 export const useStyleStore = defineStore("style", {
   state: () => ({
     theme:{
-      headerHeight:'64px',
-      sidebarWidth:'255px'
+      headerHeight:'75px',
+      sidebarWidth:'255px',
+      sidebarCollapsedWidth:'100px',
     },
     format:{
       'created_at':Format.formatDateTime

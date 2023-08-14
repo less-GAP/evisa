@@ -19,15 +19,7 @@
       </a-card>
     </template>
   </a-image-preview-group>
-  <a-card v-else-if="placeholder" shadow="none"
-          style="display:inline-block;margin-right:5px;text-align: center;position:relative">
-    <template #cover>
-      <img :width="width" :height="height" style="object-fit:contain"
-               :src="$url(placeholder)"
-               :alt="alt"/>
-    </template>
-  </a-card>
-  <br>
+
   <a-space class="mt-2">
     <a-upload
       :multiple="multiple"
@@ -40,6 +32,15 @@
       :accept="accept"
       :showUploadList="false"
     >
+      <a-card v-if="!value && placeholder" shadow="none"
+              style="display:inline-block;margin-right:5px;text-align: center;position:relative">
+        <template #cover>
+          <img :width="width" :height="height" style="object-fit:contain"
+               :src="$url(placeholder)"
+               :alt="alt"/>
+        </template>
+      </a-card>
+      <br>
       <a-button size="mini" :loading="loading">
         <upload-outlined></upload-outlined>
         Upload

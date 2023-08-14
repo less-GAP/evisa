@@ -53,7 +53,7 @@ const routes = [
     },
     path: "/pages",
     name: "pages",
-    component: () => import("@/views/visa-documents/index.vue"),
+    component: () => import("@/views/visa-applications/index.vue"),
   },
   {
     meta: {

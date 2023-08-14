@@ -25,11 +25,25 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //        Route::delete('{id}', DeleteUserAction::class . '@handle');
 //    });
     EloquentRouter::prefix('user')
+        ->routes(function(){
+            Route::get('/options', \Modules\Admin\Actions\User\GetUserOptionsAction::class . '@handle');
+        })
         ->handle(\App\Models\User::class,
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
+    EloquentRouter::prefix('visa-application')
+        ->handle(\App\Models\VisaApplication::class,
+            [
+                'allowedIncludes' => ['applicants','history','assignees'],
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')]
+            ]
+        )->routes(function(){
+            Route::post('/', \Modules\Admin\Actions\VisaApplication\PostIndexAction::class . '@handle');
+            Route::post('/status', \Modules\Admin\Actions\VisaApplication\PostStatusAction::class . '@handle');
+            Route::post('/assign', \Modules\Admin\Actions\VisaApplication\PostAssignAction::class . '@handle');
+        });
     EloquentRouter::prefix('file')
         ->handle(\App\Models\File::class,
             [
