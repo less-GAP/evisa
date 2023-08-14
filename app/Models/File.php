@@ -35,9 +35,11 @@ class File extends BaseModel
         , 'file_name'
         , 'file_dir'
     ];
+
     public function getFileUrlAttribute(){
         return \Storage::disk('upload')->url($this->file_dir.'/'.$this->file_path);
     }
+
     public function getSitePathAttribute(){
         return 'upload/'.($this->file_dir?$this->file_dir.'/':'').$this->file_path;
     }

@@ -1,8 +1,12 @@
 @php
     use App\Models\Product;
+    use Illuminate\Support\Facades\Auth;
       $query = Product::where('type', 'package')->where('status', 'A');
       $menus = $query->get()->toArray();
+    $auth = Auth::guard('frontend')->check();
+
 @endphp
+
 <header id="header-main" class="fixed top-0 left-0 z-40 w-full bg-white">
     <x-splade-toggle>
         <div class="py-4 header-inner">
@@ -72,11 +76,19 @@
                             </li>
                         @endforeach
                     @endif
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="{{route('login.get')}}" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Login</span>
-                        </a>
-                    </li>
+                    @if($auth == false)
+                        <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
+                            <a href="{{route('login.get')}}" class="h-[40px] xl:h-[60px] flex items-center">
+                                <span class="mr-2 txt">Login</span>
+                            </a>
+                        </li>
+                    @else
+                        <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
+                            <a href="{{route('profile')}}" class="h-[40px] xl:h-[60px] flex items-center">
+                                <span class="mr-2 txt">Thông tin cá nhân</span>
+                            </a>
+                        </li>
+                @endif
                 {{--                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">--}}
                 {{--                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">--}}
                 {{--                            <span class="mr-2 txt">Recovery Package</span>--}}

@@ -65,31 +65,29 @@
                             <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
                         </div>
                     </div>
-                    <script>
-                        window.document.addEventListener('DOMContentLoaded', () => {
-                            if (document.getElementById('package-{{$package['id']}}')) {
-                                var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
-                                    slidesPerView: 1,
-                                    spaceBetween: 30,
-                                    loop: true,
-                                    simulateTouch: false,
-                                });
-                                let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
-                                btn_{{$package['id']}}.addEventListener('click', () => {
-                                    let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
-                                    if (current_{{$package['id']}} == 7) {
-                                        btn_{{$package['id']}}.setAttribute('data-current', 4);
-                                        btn_{{$package['id']}}.classList.add('active');
-                                        swiper_{{$package['id']}}.slideTo(0);
-                                    } else {
-                                        btn_{{$package['id']}}.setAttribute('data-current', 7);
-                                        btn_{{$package['id']}}.classList.remove('active');
-                                        swiper_{{$package['id']}}.slideTo(1);
-                                    }
-                                });
-                            }
-                        });
-                    </script>
+                    <x-splade-script>
+                        if (document.getElementById('package-{{$package['id']}}')) {
+                            var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
+                                slidesPerView: 1,
+                                spaceBetween: 30,
+                                loop: true,
+                                simulateTouch: false,
+                            });
+                            let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
+                            btn_{{$package['id']}}.addEventListener('click', () => {
+                                let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
+                                if (current_{{$package['id']}} == 7) {
+                                    btn_{{$package['id']}}.setAttribute('data-current', 4);
+                                    btn_{{$package['id']}}.classList.add('active');
+                                    swiper_{{$package['id']}}.slideTo(0);
+                                } else {
+                                    btn_{{$package['id']}}.setAttribute('data-current', 7);
+                                    btn_{{$package['id']}}.classList.remove('active');
+                                    swiper_{{$package['id']}}.slideTo(1);
+                                }
+                            });
+                        }
+                    </x-splade-script>
                 </section>
             @elseif($package['position'] == 'left')
                 <section id="section-package-{{$package['id']}}" class="product_packages" style="background: {{$package['background']}}">
@@ -150,31 +148,29 @@
                             <img src="{{$package['image_url']}}" alt="{{$package['name']}}">
                         </div>
                     </div>
-                    <script>
-                        window.document.addEventListener('DOMContentLoaded', () => {
-                            if (document.getElementById('package-{{$package['id']}}')) {
-                                var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
-                                    slidesPerView: 1,
-                                    spaceBetween: 30,
-                                    loop: true,
-                                    simulateTouch: false,
-                                });
-                                let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
-                                btn_{{$package['id']}}.addEventListener('click', () => {
-                                    let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
-                                    if (current_{{$package['id']}} == 7) {
-                                        btn_{{$package['id']}}.setAttribute('data-current', 4);
-                                        btn_{{$package['id']}}.classList.add('active');
-                                        swiper_{{$package['id']}}.slideTo(0);
-                                    } else {
-                                        btn_{{$package['id']}}.setAttribute('data-current', 7);
-                                        btn_{{$package['id']}}.classList.remove('active');
-                                        swiper_{{$package['id']}}.slideTo(1);
-                                    }
-                                });
-                            }
-                        });
-                    </script>
+                    <x-splade-script>
+                        if (document.getElementById('package-{{$package['id']}}')) {
+                            var swiper_{{$package['id']}} = new Swiper('#package-{{$package['id']}} .swiper', {
+                                slidesPerView: 1,
+                                spaceBetween: 30,
+                                loop: true,
+                                simulateTouch: false,
+                            });
+                            let btn_{{$package['id']}} = document.getElementById('handleToggle-{{$package['id']}}');
+                            btn_{{$package['id']}}.addEventListener('click', () => {
+                                let current_{{$package['id']}} = btn_{{$package['id']}}.getAttribute('data-current');
+                                if (current_{{$package['id']}} == 7) {
+                                    btn_{{$package['id']}}.setAttribute('data-current', 4);
+                                    btn_{{$package['id']}}.classList.add('active');
+                                    swiper_{{$package['id']}}.slideTo(0);
+                                } else {
+                                    btn_{{$package['id']}}.setAttribute('data-current', 7);
+                                    btn_{{$package['id']}}.classList.remove('active');
+                                    swiper_{{$package['id']}}.slideTo(1);
+                                }
+                            });
+                        }
+                    </x-splade-script>
                 </section>
             @endif
         @endforeach

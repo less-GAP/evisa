@@ -8,20 +8,20 @@
                         <div class="mx-auto max-w-3xl">
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin đăng ký</h2>
                             <p class="mt-1 text-sm leading-6 text-gray-600"></p>
-                            <x-splade-form action="{{route('register')}}" method="POST" class="space-y-6 mt-10">
+                            <x-splade-form action="{{route('register')}}" method="POST" class="space-y-6 mt-10" default="{ referral_code: '{{$ref_code}}' }">
                                 <x-splade-input name="username" label="Tên đăng nhập*" autocomplete="off" :show-errors="true" validation-key="username"/>
 
                                 <x-splade-input name="password" type="password" label="Mật khẩu*"/>
 
                                 <x-splade-input name="password_confirmation" type="password" label="Nhập lại mật khẩu*"/>
 
-                                <x-splade-input name="name"  label="Họ và tên"/>
+                                <x-splade-input name="name" label="Họ và tên"/>
 
-                                <x-splade-input name="phone"  label="Điện thoại*"/>
+                                <x-splade-input name="phone" label="Điện thoại*"/>
 
                                 <x-splade-input name="email" type="email" label="Email*"/>
 
-                                <x-splade-input name="referral_code" label="Mã giới thiệu*" />
+                                <x-splade-input name="referral_code" label="Mã giới thiệu*" disabled/>
                                 <div class="border-b border-gray-900/10 pb-6"></div>
                                 <x-splade-submit :spinner="true"/>
                             </x-splade-form>

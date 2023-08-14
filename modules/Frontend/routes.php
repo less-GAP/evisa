@@ -14,8 +14,8 @@ use Modules\Frontend\Middleware\FrontendIsAuthenticated;
 Route::middleware(['splade'])->group(function () {
     Route::get('/', HomeAction::class . '@handle')->name('home');
     Route::get('/product/{slug}', PackageDetailPage::class . '@handle')->name('product');
-    //Route::get('/registration/{ref_code}', RegistrationFormAction::class . '@handle')->name('registration');
-    Route::get('/registration', RegistrationFormAction::class . '@handle')->name('registration');
+    Route::get('/registration/{ref_code}', RegistrationFormAction::class . '@handle')->name('registration');
+    //Route::get('/registration', RegistrationFormAction::class . '@handle')->name('registration');
 
     Route::post('/registration', RegistrationFormAction::class . '@register')->name('register');
 
@@ -33,11 +33,14 @@ Route::middleware(['splade'])->group(function () {
 
         Route::get('profile/product', ProductAction::class . '@handle')->name('profile.product');
 
+        Route::get('profile/logout', ProfileAction::class . '@logout')->name('profile.logout');
 
+        Route::get('profile/product/{id}', ProductAction::class . '@detail')->name('profile.product.detail');
+
+        Route::post('profile/cart', CartAction::class . '@update')->name('profile.product.cart');
     });
 
     Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
-
 
 
     // Registers routes to support the interactive components...

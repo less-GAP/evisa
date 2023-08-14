@@ -1,8 +1,10 @@
 @php
-    $routeName = \Request::route()->getName();
+    use App\Models\Carts;
+        $routeName = \Request::route()->getName();
+        $cart = Carts::where('customer_id',Auth::guard('frontend')->id())->count();
 @endphp
 
-<aside id="default-sidebar" class="h-screen transition-transform  sm:translate-x-0" aria-label="Sidebar">
+<aside id="default-sidebar" class="transition-transform sm:translate-x-0 border-[1px] " aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
@@ -19,7 +21,7 @@
             </li>
             <li>
                 <a href="{{route('profile.product')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
-                    dark:hover:bg-gray-700 group @if($routeName == 'profile.product')text-indigo-600 @endif">
+                    dark:hover:bg-gray-700 group @if($routeName == 'profile.product' || $routeName == 'profile.product.detail')text-indigo-600 @endif">
                     <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                         <line x1="3" y1="6" x2="21" y2="6"/>
@@ -36,7 +38,12 @@
                         <circle cx="20" cy="21" r="1"/>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                     </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Giỏ hàng</span>
+                    <span class="flex-1 ml-3 whitespace-nowrap relative">Giỏ hàng
+                        @if($cart > 0)
+                            <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs
+                     font-bold text-white bg-blue-400 border-2 border-white rounded-full -top-2 left-20">{{$cart}}</div>
+                        @endif
+                    </span>
                 </a>
             </li>
             <li>
@@ -79,7 +86,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="{{route('profile.logout')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="19 20 9 12 19 4 19 20"/>
                         <line x1="5" y1="19" x2="5" y2="5"/>

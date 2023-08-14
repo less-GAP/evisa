@@ -51,7 +51,7 @@ class PackageCourse extends Model
     ];
 
     protected $appends = [
-        'image_url'
+        'image_url',
     ];
 
     public function getImageUrlAttribute()
@@ -61,5 +61,10 @@ class PackageCourse extends Model
             return url($this->image, '', env('APP_ENV') == 'local' ? false : true);
         }
         return '';
+    }
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }
