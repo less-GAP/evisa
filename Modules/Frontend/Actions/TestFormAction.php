@@ -10,15 +10,9 @@ use ProtoneMedia\Splade\SpladeForm;
 class TestFormAction
 {
     public function handle(){
-        $form = SpladeForm::make()
-            ->fields([
-                Input::make('name')->label('User Name'),
-                Password::make('password')->label('Password'),
-                Submit::make()->label('Create'),
-            ]);
+
 
         return view('Frontend::home', [
-            'form' => $form,
         ]);
     }
 }

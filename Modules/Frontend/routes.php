@@ -2,13 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Frontend\Actions\PackageDetailPage;
+use Modules\Frontend\Actions\PostVisaApplication;
 use Modules\Frontend\Actions\TestFormAction;
 
 
 Route::middleware(['splade'])->group(function () {
     Route::get('/', TestFormAction::class.'@handle')->name('home');
+    Route::get('/apply',  fn () => view('Frontend::apply'))->name('apply');
     Route::get('/product/{slug}/', PackageDetailPage::class.'@handle')->name('product');
     Route::get('/docs', fn () => view('docs'))->name('docs');
+    Route::post('/visa-application', PostVisaApplication::class.'@handle')->name('visa-application');
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();

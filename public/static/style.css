@@ -1,0 +1,147 @@
+.lessGAP {
+  font-family: "Neue Kabel";
+}
+.lessGAP .font-spring {
+  font-family: "FONTSPRING DEMO - Cagliari Bold It";
+}
+@media screen and (min-width: 993px) {
+  .lessGAP .main-header .navbar-toggle:hover .active-1 {
+    transform: translateY(1.5rem);
+  }
+  .lessGAP .main-header .navbar-toggle:hover .active-2 {
+    transform: translateY(0);
+    width: 3rem;
+  }
+  .lessGAP .main-header .navbar-toggle:hover .active-3 {
+    transform: rotate(45deg);
+  }
+  .lessGAP .main-header .navbar-toggle:hover .active-4 {
+    transform: rotate(-45deg);
+  }
+}
+.lessGAP .main-header .navbar-toggle.active .active-1 {
+  transform: translateY(1.5rem);
+}
+.lessGAP .main-header .navbar-toggle.active .active-2 {
+  transform: translateY(0);
+  width: 3rem;
+}
+.lessGAP .main-header .navbar-toggle.active .active-3 {
+  transform: rotate(45deg);
+}
+.lessGAP .main-header .navbar-toggle.active .active-4 {
+  transform: rotate(-45deg);
+}
+@media screen and (max-width: 992px) {
+  .lessGAP .main-header #navbar-collapse {
+    opacity: 0;
+    pointer-events: none;
+    text-align: center;
+  }
+  .lessGAP .main-header #navbar-collapse.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+.lessGAP .main-header #navbar-collapse .sub-menu li:hover > div > .menu-toggle {
+  transform: translateY(-50%) rotate(90deg);
+}
+.lessGAP .main-header #navbar-collapse .sub-menu li:hover > .sub-menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lessGAP .main-header #topbar-menu li + li:before {
+  content: "|";
+  display: inline-block;
+  padding-right: 6px;
+}
+.lessGAP .title-wrapper .title {
+  transform: skew(-10deg);
+  line-height: 0.9;
+}
+.lessGAP .title-wrapper .mid-skew {
+  left: -2em;
+  transform: skew(-10deg);
+  width: calc(100% + 4em);
+  z-index: -1;
+}
+.lessGAP .banner .bg-banner::after {
+  content: "";
+  display: block;
+  width: 300%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: linear-gradient(to right, #f3c400 0%, #f3c400 1%, #0055c1 17%, #77d5aa 28%, #d100c4 40%, #f3c400 61%, #77d5aa 78%, #d100c4 88%, #0055c1 100%);
+  opacity: 0.5;
+  z-index: 2;
+}
+@media screen and (min-width: 768px) {
+  .lessGAP .banner .bg-banner::after {
+    width: 200%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .lessGAP .banner .bg-banner::after {
+    width: 100%;
+  }
+}
+.lessGAP .form-steps .box * {
+  color: inherit;
+}
+.lessGAP .form-steps .box .number {
+  opacity: 0.3;
+}
+.lessGAP .form-steps .box::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: -moz-linear-gradient(0deg, #b3246b 0%, #e4cc37 50%, #23aba9 100%);
+  background-image: -webkit-linear-gradient(0deg, #b3246b 0%, #e4cc37 50%, #23aba9 100%);
+  background-image: -ms-linear-gradient(0deg, #b3246b 0%, #e4cc37 50%, #23aba9 100%);
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.lessGAP .form-steps .box:hover, .lessGAP .form-steps .box.active {
+  color: #fff;
+}
+.lessGAP .form-steps .box:hover::before, .lessGAP .form-steps .box.active::before {
+  opacity: 1;
+}
+.lessGAP .form-steps .box:hover .number, .lessGAP .form-steps .box.active .number {
+  opacity: 1;
+}
+.lessGAP .select2-container .select2-selection {
+  height: auto;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  background-color: transparent;
+}
+.lessGAP .select2-container .select2-selection .select2-selection__rendered {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.5;
+  color: #000;
+}
+@media screen and (max-width: 768px) {
+  .lessGAP .select2-container .select2-selection .select2-selection__rendered {
+    padding-left: 0;
+  }
+}
+.lessGAP .select2-container .select2-selection .select2-selection__arrow {
+  height: 100%;
+}
+.lessGAP .select2-container .select2-selection .select2-selection__arrow b {
+  border-color: #000 transparent transparent transparent;
+}
+.lessGAP .tabs .tab-navs a:hover, .lessGAP .tabs .tab-navs a.active {
+  background-color: #000;
+  color: #fff;
+}

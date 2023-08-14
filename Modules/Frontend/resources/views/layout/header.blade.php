@@ -1,173 +1,157 @@
-<header id="header-main" class="fixed top-0 left-0 z-40 w-full bg-white">
-    <x-splade-toggle>
-        <div class="py-4 header-inner">
-            <div class="xl:px-[100px] px-5 md:px-10">
-                <div class="flex items-center">
-                    <div class="logo w-[80px] md:w-[100px] xl:w-[180px]" id="logo">
-                        <a  href="/">
-                            <img
-                                src="/data/img/logo.png?ver=1" alt="logo"/>
-                        </a>
-                    </div>
-                    <div class="flex items-center ml-auto nav" id="nav-right">
-                        <button @click.prevent="toggle" id="open-menu"
-                                class="cursor-pointer hamburger-icon w-[26px] md:w-auto">
-                            <svg width="41" height="32" viewbox="0 0 41 32" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <rect width="41" height="4" rx="2" fill="black"></rect>
-                                <rect y="14" width="23" height="4" rx="2" fill="black"></rect>
-                                <rect y="28" width="41" height="4" rx="2" fill="black"></rect>
-                            </svg>
-                        </button>
-                    </div>
+<header class="relative z-50 main-header">
+    <div class="header-2">
+        <nav class="py-2 bg-white lg:py-5">
+            <div class="container relative px-4 mx-auto lg:flex lg:items-center">
+                <div class="relative z-50 flex items-center justify-between">
+                    <a href="/" class="">
+                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/logo-eVisa.png?v=1691981753" alt="eVisa" class="max-w-[150px]">
+                    </a>
+                    <button class="relative overflow-hidden rounded-full outline-none lg:hidden navbar-toggle" id="navbar-toggle">
+                        <div class="relative flex overflow-hidden items-center justify-center rounded-full w-8 h-8 md:w-[50px] md:h-[50px] transform transition-all duration-200 shadow-md">
+                            <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
+                                <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left active-1 delay-100"></div>
+                                <div class="bg-black h-[2px] w-7 rounded transform transition-all duration-300 active-1 delay-75"></div>
+                                <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left active-1"></div>
+                                <div class="absolute items-center justify-between transform transition-all duration-500 top-2.5 -translate-x-10 active-2 flex w-0">
+                                    <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 rotate-0 delay-300 active-3"></div>
+                                    <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 -rotate-0 delay-300 active-4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
                 </div>
-            </div>
-        </div>
-        <nav :class="{open:toggled}" id="navigation-main"
-             class="navigation-main  side-nav fixed z-50 right-0 top-0 w-full md:w-[635px] h-full bg-black text-white flex flex-col justify-between">
-            <div
-                class="flex justify-end px-10 py-5 nav-top lg:px-24 h-[63px] md:h-[71px] xl:h-[103px] border-b border-white border-solid">
-                <button @click.prevent="toggle"  id="close-menu" class="ml-8 w-[26px] md:w-auto">
-                    <svg width="41" height="32" viewBox="0 0 41 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="7.41895" width="41" height="4" rx="2" transform="rotate(45 7.41895 0)" fill="white"/>
-                        <rect x="4.58984" y="29" width="41" height="4" rx="2" transform="rotate(-45 4.58984 29)"
-                              fill="white"/>
-                    </svg>
-                </button>
-            </div>
-            <div id="main-menu" class="px-10 py-10 lg:px-16">
-                <ul class="flex flex-col p-0 m-0 font-bold uppercase list-none">
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Home</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
+
+                <ul class="flex-col lg:items-center flex lg:flex-row lg:ml-auto mt-1 lg:mt-0 lg:static absolute top-[51px] left-0 w-full lg:w-auto bg-white shadow-sm lg:shadow-none transition py-5 lg:py-0" id="navbar-collapse">
+                    <li class="relative">
+                        <a href="/" class="px-5 py-3 text-lg font-medium uppercase">Home</a>
                     </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/detox-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Detox Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
+                    <li class="relative pr-1 group">
+                        <div class="relative">
+                            <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">How to apply</a>
+                            <span class="absolute right-[18px] lg:right-0 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i class="text-xs fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <ul class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <div class="relative lg:pr-6">
+                                    <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Vietnam E-visa</a>
+                                    <!-- <span class="absolute right-[18px] lg:right-1 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i class="text-xs fa-solid fa-chevron-down"></i></span> -->
+                                </div>
+                                <!-- <ul class="top-0 z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:opacity-0 lg:pointer-events-none lg:w-max right-full">
+                                    <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                        <a href="#" class="block px-5 py-2 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-[14px] whitespace-nowrap">E-visa fees</a>
+                                    </li>
+                                    <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                        <a href="#" class="block px-5 py-2 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-[14px] whitespace-nowrap">Visa on arrival fees</a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Visa on arrival</a>
+                            </li>
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Emergency visa</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/recovery-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Recovery Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
+                    <li class="relative pr-1 group">
+                        <div class="relative">
+                            <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">Visa fees</a>
+                            <span class="absolute right-[18px] lg:right-0 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i class="text-xs fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <ul class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">E-visa fees</a>
+                            </li>
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Visa on arrival fees</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/transformation-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Transformation Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
+                    <li class="relative">
+                        <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">FAQs</a>
                     </li>
-                    <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/product/revitalization-package" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Revitalization Package</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                          d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z"
-                                          fill="#BFBCB9"/>
-                                </svg>
-                            </span>
-                        </a>
+                    <li class="relative pr-1 group">
+                        <div class="relative">
+                            <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">E-visa</a>
+                            <span class="absolute right-[18px] lg:right-0 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i class="text-xs fa-solid fa-chevron-down"></i></span>
+                        </div>
+                        <ul class="z-50 flex-col hidden w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Eligible ports of entry</a>
+                            </li>
+                            <li class="relative bg-white border-black border-solid lg:border-b last:border-b-0">
+                                <a href="#" class="block px-5 py-1 text-lg font-medium text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Eligible countries</a>
+                            </li>
+                        </ul>
                     </li>
-                    <!-- <li class="py-5 border-b border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/about-us/" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">About us</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z" fill="#BFBCB9" />
-                                </svg>
-                            </span>
-                        </a>
+                    <li class="relative">
+                        <a href="#" class="block px-5 py-3 text-lg font-medium uppercase lg:inline">Apply online</a>
                     </li>
-                    <li class="py-5 border-white border-solid last:pb-0 border-opacity-40">
-                        <a href="/contact-us/" class="h-[40px] xl:h-[60px] flex items-center">
-                            <span class="mr-2 txt">Contact us</span>
-                            <span class="ml-auto">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0575 7.05654C11.5782 6.53584 12.4224 6.53584 12.9431 7.05654L20.9431 15.0565C21.4638 15.5772 21.4638 16.4215 20.9431 16.9422L12.9431 24.9422C12.4224 25.4629 11.5782 25.4629 11.0575 24.9422C10.5368 24.4215 10.5368 23.5772 11.0575 23.0565L18.1147 15.9993L11.0575 8.94216C10.5368 8.42146 10.5368 7.57724 11.0575 7.05654Z" fill="#BFBCB9" />
-                                </svg>
-                            </span>
-                        </a>
-                    </li> -->
+                    <li class="relative group navbar-toggle">
+                        <button class="relative hidden overflow-hidden rounded-full outline-none lg:block">
+                            <div class="relative flex overflow-hidden items-center justify-center rounded-full w-8 h-8 md:w-[50px] md:h-[50px] transform transition-all duration-200 shadow-md">
+                                <div class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
+                                    <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left active-1 delay-100"></div>
+                                    <div class="bg-black h-[2px] w-7 rounded transform transition-all duration-300 active-1 delay-75"></div>
+                                    <div class="bg-black h-[2px] w-7 transform transition-all duration-300 origin-left active-1"></div>
+                                    <div class="absolute items-center justify-between transform transition-all duration-500 top-2.5 -translate-x-10 active-2 flex w-0">
+                                        <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 rotate-0 delay-300 active-3"></div>
+                                        <div class="absolute bg-black h-[2px] w-5 transform transition-all duration-500 -rotate-0 delay-300 active-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+
+                        <ul class="right-0 z-50 flex flex-col w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-4">
+                            <li class="relative bg-white md:hidden">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">About</a>
+                            </li>
+                            <li class="relative bg-white md:hidden">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Contact</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Check requirements</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">How to get a Vietnam visa</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Vietnam visa exemption</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Emergency visa</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Business visa</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Photo requirements</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Visa types</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Embassy visa</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">Contact us</a>
+                            </li>
+                            <li class="relative bg-white">
+                                <a href="#" class="block px-5 py-1 text-base font-normal text-gray-500 uppercase lg:text-black lg:py-3 whitespace-nowrap">All guides (46)</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-            </div>
-            <div id="social-header" class="">
-                <ul class="flex items-center justify-center pt-5 text-center list-none border-t border-white border-solid pb-7 border-opacity-40">
-                    <li class="mx-2 md:mx-3">
-                        <a href="#">
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="30" cy="30" r="30" fill="black"/>
-                                <path
-                                    d="M31.6396 32.363V42.7059H26.8885V32.363H22.9414V28.1692H26.8885V26.6434C26.8885 20.9786 29.2549 18 34.2619 18C35.7969 18 36.1806 18.2467 37.0212 18.4477V22.5958C36.0801 22.4313 35.8151 22.34 34.8375 22.34C33.6771 22.34 33.0558 22.6689 32.4894 23.3176C31.9229 23.9663 31.6396 25.0901 31.6396 26.6982V28.1784H37.0212L35.5776 32.3722H31.6396V32.363Z"
-                                    fill="white"/>
-                            </svg>
-                        </a>
+
+                <ul class="absolute hidden space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0" id="topbar-menu">
+                    <li>
+                        <a href="#" class="hover:text-black">About</a>
                     </li>
-                    <li class="mx-2 md:mx-3">
-                        <a href="#">
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="30" cy="30" r="30" fill="black"/>
-                                <path
-                                    d="M37.049 40.9411H22.9517C21.0036 40.9411 19.4121 39.3496 19.4121 37.4016V23.3042C19.4121 21.3561 21.0036 19.7646 22.9517 19.7646H37.049C38.9971 19.7646 40.5886 21.3561 40.5886 23.3042V37.4016C40.5886 39.3583 39.0058 40.9411 37.049 40.9411Z"
-                                    fill="white"/>
-                                <path
-                                    d="M30.0048 35.7928C28.5524 35.7928 27.187 35.2275 26.1608 34.2013C25.1346 33.175 24.5693 31.8097 24.5693 30.3573C24.5693 28.905 25.1346 27.5396 26.1608 26.5134C27.187 25.4872 28.5524 24.9219 30.0048 24.9219C31.4571 24.9219 32.8225 25.4872 33.8487 26.5134C34.8749 27.5396 35.4402 28.905 35.4402 30.3573C35.4402 31.8097 34.8749 33.175 33.8487 34.2013C32.8138 35.2275 31.4571 35.7928 30.0048 35.7928ZM30.0048 26.0785C27.648 26.0785 25.726 27.9918 25.726 30.3573C25.726 32.7141 27.6393 34.6361 30.0048 34.6361C32.3616 34.6361 34.2836 32.7228 34.2836 30.3573C34.2749 28.0005 32.3616 26.0785 30.0048 26.0785Z"
-                                    fill="black"/>
-                                <path
-                                    d="M36.4997 24.7435C37.0761 24.7435 37.5433 24.2763 37.5433 23.6999C37.5433 23.1235 37.0761 22.6562 36.4997 22.6562C35.9233 22.6562 35.4561 23.1235 35.4561 23.6999C35.4561 24.2763 35.9233 24.7435 36.4997 24.7435Z"
-                                    fill="black"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="mx-2 md:mx-3">
-                        <a href="#">
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="30" cy="30" r="30" fill="black"/>
-                                <path
-                                    d="M41.1182 40.5886H19.94C17.1063 40.5886 14.8232 38.0825 14.8232 35V25.0007C14.8232 21.9057 17.1178 19.4121 19.94 19.4121H41.1182C43.9519 19.4121 46.235 21.9182 46.235 25.0007V35C46.2464 38.095 43.9519 40.5886 41.1182 40.5886Z"
-                                    fill="white"/>
-                                <path d="M36.0849 29.8435L27.1758 24.7061V34.981L36.0849 29.8435Z" fill="black"/>
-                            </svg>
-                        </a>
+                    <li>
+                        <a href="#" class="hover:text-black">Contact</a>
                     </li>
                 </ul>
             </div>
         </nav>
-    </x-splade-toggle>
+    </div>
 </header>

@@ -1,0 +1,182 @@
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariExtraBoldRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariExtraBoldRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldRegular.svg#FONTSPRINGDEMO-CagliariExtraBoldRegular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariBoldRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariBoldRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariBoldRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariBoldRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariBoldRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariBoldRegular.svg#FONTSPRINGDEMO-CagliariBoldRegular') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari Bold It';
+    src: url('FONTSPRINGDEMO-CagliariBoldItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariBoldItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariBoldItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariBoldItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariBoldItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariBoldItRegular.svg#FONTSPRINGDEMO-CagliariBoldItRegular') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari ExtraBold It';
+    src: url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariExtraBoldItRegular.svg#FONTSPRINGDEMO-CagliariExtraBoldItRegular') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariExtraLightRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariExtraLightRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariExtraLightRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariExtraLightRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariExtraLightRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariExtraLightRegular.svg#FONTSPRINGDEMO-CagliariExtraLightRegular') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari ExtraLight It';
+    src: url('FONTSPRINGDEMO-CagliariExtraLightItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariExtraLightItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariExtraLightItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariExtraLightItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariExtraLightItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariExtraLightItRegular.svg#FONTSPRINGDEMO-CagliariExtraLightItRegular') format('svg');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariLightRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariLightRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariLightRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariLightRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariLightRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariLightRegular.svg#FONTSPRINGDEMO-CagliariLightRegular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari It';
+    src: url('FONTSPRINGDEMO-CagliariItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariItRegular.svg#FONTSPRINGDEMO-CagliariItRegular') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariSemiBoldRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariSemiBoldRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldRegular.svg#FONTSPRINGDEMO-CagliariSemiBoldRegular') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari SemiBold It';
+    src: url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariSemiBoldItRegular.svg#FONTSPRINGDEMO-CagliariSemiBoldItRegular') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariRegular.svg#FONTSPRINGDEMO-CagliariRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari Light It';
+    src: url('FONTSPRINGDEMO-CagliariLightItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariLightItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariLightItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariLightItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariLightItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariLightItRegular.svg#FONTSPRINGDEMO-CagliariLightItRegular') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari';
+    src: url('FONTSPRINGDEMO-CagliariThinRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariThinRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariThinRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariThinRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariThinRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariThinRegular.svg#FONTSPRINGDEMO-CagliariThinRegular') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FONTSPRING DEMO - Cagliari Thin It';
+    src: url('FONTSPRINGDEMO-CagliariThinItRegular.eot');
+    src: url('FONTSPRINGDEMO-CagliariThinItRegular.eot?#iefix') format('embedded-opentype'),
+        url('FONTSPRINGDEMO-CagliariThinItRegular.woff2') format('woff2'),
+        url('FONTSPRINGDEMO-CagliariThinItRegular.woff') format('woff'),
+        url('FONTSPRINGDEMO-CagliariThinItRegular.ttf') format('truetype'),
+        url('FONTSPRINGDEMO-CagliariThinItRegular.svg#FONTSPRINGDEMO-CagliariThinItRegular') format('svg');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
