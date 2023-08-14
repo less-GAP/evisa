@@ -6,7 +6,6 @@ import Antd from 'ant-design-vue';
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
 const pinia = createPinia();
-import 'ant-design-vue/dist/reset.css';
 import VisaApplicationForm from './components/VisaApplicationForm.vue';
 const el = document.getElementById("app");
 const app = createApp({
