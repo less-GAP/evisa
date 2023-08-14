@@ -18,7 +18,7 @@
 #### Setup
 
 ```bash
-copy .env.example .env
+cp .env.example .env
 touch database.sqlite
 ```
 
