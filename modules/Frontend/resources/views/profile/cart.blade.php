@@ -11,12 +11,13 @@
             <h2 class="text-4xl font-extrabold dark:text-white pb-3">Giỏ hàng</h2>
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 xl:gap-x-8">
                 @if(!empty($cart))
-                    <x-splade-form action="{{route('profile.product.cart')}}" method="POST" class="mt-3" :default="$form">
+                    <x-splade-form action="{{route('profile.checkout')}}" method="POST" class="mt-3" :default="$form" id="checkout-form">
                         <ul class="border-t border-b border-gray-300 w-full ">
                             @foreach($cart as $k => $pro)
                                 @php
-                                    $subtotal += $pro['price'] + $pro['amount'];
+                                    $subtotal += $pro['price']*$pro['amount'];
                                 @endphp
+
                                 <li class="py-10 flex @if($k%2==1) border-t border-gray-300 @endif">
                                     <div class="shrink-0">
                                         <img src="{{$pro['package_course']['image_url']}}"
@@ -32,8 +33,9 @@
                                                 <p class="text-sm text-right font-semibold">{{number_format($pro['price'],-3,',','.')}}<span style="text-transform: none">đ</span></p>
                                             </div>
                                             <div class="mt-0 block absolute top-0 inset-x-1/2">
-                                                <label for="quantity-{{$k}}" class="t">Số lượng</label>
-                                                <select id="quantity-{{$k}}" name="quantity-{{$pro['id']}}" class="text-sm shadow-sm rounded border-slate-400">
+                                                <label for="quantity-{{$pro['product_id']}}-{{$pro['package_course_id']}}" class="t">Số lượng</label>
+                                                <select id="quantity-{{$pro['product_id']}}-{{$pro['package_course_id']}}" name="quantity-{{$pro['product_id']}}-{{$pro['package_course_id']}}"
+                                                        class="text-sm shadow-sm rounded border-slate-400 quantity">
                                                     @for($i = 1; $i <= 10; $i++)
                                                         <option value="{{$i}}" @if($pro['amount'] == $i) selected="selected" @endif>{{$i}}</option>
                                                     @endfor
@@ -82,6 +84,16 @@
                             </div>
                         </div>
                     </x-splade-form>
+                    <x-splade-script>
+                        @foreach($cart as $k => $pro)
+                            button = document.querySelector("#quantity-{{$pro['product_id']}}-{{$pro['package_course_id']}}");
+                            button.addEventListener("change", function(event) {
+                            form = document.querySelector("#checkout-form");
+                            form.action = '{{route('profile.update.cart')}}';
+                            form.submit();
+                            })
+                        @endforeach
+                    </x-splade-script>
                 @endif
             </div>
         </div>

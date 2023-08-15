@@ -9,6 +9,7 @@ use Modules\Frontend\Actions\LoginAction;
 use Modules\Frontend\Actions\ProfileAction;
 use Modules\Frontend\Actions\ProductAction;
 use Modules\Frontend\Actions\CartAction;
+use Modules\Frontend\Actions\LocationAction;
 use Modules\Frontend\Middleware\FrontendIsAuthenticated;
 
 Route::middleware(['splade'])->group(function () {
@@ -37,12 +38,27 @@ Route::middleware(['splade'])->group(function () {
 
         Route::get('profile/product/{id}', ProductAction::class . '@detail')->name('profile.product.detail');
 
+        Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
+
         Route::post('profile/cart', CartAction::class . '@update')->name('profile.product.cart');
 
+        Route::post('profile/update-cart', CartAction::class . '@updateCart')->name('profile.update.cart');
+
+        Route::get('profile/checkout', CartAction::class . '@checkout')->name('profile.checkout');
+
+        Route::post('profile/checkout', CartAction::class . '@checkout')->name('profile.checkout.update');
+
+        Route::post('profile/checkout-done', CartAction::class . '@doneCheckout')->name('profile.checkout.done');
+
         Route::get('profile/cart/{product_id}/{package_course_id}', CartAction::class . '@delete')->name('profile.product.delete-cart');
+
+        Route::get('profile/checkout-complete/{order_id?}', CartAction::class . '@checkoutComplete')->name('profile.checkout.complete');
+
     });
 
-    Route::get('profile/cart', CartAction::class . '@handle')->name('profile.cart');
+    Route::get('provinces', LocationAction::class . '@provinces')->name('provinces');
+    Route::get('districts/{code?}', LocationAction::class . '@districts')->name('districts');
+    Route::get('wards/{code?}', LocationAction::class . '@wards')->name('wards');
 
 
     // Registers routes to support the interactive components...

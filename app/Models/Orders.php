@@ -21,6 +21,7 @@ class Orders extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'id',
         'customer_id',
         'customer_name',
         'customer_phone',
@@ -43,6 +44,7 @@ class Orders extends Model
         's_district',
         's_province',
         's_country',
+        'order_status'
     ];
 
     /**
@@ -76,47 +78,65 @@ class Orders extends Model
 
     public function getShippingNameAttribute()
     {
-        $data = ShippingMethod::where('id', $this->shipping_id)->first();
-        return $data->name;
+        if ($this->shipping_id != '') {
+            $data = ShippingMethod::where('id', $this->shipping_id)->first();
+            return $data->name;
+        }
+        return '';
     }
 
     public function getPaymentNameAttribute()
     {
-        $data = PaymentMethod::where('id', $this->payment_id)->first();
-        return $data->name;
+        if ($this->payment_id != '') {
+            $data = PaymentMethod::where('id', $this->payment_id)->first();
+            return $data->name;
+        }
+        return '';
     }
 
     public function getCountryNameAttribute()
     {
-        $data = Countries::where('code', $this->s_country)->first();
-        return $data->name;
+        if ($this->s_country != '') {
+            $data = Countries::where('code', $this->s_country)->first();
+            return $data->name;
+        }
+        return '';
     }
 
     public function getProvinceNameAttribute()
     {
-        $data = Provinces::where('code', $this->s_province)
-            ->where('country_code', $this->s_country)
-            ->first();
-        return $data->name;
+        if ($this->s_province != '' && $this->s_country != '') {
+            $data = Provinces::where('code', $this->s_province)
+                ->where('country_code', $this->s_country)
+                ->first();
+            return $data->name;
+        }
+        return '';
     }
 
     public function getDistrictNameAttribute()
     {
-        $data = Districts::where('code', $this->s_district)
-            ->where('province_code', $this->s_province)
-            ->where('country_code', $this->s_country)
-            ->first();
-        return $data->name;
+        if ($this->s_province != '' && $this->s_country != '' && $this->s_district != '') {
+            $data = Districts::where('code', $this->s_district)
+                ->where('province_code', $this->s_province)
+                ->where('country_code', $this->s_country)
+                ->first();
+            return $data->name;
+        }
+        return '';
     }
 
     public function getWardNameAttribute()
     {
-        $data = Wards::where('code', $this->s_ward)
-            ->where('province_code', $this->s_province)
-            ->where('country_code', $this->s_country)
-            ->where('district_code', $this->s_district)
-            ->first();
-        return $data->name;
+        if ($this->s_province != '' && $this->s_country != '' && $this->s_district != '' && $this->s_ward != '') {
+            $data = Wards::where('code', $this->s_ward)
+                ->where('province_code', $this->s_province)
+                ->where('country_code', $this->s_country)
+                ->where('district_code', $this->s_district)
+                ->first();
+            return $data->name;
+        }
+        return '';
     }
 
 

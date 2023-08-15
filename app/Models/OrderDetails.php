@@ -23,26 +23,10 @@ class OrderDetails extends Model
     protected $fillable = [
         'order_id',
         'product_id',
+        'package_course_id',
         'price',
         'amount',
         'extra',
-        'discount',
-        'total',
-        'subtotal_discount',
-        'shipping_id',
-        'shipping_cost',
-        'shipping_status',
-        'payment_id',
-        'payment_status',
-        'notes',
-        'coupon_code',
-        's_name',
-        's_phone',
-        's_address',
-        's_ward',
-        's_district',
-        's_province',
-        's_country',
     ];
 
     /**
@@ -62,7 +46,7 @@ class OrderDetails extends Model
      */
     protected $casts = [
 //        'email_verified_at' => 'datetime',
-//        'password' => 'hashed',
+        'extra' => 'array',
     ];
 
     protected $appends = [

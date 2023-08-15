@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('order_id')->nullable();
             $table->integer('product_id')->nullable();
+            $table->integer('package_course_id')->nullable();
             $table->decimal('price', 11, 2)->nullable();
             $table->integer('amount')->nullable();
             $table->text('extra')->nullable();
