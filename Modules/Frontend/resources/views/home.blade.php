@@ -15,7 +15,7 @@
                                     <label class="block mb-2 font-semibold uppercase" for="applicant">Number of
                                         applicants</label>
                                     <select name="applicant" id="applicant"
-                                        class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
+                                        class="w-full bg-white border-0 cursor-pointer rounded-none js-select2"
                                         placeholder="Select number of applicants">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -43,7 +43,7 @@
                                     <label class="block mb-2 font-semibold uppercase" for="visatype">Type of
                                         visa</label>
                                     <select name="visatype" id="visatype"
-                                        class="w-full bg-transparent border-b border-black border-solid rounded-none js-select2"
+                                        class="w-full bg-white border-0 cursor-pointer rounded-none js-select2"
                                         placeholder="Select type of visa">
                                         <!-- <option></option> -->
                                         <option value="evisa1m">E-Visa (1 Month Single Entry):</option>

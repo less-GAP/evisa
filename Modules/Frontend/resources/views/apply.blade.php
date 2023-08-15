@@ -1,3 +1,3 @@
-<div class="container relative z-20 px-4 mx-auto content xl:pb-56">
+<section class="py-10 md:pt-14 xl:pt-16 md:pb-20 xl:pb-32">
     <VisaApplicationForm></VisaApplicationForm>
-</div>
+</section>

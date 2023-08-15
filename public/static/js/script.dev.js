@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   handleMenu();
-  handleSelect();
   handleTabs();
   handleToggle();
 });
@@ -27,12 +26,6 @@ function handleToggle() {
   });
   $('.js-toggle[data-toggle="list-country"]').on('click', function () {
     $(this).remove();
-  });
-}
-
-function handleSelect() {
-  $('.js-select2').select2({
-    width: '100%'
   });
 }
 

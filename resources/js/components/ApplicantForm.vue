@@ -62,7 +62,7 @@ const cancel = function () {
     <a-input v-model:value="value.full_name"/>
   </a-form-item>
   <a-form-item  label="Nationality" :rules="[{ required: true }]">
-    <a-select show-search v-model:value="value.nationality">
+    <a-select show-search v-model:value="value.nationality" class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
       <a-select-option value="afghan">Afghan</a-select-option>
       <a-select-option value="albanian">Albanian</a-select-option>
       <a-select-option value="algerian">Algerian</a-select-option>
