@@ -1,8 +1,8 @@
 <script setup>
-import { reactive, ref } from "vue";
-import { message } from 'ant-design-vue';
+import {reactive, ref} from "vue";
+import {message} from 'ant-design-vue';
 import ApplicantForm from "./ApplicantForm.vue"
-import { mdiAccountGroupOutline } from "@mdi/js";
+import {mdiAccountGroupOutline} from "@mdi/js";
 import BaseIcon from "./BaseIcon.vue";
 import Api from "../utils/Api";
 
@@ -38,14 +38,15 @@ const formConfig = reactive({
     "validateTrigger": "submit",
     "label-align": "top",
     "model": formState,
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
+    labelCol: {span: 24},
+    wrapperCol: {span: 24},
     "validate-messages": validateMessages,
 });
 const submitForm = async function () {
     loading.value = true
-    Api.post('visa-application', { ...formState, total_amount: calculateFee() }).then(result => {
-        current.value = 2
+    Api.post('visa-application', {...formState, total_amount: calculateFee()}).then(result => {
+        // current.value = 2
+        window.location.href ='/checkout'
     }).catch(e => {
     }).finally(loading.value = false)
 }
@@ -70,7 +71,7 @@ function calculateFee() {
         <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
             <div class="bg-white h-1/3"></div>
             <div class="h-1/3"
-                style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                 style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
             </div>
             <div class="bg-white h-1/3"></div>
         </div>
@@ -111,17 +112,69 @@ function calculateFee() {
                             <label class="block mb-2 font-semibold uppercase" for="number_of_visa">Number of
                                 applicants</label>
                             <a-select ref="select" v-model:value="formState.number_of_visa" id="number_of_visa"
-                                class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
-                                placeholder="Select number of applicants">
-                                <a-select-option v-for="n in 20" :key="n"></a-select-option>
+                                      class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
+                                      placeholder="Select number of applicants">
+                                <a-select-option v-for="n in 20" :value="n" :key="n">{{ n }}</a-select-option>
                             </a-select>
                         </div>
                         <div class="mt-4 lg:mt-6 has-feedback">
                             <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Type of
                                 visa</label>
                             <a-select ref="select" v-model:value="formState.type_of_visa" id="type_of_visa"
-                                class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
-                                <a-select-option value="evisa1m">E-Visa (1 Month Single Entry)</a-select-option>
+                                      class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
+                                <a-select-option value="1">E-Visa (1 Month Single Entry)</a-select-option>
+                            </a-select>
+                        </div>
+                        <div class="mt-4 lg:mt-6 has-feedback">
+                            <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Date of Arrival</label>
+                            <a-date-picker class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
+                                           style="width: 300px" v-model:value="formState.date_arrival"
+                                           :show-time="{ format: 'HH:mm' }" format="YYYY-MM-DD HH:mm"/>
+                        </div>
+                        <div class="mt-4 lg:mt-6 has-feedback">
+                            <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Entry Port</label>
+                            <a-select class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer" show-search
+                                      v-model:value="formState.entry_port" style="width: 300px"
+                                      @change="handleChange">
+                                <a-select-opt-group>
+                                    <template #label>
+                                        <b class="text-blue text-lg">
+                                            International Airports
+                                        </b>
+                                    </template>
+                                    <a-select-option value="1">Noi Bai Int Airport (Ha Noi)</a-select-option>
+                                    <a-select-option value="2">Cat Bi Int Airport (Hai Phong)</a-select-option>
+                                    <a-select-option value="3">Cam Ranh Int Airport (Khanh Hoa)</a-select-option>
+                                    <a-select-option value="4">Can Tho International Airport</a-select-option>
+                                    <a-select-option value="5">Da Nang International Airport</a-select-option>
+                                    <a-select-option value="6">Phu Bai Int Airport</a-select-option>
+                                    <a-select-option value="7">Phu Quoc International Airport</a-select-option>
+                                    <a-select-option value="8">Tan Son Nhat Int Airport (Ho Chi Minh City)
+                                    </a-select-option>
+                                </a-select-opt-group>
+                                <a-select-opt-group>
+                                    <template #label>
+                                        <b class="text-blue text-lg">
+                                            Landports
+                                        </b>
+                                    </template>
+                                    <a-select-option value="9">Bo Y Landport</a-select-option>
+                                    <a-select-option value="10">Cha Lo Landport</a-select-option>
+                                    <a-select-option value="11">Cau Treo Landport</a-select-option>
+                                    <a-select-option value="12">Huu Nghi Landport</a-select-option>
+                                    <a-select-option value="13">Ha Tien Landport</a-select-option>
+                                    <a-select-option value="14">Lao Bao Landport</a-select-option>
+                                    <a-select-option value="15">Lao Cai Landport</a-select-option>
+                                    <a-select-option value="16">La Lay Landport</a-select-option>
+                                    <a-select-option value="17">Moc Bai Landport</a-select-option>
+                                    <a-select-option value="18">Mong Cai Landport</a-select-option>
+                                    <a-select-option value="19">Nam Can Landport</a-select-option>
+                                    <a-select-option value="20">Na Meo Landport</a-select-option>
+                                    <a-select-option value="21">Song Tien Landport</a-select-option>
+                                    <a-select-option value="22">Tinh Bien Landport</a-select-option>
+                                    <a-select-option value="23">Tay Trang Landport</a-select-option>
+                                    <a-select-option value="24">Xa Mat Landport</a-select-option>
+                                </a-select-opt-group>
                             </a-select>
                         </div>
                     </div>
@@ -140,12 +193,14 @@ function calculateFee() {
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 lg:mt-0">
                         <div class="font-semibold uppercase">Service fee:</div>
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span id="lblTotal"
-                                class="">US${{ calculateFee() }}</span>
+                                                                                                       class="">US${{
+                                calculateFee()
+                            }}</span>
                         </div>
                         <div class="mt-2 text-base">*This fee excludes US $25 for the goverment e-visa fees.
                         </div>
                         <button @click="current += 1" type="button"
-                            class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
+                                class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
                         <div class="mt-1">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
@@ -263,40 +318,54 @@ function calculateFee() {
                     <div class="w-full px-4 md:w-1/2 lg:w-2/3">
                         <a-tabs v-model:activeKey="activeKey">
                             <a-tab-pane v-for="number of formState.number_of_visa" :key="number"
-                                :tab="'Applicant ' + number">
+                                        :tab="'Applicant ' + number">
                                 <ApplicantForm v-model:value="formState.applicants[number - 1]"></ApplicantForm>
                             </a-tab-pane>
                         </a-tabs>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                         <a-form-item prop="contact_name" label="Contact Name" :rules="[{ required: true }]">
-                            <a-input v-model:value="formState.contact_name" />
+                            <a-input v-model:value="formState.contact_name"/>
                         </a-form-item>
                         <a-form-item prop="contact_email" label="Contact Email" :rules="[{ required: true }]">
-                            <a-input v-model:value="formState.contact_email" />
+                            <a-input v-model:value="formState.contact_email"/>
                         </a-form-item>
                         <a-form-item prop="contact_phone" label="Contact Phone" :rules="[{ required: true }]">
-                            <a-input v-model:value="formState.contact_phone" />
+                            <a-input v-model:value="formState.contact_phone"/>
                         </a-form-item>
                         <div class="font-semibold uppercase">Service fee:</div>
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span id="lblTotal"
-                                class="">US${{ calculateFee() }}</span>
+                                                                                                       class="">US${{
+                                calculateFee()
+                            }}</span>
                         </div>
                         <div class="mt-2 text-base">*This fee excludes US $25 for the goverment e-visa fees.
                         </div>
-                        <button @click="current += 1" type="button"
-                            class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
+                        <button @click="submitForm" type="button"
+                                class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
                         <div class="mt-1">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
                     </div>
                 </div>
-                <a-row v-show="current == 2" :gutter="50">
-                    <a-result style="margin:0 auto" status="success" title="Successfully!"
-                        sub-title="Order number: 2017182818828182881 We will contact with you soon, please wait.">
-                    </a-result>
-                </a-row>
-
+                <div class="flex flex-wrap -mx-4" v-show="current == 2">
+                    <div class="w-full px-4 md:w-1/2 lg:w-2/3">
+                        <a-result style="margin:0 auto" status="success" title="Successfully!"
+                                  sub-title="Order number: 2017182818828182881 We will contact with you soon, please wait.">
+                        </a-result>
+                    </div>
+                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                        <div class="mb-4">
+                            <button
+                                class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">
+                                Pay with PayPal - $253.00
+                            </button>
+                        </div>
+                        <div class="text-xs text-gray-500 italic text-center">You'll be charged $253, including
+                            $48 for VAT in Italy
+                        </div>
+                    </div>
+                </div>
 
             </a-form>
         </div>

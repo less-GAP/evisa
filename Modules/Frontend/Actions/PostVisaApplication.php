@@ -31,6 +31,7 @@ class PostVisaApplication
             }
             VisaApplicationApplicant::create($data);
         }
-        return 1;
+        $request->session()->put('currentVisa', $visaApplication);
+        return redirect('checkout');
     }
 }
