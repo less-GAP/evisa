@@ -11,6 +11,7 @@ use Modules\Frontend\Actions\ProductAction;
 use Modules\Frontend\Actions\CartAction;
 use Modules\Frontend\Actions\OrderAction;
 use Modules\Frontend\Actions\LocationAction;
+use Modules\Frontend\Actions\PageAction;
 use Modules\Frontend\Middleware\FrontendIsAuthenticated;
 
 Route::middleware(['splade'])->group(function () {
@@ -56,6 +57,7 @@ Route::middleware(['splade'])->group(function () {
         Route::get('profile/checkout-complete/{order_id?}', CartAction::class . '@checkoutComplete')->name('profile.checkout.complete');
 
         Route::get('profile/order', OrderAction::class . '@index')->name('profile.order');
+
         Route::get('profile/order-detail/{order_id}', OrderAction::class . '@detail')->name('profile.order-detail');
 
     });
@@ -63,6 +65,12 @@ Route::middleware(['splade'])->group(function () {
     Route::get('provinces', LocationAction::class . '@provinces')->name('provinces');
     Route::get('districts/{code?}', LocationAction::class . '@districts')->name('districts');
     Route::get('wards/{code?}', LocationAction::class . '@wards')->name('wards');
+
+    Route::get('about', PageAction::class . '@about')->name('about');
+
+    Route::get('contact', PageAction::class . '@contact')->name('contact');
+
+
 
 
     // Registers routes to support the interactive components...

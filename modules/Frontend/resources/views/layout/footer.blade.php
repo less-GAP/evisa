@@ -9,8 +9,8 @@
                 </div>
                 <div id="menu-footer" class="w-full mb-5 lg:order-first lg:mb-0 lg:w-auto">
                     <ul class="flex flex-col items-center p-0 text-center list-none lg:flex-row">
-                        <li class="w-full mb-2 md:mb-0 md:mr-8 md:w-auto"><a href="#">About</a></li>
-                        <li class="w-full mb-2 md:mb-0 md:mr-8 md:w-auto"><a href="#">Contact</a></li>
+                        <li class="w-full mb-2 md:mb-0 md:mr-8 md:w-auto"><a href="{{route('about')}}">About</a></li>
+                        <li class="w-full mb-2 md:mb-0 md:mr-8 md:w-auto"><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                 </div>
                 <div id="social-footer" class="w-full lg:w-auto">
