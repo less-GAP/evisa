@@ -74,6 +74,7 @@ class Orders extends Model
         'province_name',
         'district_name',
         'ward_name',
+        'order_details'
     ];
 
     public function getShippingNameAttribute()
@@ -137,6 +138,11 @@ class Orders extends Model
             return $data->name;
         }
         return '';
+    }
+
+    public function getOrderDetailsAttribute()
+    {
+        return OrderDetails::where('order_id', $this->id)->get();
     }
 
 

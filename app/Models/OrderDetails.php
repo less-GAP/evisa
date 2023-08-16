@@ -50,15 +50,15 @@ class OrderDetails extends Model
     ];
 
     protected $appends = [
-//        'customer_group_name',
+        'product',
 //        'videos'
     ];
 
-//    public function getCustomerGroupNameAttribute()
-//    {
-//        $cus = CustomerGroup::where('id', $this->customer_group)->first();
-//        return $cus->name;
-//    }
+    public function getProductAttribute()
+    {
+        $pro = Product::where('id', $this->product_id)->first();
+        return $pro->name;
+    }
 //
 //    public function getVideosAttribute()
 //    {

@@ -9,6 +9,7 @@ use Modules\Frontend\Actions\LoginAction;
 use Modules\Frontend\Actions\ProfileAction;
 use Modules\Frontend\Actions\ProductAction;
 use Modules\Frontend\Actions\CartAction;
+use Modules\Frontend\Actions\OrderAction;
 use Modules\Frontend\Actions\LocationAction;
 use Modules\Frontend\Middleware\FrontendIsAuthenticated;
 
@@ -53,6 +54,9 @@ Route::middleware(['splade'])->group(function () {
         Route::get('profile/cart/{product_id}/{package_course_id}', CartAction::class . '@delete')->name('profile.product.delete-cart');
 
         Route::get('profile/checkout-complete/{order_id?}', CartAction::class . '@checkoutComplete')->name('profile.checkout.complete');
+
+        Route::get('profile/order', OrderAction::class . '@index')->name('profile.order');
+        Route::get('profile/order-detail/{order_id}', OrderAction::class . '@detail')->name('profile.order-detail');
 
     });
 

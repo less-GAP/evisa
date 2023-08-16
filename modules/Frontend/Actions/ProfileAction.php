@@ -15,7 +15,6 @@ class ProfileAction
     public function handle()
     {
         $customer_info = Auth::guard('frontend')->user();
-        $customer_info['photo'] = 'http://localhost:9100/upload/file/Upload/64d2074573be1_avatar.png';
         $customer_info['link'] = url('registration/' . $customer_info['username']);
 
         return view('Frontend::profile.profile', [

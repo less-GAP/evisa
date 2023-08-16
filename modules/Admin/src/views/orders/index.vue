@@ -39,14 +39,14 @@
         title: 'Mã đơn hàng',
         key: 'id',
         dataIndex: 'id',
-        fixed: 'left',
+
         width: '120px'
       },
       {
         title: 'Khách hàng',
         key: 'customer_name',
         dataIndex: 'customer_name',
-        fixed: 'left',
+
         width: '200px'
       },
       {

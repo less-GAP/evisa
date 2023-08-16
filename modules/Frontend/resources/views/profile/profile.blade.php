@@ -8,7 +8,7 @@
             <h2 class="text-4xl font-extrabold dark:text-white py-5">Thông tin tài khoản</h2>
             <x-splade-form action="{{route('profile.update')}}" method="POST" :default="$customer_info">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
-                    <x-splade-file name="photo" filepond="{ allowDrop: false }" preview class="h-50" accept="image/*"/>
+                    <x-splade-file name="photo" filepond="{ allowDrop: false }" preview class="h-50" accept="image/*" v-model="form.photo"/>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
 
