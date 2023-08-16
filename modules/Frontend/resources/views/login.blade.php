@@ -8,7 +8,7 @@
                         <div class="mx-auto max-w-3xl">
                             <h2 class="text-base font-semibold leading-7 text-gray-900">Thông tin đăng nhập</h2>
                             <x-splade-errors>
-                                <p v-if="errors.has('field')" v-text="errors.first('field')" />
+                                <p v-if="errors.has('field')" v-text="errors.first('field')"/>
                             </x-splade-errors>
                             <p class="mt-1 text-sm leading-6 text-gray-600"></p>
                             <x-splade-form action="{{route('login.post')}}" method="POST" class="space-y-6 mt-10">
@@ -33,4 +33,5 @@
                 <img src="/data/img/product/package-1/model.png?ver=1" alt="Kimble's MyQFIT Trainer Pack - Model">
             </div>
         </div>
+    </section>
 </div>
