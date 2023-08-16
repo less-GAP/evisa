@@ -31,8 +31,9 @@
   const isShowModal = ref(false);
 
   formState.value = props.value;
-
-  dataSource.value = props.value.products;
+  if(props.value.products){
+    dataSource.value = props.value.products;
+  }
 
 
   const close = () => {
