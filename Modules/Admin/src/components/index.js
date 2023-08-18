@@ -65,7 +65,9 @@ import InputCopy from "./InputCopy.vue"
 import InputUploadGetPath from "./InputUploadGetPath.vue"
 import BaseIcon from "./BaseIcon.vue"
 import RemoteSelect from "./RemoteSelect.vue"
+import InputTags from "./InputTags.vue"
 export {
+  InputTags,
   RemoteSelect,
   BaseIcon,
   InputUploadGetPath,

@@ -215,7 +215,10 @@ reload()
 
             <td v-for="column in columns"
                 :class="'p-2 whitespace-nowrap' + (column.class ? column.class : '')">
-              <slot :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+              <template v-if="item.render">
+                {{item.render()}}
+              </template>
+              <slot v-else :name="'cell['+column.key+']'" v-bind="{item,column,index}">
                 {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
               </slot>
 

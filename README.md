@@ -38,6 +38,7 @@ sh init.sh
 #### Build for production
 
 ```bash
+docker login http://137.184.69.74:5555
 sh build.sh
 ```
 

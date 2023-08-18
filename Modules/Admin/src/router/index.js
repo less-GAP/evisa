@@ -49,11 +49,19 @@ const routes = [
   },
   {
     meta: {
-      title: "Pages",
+      title: "Posts",
     },
-    path: "/pages",
-    name: "pages",
-    component: () => import("@/views/visa-applications/index.vue"),
+    path: "/post",
+    name: "post",
+    component: () => import("@/views/posts/index.vue"),
+  },
+  {
+    meta: {
+      title: "Posts",
+    },
+    path: "/post/:id",
+    name: "post-detail",
+    component: () => import("@/views/posts/Detail.vue"),
   },
   {
     meta: {
@@ -71,7 +79,6 @@ const routes = [
     name: "user-profile",
     component: () => import("@/views/users/ProfileView.vue"),
   },
-
 
 
   {

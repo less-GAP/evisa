@@ -44,6 +44,23 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             Route::post('/status', \Modules\Admin\Actions\VisaApplication\PostStatusAction::class . '@handle');
             Route::post('/assign', \Modules\Admin\Actions\VisaApplication\PostAssignAction::class . '@handle');
         });
+    EloquentRouter::prefix('post')
+        ->handle(\App\Models\Post::class,
+            [
+                'allowedIncludes' => ['tags'],
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'title')]
+            ]
+        )->routes(function(){
+
+        });
+    EloquentRouter::prefix('tag')
+        ->handle(\App\Models\Tag::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
+            ]
+        )->routes(function(){
+
+        });
     EloquentRouter::prefix('file')
         ->handle(\App\Models\File::class,
             [

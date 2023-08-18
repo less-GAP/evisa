@@ -50,7 +50,9 @@ class AbstractModuleProvider extends ServiceProvider
         }
         if (is_dir($this->dir . '/resources/views')) {
             $this->loadViewsFrom($this->dir . '/resources/views', $this->viewPrefix);
+
         }
+
         if (!$this->routePrefix) {
             $this->routePrefix = $this->featureName;
         }

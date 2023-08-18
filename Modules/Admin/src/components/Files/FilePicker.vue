@@ -239,7 +239,7 @@ reload()
             @click="addSelectedFile(image)" v-for="image in tableData.data" :key="image.id"
             class=" cursor-pointer relative border-2 border-gray-100 hover:border-blue-700 h-[150px]  mb-[50px] rounded-lg overflow:hidden">
             <a-button size="compact" type="success" v-if="selectedItems.indexOf(image)!=-1"
-                      style="position: absolute;right:2px;top:2px;background:white"  ghost>
+                      style="position: absolute;right:2px;top:2px;background:white;color:green"  ghost>
               <template #icon>
                 <CheckOutlined></CheckOutlined>
               </template>
@@ -270,9 +270,8 @@ reload()
 
       </div>
     </a-col>
-    <a-col  flex="300px" v-if="fileDetail">
+    <a-col  flex="400px" v-if="fileDetail">
       <FileViewDetail v-if="fileDetail" :value="fileDetail"></FileViewDetail>
-
     </a-col>
   </a-row>
   <a-divider></a-divider>

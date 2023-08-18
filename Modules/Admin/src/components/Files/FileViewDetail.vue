@@ -32,7 +32,7 @@ function isImageUrl(url) {
 }
 </script>
 <template>
-  <a-image v-if=" isImageUrl(value.site_path)" width="100%" height="auto" :src="$url(value.site_path)" :alt="alt"/>
+  <a-image v-if=" isImageUrl(value.site_path)" style="max-height:200px" width="auto" height="200px" :src="$url(value.site_path)" :alt="alt"/>
   <a-card shadow="none" style="padding:50px;width:200px;height:200px" v-else>
     <file-outlined style="font-size: 30px"/>
   </a-card>

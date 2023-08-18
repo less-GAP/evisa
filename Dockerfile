@@ -1,4 +1,4 @@
-FROM node:slim AS node
+FROM node:19 AS node
 FROM openswoole/swoole:4.12.1-php8.2
 COPY --from=node /usr/local/share /usr/local/share
 COPY --from=node /usr/local/lib /usr/local/lib
