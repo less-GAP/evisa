@@ -54,14 +54,16 @@ const routes = [
     path: "/post",
     name: "post",
     component: () => import("@/views/posts/index.vue"),
-  },
-  {
-    meta: {
-      title: "Posts",
-    },
-    path: "/post/:id",
-    name: "post-detail",
-    component: () => import("@/views/posts/Detail.vue"),
+    children: [
+      {
+        meta: {
+          title: "Posts",
+        },
+        path: "/post/:id",
+        name: "post-detail",
+        component: () => import("@/views/posts/Detail.vue"),
+      }
+    ]
   },
   {
     meta: {

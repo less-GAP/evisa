@@ -10,24 +10,6 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('ads', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->index();
-            $table->string('title')->index();
-            $table->string('url')->index();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('back_links', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->index();
-            $table->string('title')->index();
-            $table->string('url')->index();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
-        });
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->index();
@@ -38,35 +20,21 @@ return new class extends Migration {
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->integer('data_source_id')->index()->nullable();
-            $table->string('source_url')->index()->nullable();
+            $table->string('source_url')->unique()->nullable();
             $table->text('excerpt')->nullable();
             $table->longText('content')->nullable();
+//            $table->longText('meta')->nullable();
             $table->string('country')->index()->nullable();
             $table->bigInteger('visit_count')->index()->nullable();
             $table->timestamps();
         });
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
+            $table->string('class')->index();
+            $table->string('class_key')->index();
             $table->string('name')->index();
-            $table->string('slug')->index();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->string('post_id')->index();
-            $table->string('tag_id')->index();
-        });
-        Schema::create('back_link_tag', function (Blueprint $table) {
-            $table->id();
-            $table->string('back_link_id')->index();
-            $table->string('tag_id')->index();
-        });
-        Schema::create('ad_tag', function (Blueprint $table) {
-            $table->id();
-            $table->string('ad_id')->index();
-            $table->string('tag_id')->index();
         });
     }
 
@@ -75,12 +43,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('ads');
         Schema::dropIfExists('posts');
-        Schema::dropIfExists('back_links');
         Schema::dropIfExists('tags');
-        Schema::dropIfExists('post_tag');
-        Schema::dropIfExists('back_link_tag');
-        Schema::dropIfExists('ad_tag');
     }
 };

@@ -1,7 +1,3 @@
-rm -rf ./public/cpn1234
-rm -rf ./public/build
-docker-compose -f docker-compose.develop.yml exec admin_dev npm run build
-mv  ./Modules/Admin/public ./public/cpn1234
-docker-compose -f docker-compose.develop.yml exec frontend_dev npm run build
-cp -r ./Modules/Frontend/public/* ./public/
-rm -rf  ./public/hot
+docker build  -t registry.digitalocean.com/lessgap/evisa:latest .
+docker push registry.digitalocean.com/lessgap/evisa:latest
+

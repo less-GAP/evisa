@@ -37,27 +37,47 @@ class EloquentRouter
         $this->config = $config;
         $prefix = $this->prefix;
 
-        Route::prefix($prefix)->group(function () {
-
-            Route::get('list', function (Request $request) {
-                return $this->getList($request);
-            });
-            Route::post('', function (Request $request) {
-                return $this->updateOrCreate($request);
-            });
-            Route::get('{id}', function (Request $request) {
-                return $this->getDetail($request);
-            });
-            Route::delete('{id}', function (Request $request) {
-                return $this->delete($request);
-            });
+        Route::prefix($prefix)->group(function () use ($config) {
+            $apiList = ['list', 'all', 'detail', 'create', 'update', 'delete'];
+            if (!empty($config['apiList'])) {
+                $apiList = $config['apiList'];
+            }
+            if (in_array('all', $apiList)) {
+                Route::get('all', function (Request $request) {
+                    return $this->getAll($request);
+                });
+            }
+            if (in_array('list', $apiList)) {
+                Route::get('list', function (Request $request) {
+                    return $this->getList($request);
+                });
+            }
+            if (in_array('create', $apiList)) {
+                Route::post('', function (Request $request) {
+                    return $this->updateOrCreate($request);
+                });
+            }
+            if (in_array('update', $apiList)) {
+                Route::put('{id}', function (Request $request) {
+                    return $this->update($request);
+                });
+            }
+            if (in_array('detail', $apiList)) {
+                Route::get('{id}', function (Request $request) {
+                    return $this->getDetail($request);
+                });
+            }
+            if (in_array('delete', $apiList)) {
+                Route::delete('{id}', function (Request $request) {
+                    return $this->delete($request);
+                });
+            }
         });
         return $this;
     }
 
     public function getList(Request $request)
     {
-
         return QueryBuilder::for($this->model)
             ->defaultSort($this->config['defaultSort'] ?? '-id')
             ->allowedIncludes($this->config['allowedIncludes'] ?? [])
@@ -66,14 +86,26 @@ class EloquentRouter
             ->paginate($request->input('perPage', 15))
             ->appends($request->query());
     }
+    public function getAll(Request $request)
+    {
+        return QueryBuilder::for($this->model)
+            ->defaultSort($this->config['defaultSort'] ?? '-id')
+            ->allowedIncludes($this->config['allowedIncludes'] ?? [])
+            ->allowedFilters($this->config['allowedFilters'] ?? [])
+            ->allowedSorts($this->config['allowedSorts'] ?? 'id')
+            ->groupBy(\DB::raw($this->config['groupBy'] ?? 'id'))
+            ->limit($request->input('limit',$this->config['limit']??100))
+            ->get();
+    }
 
     public function getDetail(Request $request)
+
     {
         $query = $this->model::query();
         if ($id = $request->route('id')) {
             $query->where('id', $id);
         }
-        return $query->with($this->config['allowedIncludes']??[])->first();
+        return $query->with($this->config['allowedIncludes'] ?? [])->first();
     }
 
     public function delete(Request $request)
@@ -89,9 +121,19 @@ class EloquentRouter
     {
         $data = $request->all();
         $result = $this->model::updateOrCreate(['id' => $request->input('id')], $data);
+
         return [
             'result' => $result,
             'message' => $request->input('id') ? 'Update Successfully!' : 'Create Successfully!'
+        ];
+    }
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $result = $this->model::find($request->route('id'))->update($data);
+        return [
+            'result' => $result,
+            'message' =>'Update Successfully!'
         ];
     }
 
