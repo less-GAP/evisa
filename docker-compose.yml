@@ -2,37 +2,39 @@ version: '3'
 
 services:
     app:
-        build: .
-        working_dir: /var/www
-        user: ${MY_UID}:${MY_GID}
-        command: 'bash -c "composer install && php artisan serve --host=0.0.0.0 --port=80"'
-        networks:
-            - apisix
+        image: registry.digitalocean.com/lessgap/seo-sites:latest
+        working_dir: /app
         volumes:
-            - ./:/var/www
-            - ./database.sqlite:/var/www/database.sqlite
-            - ./public/index.php:/var/www/public/index.php
+            - app-volume:/app
+            - ./websites:/app/websites
+            - ./.env:/app/.env
+            - ./storage:/app/storage
     nginx:
         build: ./docker/nginx
-        user: ${MY_UID}:${MY_GID}
-        container_name: po5
-        depends_on:
-            - app
-        networks:
-            - apisix
+        container_name: seo_sites_nginx
         volumes:
-            - ./public:/var/www/public
+            - app-volume:/app
             - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
-            - ./storage/uploads:/var/www/public/uploads
+            - ./storage/uploads:/app/public/uploads
         environment:
             NGINX_NO_CACHE: ${NGINX_NO_CACHE}
             NGINX_PAGESPEED: 1
             NGINX_PAGESPEED_IMG: 1
             NGINX_PAGESPEED_JS: 1
             NGINX_PAGESPEED_CSS: 1
+        restart: on-failure
+        depends_on:
+            - app
+            - websites
         ports:
             - ${APP_PORT}:9100
-        restart: on-failure
-networks:
-    apisix:
-        external: true
+    redis:
+        image: 'redis'
+        restart: unless-stopped
+        environment:
+            - REDIS_PASSWORD=${REDIS_PASSWORD}
+volumes:
+    app-volume:
+        driver: local
+
+

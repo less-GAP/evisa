@@ -10,7 +10,7 @@ services:
     environment:
       - "USER=${USER}"
     volumes:
-      - ./modules/Admin:/var/www
+      - ./Modules/Admin:/var/www
     ports:
       - 9200:9200
   #    frontend_dev:
@@ -32,12 +32,12 @@ services:
   app:
     build: .
     working_dir: /var/www
-    command: 'bash -c "composer install && php artisan octane:start --watch  --server=swoole --host=0.0.0.0 --port=80"'
+    command: 'bash -c "composer install && php artisan serve --host=0.0.0.0 --port=80"'
     environment:
       - "USER=${USER}"
     volumes:
       - ./:/var/www
-      - ./modules/Frontend/public:/var/www/public
+      - ./php.ini:/usr/local/etc/php/php.ini
       - ./public/index.php:/var/www/public/index.php
       - ./public/build:/var/www/public/build
       - ./storage/upload:/var/www/public/upload
