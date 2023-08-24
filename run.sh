@@ -1,2 +1,2 @@
-docker pull registry.digitalocean.com/lessgap/po5:latest
+docker pull registry.digitalocean.com/lessgap/evisa:latest
 docker-compose down -v && docker-compose up -d
