@@ -25,3 +25,4 @@ backend/storage/logs/*.log
 docker/mysql/dbdata/
 storage
 storage-xtf
+database.sqlite
