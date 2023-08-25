@@ -52,6 +52,9 @@ class AbstractModuleProvider extends ServiceProvider
             $this->loadViewsFrom($this->dir . '/resources/views', $this->viewPrefix);
 
         }
+        if (is_dir($this->dir . '/resources/views/components')) {
+            \Blade::componentNamespace($this->dir . '/resources/views/components', $this->viewPrefix);
+        }
 
         if (!$this->routePrefix) {
             $this->routePrefix = $this->featureName;

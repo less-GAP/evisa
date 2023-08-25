@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .ant-btn-primary {
     color: #fff;
     background-color: #1677ff;
@@ -21,12 +22,12 @@
     border-color: transparent !important;
 }
 
-.ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title::after,
+.ant-steps .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after,
 .ant-steps .ant-steps-item-finish .ant-steps-item-icon {
     background-color: #4BB543;
 }
 
-.ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title {
+.ant-steps .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
     color: #4BB543 !important;
 }
 
@@ -35,15 +36,15 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.ant-steps .ant-steps-item-finish .ant-steps-item-icon>.ant-steps-icon,
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon,
 .ant-steps .ant-steps-item-icon .ant-steps-icon {
     color: #fff !important;
 }
 
-.ant-steps .ant-steps-item:not(.ant-steps-item-active)>.ant-steps-item-container[role='button']:hover .ant-steps-item-title,
-.ant-steps .ant-steps-item:not(.ant-steps-item-active)>.ant-steps-item-container[role='button']:hover .ant-steps-item-subtitle,
-.ant-steps .ant-steps-item:not(.ant-steps-item-active)>.ant-steps-item-container[role='button']:hover .ant-steps-item-description,
-.ant-steps .ant-steps-item-wait .ant-steps-item-icon>.ant-steps-icon {
+.ant-steps .ant-steps-item:not(.ant-steps-item-active) > .ant-steps-item-container[role='button']:hover .ant-steps-item-title,
+.ant-steps .ant-steps-item:not(.ant-steps-item-active) > .ant-steps-item-container[role='button']:hover .ant-steps-item-subtitle,
+.ant-steps .ant-steps-item:not(.ant-steps-item-active) > .ant-steps-item-container[role='button']:hover .ant-steps-item-description,
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
     color: #000 !important;
 }
 
@@ -80,7 +81,7 @@
     display: none;
 }
 
-.ant-radio-wrapper .ant-radio-inner{
+.ant-radio-wrapper .ant-radio-inner {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 0;
@@ -93,15 +94,15 @@
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-.ant-radio-wrapper .ant-radio-inner::after{
+.ant-radio-wrapper .ant-radio-inner::after {
     display: none;
 }
 
-.ant-radio-wrapper .ant-radio-checked .ant-radio-inner{
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
     background-color: rgb(249 250 251);
 }
 
-.ant-radio-wrapper .ant-radio-inner::before{
+.ant-radio-wrapper .ant-radio-inner::before {
     content: '';
     display: block;
     opacity: 0;
@@ -112,7 +113,7 @@
     background-image: url('../static/icons/checked.svg');
 }
 
-.ant-radio-wrapper .ant-radio-checked .ant-radio-inner::before{
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner::before {
     opacity: 1;
 }
 
@@ -141,14 +142,14 @@
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-.ant-form-item .ant-form-item-label >label::after{
+.ant-form-item .ant-form-item-label > label::after {
     display: none;
 }
 
-[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus{
+[type='text']:focus, input:where(:not([type])):focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
     box-shadow: inherit;
 }
 
-.ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input{
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
     height: 100%;
 }

@@ -8,7 +8,7 @@ services:
             - app-volume:/app
             - ./.env:/app/.env
             - ./storage:/app/storage
-            - ./storage/public/upload:/app/public/upload
+            - ./storage/upload:/app/public/upload
     nginx:
         build: ./docker/nginx
         volumes:

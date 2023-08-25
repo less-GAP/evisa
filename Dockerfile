@@ -15,7 +15,6 @@ FROM node:19 AS node
 FROM registry.digitalocean.com/lessgap/laravel-php82:latest
 WORKDIR /app
 COPY --from=admin /app/public ./public/cpn1234
-COPY ./ .
 RUN mkdir ./storage
 RUN mkdir ./storage/logs
 RUN mkdir ./storage/upload
@@ -25,10 +24,12 @@ RUN mkdir ./storage/framework/sessions
 RUN mkdir ./storage/framework/testing
 RUN mkdir ./storage/framework/views
 # install project dependencies
+COPY ./package.json .
+
 RUN npm install
+COPY ./ .
 # build app for production with minification
 RUN npm run build
-RUN rm -rf ./node_modules
 RUN rm -rf ./public/hot
 RUN composer install
 COPY ./docker/supervisor/supervisord.conf /etc/supervisor
