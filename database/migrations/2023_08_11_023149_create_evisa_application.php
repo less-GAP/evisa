@@ -36,7 +36,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('visa_application_id')->index();
             $table->string('full_name');
-            $table->integer('nationality');
+            $table->string('nationality');
             $table->string('passport_number');
             $table->string('email');
             $table->string('profile_photo');
