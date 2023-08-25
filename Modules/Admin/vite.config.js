@@ -22,7 +22,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'public',
-    chunkSizeWarningLimit: 1600
+    chunkSizeWarningLimit: 16000
   },
   resolve: {
     alias: {

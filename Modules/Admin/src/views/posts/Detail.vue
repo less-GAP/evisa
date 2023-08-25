@@ -36,7 +36,7 @@ const showPicker = ref(false);
 const activeKey = ref('1');
 
 const formRef = ref();
-const onSelectImage = function () {
+let onSelectImage = function () {
 };
 const props = defineProps({
   value: {
@@ -129,7 +129,7 @@ const closeDetail = function () {
                       tooltip: 'Select Image',
                       exec: (editor) => {
                         showPicker=true
-                        onSelectImage=function(images){
+                         onSelectImage=function(images){
                           images.forEach(function(image){
                             showPicker = false
                             const html =`<img width=100% title=`+image.title+` src=`+image.file_url+` />`;
