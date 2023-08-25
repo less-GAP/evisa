@@ -46,7 +46,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('visa_application_id')->index();
             $table->string('user')->index();
-            $table->integer('created_by');
+            $table->string('created_by');
             $table->timestamps();
         });
         Schema::create('visa_application_history', function (Blueprint $table) {
