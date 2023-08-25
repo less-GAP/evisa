@@ -11,7 +11,7 @@ const props = defineProps({
 })
 
 const validateMessages = {
-    required: '${label} is required!',
+    required: 'Please input!',
     types: {
         email: '${label} is not a valid email!',
         number: '${label} is not a valid number!',
@@ -22,6 +22,7 @@ const validateMessages = {
 };
 
 const emit = defineEmits(["success", "cancel"]);
+const form = ref()
 const loading = ref(false)
 const error = ref(null)
 const current = ref(0)
@@ -35,7 +36,7 @@ const formState = reactive(props.value || {
 });
 
 const formConfig = reactive({
-    "validateTrigger": "submit",
+    "validateTrigger": ["submit","change"],
     "label-align": "top",
     "model": formState,
     labelCol: {span: 24},
@@ -43,12 +44,27 @@ const formConfig = reactive({
     "validate-messages": validateMessages,
 });
 const submitForm = async function () {
-    loading.value = true
-    Api.post('visa-application', {...formState, total_amount: calculateFee()}).then(result => {
-        // current.value = 2
-        window.location.href ='/checkout'
-    }).catch(e => {
-    }).finally(loading.value = false)
+    try {
+        await form.value
+            .validate()
+        loading.value = true
+        Api.post('visa-application', {...formState, total_amount: calculateFee()}).then(result => {
+            // current.value = 2
+            window.location.href = '/checkout'
+        }).catch(e => {
+        }).finally(loading.value = false)
+    } catch (e) {
+
+    }
+}
+const nextStep = async function () {
+    try {
+        await form.value
+            .validate()
+        current.value = current.value + 1
+    } catch (e) {
+
+    }
 }
 const cancel = function () {
     emit('cancel')
@@ -105,34 +121,45 @@ function calculateFee() {
     </div>
     <div class="container mx-auto px-4 bg1">
         <div class="fS">
-            <a-form validateTrigger="submit" class="!2xl:text-lg" method="post" novalidate="novalidate">
-                <div class="flex flex-wrap -mx-4" v-show="current == 0">
+            <a-form v-bind="formConfig" :model="formState" ref="form" class="!2xl:text-lg" method="post"
+                    novalidate="novalidate">
+                <div class="flex flex-wrap -mx-4" v-if="current == 0">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                        <div class="has-feedback">
-                            <label class="block mb-2 font-semibold uppercase" for="number_of_visa">Number of
-                                applicants</label>
+                        <a-form-item name="number_of_visa" :rules="[{ required: true }]" class="has-feedback">
+                            <template #label>
+                                <label class="block mb-2 font-semibold uppercase" for="number_of_visa">Number of
+                                    applicants</label>
+                            </template>
                             <a-select ref="select" v-model:value="formState.number_of_visa" id="number_of_visa"
                                       class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
                                       placeholder="Select number of applicants">
                                 <a-select-option v-for="n in 20" :value="n" :key="n">{{ n }}</a-select-option>
                             </a-select>
-                        </div>
-                        <div class="mt-4 lg:mt-6 has-feedback">
-                            <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Type of
-                                visa</label>
+                        </a-form-item>
+                        <a-form-item name="type_of_visa" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
+                            <template #label>
+                                <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Type of
+                                    visa</label>
+                            </template>
                             <a-select ref="select" v-model:value="formState.type_of_visa" id="type_of_visa"
                                       class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
                                 <a-select-option value="1">E-Visa (1 Month Single Entry)</a-select-option>
                             </a-select>
-                        </div>
-                        <div class="mt-4 lg:mt-6 has-feedback">
-                            <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Date of Arrival</label>
+                        </a-form-item>
+                        <a-form-item name="date_arrival" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
+                            <template #label>
+
+                                <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Date of
+                                    Arrival</label>
+                            </template>
                             <a-date-picker class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
                                            style="width: 300px" v-model:value="formState.date_arrival"
                                            :show-time="{ format: 'HH:mm' }" format="YYYY-MM-DD HH:mm"/>
-                        </div>
-                        <div class="mt-4 lg:mt-6 has-feedback">
-                            <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Entry Port</label>
+                        </a-form-item>
+                        <a-form-item name="entry_port" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
+                            <template #label>
+                                <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Entry Port</label>
+                            </template>
                             <a-select class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer" show-search
                                       v-model:value="formState.entry_port" style="width: 300px"
                                       @change="handleChange">
@@ -176,10 +203,10 @@ function calculateFee() {
                                     <a-select-option value="24">Xa Mat Landport</a-select-option>
                                 </a-select-opt-group>
                             </a-select>
-                        </div>
+                        </a-form-item>
                     </div>
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 xl:flex xl:justify-center">
-                        <div class="inner">
+                        <a-form-item class="inner">
                             <span class="block mb-2 font-semibold uppercase">Processing Time</span>
                             <a-radio-group v-model:value="formState.processing_time">
                                 <a-radio class="m-0 mb-4" :value="1">Standard processing (5-7 working days)
@@ -188,7 +215,7 @@ function calculateFee() {
                                 <a-radio class="m-0 mb-4" :value="3">Urgent 1 Working Day (Mon-Fri)</a-radio>
                                 <a-radio :value="4">Same Day (4-8 Working Hours)</a-radio>
                             </a-radio-group>
-                        </div>
+                        </a-form-item>
                     </div>
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 lg:mt-0">
                         <div class="font-semibold uppercase">Service fee:</div>
@@ -199,7 +226,7 @@ function calculateFee() {
                         </div>
                         <div class="mt-2 text-base">*This fee excludes US $25 for the goverment e-visa fees.
                         </div>
-                        <button @click="current += 1" type="button"
+                        <button @click="nextStep" type="button"
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
@@ -314,12 +341,12 @@ function calculateFee() {
                     </p>
                 </a-col> -->
 
-                <div class="flex flex-wrap -mx-4" v-show="current == 1">
+                <div class="flex flex-wrap -mx-4" v-if="current == 1">
                     <div class="w-full px-4 md:w-1/2 lg:w-2/3">
                         <a-tabs v-model:activeKey="activeKey">
                             <a-tab-pane v-for="number of formState.number_of_visa" :key="number"
                                         :tab="'Applicant ' + number">
-                                <ApplicantForm v-model:value="formState.applicants[number - 1]"></ApplicantForm>
+                                <ApplicantForm prefix="applicants" :index="number-1" v-model:value="formState.applicants[number - 1]"></ApplicantForm>
                             </a-tab-pane>
                         </a-tabs>
                     </div>
@@ -348,7 +375,7 @@ function calculateFee() {
                         <div class="mt-1">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-4" v-show="current == 2">
+                <div class="flex flex-wrap -mx-4" v-if="current == 2">
                     <div class="w-full px-4 md:w-1/2 lg:w-2/3">
                         <a-result style="margin:0 auto" status="success" title="Successfully!"
                                   sub-title="Order number: 2017182818828182881 We will contact with you soon, please wait.">

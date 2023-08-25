@@ -6,7 +6,6 @@
 .env.xtf
 tests/
 coverage.xml
-images/
 phpunit.xml
 logs
 README.md
@@ -15,7 +14,6 @@ README.md
 /storage/
 /storage-xtf/
 /cookie.txt
-/public/images/
 **/node_modules
 frontend/node_modules
 backend/node_modules
