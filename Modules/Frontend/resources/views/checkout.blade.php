@@ -51,6 +51,7 @@
                 </div>
 
             </div>
+        </div>
     </section>
     <x-splade-script>
         // Loop over each funding source
