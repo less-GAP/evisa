@@ -110,7 +110,7 @@
     pointer-events: none;
     width: 1rem;
     height: 1rem;
-    background-image: url('../static/icons/checked.svg');
+    background-image: url('/static/icons/checked.svg');
 }
 
 .ant-radio-wrapper .ant-radio-checked .ant-radio-inner::before {
