@@ -4,12 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\CreatedUpdatedByAdmin;
+use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use CreatedUpdatedByAdmin;
+    use CreatedUpdatedByAdmin,HasSlug;
     public $slugBy = 'title';
     /**
      * The attributes that are mass assignable.

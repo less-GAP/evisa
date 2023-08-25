@@ -100,10 +100,8 @@ const closeDetail = function () {
       <a-button :icon="h(ArrowLeftOutlined)" class="float-left" type="link" @click="closeDetail" > Back to list</a-button>
       <a-space  class="flex items-end float-right " align="right">
         <!--                <a-button v-if="formState.rule_detect_category_link" @click="detectCategory" :loading="loadingDraft" >Test Category</a-button>-->
-        <a-tag v-if="formState.status=='publish'" color="success">Published</a-tag>
-        <a-tag v-else-if="formState.status" color="orange">{{ formState.status }}</a-tag>
         <a-button @click="submit('draft')" :loading="loadingDraft" type="dashed">Save Draft</a-button>
-        <a-button @click="submit('publish')" :loading="loading" type="primary">Save And Active</a-button>
+        <a-button @click="submit('publish')" :loading="loading" type="primary">Save And Publish</a-button>
       </a-space>
     </a-card>
     <a-row style="height:calc(100% - 55px);overflow: auto;padding:0;" class="mt-5 shadow" :gutter="50">
@@ -126,8 +124,7 @@ const closeDetail = function () {
                 iframe:true,
                  height: '50vh',
                  buttons: [
-                   ...Jodit.defaultOptions.buttons,
-                    {
+                   {
                       name: 'Select Image',
                       tooltip: 'Select Image',
                       exec: (editor) => {
@@ -141,7 +138,9 @@ const closeDetail = function () {
                         }
                         // editor.s.insertHTML(new Date().toDateString());
                       }
-                    }
+                    },
+                   ...Jodit.defaultOptions.buttons
+
                   ]
               }"/>
               </a-form-item>
@@ -157,6 +156,9 @@ const closeDetail = function () {
       <a-col :lg="6" :md="24">
 
         <a-card class="mt-5">
+          <a-tag v-if="formState.status=='publish'" color="success">Published</a-tag>
+          <a-tag v-else-if="formState.status" color="orange">{{ formState.status }}</a-tag>
+
           <a-form-item style="width:100%" label="Feature image">
             <InputUploadGetPath width="200px" autocomplete="off" v-model:value="formState.image">
             </InputUploadGetPath>
@@ -166,12 +168,12 @@ const closeDetail = function () {
           <!--                             v-model:value="formState.images"></InputUpload>-->
           <!--              </a-form-item>-->
         </a-card>
-        <a-card class="mt-5">
-          <a-form-item style="width:100%" label="Tags">
-            <InputTags v-model:value="formState.tags"></InputTags>
-          </a-form-item>
+<!--        <a-card class="mt-5">-->
+<!--          <a-form-item style="width:100%" label="Tags">-->
+<!--            <InputTags v-model:value="formState.tags"></InputTags>-->
+<!--          </a-form-item>-->
 
-        </a-card>
+<!--        </a-card>-->
       </a-col>
     </a-row>
   </a-form>

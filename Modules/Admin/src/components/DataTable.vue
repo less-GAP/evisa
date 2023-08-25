@@ -4,7 +4,8 @@ import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input, InputUpload} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
-import {DownOutlined, ReloadOutlined} from "@ant-design/icons-vue";
+import {DownOutlined, ReloadOutlined,SearchOutlined} from "@ant-design/icons-vue";
+const emit = defineEmits(["init"]);
 
 const props = defineProps({
   tableConfig: {
@@ -64,7 +65,6 @@ const tableColumns = computed(() => {
     result.push({
       title: 'Hành động',
       key: 'action',
-      width: 200,
       dataIndex: 'action'
     })
   }
@@ -87,7 +87,7 @@ function reload() {
     })
   }
 }
-
+emit('init',{reload})
 const loading = ref(false);
 const checkAll = ref(false);
 const selectedKeys = ref([])
@@ -145,6 +145,7 @@ reload()
             placeholder="Enter to search..."
             :loading="loading"
           />
+          <a-button @click="reload" type="primary" :icon="h(SearchOutlined)"></a-button>
           <slot name="filter"></slot>
         </a-space>
         <span></span>
@@ -155,21 +156,21 @@ reload()
               <reload-outlined @click="reload"/>
             </template>
           </a-button>
-          <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">
-            <template #overlay>
-              <a-menu>
-                <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"
-                >
-                  {{ action.title }}
-                </a-menu-item>
+          <!--          <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">-->
+          <!--            <template #overlay>-->
+          <!--              <a-menu>-->
+          <!--                <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"-->
+          <!--                >-->
+          <!--                  {{ action.title }}-->
+          <!--                </a-menu-item>-->
 
-              </a-menu>
-            </template>
-            <a-button>
-              Hành động
-              <DownOutlined/>
-            </a-button>
-          </a-dropdown>
+          <!--              </a-menu>-->
+          <!--            </template>-->
+          <!--            <a-button>-->
+          <!--              Hành động-->
+          <!--              <DownOutlined/>-->
+          <!--            </a-button>-->
+          <!--          </a-dropdown>-->
 
           <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
 
@@ -182,7 +183,7 @@ reload()
         <table  class="table-auto w-full mt-5">
           <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
           <tr>
-            <th v-if="selectionActions.length > 0" scope="col" class="p-2 whitespace-nowrap">
+            <th v-if="selectionActions.length > 0" width="50" scope="col" class="p-2 whitespace-nowrap">
               <label
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
                 @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
@@ -190,13 +191,13 @@ reload()
               </label>
             </th>
 
-            <th v-for="column in columns" scope="col" class="p-2 whitespace-nowrap">
+            <th v-for="column in columns" scope="col" :width="column.width?column.width:'auto'" class="p-2 whitespace-nowrap">
               <div class="font-semibold text-left">
                 {{ __(column.title) }}
               </div>
             </th>
 
-            <th v-if="itemActions.length" scope="col" class="p-2 whitespace-nowrap">
+            <th v-if="itemActions.length" width="100"  scope="col" class="p-2 whitespace-nowrap">
               {{ __('Action') }}
 
             </th>
@@ -214,7 +215,7 @@ reload()
             </td>
 
             <td v-for="column in columns"
-                :class="'p-2 whitespace-nowrap' + (column.class ? column.class : '')">
+                :class="'p-2 ' + (column.class ? column.class : '')">
               <template v-if="item.render">
                 {{item.render()}}
               </template>

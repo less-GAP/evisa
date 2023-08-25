@@ -1,10 +1,11 @@
 <script lang="ts">
-import {defineComponent, nextTick, reactive, ref} from 'vue';
+import {defineComponent, nextTick, reactive, ref, watch} from 'vue';
 import {Tooltip, Space} from 'ant-design-vue';
-import {PlusOutlined,CloseCircleOutlined} from "@ant-design/icons-vue";
+import {PlusOutlined, CloseCircleOutlined} from "@ant-design/icons-vue";
+import Api from "@/utils/Api";
 
 export default defineComponent({
-  components: {PlusOutlined,CloseCircleOutlined},
+  components: {PlusOutlined, CloseCircleOutlined},
   props: {
     value: Array
   },
@@ -13,12 +14,32 @@ export default defineComponent({
     const state = reactive({
       tags: [...props.value],
       inputVisible: false,
+      fetching: false,
       inputValue: '',
     });
+    watch(()=>props.value,function(){
+      state.tags = props.value
+    })
+    const options = ref([]);
     const inputRef = ref();
+    const addItem = () => {
+    };
+    const fetch = function () {
+      Api.get('tag/all?limit=10000').then(rs => {
+        options.value = rs.data
+      })
+    }
+    fetch();
     return {
+      fetch,
+      addItem,
+      options,
       inputRef,
       state,
+      handleChange(value) {
+        emit('change', state.tags)
+        emit('update:value', state.tags)
+      },
       handleClose(removedTag) {
         const tags = state.tags.filter(tag => tag !== removedTag);
         state.tags = tags;
@@ -59,28 +80,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <a-input
-      ref="inputRef"
-      v-model:value="state.inputValue"
-      type="text"
-      size="small"
-      class="mb-5"
-      :style="{ minWidth: '78px' }"
-      @keyup.enter="handleInputConfirm(true)"
-      @keyup.tab="handleInputConfirm(true)"
-    />
-    <template v-for="(tag, index) in state.tags" :key="tag">
-      <span class="border inline-block nowrap rounded p-2 mr-2 mb-2 pr-0 relative" >
-        {{ tag }}
-        <a-button type="link" style="height:auto;font-size:15px;padding:0" @click="handleClose(tag)">
-          <template #icon>
-            <close-circle-outlined  />
-          </template>
-        </a-button>
-      </span>
-    </template>
+  <a-select
+    @change="handleChange"
+    v-model:value="state.tags"
+    mode="tags"
+    :field-names="{ label: 'name', value: 'name' }"
+    :token-separators="[',']"
+    placeholder="Select tags"
+    style="width: 100%;height:100px"
+    :not-found-content="state.fetching ? undefined : null"
+    :options="options"
+  >
 
-  </div>
+  </a-select>
 
 </template>

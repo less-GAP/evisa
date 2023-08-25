@@ -68,17 +68,7 @@ const tableConfig = {
       key: 'title',
 
     },
-    {
-      title: 'Tags',
-      key: 'tags',
-      width: '150px'
 
-    },
-    {
-      title: 'Loại',
-      key: 'type',
-      width: 100
-    },
 
     {
       title: 'Publish',

@@ -47,7 +47,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     EloquentRouter::prefix('post')
         ->handle(\App\Models\Post::class,
             [
-                'allowedIncludes' => ['tags'],
+//                'allowedIncludes' => ['tags'],
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'title')]
             ]
         )->routes(function(){

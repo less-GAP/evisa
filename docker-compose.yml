@@ -8,12 +8,13 @@ services:
             - app-volume:/app
             - ./.env:/app/.env
             - ./storage:/app/storage
+            - ./storage/public/upload:/app/public/upload
     nginx:
         build: ./docker/nginx
         volumes:
             - app-volume:/app
             - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
-            - ./storage/uploads:/app/public/uploads
+            - ./storage/upload:/app/public/upload
         environment:
             NGINX_NO_CACHE: ${NGINX_NO_CACHE}
             NGINX_PAGESPEED: 1

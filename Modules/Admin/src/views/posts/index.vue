@@ -77,9 +77,7 @@ function setTableAction(actions) {
           <a-image height="50px" class="w-20 h-auto" :src="item.image_url"
                    :alt="item.name"/>
         </template>
-        <template #cell[tags]="{item,column}">
-          {{ item.tags.join(',') }}
-        </template>
+
 
         <template #cell[status]="{item,column}">
           <a-switch @change="updateApi(item.id,{status:item.status})" checkedValue="publish" unCheckedValue="draft"
