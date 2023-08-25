@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->string('type_of_visa');
-            $table->datetime('date_arrival');
+            $table->datetime('date_arrival')->nullable();
             $table->string('entry_port');
             $table->string('processing_time');
             $table->datetime('est_delivery_time');

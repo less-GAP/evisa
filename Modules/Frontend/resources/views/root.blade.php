@@ -7,7 +7,6 @@
     <title>E VISA</title>
     <link rel="icon" href="/images/favicon.png" sizes="32x32">
     <link rel='stylesheet' id='lessGAP-theme-style-css' href='/static/style.css?ver=6.3' type='text/css' media='all'/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel='stylesheet' id='lessGAP-font-NeueKabel-css'
           href='{{ asset('static/webfonts/NeueKabel/stylesheet.css') }}'
           type='text/css' media='all'/>
