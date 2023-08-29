@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Countries extends Model
+class Country extends Model
 {
 
     /**
@@ -18,16 +18,14 @@ class Countries extends Model
 
     protected $table = 'countries';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
         'code',
-        'code_A3',
-        'code_N3',
+        'emoji',
+        'image',
         'region',
-        'latitude',
-        'longitude',
         'status'
     ];
 
@@ -56,21 +54,4 @@ class Countries extends Model
 //        'videos'
     ];
 
-//    public function getCustomerGroupNameAttribute()
-//    {
-//        $cus = CustomerGroup::where('id', $this->customer_group)->first();
-//        return $cus->name;
-//    }
-//
-//    public function getVideosAttribute()
-//    {
-//        $vi = [];
-//        $videos = SeriesVideo::where('series_id', $this->id)->get();
-//        if(!empty($videos)){
-//            foreach($videos as $v){
-//                $vi[] = $v->video_descr;
-//            }
-//        }
-//        return $vi;
-//    }
 }

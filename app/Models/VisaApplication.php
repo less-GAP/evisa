@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasOrderNo;
+use App\Traits\HasVatFee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +16,7 @@ class VisaApplication extends Model
      *
      * @var array<int, string>
      */
-    use HasFactory;
+    use HasFactory,HasOrderNo,HasVatFee;
 
     protected $table = 'visa_application';
 

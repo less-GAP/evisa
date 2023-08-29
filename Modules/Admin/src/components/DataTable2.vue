@@ -4,8 +4,7 @@ import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input, InputUpload} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
-import {DownOutlined, ReloadOutlined, SearchOutlined} from "@ant-design/icons-vue";
-
+import {DownOutlined, ReloadOutlined,SearchOutlined} from "@ant-design/icons-vue";
 const emit = defineEmits(["init"]);
 
 const props = defineProps({
@@ -38,10 +37,6 @@ const props = defineProps({
     type: Array,
     default: []
   },
-  listActions: {
-    type: Array,
-    default: []
-  },
   api: Function,
   addAction: Function,
 });
@@ -66,7 +61,7 @@ const tableColumns = computed(() => {
       ...item
     }
   })
-  console.log(999, props)
+  console.log(999,props)
   if (props.actionColumn && props.itemActions.length) {
     result.push({
       title: 'Hành động',
@@ -93,8 +88,7 @@ function reload() {
     })
   }
 }
-
-emit('init', {reload})
+emit('init',{reload})
 const loading = ref(false);
 const checkAll = ref(false);
 const selectedKeys = ref([])
@@ -136,8 +130,8 @@ reload()
 </script>
 
 <template>
-  <div class="flex flex-col text-center h-full sm:rounded-lg">DataTable
-    <div :loading="loading" class="flex items-center pb-2 justify-between   bg-white dark:bg-gray-800">
+  <div class="flex flex-col text-center h-full sm:rounded-lg">
+    <div :loading="loading" class="flex items-center pb-2 justify-between  bg-white dark:bg-gray-800">
       <slot name="header" v-bind="{tableConfig,reload}">
 
         <a-space>
@@ -178,19 +172,19 @@ reload()
           <!--              <DownOutlined/>-->
           <!--            </a-button>-->
           <!--          </a-dropdown>-->
-          <a-button v-for="listAction in listActions" type="primary"
-                    @click="()=>{listAction.action(reload)}">{{ listAction.label }}
-          </a-button>
+
+          <a-button type="primary" v-if="addAction" @click="()=>{addAction(reload)}">Thêm mới</a-button>
+
         </a-space>
       </slot>
     </div>
+
     <div class="overflow-auto scroll-smooth flex-1 w-full h-full">
       <slot v-if="tableData.data?.length" name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
-        <table class="table-auto w-full mt-5">
+        <table  class="table-auto w-full mt-5">
           <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
           <tr>
-            <th v-if="selectionActions.length > 0 && tableConfig.selectionColumn" width="50" scope="col"
-                class="p-2 whitespace-nowrap">
+            <th v-if="selectionActions.length > 0 && tableConfig.selectionColumn" width="50" scope="col" class="p-2 whitespace-nowrap">
               <label
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
                 @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"
@@ -198,16 +192,15 @@ reload()
               </label>
             </th>
 
-            <th v-for="column in columns" scope="col" :width="column.width?column.width:'auto'"
-                class="p-2 whitespace-nowrap">
+            <th v-for="column in columns" scope="col" :width="column.width?column.width:'auto'" class="p-2 whitespace-nowrap">
               <div class="font-semibold text-left">
                 {{ __(column.title) }}
               </div>
             </th>
 
-            <th v-if="itemActions.length" width="100" scope="col"
-                class="p-2 whitespace-nowrap">
+            <th v-if="itemActions.length && tableConfig.actionColumn" width="100"  scope="col" class="p-2 whitespace-nowrap">
               {{ __('Action') }}
+
             </th>
           </tr>
           </thead>
@@ -225,14 +218,14 @@ reload()
             <td v-for="column in columns"
                 :class="'p-2 ' + (column.class ? column.class : '')">
               <template v-if="item.render">
-                {{ item.render() }}
+                {{item.render()}}
               </template>
               <slot v-else :name="'cell['+column.key+']'" v-bind="{item,column,index}">
                 {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
               </slot>
 
             </td>
-            <td v-if="itemActions.length " class="p-2 whitespace-nowrap">
+            <td v-if="itemActions.length && tableConfig.actionColumn" class="p-2 whitespace-nowrap">
               <!-- Modal toggle -->
               <template v-for="itemAction in itemActions">
                 <slot :name="'cellAction['+itemAction.key+']'"

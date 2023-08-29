@@ -3,6 +3,7 @@ import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
 import {useAppStateStore} from "@/stores/appState";
+import {configRoutes} from "@/views/configs/routers";
 
 const publicPages = ['/login'];
 
@@ -93,32 +94,6 @@ const routes = [
   },
   {
     meta: {
-      title: "Configs",
-    },
-    path: "/configs",
-    name: "configs",
-    component: () => import("@/views/configs/ConfigLayout.vue"),
-    children: [
-      {
-        meta: {
-          title: "General Configuration",
-        },
-        path: "/configs/general",
-        name: "config-general",
-        component: () => import("@/views/configs/GeneralConfig.vue"),
-      },
-      {
-        meta: {
-          title: "SMTP Configuration",
-        },
-        path: "/configs/smtp",
-        name: "config-smtp",
-        component: () => import("@/views/configs/SMTPConfig.vue"),
-      },
-    ]
-  },
-  {
-    meta: {
       title: "Emails",
     },
     path: "/emails",
@@ -186,6 +161,7 @@ const routes = [
     name: "error",
     component: () => import("@/views/ErrorView.vue"),
   },
+  ...configRoutes
 ];
 
 const router = createRouter({

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('visa_application', function (Blueprint $table) {
             $table->id();
+            $table->string('order_no');
+            $table->integer('vat_fee');
             $table->integer('number_of_visa');
             $table->integer('agency_id')->nullable();
             $table->integer('created_by')->nullable();

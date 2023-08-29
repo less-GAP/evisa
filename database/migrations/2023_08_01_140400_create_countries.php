@@ -13,16 +13,11 @@ return new class extends Migration {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->string('code');
-            $table->string('code_A3')->nullable();
-            $table->string('code_N3')->nullable();
+            $table->string('code')->unique();
+            $table->string('emoji')->nullable();
+            $table->string('image')->nullable();
             $table->string('region')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
-            $table->string('status')->default('A');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('status')->default('active')->index();
         });
     }
 

@@ -1,42 +1,98 @@
 <script setup>
 import {reactive, ref, h, watch} from "vue";
-import {mdiBallotOutline, mdiDelete} from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import {Modal, DataTable} from "@/components";
-
-import {PlusOutlined, LoadingOutlined, DeleteOutlined, FormOutlined} from '@ant-design/icons-vue';
-
-import {InputUpload} from "@/components";
-
-import Api from "@/utils/Api";
+import {DataTable} from "@/components";
 import router from "@/router";
+import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
+import {UseDataTable} from "@/utils/UseDataTable";
 
-import {notification} from "ant-design-vue";
-import {tableConfig, updateApi,routerPath} from "./meta";
-
+const prefix = router.currentRoute.value.meta.api ? router.currentRoute.value.meta.api : router.currentRoute.value.path
+const {
+  fetchListApi,
+  createApi,
+  deleteApi,
+  updateApi
+} = UseEloquentRouter(prefix)
 const isShowModal = ref(false)
 
-const editProduct = ref(null);
-
-function showEditUser(user, reload) {
-  isShowModal.value = true;
-  editProduct.value = user;
-}
-
-let tableAction = {
-  reload() {
+const itemActions = [
+  {
+    label: 'Edit',
+    action: (item, reload) => {
+      //showEditUser({}, reload)
+      router.push(prefix + '/' + item.id)
+    }
+  },
+  {
+    label: 'Delete',
+    class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
+    action(item, reload) {
+      deleteApi(item.id).then(rs => {
+      }).finally(() => {
+        reload();
+      });
+    }
   }
+]
+const listActions = [
+  {
+    label: 'Add',
+    action: (reload) => {
+      //showEditUser({}, reload)
+      router.push(prefix + '/new')
+    }
+  }
+]
+const columns = [
+  {
+    title: 'Hình ảnh',
+    key: 'image',
+    width: '100px'
+  },
+  {
+    title: 'Title',
+    key: 'title',
+
+  },
+
+  {
+    title: 'Loại',
+    key: 'type',
+    width: 100
+  },
+
+  {
+    title: 'Publish',
+    key: 'status',
+    width: 100
+
+  },
+  {
+    title: 'Created at',
+    key: 'created_at',
+    width: 200
+  },
+]
+
+
+const tableConfig = UseDataTable(fetchListApi, {
+  columns,
+  listActions,
+  itemActions
+})
+let reloadTable = () => {
 }
+
 watch(router.currentRoute, (data) => {
-  if (data.path === routerPath) {
-    tableAction.reload()
+  if (data.path === prefix) {
+    reloadTable()
   }
 });
 
-function setTableAction(actions) {
-  tableAction = actions
+function registerTable({reload}) {
+  reloadTable = reload
 }
 
 </script>
@@ -44,7 +100,7 @@ function setTableAction(actions) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <DataTable @init="setTableAction" v-bind="tableConfig">
+      <DataTable @register="registerTable" v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
             title="Bạn muốn xóa sản phẩm này?"

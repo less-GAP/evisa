@@ -1,6 +1,7 @@
 {
   "name": "admin-one-vue-tailwind",
   "version": "3.2.0",
+    "type": "module",
   "scripts": {
     "build": "vite build",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {reactive, h, ref, toRaw} from "vue";
+import {reactive,h, ref, toRaw} from "vue";
 
 import {useMainStore} from "@/stores/main";
 import {
@@ -14,19 +14,17 @@ import {PlusOutlined, LoadingOutlined, DeleteOutlined} from '@ant-design/icons-v
 
 import router from "@/router";
 
-import Api from "@/utils/Api";
 
-import 'jodit/es5/jodit.css';
+import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 
-import {JoditEditor, Jodit} from 'jodit-vue';
-
-import {notification} from 'ant-design-vue';
-
-import type {UploadProps} from 'ant-design-vue';
-
-import {InputTags, InputUploadGetPath, FilePicker} from "@/components";
-import {createApi, newModel, formConfig, fetchDetailApi} from "./meta";
-import {back} from "./meta";
+const prefix = router.currentRoute.value.meta.api ? router.currentRoute.value.meta.api : router.currentRoute.value.path
+const {
+  fetchListApi,
+  createApi,
+  fetchDetailApi,
+  deleteApi,
+  updateApi
+} = UseEloquentRouter(prefix)
 
 const mainStore = useMainStore();
 
@@ -48,7 +46,7 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(["close"]);
-const formState = reactive({...newModel});
+const formState = reactive({});
 const isShowModal = ref(false)
 
 const fetch = async function () {
@@ -79,7 +77,6 @@ const submit = (status) => {
 const closeDetail = function () {
   props.visible = false;
   emit('close');
-  back()
 }
 
 
@@ -97,9 +94,8 @@ const closeDetail = function () {
     >
       <a-card body-style="padding:10px;height:55px;"
               class="bg-gray-50 shadow ">
-        <a-button :icon="h(ArrowLeftOutlined)" class="float-left" type="link" @click="closeDetail"> Back to list
-        </a-button>
-        <a-space class="flex items-end float-right " align="right">
+        <a-button :icon="h(ArrowLeftOutlined)" class="float-left" type="link" @click="closeDetail" > Back to list</a-button>
+        <a-space  class="flex items-end float-right " align="right">
           <!--                <a-button v-if="formState.rule_detect_category_link" @click="detectCategory" :loading="loadingDraft" >Test Category</a-button>-->
           <a-tag v-if="formState.status=='publish'" color="success">Published</a-tag>
           <a-tag v-else-if="formState.status" color="orange">{{ formState.status }}</a-tag>
@@ -177,13 +173,7 @@ const closeDetail = function () {
       </a-row>
     </a-form>
   </a-drawer>
-  <a-modal append-to-body v-model:open="showPicker" style="z-index:99999;top: 2vh;height:98vh" height="96vh"
-           width="90vw"
-           title="Select file">
-    <FilePicker :multiple="true" @close="showPicker=false" @select="onSelectImage"></FilePicker>
-    <template #footer>
-    </template>
-  </a-modal>
+
 </template>
 
 <style>

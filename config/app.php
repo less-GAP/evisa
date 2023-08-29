@@ -167,6 +167,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        Webpatser\Countries\CountriesServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Modules\Admin\ServiceProvider::class,
         Modules\Frontend\ServiceProvider::class,

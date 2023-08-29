@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
             'password' => \Hash::make('123456'),
         ]);
         \App\Models\User::factory()->count(20)->create();
+        $this->call([
+            CountrySeeder::class
+        ]);
     }
 }

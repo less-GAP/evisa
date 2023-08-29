@@ -15,6 +15,7 @@ services:
             - app-volume:/app
             - ./docker/nginx/conf.d/server.conf:/etc/nginx/conf.d/server.conf
             - ./storage/upload:/app/public/upload
+            - ./public/static:/app/public/static
         environment:
             NGINX_NO_CACHE: 0
             NGINX_PAGESPEED: 1
