@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->string('type_of_visa');
-            $table->datetime('date_arrival');
+            $table->datetime('date_arrival')->nullable();
             $table->string('entry_port');
             $table->string('processing_time');
             $table->datetime('est_delivery_time');
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('visa_application_id')->index();
             $table->string('full_name');
-            $table->integer('nationality');
+            $table->string('nationality');
             $table->string('passport_number');
             $table->string('email');
             $table->string('profile_photo');
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('visa_application_id')->index();
             $table->string('user')->index();
-            $table->integer('created_by');
+            $table->string('created_by');
             $table->timestamps();
         });
         Schema::create('visa_application_history', function (Blueprint $table) {

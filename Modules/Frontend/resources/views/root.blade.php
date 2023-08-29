@@ -7,7 +7,6 @@
     <title>E VISA</title>
     <link rel="icon" href="/images/favicon.png" sizes="32x32">
     <link rel='stylesheet' id='lessGAP-theme-style-css' href='/static/style.css?ver=6.3' type='text/css' media='all'/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel='stylesheet' id='lessGAP-font-NeueKabel-css'
           href='{{ asset('static/webfonts/NeueKabel/stylesheet.css') }}'
           type='text/css' media='all'/>
@@ -21,6 +20,7 @@
     <link rel='shortlink' href='https://evisa.usa-server.com/'/>
 
     <script src="https://www.paypal.com/sdk/js?client-id=AWcy7kkXjKzGK6JwvlI9AR0Tpq4UqL8Sm4KkaXpfqUI-xEl4j_JH_XUFr12mJKk4__xJwJt4ukyJZmQ2&components=buttons,funding-eligibility"></script>
+
     @vite(['resources/js/app.js'])
     @spladeHead
 </head>

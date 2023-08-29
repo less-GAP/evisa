@@ -36,7 +36,8 @@
                 },
             ]"></a-steps>
                 <div class="container mx-auto px-4 mt-10 mb-5 lg:mb-10 text-center">
-                <a-result style="margin:0 auto" status="success" title="Successfully!"
+                    <a-result style="margin:0 auto" status="success" title="Successfully!"
+
                               sub-title="Order number: {{$visaApplication->order_no}} We will contact with you soon, please wait.">
                     </a-result>
                     <div class="text-xs text-gray-500 mb-2 italic text-center">You'll be charged
@@ -51,6 +52,7 @@
                 </div>
 
             </div>
+        </div>
     </section>
     <x-splade-script>
         // Loop over each funding source
