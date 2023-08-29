@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\CreatedUpdatedByAdmin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,10 +15,11 @@ class DataList extends Model
      *
      * @var array<int, string>
      */
-    use HasFactory;
+    use HasFactory,CreatedUpdatedByAdmin;
 
     protected $table = 'data_list';
     protected $keyType = 'string';
+    protected $primaryKey = 'list_key';
 
     public $timestamps = true;
 

@@ -99,11 +99,11 @@ class EloquentRouter
     }
 
     public function getDetail(Request $request)
-
     {
+        $model = new $this->model;
         $query = $this->model::query();
         if ($id = $request->route('id')) {
-            $query->where('id', $id);
+            $query->where($model->getKeyName(), $id);
         }
         return $query->with($this->config['allowedIncludes'] ?? [])->first();
     }
@@ -119,8 +119,9 @@ class EloquentRouter
 
     public function updateOrCreate(Request $request)
     {
+        $model = new $this->model;
         $data = $request->all();
-        $result = $this->model::updateOrCreate(['id' => $request->input('id')], $data);
+        $result = $this->model::updateOrCreate([$model->getKeyName() => $request->input('id')], $data);
 
         return [
             'result' => $result,

@@ -66,7 +66,6 @@ const tableColumns = computed(() => {
       ...item
     }
   })
-  console.log(999, props)
   if (props.actionColumn && props.itemActions.length) {
     result.push({
       title: 'Hành động',

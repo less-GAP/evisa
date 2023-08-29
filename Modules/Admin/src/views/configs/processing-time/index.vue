@@ -14,10 +14,11 @@ import {PlusOutlined, LoadingOutlined, DeleteOutlined} from '@ant-design/icons-v
 
 import router from "@/router";
 
-
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
+import DataListEdit from "@/components/DataListEdit.vue";
 
-const prefix = router.currentRoute.value.meta.api ? router.currentRoute.value.meta.api : router.currentRoute.value.path
+const prefix = 'data-list'
+const listKey = 'visa-processing-time'
 const {
   fetchListApi,
   createApi,
@@ -46,31 +47,29 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(["close"]);
-const formState = reactive({});
+const formState = reactive({
+  list_key:listKey,
+  data: [{}]
+});
 const isShowModal = ref(false)
 
 const fetch = async function () {
   loading.value = true;
-  var id = router.currentRoute.value.params.id;
-  if (id > 0) {
-    loading.value = true
-    const value = await fetchDetailApi(id)
+  loading.value = true
+  const value = await fetchDetailApi(listKey)
+  if (value.data) {
     Object.assign(formState, value.data)
-    loading.value = false
-  } else {
-    loading.value = false
   }
+  loading.value = false
+
 }
 fetch();
 
 const submit = (status) => {
-  formRef.value
-    .validate()
-    .then(() => {
-      createApi({...formState, status: status}).then(rs => {
-        Object.assign(formState, rs.data.result)
-      });
-    })
+
+  createApi({...formState, status: status}).then(rs => {
+    Object.assign(formState, rs.data.result)
+  });
 
 };
 
@@ -83,66 +82,26 @@ const closeDetail = function () {
 </script>
 
 <template>
-  <a-form v-if="formState" layout="vertical"
-          v-bind="formConfig"
-          ref="formRef"
-          :model="formState"
-          @finish="onFinish"
-  >
-    <a-card body-style="padding:10px;height:55px;"
-            class="bg-gray-50 shadow ">
-      <a-button :icon="h(ArrowLeftOutlined)" class="float-left" type="link" @click="closeDetail"> Back to list
-      </a-button>
-      <a-space class="flex items-end float-right " align="right">
-        <!--                <a-button v-if="formState.rule_detect_category_link" @click="detectCategory" :loading="loadingDraft" >Test Category</a-button>-->
-        <a-tag v-if="formState.status=='publish'" color="success">Published</a-tag>
-        <a-tag v-else-if="formState.status" color="orange">{{ formState.status }}</a-tag>
-        <a-button @click="submit('draft')" :loading="loadingDraft" type="dashed">Save Draft</a-button>
-        <a-button @click="submit('publish')" :loading="loading" type="primary">Save And Active</a-button>
-      </a-space>
-    </a-card>
-    <a-row style="height:calc(100% - 55px);overflow: auto;padding:0;" class="mt-5 shadow" :gutter="50">
-      <a-col :lg="18" :md="24">
-        <a-card>
-          <a-row :gutter="20">
-            <a-col :span="24">
-              <a-form-item label="Title"
-                           name="title"
-                           :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
-              >
-                <a-input v-model:value="formState.title" placeholder="Title.."/>
-              </a-form-item>
-            </a-col>
-
-            <a-col :span="24">
-
-            </a-col>
-          </a-row>
-
-        </a-card>
-
-      </a-col>
-      <a-col :lg="6" :md="24">
-
-        <a-card class="mt-5">
-          <a-form-item style="width:100%" label="Feature image">
-            <InputUploadGetPath width="200px" autocomplete="off" v-model:value="formState.image">
-            </InputUploadGetPath>
-          </a-form-item>
-          <!--              <a-form-item style="width:100%" label="Hình ảnh">-->
-          <!--                <InputUpload :multiple="true" alt="" autocomplete="off"-->
-          <!--                             v-model:value="formState.images"></InputUpload>-->
-          <!--              </a-form-item>-->
-        </a-card>
-        <a-card class="mt-5">
-          <a-form-item style="width:100%" label="Tags">
-            <InputTags v-model:value="formState.tags"></InputTags>
-          </a-form-item>
-
-        </a-card>
-      </a-col>
-    </a-row>
-  </a-form>
+  <a-button @click="submit" class="float-right" type="primary" success>Save</a-button>
+  <DataListEdit :columns="[{
+          title: 'Label',
+          dataIndex: 'label'
+        },{
+          title: 'Value',
+          dataIndex: 'value'
+        },{
+          title: 'Working hours',
+          dataIndex: 'working_hours',
+          min:0,
+           type:'number'
+        },
+        {
+          title: 'Fee per applicant',
+          dataIndex: 'fee_per_applicant',
+          min:0,
+          type:'number'
+        }
+        ]" v-model:value="formState.data"></DataListEdit>
 
 </template>
 

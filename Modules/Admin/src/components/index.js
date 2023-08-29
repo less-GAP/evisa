@@ -66,7 +66,9 @@ import InputUploadGetPath from "./InputUploadGetPath.vue"
 import BaseIcon from "./BaseIcon.vue"
 import RemoteSelect from "./RemoteSelect.vue"
 import InputTags from "./InputTags.vue"
+import DataListEdit from "./DataListEdit.vue"
 export {
+  DataListEdit,
   InputTags,
   RemoteSelect,
   BaseIcon,
