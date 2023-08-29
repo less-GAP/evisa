@@ -136,7 +136,7 @@ reload()
 </script>
 
 <template>
-  <div class="flex flex-col text-center h-full sm:rounded-lg">DataTable
+  <div class="flex flex-col text-center h-full sm:rounded-lg">
     <div :loading="loading" class="flex items-center pb-2 justify-between   bg-white dark:bg-gray-800">
       <slot name="header" v-bind="{tableConfig,reload}">
 
