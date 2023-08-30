@@ -5,22 +5,21 @@ import router from "@/router";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 const items = ref([
-    {
-      key: 'General',
-      icon: () => h(MailOutlined),
-      label: 'General',
-      href: '/configs/general',
-      title: 'General',
-    },
 
     {
-      key: 'smtp',
+      key: 'data-country',
       icon: () => h(AppstoreOutlined),
-      href: '/configs/smtp',
-      label: 'SMTP',
-      title: 'SMTP',
+      href: '/master-data/country',
+      label: 'Data Country',
+      title: 'Data Country',
+    } ,
+    {
+      key: 'processing-time',
+      icon: () => h(AppstoreOutlined),
+      href: '/master-data/processing-time',
+      label: 'Processing Time',
+      title: 'Processing Time',
     }
-
 
   ])
 ;

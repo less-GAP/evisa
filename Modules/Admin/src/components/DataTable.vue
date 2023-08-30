@@ -29,6 +29,10 @@ const props = defineProps({
     type: Object,
     default: {}
   },
+  filter: {
+    type: Object,
+    default: {}
+  },
   columns: Array,
   selectionActions: {
     type: Array,
@@ -52,7 +56,10 @@ const tableConfig = {
   , ...props.tableConfig
 }
 const tableData = ref({})
-const search = ref('')
+const filter = ref({
+  search:'',
+  ...props.filter
+})
 
 function reset() {
   props.pagination.page = 1
@@ -75,14 +82,20 @@ const tableColumns = computed(() => {
   }
   return result;
 })
-
+function getFilter(){
+  let rs = {}
+  for (let filterKey in filter.value){
+    rs['filter['+filterKey+']'] = filter.value[filterKey]
+  }
+  return rs
+}
 function reload() {
   if (props.api) {
     loading.value = true
     props.api({
       perPage: props.pagination.perPage,
       page: props.pagination.page, ...props.params,
-      "filter[search]": search.value
+      ...getFilter()
     }).then(rs => {
       tableData.value = rs.data
       props.pagination.total = rs.data?.total ? rs.data.total : 0
@@ -93,7 +106,7 @@ function reload() {
   }
 }
 
-emit('init', {reload})
+emit('register', {reload,filter})
 const loading = ref(false);
 const checkAll = ref(false);
 const selectedKeys = ref([])
@@ -137,7 +150,7 @@ reload()
 <template>
   <div class="flex flex-col text-center h-full sm:rounded-lg">
     <div :loading="loading" class="flex items-center pb-2 justify-between   bg-white dark:bg-gray-800">
-      <slot name="header" v-bind="{tableConfig,reload}">
+      <slot name="header" v-bind="{tableConfig,filter,reload}">
 
         <a-space>
 
@@ -147,7 +160,7 @@ reload()
             @search="reload"
             @keyup.enter="reload"
             style="max-width: 300px"
-            v-model:value="search"
+            v-model:value="filter.search"
             placeholder="Enter to search..."
             :loading="loading"
           />

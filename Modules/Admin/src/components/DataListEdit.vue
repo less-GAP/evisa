@@ -12,10 +12,11 @@
       <table>
         <thead class="ant-table-thead">
         <tr>
-          <th class="ant-table-cell ant-table-cell-ellipsis" v-for="(column,columnIndex) in getColumns()" scope="col">
+          <th class="ant-table-cell ant-table-cell-ellipsis" v-class="column.class"
+              v-for="(column,columnIndex) in getColumns()" scope="col">
             <slot name="column" v-bind="{column}">
               <template v-if="column.dataIndex=='action'">
-                <a-button @click="newValue.push({})" >
+                <a-button @click="newValue.push({})">
                   <template #icon>
                     <PlusOutlined></PlusOutlined>
                   </template>
@@ -150,7 +151,8 @@ export default defineComponent({
         return [{
           title: '',
           dataIndex: 'action',
-          key: 'action'
+          width: 100,
+          class: 'w-[70px]'
         }].concat(props.columns)
       },
       addColumn() {

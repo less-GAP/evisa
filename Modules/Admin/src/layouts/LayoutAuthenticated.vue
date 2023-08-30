@@ -79,6 +79,7 @@ const menuClick = (event, item) => {
 
     <main
       class="relative p-5 flex-1 w-full h-full h-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
+      <slot name="header-content"></slot>
       <a-card class="h-full">
         <slot/>
       </a-card>

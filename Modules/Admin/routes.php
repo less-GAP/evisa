@@ -37,7 +37,10 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         ->handle(\App\Models\VisaApplication::class,
             [
                 'allowedIncludes' => ['applicants','history','assignees'],
-                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')]
+                'allowedFilters' => [
+                    AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')
+                    ,AllowedFilter::custom('status', new \App\Builder\Filters\SearchLikeMultipleField, 'status')
+                ]
             ]
         )->routes(function(){
             Route::post('/', \Modules\Admin\Actions\VisaApplication\PostIndexAction::class . '@handle');
@@ -57,7 +60,10 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         ->handle(\App\Models\Country::class,
             [
 //                'allowedIncludes' => ['tags'],
-                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,code')]
+                'allowedFilters' => [
+                    AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,code')
+
+                ]
             ]
         )->routes(function(){
 

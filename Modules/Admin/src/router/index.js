@@ -3,7 +3,9 @@ import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
 import {useAppStateStore} from "@/stores/appState";
-import {configRoutes} from "@/views/configs/routers";
+import configRoutes from "@/views/configs/routers";
+import masterDataRoutes from "@/views/master-data/routers";
+import visaRoutes from "@/views/visa-applications/routers";
 
 const publicPages = ['/login'];
 
@@ -15,38 +17,6 @@ const routes = [
     path: "/",
     name: "dashboard",
     component: Home,
-  },
-  {
-    meta: {
-      title: "Kanban",
-    },
-    path: "/kanban",
-    name: "kanban",
-    component: () => import("@/views/kanban/index.vue"),
-  },
-  {
-    meta: {
-      title: "Inbox",
-    },
-    path: "/inbox",
-    name: "inbox",
-    component: () => import("@/views/inbox/index.vue"),
-  },
-  {
-    meta: {
-      title: "Visa Applications",
-    },
-    path: "/visa-applications",
-    name: "visa-applications",
-    component: () => import("@/views/visa-applications/index.vue"),
-  },
-  {
-    meta: {
-      title: "Visa Applications",
-    },
-    path: "/visa-applications/:id",
-    name: "visa-applications-form",
-    component: () => import("@/views/visa-applications/FormPage.vue"),
   },
   {
     meta: {
@@ -82,7 +52,6 @@ const routes = [
     name: "user-profile",
     component: () => import("@/views/users/ProfileView.vue"),
   },
-
 
   {
     meta: {
@@ -161,7 +130,9 @@ const routes = [
     name: "error",
     component: () => import("@/views/ErrorView.vue"),
   },
-  ...configRoutes
+  ...configRoutes,
+  ...visaRoutes,
+  ...masterDataRoutes
 ];
 
 const router = createRouter({

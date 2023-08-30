@@ -96,7 +96,7 @@ const closeDetail = function () {
            type:'number'
         },
         {
-          title: 'Fee per applicant',
+          title: 'Fee per applicant (USD)',
           dataIndex: 'fee_per_applicant',
           min:0,
           type:'number'
