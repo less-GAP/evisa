@@ -129,7 +129,7 @@ export default defineComponent({
     watch(
       () => newValue.value,
       (value) => {
-        emit('update', value)
+        emit('update:value', value)
       },
       {deep: true},
     );

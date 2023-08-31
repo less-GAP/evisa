@@ -11,7 +11,7 @@ import {BaseIcon} from "@/components";
           <ul class="pb-2 space-y-2">
 
             <li>
-              <router-link to="/visa/pending" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+              <router-link to="/visa-pending-preview" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                 <BaseIcon :size="48"   :path="mdiFileDocumentMultipleOutline"></BaseIcon>
                 <span class="ml-3" sidebar-toggle-item="">Visa Applications</span>
               </router-link>

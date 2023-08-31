@@ -66,7 +66,6 @@ function calculateFee() {
 </script>
 
 <template>
-  <LayoutAuthenticated>
 
     <a-card class="w-full relative">
 
@@ -82,11 +81,6 @@ function calculateFee() {
           <a-space>
             <h3 class="text-blue mr-5">TOTAL E-VISA FEES: <b class="ml-5">${{ calculateFee() }} US</b></h3>
 
-            <router-link to="/visa-applications" type="primary">
-              <a-button>
-                Back
-              </a-button>
-            </router-link>
             <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
           </a-space>
         </div>
@@ -189,7 +183,7 @@ function calculateFee() {
             <a-form-item class="lg:w-1/3 lg:p3 lg:inline-flex" prop="contact_name" label="Contact Name"
                          :rules="[{ required: true }]">
               <a-input v-model:value="formState.contact_name"/>
-            </a-form-item>FormPage.vue
+            </a-form-item>
             <a-form-item class="lg:w-1/3  lg:p3 lg:inline-flex" prop="contact_email" label="Contact Email"
                          :rules="[{ required: true }]">
               <a-input v-model:value="formState.contact_email"/>
@@ -211,7 +205,6 @@ function calculateFee() {
       </a-form>
     </a-card>
 
-  </LayoutAuthenticated>
 </template>
 <style scoped>
 

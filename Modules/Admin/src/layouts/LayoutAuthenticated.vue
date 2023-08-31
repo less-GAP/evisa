@@ -6,7 +6,6 @@ import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import {useMainStore} from "@/stores/main.js";
 import {useStyleStore} from "@/stores/style.js";
-import AsideMenu from "@/components/AsideMenu.vue";
 import Header from "./Header.vue";
 import Sidebar from "./Sidebar.vue";
 import Footer from "./Footer.vue";

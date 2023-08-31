@@ -6,7 +6,7 @@ import {Button, Input, InputUpload} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
 import {DownOutlined, ReloadOutlined, SearchOutlined} from "@ant-design/icons-vue";
 
-const emit = defineEmits(["init"]);
+const emit = defineEmits(["register"]);
 
 const props = defineProps({
   tableConfig: {
@@ -18,16 +18,32 @@ const props = defineProps({
     default: {
       page: 1,
       total: 0,
-      perPage: 10
+      perPage: 20
     }
   },
   showSizeChanger: {
     type: Boolean,
     default: true
   },
+  showReload: {
+    type: Boolean,
+    default: true
+  },
+  showSelection: {
+    type: Boolean,
+    default: true
+  },
+  showSort: {
+    type: [Boolean, Array],
+    default: false
+  },
   params: {
     type: Object,
     default: {}
+  },
+  sort: {
+    type: String,
+    default: '-id'
   },
   filter: {
     type: Object,
@@ -57,9 +73,10 @@ const tableConfig = {
 }
 const tableData = ref({})
 const filter = ref({
-  search:'',
+  search: '',
   ...props.filter
 })
+const orderBy = ref(props.sort)
 
 function reset() {
   props.pagination.page = 1
@@ -75,25 +92,28 @@ const tableColumns = computed(() => {
   })
   if (props.actionColumn && props.itemActions.length) {
     result.push({
-      title: 'Hành động',
+      title: 'Actions',
       key: 'action',
       dataIndex: 'action'
     })
   }
   return result;
 })
-function getFilter(){
+
+function getFilter() {
   let rs = {}
-  for (let filterKey in filter.value){
-    rs['filter['+filterKey+']'] = filter.value[filterKey]
+  for (let filterKey in filter.value) {
+    rs['filter[' + filterKey + ']'] = filter.value[filterKey]
   }
   return rs
 }
+
 function reload() {
   if (props.api) {
     loading.value = true
     props.api({
       perPage: props.pagination.perPage,
+      sort: orderBy.value,
       page: props.pagination.page, ...props.params,
       ...getFilter()
     }).then(rs => {
@@ -106,7 +126,7 @@ function reload() {
   }
 }
 
-emit('register', {reload,filter})
+emit('register', {reload, filter})
 const loading = ref(false);
 const checkAll = ref(false);
 const selectedKeys = ref([])
@@ -148,60 +168,61 @@ reload()
 </script>
 
 <template>
-  <div class="flex flex-col text-center h-full sm:rounded-lg">
-    <div :loading="loading" class="flex items-center pb-2 justify-between   bg-white dark:bg-gray-800">
-      <slot name="header" v-bind="{tableConfig,filter,reload}">
+  <div class="flex flex-col sm:rounded-lg" id="table-list">
+    <slot name="header" v-bind="{tableConfig,filter,reload}">
+    </slot>
 
-        <a-space>
+    <div :loading="loading" class="flex items-center p-2 justify-between bg-white border border-gray-200 rounded-xl">
 
-          <a-input
-            v-if="tableConfig.globalSearch"
-            allow-clear
-            @search="reload"
-            @keyup.enter="reload"
-            style="max-width: 300px"
-            v-model:value="filter.search"
-            placeholder="Enter to search..."
-            :loading="loading"
-          />
-          <a-button @click="reload" type="primary" :icon="h(SearchOutlined)"></a-button>
-          <slot name="filter"></slot>
-        </a-space>
-        <span></span>
+      <a-space>
 
-        <a-space>
-          <a-button>
-            <template #icon>
-              <reload-outlined @click="reload"/>
-            </template>
-          </a-button>
-          <!--          <a-dropdown v-if="selectionActions.length > 0" :disabled="!selectedItems.length">-->
-          <!--            <template #overlay>-->
-          <!--              <a-menu>-->
-          <!--                <a-menu-item @click="doSelectionAction(action)" :key="index" v-for="(action,index) in selectionActions"-->
-          <!--                >-->
-          <!--                  {{ action.title }}-->
-          <!--                </a-menu-item>-->
+        <a-input-search
+          v-if="tableConfig.globalSearch"
+          allow-clear
+          @search="reload"
+          @keyup.enter="reload"
+          style="max-width: 300px"
+          v-model:value="filter.search"
+          placeholder="Enter to search..."
+          :loading="loading"
+        />
+        <slot name="filter" v-bind="{tableConfig,filter,reload}"></slot>
+        <slot name="sort" v-bind="{tableConfig,sort,filter,reload}">
+          <a-select
+            v-if="showSort"
+            style="width: 140px"
+            placeholder="Order by..."
+            v-model:value="orderBy"
+            @change="reload"
+          >
+            <a-select-option v-for="sort in showSort" :key="sort.value" :value="sort.value">{{ sort.label }}
+            </a-select-option>
+          </a-select>
+        </slot>
 
-          <!--              </a-menu>-->
-          <!--            </template>-->
-          <!--            <a-button>-->
-          <!--              Hành động-->
-          <!--              <DownOutlined/>-->
-          <!--            </a-button>-->
-          <!--          </a-dropdown>-->
-          <a-button v-for="listAction in listActions" type="primary"
-                    @click="()=>{listAction.action(reload)}">{{ listAction.label }}
-          </a-button>
-        </a-space>
-      </slot>
+      </a-space>
+      <span></span>
+
+      <a-space>
+        <a-button v-if="showReload">
+          <template #icon>
+            <reload-outlined @click="reload"/>
+          </template>
+        </a-button>
+
+        <a-button v-for="listAction in listActions" type="primary"
+                  @click="()=>{listAction.action(reload)}">{{ listAction.label }}
+        </a-button>
+      </a-space>
     </div>
-    <div class="overflow-auto scroll-smooth flex-1 w-full h-full">
-      <slot v-if="tableData.data?.length" name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
-        <table class="table-auto w-full mt-5">
-          <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+    <div class="overflow-auto scroll-smooth flex-1 w-full bg-white shadow rounded-lg my-5">
+      <a-skeleton active class="p-10" v-if="loading||!tableData.data"/>
+
+      <slot v-else name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
+        <table class="table-auto w-full">
+          <thead class="text-xs font-semibold text-gray-400 uppercase bg-gray-50">
           <tr>
-            <th v-if="selectionActions.length > 0 && tableConfig.selectionColumn" width="50" scope="col"
+            <th v-if="showSelection" width="30" scope="col"
                 class="p-2 whitespace-nowrap">
               <label
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
@@ -218,7 +239,7 @@ reload()
             </th>
 
             <th v-if="itemActions.length" width="100" scope="col"
-                class="p-2 whitespace-nowrap">
+                class="p-2 text-center whitespace-nowrap">
               {{ __('Action') }}
             </th>
           </tr>
@@ -226,7 +247,7 @@ reload()
           <tbody class="text-sm divide-y divide-gray-100">
           <tr v-for="(item,index) in tableData.data" :key="item[tableConfig.item_key]"
               v-bind:class="{'border-b':(index%2===0)}">
-            <td v-if="tableConfig.selectionColumn" class="p-2 whitespace-nowrap">
+            <td v-if="showSelection" class="p-2 whitespace-nowrap">
               <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
                      class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
                 v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
@@ -234,7 +255,7 @@ reload()
               </label>
             </td>
 
-            <td v-for="column in columns"
+            <td :data-label="column.title" v-for="column in columns"
                 :class="'p-2 ' + (column.class ? column.class : '')">
               <template v-if="item.render">
                 {{ item.render() }}
@@ -244,7 +265,7 @@ reload()
               </slot>
 
             </td>
-            <td v-if="itemActions.length " class="p-2 whitespace-nowrap">
+            <td v-if="itemActions.length " class="flex flex-wrap justify-center p-2 whitespace-nowrap">
               <!-- Modal toggle -->
               <template v-for="itemAction in itemActions">
                 <slot :name="'cellAction['+itemAction.key+']'"
@@ -264,11 +285,11 @@ reload()
           </tbody>
         </table>
       </slot>
-      <a-empty v-else/>
-      <br>
+      <a-empty class="my-10" :description="false" v-if="tableData.data?.length === 0 && pagination.total ===0"/>
     </div>
 
-    <a-pagination style="height:40px" class="pt-2" v-if="pagination?.total" :showSizeChanger="showSizeChanger"
+    <a-pagination style="height:40px" class="pt-2" v-if="tableData.data && pagination?.total"
+                  :showSizeChanger="showSizeChanger"
                   @change="reload"
                   v-model:current="pagination.page"
                   v-model:pageSize="pagination.perPage" :total="pagination.total">
@@ -278,12 +299,12 @@ reload()
         <component :is="originalElement" v-else></component>
       </template>
     </a-pagination>
-    <!--    <table v-if="tableData.data?.length" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">-->
+    <!--    <table v-if="tableData.data?.length" class="w-full mt-5 text-sm text-left text-gray-500 dark:text-gray-400">-->
     <!--      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">-->
     <!--      <tr>-->
     <!--        <th v-if="config.rowSelect" scope="col" class="p-4">-->
     <!--          <div class="flex items-center">-->
-    <!--            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">-->
+    <!--            <div class="flex items-center pl-4 border-gray-200 rounded dark:border-gray-700">-->
     <!--              <label-->
     <!--                class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input-->
     <!--                @change="toggleCheckAll" :value="true" v-model="checkAll" type="checkbox"-->
@@ -308,7 +329,7 @@ reload()
     <!--          class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">-->
     <!--        <td v-if="config.rowSelect" class="w-4 p-4">-->
     <!--          <div class="flex items-center">-->
-    <!--            <div class="flex items-center pl-4  border-gray-200 rounded dark:border-gray-700">-->
+    <!--            <div class="flex items-center pl-4 border-gray-200 rounded dark:border-gray-700">-->
     <!--              <label :for="'checkbox-table-search-'+item[config.item_key]"-->
     <!--                     class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input-->
     <!--                v-model="selectedItems" :id="item[config.item_key]" :value="item" type="checkbox"-->
@@ -325,7 +346,7 @@ reload()
     <!--          </slot>-->
 
     <!--        </td>-->
-    <!--        <td v-if="itemActions.length" class="px-6 item-actions py-2">-->
+    <!--        <td v-if="itemActions.length" class="px-6 py-2 item-actions">-->
     <!--          &lt;!&ndash; Modal toggle &ndash;&gt;-->
     <!--          <template v-for="itemAction in itemActions">-->
     <!--            <slot :name="'cellAction['+itemAction.key+']'"-->

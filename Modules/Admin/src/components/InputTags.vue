@@ -25,7 +25,7 @@ export default defineComponent({
     const addItem = () => {
     };
     const fetch = function () {
-      Api.get('tag/all?limit=10000').then(rs => {
+      Api.get('tag/all').then(rs => {
         options.value = rs.data
       })
     }
@@ -37,6 +37,7 @@ export default defineComponent({
       inputRef,
       state,
       handleChange(value) {
+        console.log(444,value)
         emit('change', state.tags)
         emit('update:value', state.tags)
       },
@@ -88,6 +89,7 @@ export default defineComponent({
     :token-separators="[',']"
     placeholder="Select tags"
     style="width: 100%;height:100px"
+    :filter-option="false"
     :not-found-content="state.fetching ? undefined : null"
     :options="options"
   >

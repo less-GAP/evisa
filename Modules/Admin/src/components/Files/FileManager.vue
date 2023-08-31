@@ -139,10 +139,10 @@ reload()
 <template>
   <div class="relative text-center overflow-x-auto sm:rounded-lg">
 
-    <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
+    <div :loading="loading" class="flex items-center justify-between">
       <a-space>
 
-        <a-input
+        <a-input-search
           v-if="tableConfig.globalSearch"
           allow-clear
           @keyup.enter="reload"

@@ -2,7 +2,6 @@
 import {reactive, ref, h, watch} from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import {DataTable} from "@/components";
 import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
@@ -40,13 +39,7 @@ const itemActions = [
   }
 ]
 const listActions = [
-  {
-    label: 'Add',
-    action: (reload) => {
-      //showEditUser({}, reload)
-      router.push(prefix + '/new')
-    }
-  }
+
 ]
 const columns = [
   {
@@ -102,21 +95,15 @@ function registerTable({reload}) {
 </script>
 
 <template>
-    <div class="sm:px-6 w-full">
       <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
 
       <DataTable class="mt-5" v-bind="tableConfig">
         <template #header="{filter,reload}">
           <div class="flex w-full justify-between">
             <div class="flex items-center">
-
-
             </div>
             <span></span>
-            <router-link to="/visa-applications/new"
-                         class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
-              <p class="text-sm font-medium leading-none text-white">Add New</p>
-            </router-link>
+
           </div>
         </template>
         <template #table="{tableData}">
@@ -224,7 +211,6 @@ function registerTable({reload}) {
         </template>
       </DataTable>
 
-    </div>
 
 </template>
 <style>.checkbox:checked + .check-icon {

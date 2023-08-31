@@ -18,7 +18,7 @@ export const useStyleStore = defineStore("style", {
     },
     antdv:{
       autoInsertSpaceInButton: true,
-      componentSize: "large",
+      componentSize: "mini",
       space: {size:"small"},
     },
     /* Styles */

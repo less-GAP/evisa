@@ -1,15 +1,12 @@
 import {createRouter, createWebHashHistory} from "vue-router";
-import Style from "@/views/StyleView.vue";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
 import {useAppStateStore} from "@/stores/appState";
 import configRoutes from "@/views/configs/routers";
-import masterDataRoutes from "@/views/master-data/routers";
-import visaRoutes from "@/views/visa-applications/routers";
 
 const publicPages = ['/login'];
 
-const routes = [
+let routes = [
   {
     meta: {
       title: "Dashboard",
@@ -129,11 +126,14 @@ const routes = [
     path: "/error",
     name: "error",
     component: () => import("@/views/ErrorView.vue"),
-  },
-  ...configRoutes,
-  ...visaRoutes,
-  ...masterDataRoutes
+  }
 ];
+const modules = import.meta.globEager('./../views/**/router.js');
+
+Object.keys(modules).forEach((key) => {
+  const mod = modules[key].default || {};
+  routes = [...routes, ...mod]
+});
 
 const router = createRouter({
   history: createWebHashHistory(),
