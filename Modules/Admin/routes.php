@@ -33,6 +33,14 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,username')]
             ]
         );
+    EloquentRouter::prefix('customer')
+        ->routes(function(){
+        })
+        ->handle(\App\Models\Customer::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,email,phone')]
+            ]
+        );
     EloquentRouter::prefix('visa-application')
         ->handle(\App\Models\VisaApplication::class,
             [
@@ -68,8 +76,25 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function(){
 
         });
-    EloquentRouter::prefix('data-list')
-        ->handle(\App\Models\DataList::class,
+    EloquentRouter::prefix('master-data')
+        ->handle(\App\Models\MasterData::class,
+            [
+            ]
+        )->routes(function(){
+            Route::get('{listKey}/data', \Modules\Admin\Actions\MasterData\GetOptionsAction::class . '@handle');
+        });
+    EloquentRouter::prefix('agency-level')
+        ->handle(\App\Models\AgencyLevel::class,
+            [
+                'allowedFilters' => [
+                    AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,code')
+                ]
+            ]
+        )->routes(function(){
+
+        });
+    EloquentRouter::prefix('agency-level-pricing')
+        ->handle(\App\Models\AgencyLevelPricing::class,
             [
             ]
         )->routes(function(){

@@ -6,9 +6,14 @@ use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\PostVisaApplication;
 use Modules\Frontend\Actions\TestFormAction;
 
+Route::get('/master-data/country/options', \Modules\Frontend\Actions\MasterData\GetCountryOptionsAction::class . '@handle');
+Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterData\GetOptionsAction::class . '@handle');
 
 Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
+    Route::view('/login',  'Frontend::login')->name('login');
+    Route::view('/signup',  'Frontend::signup')->name('signup');
+    Route::view('/forgot',  'Frontend::forgot')->name('forgot');
     Route::view('/apply',  'Frontend::apply')->name('apply');
     Route::get('/checkout',  CheckoutVisaApplication::class.'@handle')->name('checkout');
     Route::post('/visa-application', PostVisaApplication::class.'@handle')->name('visa-application');

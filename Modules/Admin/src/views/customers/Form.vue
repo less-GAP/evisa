@@ -5,7 +5,7 @@ import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import ApiData from "@/components/ApiData.vue";
 
-const prefix = 'user'
+const prefix = 'customer'
 const {
   fetchDetailApi,
   createApi,

@@ -4,7 +4,9 @@ import {message} from 'ant-design-vue';
 import ApplicantForm from "./ApplicantForm.vue"
 import {mdiAccountGroupOutline} from "@mdi/js";
 import BaseIcon from "./BaseIcon.vue";
+import ApiData from "./ApiData.vue";
 import Api from "../utils/Api";
+import dayjs from "../utils/Dayjs";
 
 const props = defineProps({
     value: Object
@@ -23,20 +25,27 @@ const validateMessages = {
 
 const emit = defineEmits(["success", "cancel"]);
 const form = ref()
+const typeVisaList = ref([])
+const typeProcessingList = ref([])
 const loading = ref(false)
 const error = ref(null)
 const current = ref(0)
-
+const tz = 'Asia/Ho_Chi_Minh'
+const guessTz = dayjs.tz.guess()
+const today = ref(dayjs().tz(tz))
+setInterval(()=>{
+    today.value = dayjs().tz(tz)
+},5000)
 const formState = reactive(props.value || {
     number_of_visa: 1,
-    type_of_visa: 1,
-    processing_time: 1,
+    type_of_visa: "1",
+    processing_time: "1",
     applicants: [{}, {}, {}, {}, {}],
 
 });
 
 const formConfig = reactive({
-    "validateTrigger": ["submit","change"],
+    "validateTrigger": ["submit","change", "update:value"],
     "label-align": "top",
     "model": formState,
     labelCol: {span: 24},
@@ -77,9 +86,56 @@ const visaProcessingTypeFeePerPerson = {
 }
 
 function calculateFee() {
-    return visaProcessingTypeFeePerPerson[formState.processing_time] * formState.number_of_visa
+    return getSelectedProcessingTime()?.fee_per_applicant * formState.number_of_visa
 }
 
+function getSelectedProcessingTime() {
+    return typeProcessingList.value.find(item => item.value == formState.processing_time)
+}
+
+function calculateDueDate() {
+    const procesingTime = getSelectedProcessingTime();
+    let dueDate = dayjs().tz(tz).addBusinessHours(procesingTime.working_hours);
+    if (dueDate.format('HH:MM') < '15:30') {
+        formState.due_date = dueDate.set('hour', 15).set('minute', '00')
+    } else {
+        formState.due_date = dueDate.set('hour', 18).set('minute', 30)
+    }
+    console.log(777, formState.due_date)
+
+}
+
+function getDueDateDiffHuman() {
+    const diff = formState.due_date?.diff(today.value, 'day', true);
+    const result = {
+        day: parseInt(diff),
+        hour: parseInt(24 * (diff % 1))
+    }
+    let dayText = '';
+    let hoursText = '';
+    if (result.hour && result.hour > 1) {
+        hoursText = result.hour + ' hours'
+    }
+    if (result.hour && result.hour == 1) {
+        hoursText = result.hour + ' hour'
+    }
+    if (result.day && result.day > 1) {
+        dayText = result.day + ' days '
+    }
+    if (result.day && result.day == 1) {
+        dayText = result.day + ' day '
+    }
+    return dayText + hoursText;
+}
+
+function disabledDate(current) {
+    // Can not select days before today and today
+    return current && current < dayjs().addBusinessDays(1);
+};
+import { useDateFormat, useNow } from '@vueuse/core'
+
+const formatter = ref('HH:mm A dddd, MMMM D, YYYY')
+const currentTime = useDateFormat(useNow(), formatter)
 </script>
 
 <template>
@@ -136,33 +192,36 @@ function calculateFee() {
                                 <a-select-option v-for="n in 20" :value="n" :key="n">{{ n }}</a-select-option>
                             </a-select>
                         </a-form-item>
-                        <a-form-item name="type_of_visa" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
+                        <a-form-item name="type_of_visa" :rules="[{ required: true }]"
+                                     class="mt-4 lg:mt-6 has-feedback">
                             <template #label>
                                 <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Type of
                                     visa</label>
                             </template>
-                            <a-select ref="select" v-model:value="formState.type_of_visa" id="type_of_visa"
-                                      class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
-                                <a-select-option value="1">E-Visa (1 Month Single Entry)</a-select-option>
-                            </a-select>
-                        </a-form-item>
-                        <a-form-item name="date_arrival" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
-                            <template #label>
+                            <ApiData v-model:value="typeVisaList" url="master-data/type-of-visa/options">
+                                <template #default="{data}">
 
-                                <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Date of
-                                    Arrival</label>
-                            </template>
-                            <a-date-picker class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
-                                           style="width: 300px" v-model:value="formState.date_arrival"
-                                           :show-time="{ format: 'HH:mm' }" format="YYYY-MM-DD HH:mm"/>
+                                    <a-select ref="select" v-model:value="formState.type_of_visa" id="type_of_visa"
+                                              class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer">
+                                        <template v-for="option in data">
+                                            <a-select-option v-if="option.status == 'active'" :value="option.value">
+                                                {{ option.label }}
+                                            </a-select-option>
+                                        </template>
+
+                                    </a-select>
+                                </template>
+
+                            </ApiData>
                         </a-form-item>
+
                         <a-form-item name="entry_port" :rules="[{ required: true }]" class="mt-4 lg:mt-6 has-feedback">
                             <template #label>
                                 <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Entry Port</label>
                             </template>
                             <a-select class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer" show-search
                                       v-model:value="formState.entry_port" style="width: 300px"
-                                      @change="handleChange">
+                            >
                                 <a-select-opt-group>
                                     <template #label>
                                         <b class="text-blue text-lg">
@@ -205,19 +264,49 @@ function calculateFee() {
                             </a-select>
                         </a-form-item>
                     </div>
-                    <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 xl:flex xl:justify-center">
+                    <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 ">
+                        <a-form-item name="date_arrival" :rules="[{ required: true }]"
+                                     class="mt-4 lg:mt-6 has-feedback">
+                            <template #label>
+
+                                <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Date of
+                                    Arrival</label>
+                            </template>
+                            <a-date-picker :disabled-date="disabledDate"
+                                           class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
+                                           style="width: 300px" v-model:value="formState.date_arrival"
+                                           format="YYYY-MM-DD"/>
+                        </a-form-item>
                         <a-form-item class="inner">
                             <span class="block mb-2 font-semibold uppercase">Processing Time</span>
-                            <a-radio-group v-model:value="formState.processing_time">
-                                <a-radio class="m-0 mb-4" :value="1">Standard processing (5-7 working days)
-                                </a-radio>
-                                <a-radio class="m-0 mb-4" :value="2">Urgent 2 Working Days (Mon-Fri)</a-radio>
-                                <a-radio class="m-0 mb-4" :value="3">Urgent 1 Working Day (Mon-Fri)</a-radio>
-                                <a-radio :value="4">Same Day (4-8 Working Hours)</a-radio>
-                            </a-radio-group>
+                            <ApiData @change="calculateDueDate" v-model:value="typeProcessingList" url="master-data/visa-processing-time/options">
+                                <template #default="{data}">
+                                    <a-radio-group @change="calculateDueDate" v-model:value="formState.processing_time">
+                                        <template v-for="option in data">
+                                            <a-radio class="m-0 mb-4" v-if="option.status == 'active'"
+                                                     :value="option.value">{{ option.label }}
+                                            </a-radio>
+                                        </template>
+
+                                    </a-radio-group>
+
+                                </template>
+
+                            </ApiData>
+
+
                         </a-form-item>
                     </div>
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 lg:mt-0">
+                        <a-alert class="mb-5 border-dashed" message="Estimated delivery time" type="error">
+                            <template #description>
+                                <p class="text-red-500">
+                                    {{ formState.due_date?.tz(guessTz).format('HH:mm') }}
+                                    {{ formState.due_date?.tz(guessTz).format('dddd, MMMM D, YYYY') }}
+                                    ( {{ getDueDateDiffHuman() }} from now)
+                                </p>
+                            </template>
+                        </a-alert>
                         <div class="font-semibold uppercase">Service fee:</div>
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span id="lblTotal"
                                                                                                        class="">US${{
@@ -230,7 +319,7 @@ function calculateFee() {
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
-                        <div class="mt-1">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
+                        <div class="mt-1">(Current time in Vietnam: {{today.format('HH:mm A dddd, MMMM D, YYYY')}})</div>
                     </div>
                 </div>
                 <!-- <a-col :xs="24" :xl="16">
@@ -346,7 +435,8 @@ function calculateFee() {
                         <a-tabs v-model:activeKey="activeKey">
                             <a-tab-pane v-for="number of formState.number_of_visa" :key="number"
                                         :tab="'Applicant ' + number">
-                                <ApplicantForm prefix="applicants" :index="number-1" v-model:value="formState.applicants[number - 1]"></ApplicantForm>
+                                <ApplicantForm prefix="applicants" :index="number-1"
+                                               v-model:value="formState.applicants[number - 1]"></ApplicantForm>
                             </a-tab-pane>
                         </a-tabs>
                     </div>
@@ -372,7 +462,7 @@ function calculateFee() {
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
-                        <div class="mt-1">(Current time in Vietnam: 15:10 PM - Monday - August 14, 2023)</div>
+                        <div class="mt-1">(Current time in Vietnam: {{today.format('HH:mm A dddd, MMMM D, YYYY')}})</div>
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-4" v-if="current == 2">

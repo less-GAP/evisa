@@ -228,6 +228,12 @@
                     <li>
                         <a href="#" class="hover:text-black">Contact</a>
                     </li>
+                    <li>
+                        <a href="/login" class="hover:text-black">Login</a>
+                    </li>
+                    <li>
+                        <a href="/signup" class="hover:text-black">Register</a>
+                    </li>
                 </ul>
             </div>
         </nav>

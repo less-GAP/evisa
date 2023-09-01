@@ -39,7 +39,7 @@
         <draggable v-bind="dragOptions" v-model="newValue" class="ant-table-tbody" handle=".drag-handle" tag="tbody">
           <template #item="{ element ,index }">
             <tr class="ant-table-measure-row">
-              <td v-for="column in getColumns()" scope="row">
+              <td :data-label="column.title" v-for="column in getColumns()" scope="row">
                 <template v-if="column.dataIndex=='action'">
                   <div style="width:100px">
 
@@ -59,11 +59,15 @@
                 </template>
                 <template v-else>
                   <slot :name="'bodyCell['+column.dataIndex+']'" v-bind="{record:element,column}">
-                    <a-input-number :min="column.min"
+                    <a-input-number v-bind="column.props" :min="column.min"
                                     :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
                                     :parser="value => value.replace(/\$\s?|(,*)/g, '')" v-if="column.type =='number'"
                                     v-model:value="element[column.dataIndex]"></a-input-number>
-                    <a-input v-else v-model:value="element[column.dataIndex]"></a-input>
+                    <a-switch v-bind="column.props"  v-else-if="column.type =='switch'"
+                                    v-model:checked="element[column.dataIndex]"></a-switch>
+                    <component :is="column.component" v-bind="column.props" v-else-if="column.type =='component'"
+                               v-model:value="element[column.dataIndex]"></component>
+                    <a-input v-bind="column.props" v-else v-model:value="element[column.dataIndex]"></a-input>
                   </slot>
                 </template>
               </td>

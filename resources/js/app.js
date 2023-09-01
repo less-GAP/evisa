@@ -11,18 +11,20 @@ import VisaApplicationForm from './components/VisaApplicationForm.vue';
 import PaypalCheckout from './components/PaypalCheckout.vue';
 import {Swiper, SwiperSlide} from 'swiper/vue';
 
+
+
 // Import Swiper styles
 import 'swiper/css';
 
 const el = document.getElementById("app");
- createApp({
+createApp({
 
     render: renderSpladeApp({el}),
 }).use(SpladePlugin, {
-     "max_keep_alive": 10,
-     "transform_anchors": false,
-     "progress_bar": true,
-    components:{
+    "max_keep_alive": 10,
+    "transform_anchors": false,
+    "progress_bar": true,
+    components: {
         VisaApplicationForm
         , PaypalCheckout
         , Swiper

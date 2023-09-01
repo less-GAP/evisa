@@ -7,6 +7,13 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 const items = ref([
 
     {
+      key: 'agency-level',
+      icon: () => h(AppstoreOutlined),
+      href: '/master-data/agency-level',
+      label: 'Agency Level',
+      title: 'Agency Level',
+    } ,
+  {
       key: 'data-country',
       icon: () => h(AppstoreOutlined),
       href: '/master-data/country',
@@ -19,6 +26,13 @@ const items = ref([
       href: '/master-data/processing-time',
       label: 'Processing Time',
       title: 'Processing Time',
+    },
+    {
+      key: 'type-of-visa',
+      icon: () => h(AppstoreOutlined),
+      href: '/master-data/type-of-visa',
+      label: 'Type of visa',
+      title: 'Type of visa',
     }
 
   ])

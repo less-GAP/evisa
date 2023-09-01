@@ -8,6 +8,7 @@ import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
 
 import "./css/main.css";
+import "ant-design-vue/dist/reset.css";
 
 import {useAuthStore} from "@/stores/auth";
 import piniaPersist from 'pinia-plugin-persist'

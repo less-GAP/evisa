@@ -27,7 +27,7 @@ const props = defineProps({
   },
   showReload: {
     type: Boolean,
-    default: true
+    default: false
   },
   showSelection: {
     type: Boolean,
@@ -172,7 +172,7 @@ reload()
     <slot name="header" v-bind="{tableConfig,filter,reload}">
     </slot>
 
-    <div :loading="loading" class="flex items-center p-2 justify-between bg-white border border-gray-200 rounded-xl">
+    <div :loading="loading" class="flex items-center p-2 justify-between bg-white rounded-xl">
 
       <a-space>
 
@@ -220,7 +220,7 @@ reload()
 
       <slot v-else name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
         <table class="table-auto w-full">
-          <thead class="text-xs font-semibold text-gray-400 uppercase bg-gray-50">
+          <thead class="text-xs font-semibold  uppercase bg-gray-700 text-white">
           <tr>
             <th v-if="showSelection" width="30" scope="col"
                 class="p-2 whitespace-nowrap">
@@ -238,7 +238,7 @@ reload()
               </div>
             </th>
 
-            <th v-if="itemActions.length" width="100" scope="col"
+            <th v-if="itemActions.length" :width="itemActions.length*80" scope="col"
                 class="p-2 text-center whitespace-nowrap">
               {{ __('Action') }}
             </th>
@@ -270,9 +270,18 @@ reload()
               <template v-for="itemAction in itemActions">
                 <slot :name="'cellAction['+itemAction.key+']'"
                       v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
+                  <a-popconfirm v-if="itemAction.confirm"  @confirm="itemAction.action(item,reload)" title="Are you sure？">
+                    <a-button
+                      :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                      type="link"
+                    >
+                      {{ itemAction.label }}
+                    </a-button>
+                  </a-popconfirm>
                   <a-button
+                    v-else
                     @click="itemAction.action(item,reload)"
-                    :class="itemAction.class ||'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                    :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
                     type="link"
                   >
                     {{ itemAction.label }}

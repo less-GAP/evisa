@@ -7,7 +7,7 @@ use App\Traits\CreatedUpdatedByAdmin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataList extends Model
+class AgencyLevelPricing extends Model
 {
 
     /**
@@ -17,15 +17,15 @@ class DataList extends Model
      */
     use HasFactory,CreatedUpdatedByAdmin;
 
-    protected $table = 'data_list';
-    protected $keyType = 'string';
-    protected $primaryKey = 'list_key';
+    protected $table = 'agency_level_pricing';
 
     public $timestamps = true;
 
     protected $fillable = [
-        'list_key',
-        'data'
+        'agency_level_id',
+        'processing_time',
+        'fee_per_applicant',
+
     ];
 
     /**
@@ -44,7 +44,6 @@ class DataList extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'data' => 'array'
     ];
 
     protected $appends = [

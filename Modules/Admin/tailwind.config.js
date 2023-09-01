@@ -5,6 +5,9 @@ const plugin = require("tailwindcss/plugin");
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}","./node_modules/flowbite/**/*.js",'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}',],
   darkMode: "class", // or 'media' or 'class'
+  corePlugins: {
+    preflight: true // <== disable this!
+  },
   theme: {
     asideScrollbars: {
       light: "light",

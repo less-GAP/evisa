@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('order_no');
             $table->integer('vat_fee');
             $table->integer('number_of_visa');
-            $table->integer('agency_id')->nullable();
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->string('type_of_visa');
             $table->datetime('date_arrival')->nullable();
             $table->string('entry_port');

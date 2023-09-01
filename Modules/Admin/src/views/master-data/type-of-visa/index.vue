@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {reactive, h, ref, toRaw} from "vue";
+
 import {useMainStore} from "@/stores/main";
 import {
   mdiAccount,
@@ -15,10 +16,9 @@ import router from "@/router";
 
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import DataListEdit from "@/components/DataListEdit.vue";
-import {Switch} from "ant-design-vue";
 
 const prefix = 'master-data'
-const listKey = 'visa-processing-time'
+const listKey = 'type-of-visa'
 const {
   fetchListApi,
   createApi,
@@ -83,20 +83,12 @@ const closeDetail = function () {
 
 <template>
   <a-button @click="submit" class="float-right" type="primary" success>Save</a-button>
-  <DataListEdit :columns="
-[{
+  <DataListEdit :columns="[{
           title: 'Label',
           dataIndex: 'label'
         },{
           title: 'Value',
           dataIndex: 'value'
-        },{
-          title: 'Working hours',
-          dataIndex: 'working_hours',
-           props:{
-            min:0,
-          },
-           type:'number'
         },
         {
           title: 'Fee per applicant (USD)',
