@@ -12,6 +12,7 @@ Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterDat
 
 Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
+    Route::view('/profile',  'Frontend::profile')->name('profile');
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
     Route::post('/signup',  PostSignupAction::class.'@handle')->name('post-signup');

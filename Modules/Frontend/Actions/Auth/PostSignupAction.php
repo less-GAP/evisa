@@ -13,6 +13,8 @@ class PostSignupAction
     {
         $data = $request->all();
         $data['password'] = \Hash::make($data['password']);
-        VisaUser::create($data);
+        $user = VisaUser::create($data);
+        auth('frontend')->login($user);
+        return redirect('profile');
     }
 }
