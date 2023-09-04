@@ -1,73 +1,48 @@
 <x-Frontend::layout.default>
     <div class="container mx-auto">
-        <div class="flex justify-center px-6 my-12">
-            <!-- Row -->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-                <!-- Col -->
-                <div
-                    class="w-full h-auto hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-                ></div>
-                <!-- Col -->
-                <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
-                    <h3 class="pt-4 text-2xl text-center">Welcome Back!</h3>
-                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="username">
-                                Username
-                            </label>
-                            <input
-                                class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="username"
-                                type="text"
-                                placeholder="Username"
-                            />
-                        </div>
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                                Password
-                            </label>
-                            <input
-                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="password"
-                                type="password"
-                                placeholder="******************"
-                            />
-                            <p class="text-xs italic text-red-500">Please choose a password.</p>
-                        </div>
-                        <div class="mb-4">
-                            <input class="mr-2 leading-tight" type="checkbox" id="checkbox_id" />
-                            <label class="text-sm" for="checkbox_id">
-                                Remember Me
-                            </label>
-                        </div>
-                        <div class="mb-6 text-center">
-                            <button
-                                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="button"
-                            >
-                                Sign In
-                            </button>
-                        </div>
-                        <hr class="mb-6 border-t" />
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="/signup"
-                            >
-                                Create an Account!
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="/forgot"
-                            >
-                                Forgot Password?
-                            </a>
-                        </div>
-                    </form>
+        <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
+            <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
+                <div class="bg-white h-1/3"></div>
+                <div class="h-1/3"
+                     style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                </div>
+                <div class="bg-white h-1/3"></div>
+            </div>
+            <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
+                <div class="relative flex flex-col items-center justify-center h-full m-0 whitespace-no-wrap">
+                    <div class="hidden h-1/3"></div>
+                    <div class="absolute bg-white h-1/3 mid-skew"></div>
+                    <div class="hidden h-1/3"></div>
+                    <div>
+                        <h1
+                            class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                            Login</h1>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="flex  justify-center px-6 my-12">
+            <!-- Row -->
+            <x-splade-form action="login" method="POST">
+                <a-card class="px-4 ">
+                    <a-form-item name="email" label="Email" :rules="[{ required: true }]">
+                        <a-input v-model:value="form.email" class="w-[300px]"/>
+                    </a-form-item>
+
+                    <a-form-item name="password" label="Password" :rules="[{ required: true }]">
+                        <a-input v-model:value="form.password" class="w-[300px]" type="password"/>
+                    </a-form-item>
+                    <a-form-item>
+
+                        <button type="submit"
+                                class=" items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full">
+                            Login
+                        </button>
+                    </a-form-item>
+
+
+                </a-card>
+            </x-splade-form>
         </div>
     </div>
 </x-Frontend::layout.default>

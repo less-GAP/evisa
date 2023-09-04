@@ -70,7 +70,7 @@ return [
         ],
         'frontend' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\VisaUser::class,
         ],
 
         // 'users' => [

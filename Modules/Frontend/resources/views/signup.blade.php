@@ -1,104 +1,44 @@
 <x-Frontend::layout.default>
     <div class="container mx-auto">
-        <div class="flex justify-center px-6 my-12">
-            <!-- Row -->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-                <!-- Col -->
-                <div
-                    class="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
-                ></div>
-                <!-- Col -->
-                <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
-                    <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
-                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-                        <div class="mb-4 md:flex md:justify-between">
-                            <div class="mb-4 md:mr-2 md:mb-0">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">
-                                    First Name
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="firstName"
-                                    type="text"
-                                    placeholder="First Name"
-                                />
-                            </div>
-                            <div class="md:ml-2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
-                                    Last Name
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="lastName"
-                                    type="text"
-                                    placeholder="Last Name"
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
-                                Email
-                            </label>
-                            <input
-                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                id="email"
-                                type="email"
-                                placeholder="Email"
-                            />
-                        </div>
-                        <div class="mb-4 md:flex md:justify-between">
-                            <div class="mb-4 md:mr-2 md:mb-0">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                                    Password
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="password"
-                                    type="password"
-                                    placeholder="******************"
-                                />
-                                <p class="text-xs italic text-red-500">Please choose a password.</p>
-                            </div>
-                            <div class="md:ml-2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="c_password"
-                                    type="password"
-                                    placeholder="******************"
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-6 text-center">
-                            <button
-                                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="button"
-                            >
-                                Register Account
-                            </button>
-                        </div>
-                        <hr class="mb-6 border-t" />
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="/forgot"
-                            >
-                                Forgot Password?
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="/login"
-                            >
-                                Already have an account? Login!
-                            </a>
-                        </div>
-                    </form>
+        <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
+            <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
+                <div class="bg-white h-1/3"></div>
+                <div class="h-1/3"
+                     style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                </div>
+                <div class="bg-white h-1/3"></div>
+            </div>
+            <div class="absolute top-0 z-20 flex flex-col w-auto h-full -translate-x-1/2 left-1/2">
+                <div class="relative flex flex-col items-center justify-center h-full m-0 whitespace-no-wrap">
+                    <div class="hidden h-1/3"></div>
+                    <div class="absolute bg-white h-1/3 mid-skew"></div>
+                    <div class="hidden h-1/3"></div>
+                    <div>
+                        <h1
+                            class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
+                            SIGNUP</h1>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="flex  justify-center px-6 my-12">
+            <!-- Row -->
+            <x-splade-data>
+                <x-splade-form  :validateTrigger="'submit'" action="/signup" method="POST">
+                    <a-card class="px-4 " body-style="width:500px">
+                        <x-splade-input required name="full_name" label="Full Name"  autocomplete="off"/>
+                        <x-splade-input required name="phone" label="Phone"  autocomplete="off"/>
+                        <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
+                        <x-splade-input name="password"  type="password" label="Password" required autocomplete="off"/>
+                        <x-splade-input type="password" name="password_confirmation" label="Confirm Password" required
+                                        autocomplete="off"/>
+                        <x-splade-submit
+                            class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                            :spinner="true"/>
+
+                    </a-card>
+                </x-splade-form>
+            </x-splade-data>
         </div>
     </div>
 </x-Frontend::layout.default>

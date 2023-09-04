@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
 use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\PostVisaApplication;
@@ -13,6 +14,7 @@ Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
+    Route::post('/signup',  PostSignupAction::class.'@handle')->name('post-signup');
     Route::view('/forgot',  'Frontend::forgot')->name('forgot');
     Route::view('/apply',  'Frontend::apply')->name('apply');
     Route::get('/checkout',  CheckoutVisaApplication::class.'@handle')->name('checkout');

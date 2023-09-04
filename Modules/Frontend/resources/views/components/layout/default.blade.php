@@ -1,4 +1,6 @@
-
+<x-splade-flash>
+    <p v-if="flash.has('message')" v-text="flash.message" />
+</x-splade-flash>
 <x-Frontend::layout.header>
 </x-Frontend::layout.header>
     <div id="primary" class="content-area">
