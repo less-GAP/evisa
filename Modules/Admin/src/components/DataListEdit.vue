@@ -28,7 +28,7 @@
                 <a-button size="small" v-if="editColumn && column.dataIndex !=='action'"
                           @click="columns.splice((columnIndex-1),1)" style="float:right" type="link" danger>
                   <template #icon>
-                    <Icon icon="ion:remove-outline"></Icon>
+                    <BaseIcon icon="ion:remove-outline"></BaseIcon>
                   </template>
                 </a-button>
               </template>
@@ -36,7 +36,8 @@
           </th>
         </tr>
         </thead>
-        <draggable v-bind="dragOptions" v-model="newValue" class="ant-table-tbody" handle=".drag-handle" tag="tbody">
+        <draggable v-bind="dragOptions" v-model="newValue" itemKey="value" class="ant-table-tbody" handle=".drag-handle"
+                   tag="tbody">
           <template #item="{ element ,index }">
             <tr class="ant-table-measure-row">
               <td :data-label="column.title" v-for="column in getColumns()" scope="row">
@@ -63,8 +64,8 @@
                                     :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
                                     :parser="value => value.replace(/\$\s?|(,*)/g, '')" v-if="column.type =='number'"
                                     v-model:value="element[column.dataIndex]"></a-input-number>
-                    <a-switch v-bind="column.props"  v-else-if="column.type =='switch'"
-                                    v-model:checked="element[column.dataIndex]"></a-switch>
+                    <a-switch v-bind="column.props" v-else-if="column.type =='switch'"
+                              v-model:checked="element[column.dataIndex]"></a-switch>
                     <component :is="column.component" v-bind="column.props" v-else-if="column.type =='component'"
                                v-model:value="element[column.dataIndex]"></component>
                     <a-input v-bind="column.props" v-else v-model:value="element[column.dataIndex]"></a-input>
@@ -103,16 +104,17 @@ import {computed, defineComponent, watch, ref, onMounted, unref, toRaw} from 'vu
 import {isArray, isFunction} from '@/utils/is';
 import {DragOutlined, DeleteOutlined, PlusOutlined} from '@ant-design/icons-vue';
 import draggable from "vuedraggable";
+import BaseIcon from "./BaseIcon.vue";
 import type {FormInstance} from "ant-design-vue";
 
 export default defineComponent({
-  components: {draggable, DragOutlined, DeleteOutlined, PlusOutlined},
+  components: {draggable, DragOutlined, DeleteOutlined, PlusOutlined, BaseIcon},
   props: {
     value: Array,
     columns: Array,
     editColumn: Boolean,
   },
-  emits: ['options-change', 'change'],
+  emits: ['options-change', 'update:value', 'change'],
   setup(props, {emit}) {
     const isFirstLoaded = ref<Boolean>(false);
     const loading = ref(false);
@@ -123,7 +125,10 @@ export default defineComponent({
 
     if (!props.value) {
       props.value = []
-      emit('update', [])
+      emit('update:value', [])
+    }
+    if (!Array.isArray(newValue.value)) {
+      newValue.value = []
     }
 
     function handleChange(...args) {

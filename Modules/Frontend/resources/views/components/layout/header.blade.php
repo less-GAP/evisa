@@ -4,7 +4,7 @@
             <div class="container relative px-4 mx-auto lg:flex lg:items-center">
                 <div class="relative z-50 flex items-center justify-between">
                     <a href="/" class="">
-                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/logo-eVisa.png?v=1691981753"
+                        <img src="/static/images/logo-eVisa.png?v=1691981753"
                              alt="eVisa" class="max-w-[150px]">
                     </a>
                     <button class="relative overflow-hidden rounded-full outline-none lg:hidden navbar-toggle"

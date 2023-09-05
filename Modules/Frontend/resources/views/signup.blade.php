@@ -23,7 +23,6 @@
         </div>
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
-            <x-splade-data>
                 <x-splade-form  :validateTrigger="'submit'" action="/signup" method="POST">
                     <a-card class="px-4 " body-style="width:500px">
                         <x-splade-input required name="full_name" label="Full Name"  autocomplete="off"/>
@@ -38,7 +37,6 @@
 
                     </a-card>
                 </x-splade-form>
-            </x-splade-data>
         </div>
     </div>
 </x-Frontend::layout.default>

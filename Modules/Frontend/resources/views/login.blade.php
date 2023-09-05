@@ -16,30 +16,20 @@
                     <div>
                         <h1
                             class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
-                            Login</h1>
+                            SIGNIN</h1>
                     </div>
                 </div>
             </div>
         </div>
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
-            <x-splade-form action="login" method="POST">
-                <a-card class="px-4 ">
-                    <a-form-item name="email" label="Email" :rules="[{ required: true }]">
-                        <a-input v-model:value="form.email" class="w-[300px]"/>
-                    </a-form-item>
-
-                    <a-form-item name="password" label="Password" :rules="[{ required: true }]">
-                        <a-input v-model:value="form.password" class="w-[300px]" type="password"/>
-                    </a-form-item>
-                    <a-form-item>
-
-                        <button type="submit"
-                                class=" items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full">
-                            Login
-                        </button>
-                    </a-form-item>
-
+            <x-splade-form  :validateTrigger="'submit'" action="/login" method="POST">
+                <a-card class="px-4 " body-style="width:500px">
+                    <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
+                    <x-splade-input name="password"  type="password" label="Password" required autocomplete="off"/>
+                    <x-splade-submit
+                        class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                        :spinner="true"/>
 
                 </a-card>
             </x-splade-form>

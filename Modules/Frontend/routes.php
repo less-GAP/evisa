@@ -15,6 +15,7 @@ Route::middleware(['splade'])->group(function () {
     Route::view('/profile',  'Frontend::profile')->name('profile');
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
+    Route::post('/login',  PostLoginAction::class.'@handle')->name('post-login');
     Route::post('/signup',  PostSignupAction::class.'@handle')->name('post-signup');
     Route::view('/forgot',  'Frontend::forgot')->name('forgot');
     Route::view('/apply',  'Frontend::apply')->name('apply');

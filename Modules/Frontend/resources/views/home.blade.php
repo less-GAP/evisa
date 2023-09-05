@@ -1,7 +1,7 @@
 <x-Frontend::layout.default>
     <section class="relative banner">
         <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
-            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/banner.png"
+            <img src="/static/images/home/banner.png"
                  alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
         </div>
         <div class="container relative z-20 px-4 py-20 mx-auto content lg:py-32 xl:pt-32 xl:pb-56">
@@ -169,7 +169,7 @@
                     <!-- <div class="number relative z-10 text-3xl md:text-[42px] 2xl:text-[80px] mr-5 -mb-1 md:-mb-2">3</div> -->
                     <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl">Featured on <img
                             class="inline-block m-1"
-                            src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/the-new-york-times.webp"
+                            src="/static/images/home/the-new-york-times.webp"
                             alt="the-new-york-times"></p>
                 </div>
             </div>
@@ -278,7 +278,7 @@
                     </div>
                 </div>
                 <div class="w-full px-4 mt-12 text-center xl:w-1/4 2xl:w-5/12 xl:text-left xl:mt-0">
-                    <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/passport.png"
+                    <img src="/static/images/home/passport.png"
                          alt="passport-eVisa"
                          class="w-[200px] md:w-[375px] xl:ml-32 max-w-full inline-block grayscale">
                 </div>
@@ -315,7 +315,7 @@
 {{--                        <div class="relative h-40 overflow-hidden rounded-md top">--}}
 {{--                            <a href="#">--}}
 {{--                                <img class="absolute top-0 left-0 object-cover w-full h-full"--}}
-{{--                                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-states.webp"--}}
+{{--                                     src="/static/images/countries/visa-information-by-united-states.webp"--}}
 {{--                                     alt="">--}}
 {{--                            </a>--}}
 {{--                        </div>--}}
@@ -338,7 +338,7 @@
 {{--                        <div class="relative h-40 overflow-hidden rounded-md top">--}}
 {{--                            <a href="#">--}}
 {{--                                <img class="absolute top-0 left-0 object-cover w-full h-full"--}}
-{{--                                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-canada.webp"--}}
+{{--                                     src="/static/images/countries/visa-information-by-canada.webp"--}}
 {{--                                     alt="">--}}
 {{--                            </a>--}}
 {{--                        </div>--}}
@@ -361,7 +361,7 @@
 {{--                        <div class="relative h-40 overflow-hidden rounded-md top">--}}
 {{--                            <a href="#">--}}
 {{--                                <img class="absolute top-0 left-0 object-cover w-full h-full"--}}
-{{--                                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-australia.webp"--}}
+{{--                                     src="/static/images/countries/visa-information-by-australia.webp"--}}
 {{--                                     alt="">--}}
 {{--                            </a>--}}
 {{--                        </div>--}}
@@ -384,7 +384,7 @@
 {{--                        <div class="relative h-40 overflow-hidden rounded-md top">--}}
 {{--                            <a href="#">--}}
 {{--                                <img class="absolute top-0 left-0 object-cover w-full h-full"--}}
-{{--                                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-kingdom.webp"--}}
+{{--                                     src="/static/images/countries/visa-information-by-united-kingdom.webp"--}}
 {{--                                     alt="">--}}
 {{--                            </a>--}}
 {{--                        </div>--}}
@@ -407,7 +407,7 @@
 {{--                        <div class="relative h-40 overflow-hidden rounded-md top">--}}
 {{--                            <a href="#">--}}
 {{--                                <img class="absolute top-0 left-0 object-cover w-full h-full"--}}
-{{--                                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-india.webp"--}}
+{{--                                     src="/static/images/countries/visa-information-by-india.webp"--}}
 {{--                                     alt="">--}}
 {{--                            </a>--}}
 {{--                        </div>--}}
@@ -804,7 +804,7 @@
 {{--                                class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">--}}
 {{--                                <a href="#">--}}
 {{--                                    <img--}}
-{{--                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/e-visa.webp"--}}
+{{--                                        src="/static/images/home/e-visa.webp"--}}
 {{--                                        alt="news-eVisa"--}}
 {{--                                        class="absolute top-0 left-0 object-cover w-full h-full">--}}
 {{--                                </a>--}}
@@ -829,7 +829,7 @@
 {{--                                class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">--}}
 {{--                                <a href="#">--}}
 {{--                                    <img--}}
-{{--                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-on-arrival.webp"--}}
+{{--                                        src="/static/images/home/visa-on-arrival.webp"--}}
 {{--                                        alt="news-eVisa"--}}
 {{--                                        class="absolute top-0 left-0 object-cover w-full h-full">--}}
 {{--                                </a>--}}
@@ -854,7 +854,7 @@
 {{--                                class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">--}}
 {{--                                <a href="#">--}}
 {{--                                    <img--}}
-{{--                                        src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-update.webp"--}}
+{{--                                        src="/static/images/home/visa-update.webp"--}}
 {{--                                        alt="news-eVisa"--}}
 {{--                                        class="absolute top-0 left-0 object-cover w-full h-full">--}}
 {{--                                </a>--}}
@@ -900,7 +900,7 @@
 {{--        <div class="container px-4 py-10 mx-auto md:py-20 xl:py-32">--}}
 {{--            <div class="text-center">--}}
 {{--                <img class="inline-block"--}}
-{{--                     src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/clients-myvietnamvisa.webp"--}}
+{{--                     src="/static/images/home/clients-myvietnamvisa.webp"--}}
 {{--                     alt="As Featured on">--}}
 {{--            </div>--}}
 {{--            <div class="max-w-3xl pt-8 mx-auto mt-8 border-t border-black border-solid xl:mt-20">--}}
@@ -1349,7 +1349,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/alpha-delight.png"--}}
+{{--                                src="/static/images/partners/alpha-delight.png"--}}
 {{--                                alt="alpha-delight.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1358,7 +1358,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/buddha.png"--}}
+{{--                                src="/static/images/partners/buddha.png"--}}
 {{--                                alt="buddha.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1367,7 +1367,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/cobra.png"--}}
+{{--                                src="/static/images/partners/cobra.png"--}}
 {{--                                alt="cobra.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1376,7 +1376,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/craw-fish-7.png"--}}
+{{--                                src="/static/images/partners/craw-fish-7.png"--}}
 {{--                                alt="craw-fish-7.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1385,7 +1385,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/d360.png"--}}
+{{--                                src="/static/images/partners/d360.png"--}}
 {{--                                alt="d360.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1394,7 +1394,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/damtexas.png"--}}
+{{--                                src="/static/images/partners/damtexas.png"--}}
 {{--                                alt="damtexas.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1403,7 +1403,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ellipsis-360.svg"--}}
+{{--                                src="/static/images/partners/ellipsis-360.svg"--}}
 {{--                                alt="ellipsis-360.svg-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1412,7 +1412,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/liftmar.png"--}}
+{{--                                src="/static/images/partners/liftmar.png"--}}
 {{--                                alt="liftmar.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1421,7 +1421,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/lpfbakery.png"--}}
+{{--                                src="/static/images/partners/lpfbakery.png"--}}
 {{--                                alt="lpfbakery.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1430,7 +1430,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/luxnailspa.png"--}}
+{{--                                src="/static/images/partners/luxnailspa.png"--}}
 {{--                                alt="luxnailspa.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1439,7 +1439,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/msrauma.png"--}}
+{{--                                src="/static/images/partners/msrauma.png"--}}
 {{--                                alt="msrauma.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1448,7 +1448,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nailsupplydiscount.png"--}}
+{{--                                src="/static/images/partners/nailsupplydiscount.png"--}}
 {{--                                alt="nailsupplydiscount.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1457,7 +1457,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nikki.png"--}}
+{{--                                src="/static/images/partners/nikki.png"--}}
 {{--                                alt="nikki.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1466,7 +1466,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/omega-flux.png"--}}
+{{--                                src="/static/images/partners/omega-flux.png"--}}
 {{--                                alt="omega-flux.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1475,7 +1475,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ongles.png"--}}
+{{--                                src="/static/images/partners/ongles.png"--}}
 {{--                                alt="ongles.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1484,7 +1484,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/power-of-five.png"--}}
+{{--                                src="/static/images/partners/power-of-five.png"--}}
 {{--                                alt="power-of-five.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1493,7 +1493,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/qura.png"--}}
+{{--                                src="/static/images/partners/qura.png"--}}
 {{--                                alt="qura.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1502,7 +1502,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/thuan-chay.png"--}}
+{{--                                src="/static/images/partners/thuan-chay.png"--}}
 {{--                                alt="thuan-chay.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}
@@ -1511,7 +1511,7 @@
 {{--                        <div--}}
 {{--                            class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">--}}
 {{--                            <img--}}
-{{--                                src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/titras.png"--}}
+{{--                                src="/static/images/partners/titras.png"--}}
 {{--                                alt="titras.png-eVisa"--}}
 {{--                                class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">--}}
 {{--                        </div>--}}

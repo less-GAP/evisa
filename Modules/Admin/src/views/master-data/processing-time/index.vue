@@ -78,11 +78,25 @@ const closeDetail = function () {
   emit('close');
 }
 
+const showExport = ref(false)
+const jsonEdit = ref('')
+
+const showEdit = function () {
+  jsonEdit.value = JSON.stringify(formState.data)
+  showExport.value = true
+}
+const saveJson = function () {
+  formState.data = JSON.parse(jsonEdit.value)
+  showExport.value = false
+}
 
 </script>
 
 <template>
-  <a-button @click="submit" class="float-right" type="primary" success>Save</a-button>
+  <a-space class="float-right">
+    <a-button @click="showEdit" class="float-right" type="dashed" warning>Draw Edit</a-button>
+    <a-button @click="submit" class="float-right" type="primary">Save</a-button>
+  </a-space>
   <DataListEdit :columns="
 [{
           title: 'Label',
@@ -118,7 +132,19 @@ const closeDetail = function () {
           type:'switch'
         }
         ]" v-model:value="formState.data"></DataListEdit>
+  <a-drawer title="Draw edit" v-model:open="showExport" width="50vw">
+    <a-form label-position="top" label-width="200px" >
 
+    <a-form-item label="Key">
+
+      <a-input :disabled="true" :value="formState.data_key"></a-input>
+    </a-form-item>
+    <a-form-item label="Data">
+      <a-textarea rows="10" v-model:value="jsonEdit" v-if="showExport"></a-textarea>
+    </a-form-item>
+    <a-button class="mt-5" type="primary" @click="saveJson">Submit</a-button>
+    </a-form>
+  </a-drawer>
 </template>
 
 <style>

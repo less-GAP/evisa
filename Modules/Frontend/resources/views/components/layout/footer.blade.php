@@ -1,7 +1,7 @@
 <footer class="main-footer relative">
     <div class="footer-top lg:py-24 py-10 relative">
         <div class="footer-bg absolute z-10 w-full h-full top-0 left-0 overflow-hidden">
-            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/bg-footer.png" alt="eVisa"
+            <img src="/static/images/bg-footer.png" alt="eVisa"
                  class="absolute z-0 w-full h-full top-0 left-0 object-cover">
         </div>
         <div class="container px-4 mx-auto relative z-30">
@@ -44,7 +44,7 @@
             <div class="flex flex-wrap">
                 <div class="w-full md:w-1/2 lg:w-1/3 text-center md:text-left">
                     <a href="/">
-                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/logo-eVisa.png" alt="eVisa" class="max-w-[150px] brightness-0 invert inline-block">
+                        <img src="/static/images/logo-eVisa.png" alt="eVisa" class="max-w-[150px] brightness-0 invert inline-block">
                     </a>
                 </div>
                 <div

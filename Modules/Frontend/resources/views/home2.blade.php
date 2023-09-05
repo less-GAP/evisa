@@ -11,7 +11,7 @@
                 <div class="container relative px-4 mx-auto lg:flex lg:items-center">
                     <div class="relative z-50 flex items-center justify-between">
                         <a href="/" class="">
-                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/logo-eVisa.png?v=1691981376" alt="eVisa" class="max-w-[150px]">
+                            <img src="/static/images/logo-eVisa.png?v=1691981376" alt="eVisa" class="max-w-[150px]">
                         </a>
                         <button class="relative overflow-hidden rounded-full outline-none lg:hidden navbar-toggle" id="navbar-toggle">
                             <div class="relative flex overflow-hidden items-center justify-center rounded-full w-8 h-8 md:w-[50px] md:h-[50px] transform transition-all duration-200 shadow-md">
@@ -167,7 +167,7 @@
             <main id="main" class="site-main">
                 <section class="relative banner">
                     <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
-                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/banner.png" alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
+                        <img src="/static/images/home/banner.png" alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
                     </div>
                     <div class="container relative z-20 px-4 py-20 mx-auto content lg:py-32 xl:pt-32 xl:pb-56">
                         <!-- <legend class="text-white text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] 2xl:text-[100px] uppercase font-black italic leading-none">Make your dream</br>vacation happen!</legend> -->
@@ -287,7 +287,7 @@
                             </div>
                             <div class="box flex items-center bg-[#f6f6f6] transition  lg:rounded-2xl rounded-xl relative overflow-hidden cursor-pointer p-5 lg:px-10 lg:py-8 h-full">
                                 <!-- <div class="number relative z-10 text-3xl md:text-[42px] 2xl:text-[80px] mr-5 -mb-1 md:-mb-2">3</div> -->
-                                <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl">Featured on <img class="inline-block m-1" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/the-new-york-times.webp" alt="the-new-york-times"></p>
+                                <p class="relative z-10 w-full text-lg text-center xl:text-2xl md:text-xl">Featured on <img class="inline-block m-1" src="/static/images/home/the-new-york-times.webp" alt="the-new-york-times"></p>
                             </div>
                         </div>
                     </div>
@@ -362,7 +362,7 @@
                                 </div>
                             </div>
                             <div class="w-full px-4 mt-12 text-center xl:w-1/4 2xl:w-5/12 xl:text-left xl:mt-0">
-                                <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/passport.png" alt="passport-eVisa" class="w-[200px] md:w-[375px] xl:ml-32 max-w-full inline-block grayscale">
+                                <img src="/static/images/home/passport.png" alt="passport-eVisa" class="w-[200px] md:w-[375px] xl:ml-32 max-w-full inline-block grayscale">
                             </div>
                         </div>
                     </div>
@@ -391,7 +391,7 @@
                                 <div class="content md:w-[350px] max-w-full relative bg-white group rounded-md overflow-hidden shadow-md">
                                     <div class="relative h-40 overflow-hidden rounded-md top">
                                         <a href="#">
-                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-states.webp" alt="">
+                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="/static/images/countries/visa-information-by-united-states.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="relative p-3 bottom">
@@ -406,7 +406,7 @@
                                 <div class="content md:w-[350px] max-w-full relative bg-white group rounded-md overflow-hidden shadow-md">
                                     <div class="relative h-40 overflow-hidden rounded-md top">
                                         <a href="#">
-                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-canada.webp" alt="">
+                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="/static/images/countries/visa-information-by-canada.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="relative p-3 bottom">
@@ -421,7 +421,7 @@
                                 <div class="content md:w-[350px] max-w-full relative bg-white group rounded-md overflow-hidden shadow-md">
                                     <div class="relative h-40 overflow-hidden rounded-md top">
                                         <a href="#">
-                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-australia.webp" alt="">
+                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="/static/images/countries/visa-information-by-australia.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="relative p-3 bottom">
@@ -436,7 +436,7 @@
                                 <div class="content md:w-[350px] max-w-full relative bg-white group rounded-md overflow-hidden shadow-md">
                                     <div class="relative h-40 overflow-hidden rounded-md top">
                                         <a href="#">
-                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-united-kingdom.webp" alt="">
+                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="/static/images/countries/visa-information-by-united-kingdom.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="relative p-3 bottom">
@@ -451,7 +451,7 @@
                                 <div class="content md:w-[350px] max-w-full relative bg-white group rounded-md overflow-hidden shadow-md">
                                     <div class="relative h-40 overflow-hidden rounded-md top">
                                         <a href="#">
-                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/countries/visa-information-by-india.webp" alt="">
+                                            <img class="absolute top-0 left-0 object-cover w-full h-full" src="/static/images/countries/visa-information-by-india.webp" alt="">
                                         </a>
                                     </div>
                                     <div class="relative p-3 bottom">
@@ -637,7 +637,7 @@
                                     <div class="post-wrapper">
                                         <div class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                             <a href="#">
-                                                <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/e-visa.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
+                                                <img src="/static/images/home/e-visa.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
                                             </a>
                                         </div>
                                         <div class="mt-4 post-content">
@@ -652,7 +652,7 @@
                                     <div class="post-wrapper">
                                         <div class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                             <a href="#">
-                                                <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-on-arrival.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
+                                                <img src="/static/images/home/visa-on-arrival.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
                                             </a>
                                         </div>
                                         <div class="mt-4 post-content">
@@ -667,7 +667,7 @@
                                     <div class="post-wrapper">
                                         <div class="featured-image post-image pb-[58.5%] h-0 overflow-hidden relative z-10 w-full rounded-lg lg:rounded-xl">
                                             <a href="#">
-                                                <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/visa-update.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
+                                                <img src="/static/images/home/visa-update.webp" alt="news-eVisa" class="absolute top-0 left-0 object-cover w-full h-full">
                                             </a>
                                         </div>
                                         <div class="mt-4 post-content">
@@ -700,7 +700,7 @@
                     </div>
                     <div class="container px-4 py-10 mx-auto md:py-20 xl:py-32">
                         <div class="text-center">
-                            <img class="inline-block" src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/home/clients-myvietnamvisa.webp" alt="As Featured on">
+                            <img class="inline-block" src="/static/images/home/clients-myvietnamvisa.webp" alt="As Featured on">
                         </div>
                         <div class="max-w-3xl pt-8 mx-auto mt-8 border-t border-black border-solid xl:mt-20">
                             <div class="mb-10 post">
@@ -916,97 +916,97 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/alpha-delight.png" alt="alpha-delight.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/alpha-delight.png" alt="alpha-delight.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/buddha.png" alt="buddha.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/buddha.png" alt="buddha.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/cobra.png" alt="cobra.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/cobra.png" alt="cobra.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/craw-fish-7.png" alt="craw-fish-7.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/craw-fish-7.png" alt="craw-fish-7.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/d360.png" alt="d360.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/d360.png" alt="d360.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/damtexas.png" alt="damtexas.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/damtexas.png" alt="damtexas.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ellipsis-360.svg" alt="ellipsis-360.svg-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/ellipsis-360.svg" alt="ellipsis-360.svg-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/liftmar.png" alt="liftmar.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/liftmar.png" alt="liftmar.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/lpfbakery.png" alt="lpfbakery.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/lpfbakery.png" alt="lpfbakery.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/luxnailspa.png" alt="luxnailspa.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/luxnailspa.png" alt="luxnailspa.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/msrauma.png" alt="msrauma.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/msrauma.png" alt="msrauma.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nailsupplydiscount.png" alt="nailsupplydiscount.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/nailsupplydiscount.png" alt="nailsupplydiscount.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/nikki.png" alt="nikki.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/nikki.png" alt="nikki.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/omega-flux.png" alt="omega-flux.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/omega-flux.png" alt="omega-flux.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/ongles.png" alt="ongles.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/ongles.png" alt="ongles.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/power-of-five.png" alt="power-of-five.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/power-of-five.png" alt="power-of-five.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/qura.png" alt="qura.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/qura.png" alt="qura.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/thuan-chay.png" alt="thuan-chay.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/thuan-chay.png" alt="thuan-chay.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="partner flex items-center justify-center mx-auto h-[80px] xl:h-[120px] w-[150px] xl:w-[230px] max-w-full">
-                                        <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/partners/titras.png" alt="titras.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
+                                        <img src="/static/images/partners/titras.png" alt="titras.png-eVisa" class="object-contain max-w-full max-h-full transition cursor-pointer grayscale hover:grayscale-0">
                                     </div>
                                 </div>
                             </div>
@@ -1051,7 +1051,7 @@
     <footer class="main-footer relative">
         <div class="footer-top lg:py-24 py-10 relative">
             <div class="footer-bg absolute z-10 w-full h-full top-0 left-0 overflow-hidden">
-                <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/bg-footer.png" alt="eVisa" class="absolute z-0 w-full h-full top-0 left-0 object-cover">
+                <img src="/static/images/bg-footer.png" alt="eVisa" class="absolute z-0 w-full h-full top-0 left-0 object-cover">
             </div>
             <div class="container px-4 mx-auto relative z-30">
                 <div class="uppercase font-black xl:text-3xl md:text-2xl text-xl">OUr LINK</div>
@@ -1093,7 +1093,7 @@
                 <div class="flex flex-wrap">
                     <div class="w-full md:w-1/2 lg:w-1/3 text-center md:text-left">
                         <a href="/">
-                            <img src="https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/images/logo-eVisa.png?v=1691981376" alt="eVisa" class="max-w-[150px] brightness-0 invert inline-block">
+                            <img src="/static/images/logo-eVisa.png?v=1691981376" alt="eVisa" class="max-w-[150px] brightness-0 invert inline-block">
                         </a>
                     </div>
                     <div class="w-full md:w-1/2 lg:w-2/3 mt-5 md:mt-0 text-center md:text-right md:text-base text-[12px]">
@@ -1105,7 +1105,7 @@
     </footer>
 
 </div><!-- #page -->
-<script type='text/javascript' src='https://evisa.usa-server.com/wp-content/themes/lessGAP/assets/js/script.dev.js?ver=1691981376' id='lessGAP-script-js'></script>
+<script type='text/javascript' src='/static/js/script.dev.js?ver=1691981376' id='lessGAP-script-js'></script>
 </body>
 
 </html>
