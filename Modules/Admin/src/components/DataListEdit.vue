@@ -1,10 +1,23 @@
 <template>
   <div style="margin-bottom:15px">
-    <a-button style="margin-right:15px" v-if="editColumn" @click="showAddColumn =true;columnForm={}" type="primary">{{
-        __('Add Column')
-      }}
-    </a-button>
+    <a-space class="float-left">
 
+      <a-button @click="newValue.push({})">
+        <template #icon>
+          <PlusOutlined></PlusOutlined>
+        </template>
+        {{ __('Add Row') }}
+      </a-button>
+      <a-button style="margin-right:15px" v-if="editColumn" @click="showAddColumn =true;columnForm={}" type="primary">{{
+          __('Add Column')
+        }}
+      </a-button>
+    </a-space>
+    <a-space class="float-right">
+      <a-button v-if="drawEdit" @click="showDrawEdit" class="float-right" type="dashed" warning>Draw Edit</a-button>
+      <slot name="action">
+      </slot>
+    </a-space>
   </div>
   <div
     class="ant-table ant-table-ping-right ant-table-layout-fixed ant-table-fixed-header ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-right ant-table-small ant-table-bordered">
@@ -16,12 +29,7 @@
               v-for="(column,columnIndex) in getColumns()" scope="col">
             <slot name="column" v-bind="{column}">
               <template v-if="column.dataIndex=='action'">
-                <a-button @click="newValue.push({})">
-                  <template #icon>
-                    <PlusOutlined></PlusOutlined>
-                  </template>
-                  {{ __('Add Row') }}
-                </a-button>
+
               </template>
               <template v-else>
                 {{ column.title }}
@@ -97,6 +105,14 @@
     </a-form>
 
   </a-modal>
+  <a-drawer title="Draw edit" v-model:open="showEdit" width="50vw">
+    <a-form label-position="top" label-width="200px">
+      <a-form-item label="Data">
+        <a-textarea rows="10" v-model:value="jsonEdit" v-if="showEdit"></a-textarea>
+      </a-form-item>
+      <a-button class="mt-5" type="primary" @click="saveJson">Submit</a-button>
+    </a-form>
+  </a-drawer>
 </template>
 
 <script lang="ts">
@@ -113,6 +129,7 @@ export default defineComponent({
     value: Array,
     columns: Array,
     editColumn: Boolean,
+    drawEdit: {type: Boolean, default: true},
   },
   emits: ['options-change', 'update:value', 'change'],
   setup(props, {emit}) {
@@ -149,10 +166,23 @@ export default defineComponent({
       },
       {deep: true},
     );
+    const showEdit = ref(false)
+    const jsonEdit = ref('')
 
+    const showDrawEdit = function () {
+      jsonEdit.value = JSON.stringify(toRaw(newValue.value))
+      showEdit.value = true
+    }
+    const saveJson = function () {
+      newValue.value = JSON.parse(jsonEdit.value)
+      showEdit.value = false
+    }
 
     return {
-
+      showEdit,
+      jsonEdit,
+      showDrawEdit,
+      saveJson,
       getColumns() {
         if (!props.columns) {
           return []

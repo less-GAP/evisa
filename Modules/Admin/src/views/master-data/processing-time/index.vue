@@ -93,10 +93,7 @@ const saveJson = function () {
 </script>
 
 <template>
-  <a-space class="float-right">
-    <a-button @click="showEdit" class="float-right" type="dashed" warning>Draw Edit</a-button>
-    <a-button @click="submit" class="float-right" type="primary">Save</a-button>
-  </a-space>
+
   <DataListEdit :columns="
 [{
           title: 'Label',
@@ -131,7 +128,11 @@ const saveJson = function () {
           },
           type:'switch'
         }
-        ]" v-model:value="formState.data"></DataListEdit>
+        ]" v-model:value="formState.data">
+    <template #action>
+      <a-button @click="submit" class="float-right" type="primary">Save</a-button>
+    </template>
+  </DataListEdit>
   <a-drawer title="Draw edit" v-model:open="showExport" width="50vw">
     <a-form label-position="top" label-width="200px" >
 

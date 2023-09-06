@@ -82,7 +82,6 @@ const closeDetail = function () {
 </script>
 
 <template>
-  <a-button @click="submit" class="float-right" type="primary" success>Save</a-button>
   <DataListEdit :columns="[{
           title: 'Label',
           dataIndex: 'label'
@@ -109,7 +108,11 @@ const closeDetail = function () {
           },
           type:'switch'
         }
-        ]" v-model:value="formState.data"></DataListEdit>
+        ]" v-model:value="formState.data">
+    <template #action>
+      <a-button @click="submit" class="float-right" type="primary" success>Save</a-button>
+    </template>
+  </DataListEdit>
 
 </template>
 
