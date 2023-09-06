@@ -26,9 +26,9 @@ class PostLoginAction
                 ->intended('profile')
                 ;
         }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        Toast::message('The provided credentials do not match our records.')
+            ->warning()
+            ->centerTop();
+        return back()->onlyInput('email');
     }
 }

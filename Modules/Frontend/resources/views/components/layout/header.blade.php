@@ -228,12 +228,21 @@
                     <li>
                         <a href="#" class="hover:text-black">Contact</a>
                     </li>
+                    @if(auth('frontend')->check())
                     <li>
-                        <a href="/login" class="hover:text-black">Login</a>
+                        Welcome, <a href="/profile" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
                     </li>
-                    <li>
-                        <a href="/signup" class="hover:text-black">Register</a>
+                        <li>
+                       <a href="/logout" class="hover:text-black">Logout</a>
                     </li>
+                    @else
+                        <li>
+                            <a href="/login" class="hover:text-black">Login</a>
+                        </li>
+                        <li>
+                            <a href="/signup" class="hover:text-black">Register</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>

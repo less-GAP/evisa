@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Frontend\Actions\Auth\LogoutAction;
 use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
@@ -16,6 +17,7 @@ Route::middleware(['splade'])->group(function () {
     Route::view('/profile',  'Frontend::profile')->name('profile');
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
+    Route::get('/logout',  LogoutAction::class.'@handle')->name('logout');
     Route::post('/login',  PostLoginAction::class.'@handle')->name('post-login');
     Route::post('/signup',  PostSignupAction::class.'@handle')->name('post-signup');
     Route::view('/forgot',  'Frontend::forgot')->name('forgot');
