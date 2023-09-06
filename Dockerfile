@@ -14,7 +14,6 @@ RUN npm run build
 FROM node:19 AS node
 FROM registry.digitalocean.com/lessgap/laravel-php82:latest
 WORKDIR /app
-RUN
 COPY --from=admin /app/public ./public/cpn1234
 RUN mkdir ./storage
 RUN mkdir ./storage/logs
