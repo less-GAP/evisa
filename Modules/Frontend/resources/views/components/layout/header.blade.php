@@ -1,4 +1,4 @@
-<header class="relative z-50 main-header">
+<header class="relative z-30 main-header">
     <div class="header-2">
         <nav class="py-2 bg-white lg:py-5">
             <div class="container relative px-4 mx-auto lg:flex lg:items-center">

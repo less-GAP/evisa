@@ -2,7 +2,6 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Home from "@/views/HomeView.vue";
 import {useAuthStore} from "@/stores/auth";
 import {useAppStateStore} from "@/stores/appState";
-import configRoutes from "@/views/configs/routers";
 
 const publicPages = ['/login'];
 

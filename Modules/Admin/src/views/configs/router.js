@@ -4,7 +4,7 @@ export default [{
   },
   path: "/configs",
   name: "configs",
-  component: () => import("@/views/configs/ConfigLayout.vue"),
+  component: () => import("./ConfigLayout.vue"),
   children: [
     {
       meta: {
@@ -12,7 +12,7 @@ export default [{
       },
       path: "/configs/general",
       name: "config-general",
-      component: () => import("@/views/configs/GeneralConfig.vue"),
+      component: () => import("./GeneralConfig.vue"),
     },
     {
       meta: {
@@ -20,7 +20,7 @@ export default [{
       },
       path: "/configs/smtp",
       name: "config-smtp",
-      component: () => import("@/views/configs/SMTPConfig.vue"),
+      component: () => import("./SMTPConfig.vue"),
     }
   ]
 }]

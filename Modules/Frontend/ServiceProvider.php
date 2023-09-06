@@ -20,5 +20,8 @@ class ServiceProvider extends AbstractModuleProvider
     {
         parent::boot();
         Splade::setRootView('Frontend::root');
+        Splade::defaultToast(function ($toast) {
+            $toast->info()->centerTop()->autoDismiss(5);
+        });
     }
 }

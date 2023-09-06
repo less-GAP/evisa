@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
 use Modules\Frontend\Actions\PackageDetailPage;

@@ -4,14 +4,31 @@
 namespace Modules\Frontend\Actions\Auth;
 
 
-use App\Models\VisaUser;
-use Modules\Frontend\Requests\SignupRequest;
+use Illuminate\Http\Request;
+use ProtoneMedia\Splade\Facades\Toast;
 
 class PostLoginAction
 {
-    public function handle(SignupRequest $request)
+    public function handle(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        return redirect('profile');
+        if (auth('frontend')->attempt($credentials)) {
+            $request->session()->regenerate();
+//            $request->session()->flash('message', 'Login successful!');
+            Toast::message('Login successful!')
+                ->success()
+                ->centerTop();
+            return redirect()
+                ->intended('profile')
+                ;
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }
