@@ -10,17 +10,17 @@ trait CreatedUpdatedByAdmin
     {
         // updating created_by and updated_by when model is created
         static::creating(function ($model) {
-            if (!$model->isDirty('created_by')) {
+            if (!$model->isDirty('created_by') &&auth('admin')->user()) {
                 $model->created_by = auth('admin')->user()->username;
             }
-            if (!$model->isDirty('updated_by')) {
+            if (!$model->isDirty('updated_by') &&auth('admin')->user()) {
                 $model->updated_by = auth('admin')->user()->username;
             }
         });
 
         // updating updated_by when model is updated
         static::updating(function ($model) {
-            if (!$model->isDirty('updated_by')) {
+            if (!$model->isDirty('updated_by') &&auth('admin')->user()) {
                 $model->updated_by = auth('admin')->user()->username;
             }
         });
