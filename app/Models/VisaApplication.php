@@ -7,6 +7,7 @@ use App\Traits\HasOrderNo;
 use App\Traits\HasVatFee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Panoscape\History\HasHistories;
 
 class VisaApplication extends Model
 {
@@ -16,7 +17,7 @@ class VisaApplication extends Model
      *
      * @var array<int, string>
      */
-    use HasFactory,HasOrderNo,HasVatFee;
+    use HasFactory, HasOrderNo, HasVatFee, HasHistories;
 
     protected $table = 'visa_application';
 
@@ -35,6 +36,7 @@ class VisaApplication extends Model
         'contact_name',
         'contact_email',
         'contact_phone',
+        'user_id',
         'status',
         'approval_status',
     ];
@@ -64,6 +66,16 @@ class VisaApplication extends Model
         'assigned_users'
     ];
 
+    public function getModelLabel()
+    {
+        return $this->contact_name;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(VisaUser::class, 'user_id');
+    }
+
     public function applicants()
     {
         return $this->hasMany(VisaApplicationApplicant::class, 'visa_application_id');
@@ -73,6 +85,7 @@ class VisaApplication extends Model
     {
         return $this->hasMany(VisaApplicationComment::class, 'visa_application_id');
     }
+
     public function history()
     {
         return $this->hasMany(VisaApplicationHistory::class, 'visa_application_id');
@@ -80,10 +93,12 @@ class VisaApplication extends Model
 
     public function assignees()
     {
-        return $this->belongsToMany(User::class, 'visa_application_assignee', 'visa_application_id', 'user','id','username');
+        return $this->belongsToMany(User::class, 'visa_application_assignee', 'visa_application_id', 'user', 'id', 'username');
     }
-    public function getAssignedUsersAttribute(){
-        if($this->assignees->count()){
+
+    public function getAssignedUsersAttribute()
+    {
+        if ($this->assignees->count()) {
             return $this->assignees->pluck('username');
         }
         return [];

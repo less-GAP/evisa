@@ -186,6 +186,11 @@ reload()
           placeholder="Enter to search..."
           :loading="loading"
         />
+        <a-button v-if="showReload">
+          <template #icon>
+            <reload-outlined @click="reload"/>
+          </template>
+        </a-button>
         <slot name="filter" v-bind="{tableConfig,filter,reload}"></slot>
         <slot name="sort" v-bind="{tableConfig,sort,filter,reload}">
           <a-select
@@ -204,15 +209,12 @@ reload()
       <span></span>
 
       <a-space>
-        <a-button v-if="showReload">
-          <template #icon>
-            <reload-outlined @click="reload"/>
-          </template>
-        </a-button>
+
 
         <a-button v-for="listAction in listActions" type="primary"
                   @click="()=>{listAction.action(reload)}">{{ listAction.label }}
         </a-button>
+        <slot name="action" v-bind="{selectedItems,reload}"></slot>
       </a-space>
     </div>
     <div class="overflow-auto scroll-smooth flex-1 w-full bg-white shadow rounded-lg my-5">

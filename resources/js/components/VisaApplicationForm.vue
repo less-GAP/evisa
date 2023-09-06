@@ -45,7 +45,7 @@ const formState = reactive(props.value || {
 });
 
 const formConfig = reactive({
-    "validateTrigger": ["submit","change", "update:value"],
+    "validateTrigger": ["submit","update:value"],
     "label-align": "top",
     "model": formState,
     labelCol: {span: 24},

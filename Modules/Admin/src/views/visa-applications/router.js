@@ -2,17 +2,17 @@ export default [{
   meta: {
     title: "Visa",
   },
-  path: "/visa/:action?",
+  path: "/visa/:status?",
   name: "visa",
   component: () => import("./Layout.vue"),
   children: [
     {
       meta: {
-        title: "Visa List",
+        title: "Visa Detail",
       },
-      path: "/visa-:status",
-      name: "visa-list",
-      component: () => import("./PendingVisa.vue"),
+      path: "/visa/:status/:id",
+      name: "visa-detail",
+      component: () => import("./ViewDetail.vue"),
     },
   ]
 }]

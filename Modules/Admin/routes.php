@@ -42,19 +42,22 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             ]
         );
     EloquentRouter::prefix('visa-application')
+        ->routes(function(){
+            Route::post('/', \Modules\Admin\Actions\VisaApplication\PostIndexAction::class . '@handle');
+            Route::post('/status', \Modules\Admin\Actions\VisaApplication\PostStatusAction::class . '@handle');
+            Route::post('/assign', \Modules\Admin\Actions\VisaApplication\PostAssignAction::class . '@handle');
+            Route::post('/doneList', \Modules\Admin\Actions\VisaApplication\PostDoneListAction::class . '@handle');
+            Route::get('/export', \Modules\Admin\Actions\VisaApplication\ExportAction::class . '@handle');
+        })
         ->handle(\App\Models\VisaApplication::class,
             [
-                'allowedIncludes' => ['applicants','history','assignees'],
+                'allowedIncludes' => ['applicants','history','assignees','user'],
                 'allowedFilters' => [
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')
                     ,AllowedFilter::custom('status', new \App\Builder\Filters\SearchLikeMultipleField, 'status')
                 ]
             ]
-        )->routes(function(){
-            Route::post('/', \Modules\Admin\Actions\VisaApplication\PostIndexAction::class . '@handle');
-            Route::post('/status', \Modules\Admin\Actions\VisaApplication\PostStatusAction::class . '@handle');
-            Route::post('/assign', \Modules\Admin\Actions\VisaApplication\PostAssignAction::class . '@handle');
-        });
+        );
     EloquentRouter::prefix('post')
         ->handle(\App\Models\Post::class,
             [

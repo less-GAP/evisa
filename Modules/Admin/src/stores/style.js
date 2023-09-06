@@ -12,6 +12,8 @@ export const useStyleStore = defineStore("style", {
     format:{
       'created_at':Format.formatDateTime
       ,'updated_at':Format.formatDateTime
+      ,'est_delivery_time':Format.formatDateTime
+      ,'date_arrival':Format.formatDateTime
     },
     menu:{
       iconSize:28

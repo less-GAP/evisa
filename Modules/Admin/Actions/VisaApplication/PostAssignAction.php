@@ -28,7 +28,7 @@ class PostAssignAction
             }
             $visaApplication->assignees()->sync($syncData);
             $visaApplication->update(
-                ['status' => 'assigned']
+                ['status' => 'pending-preview']
             );
 
             $data = [
