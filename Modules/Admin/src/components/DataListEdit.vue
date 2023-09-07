@@ -26,7 +26,7 @@
         <thead class="ant-table-thead">
         <tr>
           <th class="ant-table-cell ant-table-cell-ellipsis" v-class="column.class"
-              v-for="(column,columnIndex) in getColumns()" scope="col">
+              v-for="(column,columnIndex) in getColumns()" :width="column.width" scope="col">
             <slot name="column" v-bind="{column}">
               <template v-if="column.dataIndex=='action'">
 
@@ -50,7 +50,7 @@
             <tr class="ant-table-measure-row">
               <td :data-label="column.title" v-for="column in getColumns()" scope="row">
                 <template v-if="column.dataIndex=='action'">
-                  <div style="width:100px">
+                  <div style="width:70px">
 
                     <a-button type="link" primary>
                       <template #icon>
@@ -58,7 +58,7 @@
                       </template>
                     </a-button>
 
-                    <a-button @click="newValue.splice(index,1)" style="margin-left:10px" type="link" danger>
+                    <a-button @click="newValue.splice(index,1)" style="margin-left:5px" type="link" danger>
                       <template #icon>
                         <DeleteOutlined></DeleteOutlined>
                       </template>
@@ -67,8 +67,8 @@
 
                 </template>
                 <template v-else>
-                  <slot :name="'bodyCell['+column.dataIndex+']'" v-bind="{record:element,column}">
-                    <a-input-number v-bind="column.props" :min="column.min"
+                  <slot :name="'cell['+column.dataIndex+']'" v-bind="{item:element,column,index}">
+                    <a-input-number class="!w-full" v-bind="column.props" :min="column.min"
                                     :formatter="value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
                                     :parser="value => value.replace(/\$\s?|(,*)/g, '')" v-if="column.type =='number'"
                                     v-model:value="element[column.dataIndex]"></a-input-number>
@@ -190,8 +190,8 @@ export default defineComponent({
         return [{
           title: '',
           dataIndex: 'action',
-          width: 100,
-          class: 'w-[70px]'
+          width: 50,
+          class: 'w-[50px]'
         }].concat(props.columns)
       },
       addColumn() {

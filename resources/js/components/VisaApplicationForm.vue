@@ -33,19 +33,19 @@ const current = ref(0)
 const tz = 'Asia/Ho_Chi_Minh'
 const guessTz = dayjs.tz.guess()
 const today = ref(dayjs().tz(tz))
-setInterval(()=>{
+setInterval(() => {
     today.value = dayjs().tz(tz)
-},5000)
+}, 5000)
 const formState = reactive(props.value || {
     number_of_visa: 1,
     type_of_visa: "1",
-    processing_time: "1",
+    processing_time: "2",
     applicants: [{}, {}, {}, {}, {}],
 
 });
 
 const formConfig = reactive({
-    "validateTrigger": ["submit","update:value"],
+    "validateTrigger": ["submit", "update:value"],
     "label-align": "top",
     "model": formState,
     labelCol: {span: 24},
@@ -86,7 +86,10 @@ const visaProcessingTypeFeePerPerson = {
 }
 
 function calculateFee() {
-    return getSelectedProcessingTime()?.fee_per_applicant * formState.number_of_visa
+    if (!getSelectedProcessingTime()) {
+        return 0
+    }
+    return getSelectedProcessingTime()['price_' + formState.type_of_visa] * formState.number_of_visa
 }
 
 function getSelectedProcessingTime() {
@@ -95,13 +98,21 @@ function getSelectedProcessingTime() {
 
 function calculateDueDate() {
     const procesingTime = getSelectedProcessingTime();
-    let dueDate = dayjs().tz(tz).addBusinessHours(procesingTime.working_hours);
-    if (dueDate.format('HH:MM') < '15:30') {
-        formState.due_date = dueDate.set('hour', 15).set('minute', '00')
-    } else {
-        formState.due_date = dueDate.set('hour', 18).set('minute', 30)
+    if (!procesingTime && !Array.isArray(procesingTime.cut_off)) {
+        return;
     }
-    console.log(777, formState.due_date)
+    console.log(procesingTime.cut_off);
+    let dueDate = dayjs().tz(tz).addBusinessHours(procesingTime.working_hours);
+    for (let cutoff of procesingTime.cut_off) {
+        if (dueDate.format('HH:MM') < cutoff) {
+            const cutoffData = cutoff.split(':')
+            formState.due_date = dueDate.set('hour', cutoffData[0]).set('minute', cutoffData[1])
+            return
+        }
+        formState.due_date = dueDate.set('hour', 18).set('minute', 30)
+
+    }
+
 
 }
 
@@ -132,7 +143,7 @@ function disabledDate(current) {
     // Can not select days before today and today
     return current && current < dayjs().addBusinessDays(1);
 };
-import { useDateFormat, useNow } from '@vueuse/core'
+import {useDateFormat, useNow} from '@vueuse/core'
 
 const formatter = ref('HH:mm A dddd, MMMM D, YYYY')
 const currentTime = useDateFormat(useNow(), formatter)
@@ -279,11 +290,13 @@ const currentTime = useDateFormat(useNow(), formatter)
                         </a-form-item>
                         <a-form-item class="inner">
                             <span class="block mb-2 font-semibold uppercase">Processing Time</span>
-                            <ApiData @change="calculateDueDate" v-model:value="typeProcessingList" url="master-data/visa-processing-time/options">
+                            <ApiData @change="calculateDueDate" v-model:value="typeProcessingList"
+                                     url="master-data/visa-processing-time/options">
                                 <template #default="{data}">
                                     <a-radio-group @change="calculateDueDate" v-model:value="formState.processing_time">
                                         <template v-for="option in data">
-                                            <a-radio class="m-0 mb-4" v-if="option.status == 'active'"
+                                            <a-radio class="m-0 mb-4"
+                                                     v-if="option.status == 'active' && !option.contact_admin"
                                                      :value="option.value">{{ option.label }}
                                             </a-radio>
                                         </template>
@@ -319,7 +332,8 @@ const currentTime = useDateFormat(useNow(), formatter)
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
-                        <div class="mt-1">(Current time in Vietnam: {{today.format('HH:mm A dddd, MMMM D, YYYY')}})</div>
+                        <div class="mt-1">(Current time in Vietnam: {{ today.format('HH:mm A dddd, MMMM D, YYYY') }})
+                        </div>
                     </div>
                 </div>
                 <!-- <a-col :xs="24" :xl="16">
@@ -462,7 +476,8 @@ const currentTime = useDateFormat(useNow(), formatter)
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
                         </button>
-                        <div class="mt-1">(Current time in Vietnam: {{today.format('HH:mm A dddd, MMMM D, YYYY')}})</div>
+                        <div class="mt-1">(Current time in Vietnam: {{ today.format('HH:mm A dddd, MMMM D, YYYY') }})
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-4" v-if="current == 2">

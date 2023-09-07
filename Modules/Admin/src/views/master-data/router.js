@@ -38,7 +38,7 @@ export default [{
         title: "Processing Time",
       },
       path: "/master-data/processing-time",
-      name: "data-processing-time",
+      name: "processing-time",
       component: () => import("./processing-time/index.vue"),
     },
     {

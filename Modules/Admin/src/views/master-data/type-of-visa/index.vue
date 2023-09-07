@@ -89,16 +89,16 @@ const closeDetail = function () {
           title: 'Value',
           dataIndex: 'value'
         },
-        {
-          title: 'Fee per applicant (USD)',
-          dataIndex: 'fee_per_applicant',
-          props:{
-            min:0,
-            style:`width:'250px'`,
-            prefix:'$'
-          },
-          type:'number'
-        },
+        // {
+        //   title: 'Fee per applicant (USD)',
+        //   dataIndex: 'fee_per_applicant',
+        //   props:{
+        //     min:0,
+        //     style:`width:'250px'`,
+        //     prefix:'$'
+        //   },
+        //   type:'number'
+        // },
         {
           title: 'Status',
           dataIndex: 'status',

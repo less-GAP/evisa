@@ -143,5 +143,6 @@ router.beforeEach(async (to) => {
     return '/login';
   }
   useAppStateStore().setTitle(to.meta.title)
+  useAppStateStore().setRoute(to)
 });
 export default router;

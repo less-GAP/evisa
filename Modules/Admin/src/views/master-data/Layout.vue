@@ -12,14 +12,14 @@ const items = ref([
       href: '/master-data/agency-level',
       label: 'Agency Level',
       title: 'Agency Level',
-    } ,
-  {
+    },
+    {
       key: 'data-country',
       icon: () => h(AppstoreOutlined),
       href: '/master-data/country',
       label: 'Data Country',
       title: 'Data Country',
-    } ,
+    },
     {
       key: 'processing-time',
       icon: () => h(AppstoreOutlined),
@@ -48,7 +48,7 @@ function menuClick({item}) {
 <template>
   <LayoutAuthenticated>
     <a-layout>
-      <a-menu @click="menuClick" mode="horizontal" :items="items">
+      <a-menu :selectedKeys="[$appState.currentRoute?.name]" @click="menuClick" mode="horizontal" :items="items">
       </a-menu>
       <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"

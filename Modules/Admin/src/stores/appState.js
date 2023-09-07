@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import {defineStore} from "pinia";
 
 export const useAppStateStore = defineStore("appState", {
   state: () => ({
@@ -6,11 +6,15 @@ export const useAppStateStore = defineStore("appState", {
     showMenu: false,
     menuCollapsed: false,
     title: '',
+    currentRoute: {},
 
   }),
   actions: {
-    setTitle(title){
+    setTitle(title) {
       this.title = title
+    },
+    setRoute(curentRoute) {
+      this.currentRoute = curentRoute
     }
   },
   persist: {

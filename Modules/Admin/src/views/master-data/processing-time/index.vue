@@ -16,6 +16,7 @@ import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import DataListEdit from "@/components/DataListEdit.vue";
 import {Switch} from "ant-design-vue";
+import Api from "@/utils/Api";
 
 const prefix = 'master-data'
 const listKey = 'visa-processing-time'
@@ -89,61 +90,119 @@ const saveJson = function () {
   formState.data = JSON.parse(jsonEdit.value)
   showExport.value = false
 }
+const columns = ref([
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    props: {
+      checkedValue: 'active',
+      unCheckedValue: 'inactive',
+    },
+    type: 'switch'
+  },
+  {
+    title: 'Contact Admin',
+    dataIndex: 'contact_admin',
+    props: {
+      checkedValue: true,
+      unCheckedValue: false,
+    },
+    type: 'switch'
+  },
+  {
+    title: 'Label',
+    width: 350,
+    dataIndex: 'label'
+  }, {
+    title: 'Value',
+    width: 70,
+    dataIndex: 'value'
+  }, {
+    title: 'Working hours',
+    dataIndex: 'working_hours',
+    width: 100,
+    props: {
+      min: 0,
+    },
+    type: 'number'
+  },
+  {
+    title: 'CUT OFF',
+    dataIndex: 'cut_off',
+    width: 200,
+    props: {
+      min: 0,
+    }
+  }
+
+])
+Api.get('master-data/type-of-visa').then(rs => {
+  const data = rs.data.data;
+  for (const visaType of data) {
+    columns.value.push({
+      title: visaType.label,
+      dataIndex: 'price_' + visaType.value,
+      width: 250,
+      props: {
+        min: 0,
+        style: `width:'250px'`,
+        prefix: '$'
+      },
+      type: 'number'
+    })
+  }
+  columns.value.push( {
+    title: 'Note',
+    dataIndex: 'not',
+    width: 300,
+  })
+})
+let timeOptions = [];
+const MIN = 8, MAX = 19
+Array.from({length: MAX - MIN + 1}, (v, k) => k + MIN).forEach(item => {
+  let string = item;
+  if (item < 10) {
+    string = '0' + item
+  }
+  timeOptions.push({
+    value: string + ':00',
+    label: string + ':00'
+  })
+  timeOptions.push({
+    value: string + ':30',
+    label: string + ':30'
+  })
+})
 
 </script>
 
 <template>
-
-  <DataListEdit :columns="
-[{
-          title: 'Label',
-          dataIndex: 'label'
-        },{
-          title: 'Value',
-          dataIndex: 'value'
-        },{
-          title: 'Working hours',
-          dataIndex: 'working_hours',
-           props:{
-            min:0,
-          },
-           type:'number'
-        },
-        {
-          title: 'Fee per applicant (USD)',
-          dataIndex: 'fee_per_applicant',
-          props:{
-            min:0,
-            style:`width:'250px'`,
-            prefix:'$'
-          },
-          type:'number'
-        },
-        {
-          title: 'Status',
-          dataIndex: 'status',
-          props:{
-            checkedValue:'active',
-            unCheckedValue:'inactive',
-          },
-          type:'switch'
-        }
-        ]" v-model:value="formState.data">
+  <DataListEdit :columns="columns" v-model:value="formState.data">
     <template #action>
       <a-button @click="submit" class="float-right" type="primary">Save</a-button>
     </template>
+    <template #cell[cut_off]="{item}">
+      <a-select
+        v-model:value="item.cut_off"
+        mode="multiple"
+        style="width: 100%"
+        placeholder="Please select"
+        :options="timeOptions"
+        @change="handleChange"
+      ></a-select>
+    </template>
   </DataListEdit>
   <a-drawer title="Draw edit" v-model:open="showExport" width="50vw">
-    <a-form label-position="top" label-width="200px" >
+    <a-form label-position="top" label-width="200px">
 
-    <a-form-item label="Key">
+      <a-form-item label="Key">
 
-      <a-input :disabled="true" :value="formState.data_key"></a-input>
-    </a-form-item>
-    <a-form-item label="Data">
-      <a-textarea rows="10" v-model:value="jsonEdit" v-if="showExport"></a-textarea>
-    </a-form-item>
-    <a-button class="mt-5" type="primary" @click="saveJson">Submit</a-button>
+        <a-input :disabled="true" :value="formState.data_key"></a-input>
+      </a-form-item>
+      <a-form-item label="Data">
+        <a-textarea rows="10" v-model:value="jsonEdit" v-if="showExport"></a-textarea>
+      </a-form-item>
+      <a-button class="mt-5" type="primary" @click="saveJson">Submit</a-button>
     </a-form>
   </a-drawer>
 </template>

@@ -15,10 +15,10 @@ class PostSignupAction
         $data = $request->all();
         $data['password'] = \Hash::make($data['password']);
         $user = VisaUser::create($data);
-        auth('frontend')->login($user);
+//        auth('frontend')->login($user);
         Toast::message('Signup successfully!')
             ->success()
             ->centerTop();
-        return redirect('profile');
+        return redirect('/login');
     }
 }
