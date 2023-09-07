@@ -96,22 +96,30 @@ function getSelectedProcessingTime() {
     return typeProcessingList.value.find(item => item.value == formState.processing_time)
 }
 
+function cutOffTime() {
+
+}
+
 function calculateDueDate() {
     const procesingTime = getSelectedProcessingTime();
     if (!procesingTime && !Array.isArray(procesingTime.cut_off)) {
         return;
     }
-    console.log(procesingTime.cut_off);
     let dueDate = dayjs().tz(tz).addBusinessHours(procesingTime.working_hours);
-    for (let cutoff of procesingTime.cut_off) {
+    let time = null;
+    for (let cutoff of procesingTime.cut_off.sort()) {
         if (dueDate.format('HH:MM') < cutoff) {
-            const cutoffData = cutoff.split(':')
-            formState.due_date = dueDate.set('hour', cutoffData[0]).set('minute', cutoffData[1])
-            return
+            time = cutoff;
+            break;
         }
-        formState.due_date = dueDate.set('hour', 18).set('minute', 30)
-
     }
+    if (!time) {
+        dueDate = dueDate.addBusinessDays(1).set('hour', 0).set('minute', 0)
+
+        time = procesingTime.cut_off.sort()[0]
+    }
+    const cutoffData = time.split(':')
+    formState.due_date = dueDate.set('hour', cutoffData[0]).set('minute', cutoffData[1])
 
 
 }
