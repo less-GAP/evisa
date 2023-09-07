@@ -57,7 +57,9 @@
 
                                 <label class="flex p-2 pl-0 cursor-pointer">
                                     <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">
-                                        <input type="radio" class="hidden peer" value="{{$data['value']}}" name="processing" checked
+                                        <input type="radio" class="hidden peer visa-processing-time"
+                                               data-value="{{json_encode($data)}}" value="{{$data['value']}}"
+                                               name="processing" checked
                                                data-time="Delivery Time: 14:30 - Friday, August 11 2023">
                                         <svg class="hidden w-4 h-4 pointer-events-none text-purple peer-checked:block"
                                              viewBox="0 0 172 172">
@@ -1472,6 +1474,18 @@
 
     {{--        </div>--}}
     {{--    </section>--}}
+    <x-splade-script>
+        function calculateFee(){
+        const value = jQuery('.visa-processing-time:checked').data('value')
+        jQuery('#lblTotal').text('US$'+value['price_'+jQuery('#visatype').val()]+'.00');
+        }
+        jQuery('#visatype').change(function(){
+        calculateFee()
+        })
+        jQuery('.visa-processing-time').click(function(){
+        calculateFee()
+        })
+    </x-splade-script>
 </x-Frontend::layout.default>
 
 

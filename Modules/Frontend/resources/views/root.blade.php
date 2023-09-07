@@ -18,7 +18,7 @@
           type='text/css' media='all'/>
     <link rel="canonical" href="https://evisa.usa-server.com/"/>
     <link rel='shortlink' href='https://evisa.usa-server.com/'/>
-
+    <script src="{{ asset('static/js/jquery-3.7.1.min.js')}}"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AWcy7kkXjKzGK6JwvlI9AR0Tpq4UqL8Sm4KkaXpfqUI-xEl4j_JH_XUFr12mJKk4__xJwJt4ukyJZmQ2&components=buttons,funding-eligibility"></script>
 
     @vite(['resources/js/app.js'])
