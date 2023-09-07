@@ -36,9 +36,9 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     EloquentRouter::prefix('customer')
         ->routes(function(){
         })
-        ->handle(\App\Models\Customer::class,
+        ->handle(\App\Models\VisaUser::class,
             [
-                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,email,phone')]
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'full_name,email,phone')]
             ]
         );
     EloquentRouter::prefix('visa-application')
@@ -180,10 +180,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::post('/', \Modules\Admin\Actions\Config\PostAction::class . '@handle');
         Route::post('/testSmtp', \Modules\Admin\Actions\Config\PostTestSmtpAction::class . '@handle');
     });
-    Route::prefix('/customer')->group(function () {
-        Route::get('list', \Modules\Admin\Actions\Customer\GetListAction::class . '@handle');
-        Route::post('activeList', \Modules\Admin\Actions\Customer\PostActiveListAction::class . '@handle');
-    });
+
 
     Route::prefix('/customer-group')->group(function () {
         Route::get('list', \Modules\Admin\Actions\CustomerGroup\GetListAction::class . '@handle');
