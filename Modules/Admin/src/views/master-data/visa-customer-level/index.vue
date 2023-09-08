@@ -7,7 +7,7 @@ import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {UseDataTable} from "@/utils/UseDataTable";
 
-const prefix = 'agency-level'
+const prefix = 'visa-customer-level'
 const routePath = '/master-data/'+prefix
 const {
   fetchListApi,
@@ -67,7 +67,11 @@ const columns = [
     title: 'Status',
     key: 'status',
     width: 100
-
+  },
+  {
+    title: 'Default',
+    key: 'is_default',
+    width: 100
   },
   {
     title: 'Created at',
@@ -135,6 +139,10 @@ function registerTable({reload}) {
     <template #cell[status]="{item,column}">
       <a-switch @change="updateApi(item.id,{status:item.status})" checkedValue="active" unCheckedValue="inactive"
                 v-model:checked="item.status"/>
+    </template>
+    <template #cell[is_default]="{item,column}">
+      <a-switch @change="updateApi(item.id,{is_default:item.is_default})" :checkedValue="1" :unCheckedValue="0"
+                v-model:checked="item.is_default"/>
     </template>
   </DataTable>
   <router-view></router-view>

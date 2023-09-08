@@ -2,7 +2,7 @@
 import {reactive, ref, h, watch} from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import {DataTable} from "@/components";
+import {DataTable,RemoteSelect} from "@/components";
 import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {UseDataTable} from "@/utils/UseDataTable";
@@ -37,6 +37,7 @@ const listActions = [
 const columns = [
    {title: 'Name', key: 'full_name'}
   , {title: 'Phone', key: 'phone'}
+  , {title: 'Current Level', key: 'customer_level'}
   , {title: 'Status', key: 'status'}
   , {title: 'Type', key: 'type'}
   , {title: 'Submit Visa Number', key: 'submited_count'}
@@ -98,6 +99,11 @@ function registerTable({reload}) {
       <template #cell[status]="{item,column}">
         <a-switch @change="updateApi(item.id,{status:item.status})" checkedValue="active" unCheckedValue="inactive"
                   v-model:checked="item.status"/>
+      </template>
+      <template #cell[customer_level]="{item,column}">
+
+        <RemoteSelect @change="updateApi(item.id,{customer_level:item.customer_level})"  v-model:value="item.customer_level" url="visa-customer-level/all" valueKey="id" labelKey="name"></RemoteSelect>
+
       </template>
     </DataTable>
 

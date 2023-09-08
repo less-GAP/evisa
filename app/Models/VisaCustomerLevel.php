@@ -7,7 +7,7 @@ use App\Traits\CreatedUpdatedByAdmin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AgencyLevel extends Model
+class VisaCustomerLevel extends Model
 {
 
     /**
@@ -15,18 +15,19 @@ class AgencyLevel extends Model
      *
      * @var array<int, string>
      */
-    use HasFactory,CreatedUpdatedByAdmin;
+    use HasFactory, CreatedUpdatedByAdmin;
 
-    protected $table = 'agency_level';
+    protected $table = 'visa_customer_level';
 
     public $timestamps = true;
 
     protected $fillable = [
         'name',
         'status',
+        'is_default',
         'min_success_visa_per_month',
-        'processing_time_pricing',
         'expire_days',
+        'price_config',
 
     ];
 
@@ -46,7 +47,7 @@ class AgencyLevel extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'processing_time_pricing'=>'array'
+        'price_config' => 'array'
     ];
 
     protected $appends = [

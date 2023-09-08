@@ -7,11 +7,11 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 const items = ref([
 
     {
-      key: 'agency-level',
+      key: 'visa-customer-level',
       icon: () => h(AppstoreOutlined),
-      href: '/master-data/agency-level',
-      label: 'Agency Level',
-      title: 'Agency Level',
+      href: '/master-data/visa-customer-level',
+      label: 'Customer Level',
+      title: 'Customer Level',
     },
     {
       key: 'data-country',

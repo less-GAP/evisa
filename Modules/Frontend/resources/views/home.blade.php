@@ -53,7 +53,7 @@
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 xl:flex xl:justify-center">
                         <div class="inner">
                             <span class="font-semibold uppercase form-label">Processing Time</span>
-                            @foreach(master_data('visa-processing-time')->where('contact_admin','<>',true) as $data)
+                            @foreach(frontend_processing_time()->where('contact_admin','<>',true) as $data)
 
                                 <label class="flex p-2 pl-0 cursor-pointer">
                                     <div class="flex items-center justify-center w-6 h-6 p-1 mr-2 bg-white shadow">

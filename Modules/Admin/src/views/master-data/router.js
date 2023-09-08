@@ -8,19 +8,19 @@ export default [{
   children: [
     {
       meta: {
-        title: "Agency Level",
+        title: "Customer Level",
       },
-      path: "/master-data/agency-level",
-      name: "agency-level",
-      component: () => import("./agency-level/index.vue"),
+      path: "/master-data/visa-customer-level",
+      name: "visa-customer-level",
+      component: () => import("./visa-customer-level/index.vue"),
       children: [
         {
           meta: {
             title: "Agency Level",
           },
-          path: "/master-data/agency-level/:id",
-          name: "agency-level-form",
-          component: () => import("./agency-level/form.vue"),
+          path: "/master-data/visa-customer-level/:id",
+          name: "visa-customer-level-form",
+          component: () => import("./visa-customer-level/form.vue"),
         }
       ]
     },

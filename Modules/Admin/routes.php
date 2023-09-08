@@ -86,8 +86,8 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function(){
             Route::get('{listKey}/data', \Modules\Admin\Actions\MasterData\GetOptionsAction::class . '@handle');
         });
-    EloquentRouter::prefix('agency-level')
-        ->handle(\App\Models\AgencyLevel::class,
+    EloquentRouter::prefix('visa-customer-level')
+        ->handle(\App\Models\VisaCustomerLevel::class,
             [
                 'allowedFilters' => [
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,code')
@@ -96,13 +96,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function(){
 
         });
-    EloquentRouter::prefix('agency-level-pricing')
-        ->handle(\App\Models\AgencyLevelPricing::class,
-            [
-            ]
-        )->routes(function(){
 
-        });
     EloquentRouter::prefix('tag')
         ->handle(\App\Models\Tag::class,
             [

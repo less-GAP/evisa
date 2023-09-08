@@ -10,11 +10,12 @@ use Modules\Frontend\Actions\PostVisaApplication;
 use Modules\Frontend\Actions\TestFormAction;
 
 Route::get('/master-data/country/options', \Modules\Frontend\Actions\MasterData\GetCountryOptionsAction::class . '@handle');
+Route::get('/master-data/visa-processing-time/options', \Modules\Frontend\Actions\MasterData\GetProcessingTimeOptionsAction::class . '@handle');
 Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterData\GetOptionsAction::class . '@handle');
 
 Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
-    Route::view('/profile',  'Frontend::profile')->name('profile');
+    Route::view('/my-account',  'Frontend::profile')->name('my-account');
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
     Route::get('/logout',  LogoutAction::class.'@handle')->name('logout');

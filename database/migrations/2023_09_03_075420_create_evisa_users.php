@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('type')->default('user');
             $table->string('password');
             $table->string('status')->default('active');
-            $table->integer('agency_level')->nullable();
+            $table->integer('customer_level')->nullable();
+            $table->dateTime('customer_level_expired_at')->nullable();
             $table->timestamps();
         });
     }

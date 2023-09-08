@@ -23,7 +23,7 @@ class PostLoginAction
                 ->success()
                 ->centerTop();
             return redirect()
-                ->intended('profile')
+                ->intended('my-account')
                 ;
         }
         Toast::message('The provided credentials do not match our records.')

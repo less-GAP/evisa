@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agency_level', function (Blueprint $table) {
+        Schema::create('visa_customer_level', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->integer('min_success_visa_per_month');
-            $table->text('processing_time_pricing')->nullable();
-            $table->integer('expire_days')->default(30);
+            $table->tinyInteger('is_default')->default(false);
+            $table->integer('min_success_visa_per_month')->default(0);
+            $table->longText('price_config')->nullable();
+            $table->integer('expire_days')->default(0);
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agency_level');
+        Schema::dropIfExists('visa_customer_level');
     }
 };

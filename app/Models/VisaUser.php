@@ -20,7 +20,9 @@ class VisaUser extends Authenticatable
      */
     protected $fillable = [
         'full_name',
+        'customer_level',
         'email',
+        'phone',
         'phone',
         'type',
         'status',
@@ -48,6 +50,14 @@ class VisaUser extends Authenticatable
     ];
 
     protected $appends = [
-        'profile_photo_url'
     ];
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ( $model) {
+            $model->customer_level = default_visa_customer_level_id();
+        });
+    }
 }

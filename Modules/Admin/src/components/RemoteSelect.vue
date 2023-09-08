@@ -50,8 +50,8 @@ export default defineComponent({
       inputValue,
       options,
       async handleChange() {
-        emit('change', inputValue.value);
         emit('update:value', inputValue.value);
+        emit('change', inputValue.value);
       },
     };
   },

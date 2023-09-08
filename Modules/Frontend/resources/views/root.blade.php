@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +26,7 @@
 </head>
 
 <body
-    class="home page-template page-template-templates page-template-frontpage page-template-templates frontpage-php page page-id-5 lessGAP">
+    class="home bg-[#f8f8f8] page-template page-template-templates page-template-frontpage page-template-templates frontpage-php page page-id-5 lessGAP">
 
     @splade
 </body>
