@@ -219,8 +219,6 @@ reload()
       <span></span>
 
       <a-space>
-
-
         <a-button v-for="listAction in listActions" type="primary"
                   @click="()=>{listAction.action(reload)}">{{ listAction.label }}
         </a-button>
@@ -256,7 +254,7 @@ reload()
             </th>
           </tr>
           </thead>
-          <tbody class="text-sm divide-y divide-gray-100">
+          <tbody v-if="data && data.length" class="text-sm divide-y divide-gray-100">
           <tr v-for="(item,index) in data" :key="item[tableConfig.item_key]"
               v-bind:class="{'border-b':(index%2===0)}">
             <td v-if="showSelection" class="p-2 whitespace-nowrap">

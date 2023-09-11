@@ -20,13 +20,13 @@ const items = ref([
       label: 'Data Country',
       title: 'Data Country',
     },
-    {
-      key: 'processing-time',
-      icon: () => h(AppstoreOutlined),
-      href: '/master-data/processing-time',
-      label: 'Processing Time',
-      title: 'Processing Time',
-    },
+    // {
+    //   key: 'processing-time',
+    //   icon: () => h(AppstoreOutlined),
+    //   href: '/master-data/processing-time',
+    //   label: 'Processing Time',
+    //   title: 'Processing Time',
+    // },
     {
       key: 'type-of-visa',
       icon: () => h(AppstoreOutlined),
