@@ -38,7 +38,7 @@ $currentLevel = $user->level;
                         Expire date
                     </dt>
                     <dd class="mt-1 text-sm text-neutral-900 dark:text-neutral-200 font-medium sm:mt-0 sm:col-span-2">
-                        {{$user->customer_level_expired_at->format('M d, Y')}}
+                        {{$user->customer_level_expired_at?$user->customer_level_expired_at->format('M d, Y'):'Never'}}
                     </dd>
                 </div>
             </dl>
