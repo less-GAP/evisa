@@ -40,7 +40,7 @@ const items = ref([
 
 function menuClick({item}) {
   if (item.href) {
-    router.push(item.href)
+    router.replace(item.href)
   }
 }
 </script>

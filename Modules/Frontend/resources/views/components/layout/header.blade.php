@@ -230,7 +230,7 @@
                     </li>
                     @if(auth('frontend')->check())
                     <li>
-                        Welcome, <a href="/profile" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
+                        Welcome, <a href="/my-account" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
                     </li>
                         <li>
                        <a href="/logout" class="hover:text-black">Logout</a>

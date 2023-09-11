@@ -55,7 +55,7 @@ if (id) {
 const submit = async function () {
   loading.value = true
   Api.post('email-template', formState).then(result => {
-    router.push('/email/templates')
+    router.replace('/email/templates')
   }).catch(e => {
   }).finally(loading.value = false)
 }

@@ -57,7 +57,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/payment-method');
+            router.replace('/payment-method');
           }
         });
       })
@@ -70,7 +70,7 @@
   };
 
   const back = () => {
-    router.push('/payment-method');
+    router.replace('/payment-method');
   };
 
 

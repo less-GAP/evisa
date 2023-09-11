@@ -21,7 +21,7 @@
     },
     api: (params) => Api.get('orders/list', {params}),
     addAction: (reload) => {
-      router.push('/orders/0')
+      router.replace('/orders/0')
     },
     itemActions: [
       {
@@ -30,7 +30,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/orders/' + item.id)
+          router.replace('/orders/' + item.id)
         }
       },
     ],

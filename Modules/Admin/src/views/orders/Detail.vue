@@ -150,7 +150,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/orders');
+            router.replace('/orders');
           }
         });
       })
@@ -163,7 +163,7 @@
   };
 
   const back = () => {
-    router.push('/orders');
+    router.replace('/orders');
   };
 
 

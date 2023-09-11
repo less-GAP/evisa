@@ -34,7 +34,7 @@
     api: (params) => Api.get('product/list', {params}),
     addAction: (reload) => {
       //showEditUser({}, reload)
-      router.push('/products/0')
+      router.replace('/products/0')
     },
     itemActions: [
       {
@@ -43,7 +43,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/products/' + item.id)
+          router.replace('/products/' + item.id)
         }
       },
       {

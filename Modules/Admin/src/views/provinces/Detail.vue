@@ -77,7 +77,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/provinces');
+            router.replace('/provinces');
           }
         });
       })
@@ -90,7 +90,7 @@
   };
 
   const back = () => {
-    router.push('/provinces');
+    router.replace('/provinces');
   };
 
 

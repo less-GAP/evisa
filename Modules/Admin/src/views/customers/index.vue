@@ -2,10 +2,11 @@
 import {reactive, ref, h, watch} from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import {DataTable,RemoteSelect} from "@/components";
+import {DataTable, RemoteSelect} from "@/components";
 import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {UseDataTable} from "@/utils/UseDataTable";
+import Format from "@/utils/Format";
 
 const prefix = 'customer'
 const {
@@ -21,7 +22,7 @@ const itemActions = [
     label: 'Edit',
     action: (item, reload) => {
       //showEditUser({}, reload)
-      router.push(prefix + '/' + item.id)
+      router.replace(prefix + '/' + item.id)
     }
   }
 ]
@@ -30,17 +31,18 @@ const listActions = [
   //   label: 'Add',
   //   action: (reload) => {
   //     //showEditUser({}, reload)
-  //     router.push(prefix + '/new')
+  //     router.replace(prefix + '/new')
   //   }
   // }
 ]
 const columns = [
-   {title: 'Name', key: 'full_name'}
+  {title: 'Name', key: 'full_name'}
   , {title: 'Phone', key: 'phone'}
   , {title: 'Current Level', key: 'customer_level'}
+  , {title: 'Level Expired At', key: 'customer_level_expired_at', format: Format.formatDateTime}
   , {title: 'Status', key: 'status'}
   , {title: 'Type', key: 'type'}
-  , {title: 'Submit Visa Number', key: 'submited_count'}
+  , {title: 'Submit Visa Number', key: 'submit_visa_number'}
   , {title: 'Joined date', key: 'created_at'}
 ]
 
@@ -67,7 +69,7 @@ function registerTable({reload}) {
 
 <template>
   <LayoutAuthenticated>
-    <DataTable @register="registerTable"  v-bind="tableConfig">
+    <DataTable @register="registerTable" v-bind="tableConfig">
       <template #cellAction[delete]="{item,actionMethod}">
         <a-popconfirm
           title="Are you sure delete this user?"
@@ -89,8 +91,8 @@ function registerTable({reload}) {
         </a-popconfirm>
       </template>
       <template #cell[full_name]="{item,column}">
-        <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-             :alt="item.full_name">
+        <!--        <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"-->
+        <!--             :alt="item.full_name">-->
         <div class="pl-3 float-left">
           <div class="text-base font-semibold">{{ item.full_name }}</div>
           <div class="font-normal text-gray-500">{{ item.email }}</div>
@@ -102,7 +104,9 @@ function registerTable({reload}) {
       </template>
       <template #cell[customer_level]="{item,column}">
 
-        <RemoteSelect @change="updateApi(item.id,{customer_level:item.customer_level})"  v-model:value="item.customer_level" url="visa-customer-level/all" valueKey="id" labelKey="name"></RemoteSelect>
+        <RemoteSelect @change="updateApi(item.id,{customer_level:item.customer_level})"
+                      v-model:value="item.customer_level" url="visa-customer-level/all" valueKey="id"
+                      labelKey="name"></RemoteSelect>
 
       </template>
     </DataTable>

@@ -1,26 +1,31 @@
 <template>
   <a-select
+    show-search
     v-bind="$attrs"
+    :filterOption="onFilter"
+    @search="filterOption"
     v-model:value="inputValue"
     @change="handleChange"
   >
-    <a-select-option v-for="option in options" :value="option[valueKey]">
-      <slot name="option" v-bind="{option}">
-        {{option[labelKey]}}
+    <template :key="option[valueKey]" v-for="option in filteredOptions">
+      <slot name="option" v-bind="{option,valueKey,labelKey}">
+        <a-select-option :value="option[valueKey]">
+          {{ option[labelKey] }}
+        </a-select-option>
       </slot>
-    </a-select-option>
+    </template>
 
   </a-select>
 </template>
 <script lang="ts">
-import {defineComponent, ref, watch, unref, computed} from 'vue';
+import {defineComponent, ref, watch, unref, computed, toRaw} from 'vue';
 import Api from "@/utils/Api";
 
 export default defineComponent({
   name: 'InputUpload',
   components: {},
   props: {
-    value: [String , Number , Array],
+    value: [String, Number, Array],
     url: String,
     valueKey: {
       type: String
@@ -37,17 +42,40 @@ export default defineComponent({
   setup(props, {emit}) {
     const inputValue = ref(props.value);
     const options = ref([]);
-    watch( ()=>props.value, function () {
+    const filteredOptions = ref([]);
+    watch(() => props.value, function () {
       inputValue.value = props.value
     })
+
+    function onFilter() {
+      return true
+    }
+
+    const filterOption = (input: string) => {
+      if (!input || input == '') {
+        filteredOptions.value = toRaw(options.value)
+        return
+      }
+      const filters = toRaw(options.value).filter(option => {
+        return String(option[props.labelKey]).toLowerCase().indexOf(String(input).toLowerCase()) >=0 || String(option[props.valueKey]).toLowerCase().indexOf(String(input).toLowerCase()) >= 0;
+      })
+      filteredOptions.value = filters
+      return
+    };
+
 
     async function fetch() {
       const result = await Api.get(props.url, {params: props.params});
       options.value = result.data
+      filterOption('')
     }
+
     fetch()
     return {
+      filteredOptions,
       inputValue,
+      onFilter,
+      filterOption,
       options,
       async handleChange() {
         emit('update:value', inputValue.value);

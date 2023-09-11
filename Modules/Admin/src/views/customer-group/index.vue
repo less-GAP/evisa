@@ -17,7 +17,7 @@
     api: (params) => Api.get('customer-group/list', {params}),
     addAction: (reload) => {
       //showEditUser({}, reload)
-      router.push('/customer-group/0')
+      router.replace('/customer-group/0')
     },
     itemActions: [
       {
@@ -26,7 +26,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/customer-group/' + item.id)
+          router.replace('/customer-group/' + item.id)
         }
       },
       {

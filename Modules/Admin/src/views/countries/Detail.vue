@@ -56,7 +56,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/countries');
+            router.replace('/countries');
           }
         });
       })
@@ -69,7 +69,7 @@
   };
 
   const back = () => {
-    router.push('/countries');
+    router.replace('/countries');
   };
 
 

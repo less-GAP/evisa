@@ -15,7 +15,7 @@ import {notification} from "ant-design-vue";
 const tableConfig = {
   api: (params) => Api.get('provinces/list', {params}),
   addAction: (reload) => {
-    router.push('/provinces/0')
+    router.replace('/provinces/0')
   },
   itemActions: [
     {
@@ -24,7 +24,7 @@ const tableConfig = {
       icon: mdiDelete,
       key: 'edit',
       action(item, reload) {
-        router.push('/provinces/' + item.id)
+        router.replace('/provinces/' + item.id)
       }
     },
     {

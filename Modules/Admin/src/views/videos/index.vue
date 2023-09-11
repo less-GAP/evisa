@@ -31,7 +31,7 @@ const handlePreview = (item) => {
 const tableConfig = {
   api: (params) => Api.get('video/list', {params}),
   addAction: (reload) => {
-    router.push('/videos/0')
+    router.replace('/videos/0')
   },
   itemActions: [
     {
@@ -40,7 +40,7 @@ const tableConfig = {
       icon: mdiDelete,
       key: 'edit',
       action(item, reload) {
-        router.push('/videos/' + item.id)
+        router.replace('/videos/' + item.id)
       }
     },
     {

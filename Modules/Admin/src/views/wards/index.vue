@@ -15,7 +15,7 @@
   const tableConfig = {
     api: (params) => Api.get('wards/list', {params}),
     addAction: (reload) => {
-      router.push('/wards/0')
+      router.replace('/wards/0')
     },
     itemActions: [
       {
@@ -24,7 +24,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/wards/' + item.id)
+          router.replace('/wards/' + item.id)
         }
       },
       {

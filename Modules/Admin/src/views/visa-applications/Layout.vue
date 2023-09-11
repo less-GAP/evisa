@@ -77,7 +77,7 @@ watch(router.currentRoute, (data) => {
 
 function menuClick({item}) {
   if (item.href) {
-    router.push(item.href)
+    router.replace(item.href)
   }
 }
 

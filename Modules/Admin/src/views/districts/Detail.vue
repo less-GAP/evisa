@@ -97,7 +97,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/districts');
+            router.replace('/districts');
           }
         });
       })
@@ -110,7 +110,7 @@
   };
 
   const back = () => {
-    router.push('/districts');
+    router.replace('/districts');
   };
 
 

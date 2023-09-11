@@ -37,6 +37,10 @@ const props = defineProps({
     type: [Boolean, Array],
     default: false
   },
+  showPagination: {
+    type: [Boolean],
+    default: true
+  },
   params: {
     type: Object,
     default: {}
@@ -72,6 +76,7 @@ const tableConfig = {
   , ...props.tableConfig
 }
 const tableData = ref({})
+const data = ref(null)
 const filter = ref({
   search: '',
   ...props.filter
@@ -117,8 +122,13 @@ function reload() {
       page: props.pagination.page, ...props.params,
       ...getFilter()
     }).then(rs => {
-      tableData.value = rs.data
-      props.pagination.total = rs.data?.total ? rs.data.total : 0
+      if (rs.data?.total) {
+        tableData.value = rs.data
+        data.value = rs.data.data
+        props.pagination.total = rs.data?.total ? rs.data.total : 0
+      } else {
+        data.value = rs.data
+      }
     }).finally(() => {
       checkAll.value = false
       loading.value = false
@@ -144,7 +154,7 @@ async function doSelectionAction(action) {
 
 function toggleCheckAll() {
   if (checkAll.value) {
-    selectedItems.value = toRaw(tableData?.value.data || [])
+    selectedItems.value = toRaw(data || [])
   } else {
     selectedItems.value = []
   }
@@ -214,13 +224,13 @@ reload()
         <a-button v-for="listAction in listActions" type="primary"
                   @click="()=>{listAction.action(reload)}">{{ listAction.label }}
         </a-button>
-        <slot name="action" v-bind="{selectedItems,reload}"></slot>
+        <slot name="action" v-bind="{selectedItems,data,reload}"></slot>
       </a-space>
     </div>
     <div class="overflow-auto scroll-smooth flex-1 w-full bg-white shadow rounded-lg my-5">
-      <a-skeleton active class="p-10" v-if="loading||!tableData.data"/>
+      <a-skeleton active class="p-10" v-if="loading"/>
+      <slot v-else name="table" v-bind="{tableConfig,tableData,data,columns,selectionActions,reload}">
 
-      <slot v-else name="table" v-bind="{tableConfig,tableData,columns,selectionActions,reload}">
         <table class="table-auto w-full">
           <thead class="text-xs font-semibold  uppercase bg-gray-700 text-white">
           <tr>
@@ -247,7 +257,7 @@ reload()
           </tr>
           </thead>
           <tbody class="text-sm divide-y divide-gray-100">
-          <tr v-for="(item,index) in tableData.data" :key="item[tableConfig.item_key]"
+          <tr v-for="(item,index) in data" :key="item[tableConfig.item_key]"
               v-bind:class="{'border-b':(index%2===0)}">
             <td v-if="showSelection" class="p-2 whitespace-nowrap">
               <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
@@ -260,8 +270,11 @@ reload()
             <td :data-label="column.title" v-for="column in columns"
                 :class="'p-2 ' + (column.class ? column.class : '')">
               <template v-if="item.render">
-                {{ item.render() }}
+                {{ item.render(item) }}
               </template>
+              <slot v-else-if="column.format" :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+                {{ column.format(item[column.key]) }}
+              </slot>
               <slot v-else :name="'cell['+column.key+']'" v-bind="{item,column,index}">
                 {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
               </slot>
@@ -272,7 +285,8 @@ reload()
               <template v-for="itemAction in itemActions">
                 <slot :name="'cellAction['+itemAction.key+']'"
                       v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
-                  <a-popconfirm v-if="itemAction.confirm"  @confirm="itemAction.action(item,reload)" title="Are you sure？">
+                  <a-popconfirm v-if="itemAction.confirm" @confirm="itemAction.action(item,reload)"
+                                title="Are you sure？">
                     <a-button
                       :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
                       type="link"
@@ -296,10 +310,11 @@ reload()
           </tbody>
         </table>
       </slot>
-      <a-empty class="my-10" :description="false" v-if="tableData.data?.length === 0 && pagination.total ===0"/>
+      <a-empty class="my-10" :description="false" v-if="data?.length === 0 && pagination.total ===0"/>
     </div>
 
-    <a-pagination style="height:40px" class="pt-2" v-if="tableData.data && pagination?.total"
+    <a-pagination style="height:40px" class="pt-2"
+                  v-if="showPagination&&data && pagination?.total >pagination.perPage"
                   :showSizeChanger="showSizeChanger"
                   @change="reload"
                   v-model:current="pagination.page"

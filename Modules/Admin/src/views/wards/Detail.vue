@@ -118,7 +118,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/wards');
+            router.replace('/wards');
           }
         });
       })
@@ -131,7 +131,7 @@
   };
 
   const back = () => {
-    router.push('/wards');
+    router.replace('/wards');
   };
 
 

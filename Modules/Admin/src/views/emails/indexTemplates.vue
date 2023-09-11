@@ -27,7 +27,7 @@ const tableConfig = {
   api: (params) => Api.get('email-template/list', {params}),
   addAction: (reload) => {
     // showEdit(null, reload)
-    router.push('/email/templates/form/' )
+    router.replace('/email/templates/form/' )
   },
   itemActions: [
     // {
@@ -36,7 +36,7 @@ const tableConfig = {
     //   , icon: mdiEye
     //   , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
     //   , action(item, reload) {
-    //     router.push('/users/' + item.id)
+    //     router.replace('/users/' + item.id)
     //   }
     // },
     {
@@ -44,7 +44,7 @@ const tableConfig = {
       , key: 'edit'
       , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
       , action(item, reload) {
-        router.push('/email/templates/form/' + item.id)
+        router.replace('/email/templates/form/' + item.id)
       }
     },
     {

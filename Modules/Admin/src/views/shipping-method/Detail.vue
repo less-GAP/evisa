@@ -57,7 +57,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/shipping-method');
+            router.replace('/shipping-method');
           }
         });
       })
@@ -70,7 +70,7 @@
   };
 
   const back = () => {
-    router.push('/shipping-method');
+    router.replace('/shipping-method');
   };
 
 

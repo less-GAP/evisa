@@ -86,7 +86,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/series');
+            router.replace('/series');
           }
         });
       })
@@ -99,7 +99,7 @@
   };
 
   const back = () => {
-    router.push('/series');
+    router.replace('/series');
   };
 
   const dataSource = ref([]);

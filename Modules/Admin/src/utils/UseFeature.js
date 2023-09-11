@@ -15,7 +15,7 @@ export function UseFeature(prefix, options = {}) {
   const tableConfig = UseDataTable(fetchListApi, options)
   const defaultNewValue = {...options.newModel}
   const back = () => {
-    router.push('/' + prefix);
+    router.replace('/' + prefix);
   };
   return {
     back,

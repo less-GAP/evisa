@@ -15,7 +15,7 @@
   const tableConfig = {
     api: (params) => Api.get('payment-method/list', {params}),
     addAction: (reload) => {
-      router.push('/payment-method/0')
+      router.replace('/payment-method/0')
     },
     itemActions: [
       {
@@ -24,7 +24,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/payment-method/' + item.id)
+          router.replace('/payment-method/' + item.id)
         }
       },
       {

@@ -15,7 +15,7 @@ const router = useRouter();
 const submit = async () => {
   try{
     await useAuthStore().login(form.value)
-    router.push("/");
+    router.replace("/");
   }catch (e) {
     alert('wrong!')
   }

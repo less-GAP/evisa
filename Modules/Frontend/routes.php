@@ -5,6 +5,8 @@ use Modules\Frontend\Actions\Auth\LogoutAction;
 use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
+use Modules\Frontend\Actions\MyAccount\PostEditProfileAction;
+use Modules\Frontend\Actions\MyAccount\PostUpdatePasswordAction;
 use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\PostVisaApplication;
 use Modules\Frontend\Actions\TestFormAction;
@@ -15,7 +17,12 @@ Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterDat
 
 Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
-    Route::view('/my-account',  'Frontend::profile')->name('my-account');
+    Route::view('/my-account',  'Frontend::my-account.dashboard')->name('my-account');
+    Route::view('/my-account/my-visa',  'Frontend::my-account.my-visa')->name('my-visa');
+    Route::post('/my-account/edit-profile',  PostEditProfileAction::class.'@handle')->name('post-edit-profile');
+    Route::post('/my-account/password',  PostUpdatePasswordAction::class.'@handle')->name('post-edit-password');
+    Route::view('/my-account/edit-profile',  'Frontend::my-account.edit-profile')->name('edit-profile');
+
     Route::view('/login',  'Frontend::login')->name('login');
     Route::view('/signup',  'Frontend::signup')->name('signup');
     Route::get('/logout',  LogoutAction::class.'@handle')->name('logout');

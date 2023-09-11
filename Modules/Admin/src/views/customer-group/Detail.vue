@@ -66,7 +66,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/customer-group');
+            router.replace('/customer-group');
           }
         });
       })
@@ -79,7 +79,7 @@
   };
 
   const back = () => {
-    router.push('/customer-group');
+    router.replace('/customer-group');
   };
 
 

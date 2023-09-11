@@ -7,7 +7,7 @@ const itemActions = [{
   label: 'Edit',
   action: (item,reload) => {
     //showEditUser({}, reload)
-    router.push('/' + prefix + '/'+item.id)
+    router.replace('/' + prefix + '/'+item.id)
   }
 }]
 const listActions = [
@@ -15,7 +15,7 @@ const listActions = [
     label: 'Add',
     action: (reload) => {
       //showEditUser({}, reload)
-      router.push('/' + prefix + '/new')
+      router.replace('/' + prefix + '/new')
     }
   }
 ]

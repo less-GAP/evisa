@@ -45,7 +45,7 @@ const formConfig = reactive({
 const submit = async function () {
   loading.value = true
   Api.post('visa-application', {...formState, total_amount: calculateFee()}).then(result => {
-    router.push('/visa-applications')
+    router.replace('/visa-applications')
   }).catch(e => {
   }).finally(loading.value = false)
 }

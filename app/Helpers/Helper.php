@@ -28,3 +28,6 @@ function default_visa_customer_level_id()
     $userLevel = VisaCustomerLevel::where('is_default', 1)->where('status', 'active')->first();
     return $userLevel ? $userLevel->id : null;
 }
+function frontend_user(){
+    return auth('frontend')->user();
+}

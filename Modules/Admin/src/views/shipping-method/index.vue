@@ -15,7 +15,7 @@
   const tableConfig = {
     api: (params) => Api.get('shipping-method/list', {params}),
     addAction: (reload) => {
-      router.push('/shipping-method/0')
+      router.replace('/shipping-method/0')
     },
     itemActions: [
       {
@@ -24,7 +24,7 @@
         icon: mdiDelete,
         key: 'edit',
         action(item, reload) {
-          router.push('/shipping-method/' + item.id)
+          router.replace('/shipping-method/' + item.id)
         }
       },
       {

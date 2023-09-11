@@ -30,7 +30,7 @@ import {useAppStateStore} from "@/stores/appState";
 // initialize components based on data attribute selectors
 onMounted(() => {
   if (!useAuthStore().isLogin()) {
-    router.push('login')
+    router.replace('login')
   }
   initAccordions();
   initCarousels();

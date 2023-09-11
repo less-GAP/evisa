@@ -73,7 +73,7 @@ const onFinish = () => {
         });
 
         if (rs.data.code == 1) {
-          router.push('/videos');
+          router.replace('/videos');
         }
       });
     })
@@ -86,7 +86,7 @@ const onFinish = () => {
 };
 
 const back = () => {
-  router.push('/videos');
+  router.replace('/videos');
 };
 
 

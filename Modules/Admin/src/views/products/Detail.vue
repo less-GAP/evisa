@@ -84,7 +84,7 @@
           });
 
           if (rs.data.code == 1) {
-            router.push('/products');
+            router.replace('/products');
           }
         });
       })
@@ -97,7 +97,7 @@
   };
 
   const back = () => {
-    router.push('/products');
+    router.replace('/products');
   };
 
 
