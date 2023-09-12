@@ -225,9 +225,14 @@ reload()
           {{ image.file_name }}
         </div>
       </div>
+      <div class="col-span-2 md:col-span-6 w-full bg-white shadow rounded-lg overflow-hidden" v-if="!tableData.data">
+        <a-skeleton active class="p-10" />
+      </div>
+      <div class="col-span-2 md:col-span-6 w-full bg-white shadow rounded-lg overflow-hidden"
+        v-if="tableData.data?.length === 0 && pagination.total === 0">
+        <a-empty class="my-10" :description="false" />
+      </div>
     </div>
-    <!--     <a-empty v-else/>-->
-    <br>
     <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
                   v-model:current="pagination.page"
                   v-model:pageSize="pagination.perPage" :total="pagination.total">
