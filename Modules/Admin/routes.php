@@ -67,6 +67,15 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function(){
 
         });
+    EloquentRouter::prefix('page')
+        ->handle(\App\Models\Page::class,
+            [
+//                'allowedIncludes' => ['tags'],
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'title')]
+            ]
+        )->routes(function(){
+
+        });
     EloquentRouter::prefix('country')
         ->handle(\App\Models\Country::class,
             [

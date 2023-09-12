@@ -9,6 +9,7 @@
   const configNames = [
     'site_title',
     'site_logo',
+    'site_icon',
     'site_description',
   ]
 
@@ -61,6 +62,10 @@
     </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
       <InputUploadGetPath width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
+      </InputUploadGetPath>
+    </a-form-item>
+    <a-form-item name="site_icon" label="Site Icon" :rules="[{ required: true }]">
+      <InputUploadGetPath width="100px" alt="Site Icon" autocomplete="off" v-model:value="formState.site_icon">
       </InputUploadGetPath>
     </a-form-item>
 

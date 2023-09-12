@@ -35,6 +35,14 @@ export default [{
     },
     {
       meta: {
+        title: "Site Menu",
+      },
+      path: "/master-data/site-menu",
+      name: "site-menu",
+      component: () => import("./site-menu/index.vue"),
+    },
+    {
+      meta: {
         title: "Processing Time",
       },
       path: "/master-data/processing-time",
