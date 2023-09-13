@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom:15px">
+  <div class="inline-block w-full" style="margin-bottom:15px">
     <a-space class="float-left">
 
       <a-button @click="newValue.push({})">
@@ -20,6 +20,13 @@
     </a-space>
   </div>
   <div
+    v-if="nested"
+    class="ant-table ant-table-ping-right ant-table-layout-fixed ant-table-fixed-header ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-right ant-table-small ant-table-bordered">
+  <nestedDraggable :columns="getColumns()"  v-model:value="newValue">
+  </nestedDraggable>
+  </div>
+  <div
+    v-else
     class="ant-table ant-table-ping-right ant-table-layout-fixed ant-table-fixed-header ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-right ant-table-small ant-table-bordered">
     <div class="ant-table-container">
       <table>
@@ -29,7 +36,6 @@
               v-for="(column,columnIndex) in getColumns()" :width="column.width" scope="col">
             <slot name="column" v-bind="{column}">
               <template v-if="column.dataIndex=='action'">
-
               </template>
               <template v-else>
                 {{ column.title }}
@@ -44,21 +50,21 @@
           </th>
         </tr>
         </thead>
+
         <draggable v-bind="dragOptions" v-model="newValue" itemKey="value" class="ant-table-tbody" handle=".drag-handle"
                    tag="tbody">
           <template #item="{ element ,index }">
             <tr class="ant-table-measure-row">
               <td :data-label="column.title" v-for="column in getColumns()" scope="row">
                 <template v-if="column.dataIndex=='action'">
-                  <div style="width:70px">
-
-                    <a-button type="link" primary>
+                  <div style="white-space: nowrap">
+                    <a-button type="primary" primary>
                       <template #icon>
                         <DragOutlined class="drag-handle"></DragOutlined>
                       </template>
                     </a-button>
 
-                    <a-button @click="newValue.splice(index,1)" style="margin-left:5px" type="link" danger>
+                    <a-button @click="newValue.splice(index,1)" style="margin-left:5px" type="primary" danger>
                       <template #icon>
                         <DeleteOutlined></DeleteOutlined>
                       </template>
@@ -122,14 +128,16 @@ import {DragOutlined, DeleteOutlined, PlusOutlined} from '@ant-design/icons-vue'
 import draggable from "vuedraggable";
 import BaseIcon from "./BaseIcon.vue";
 import type {FormInstance} from "ant-design-vue";
+import nestedDraggable from "./nested.vue";
 
 export default defineComponent({
-  components: {draggable, DragOutlined, DeleteOutlined, PlusOutlined, BaseIcon},
+  components: {draggable, nestedDraggable, DragOutlined, DeleteOutlined, PlusOutlined, BaseIcon},
   props: {
     value: Array,
     columns: Array,
     editColumn: Boolean,
     drawEdit: {type: Boolean, default: true},
+    nested: {type: Number, default: 0},
   },
   emits: ['options-change', 'update:value', 'change'],
   setup(props, {emit}) {

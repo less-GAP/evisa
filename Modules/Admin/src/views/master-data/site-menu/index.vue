@@ -50,7 +50,15 @@ const props = defineProps({
 const emit = defineEmits(["close"]);
 const formState = reactive({
   data_key: listKey,
-  data: [{}]
+  data: [{
+    children: [
+      {},{}
+    ]
+  },{
+    children: [
+      {},{}
+    ]
+  }]
 });
 const isShowModal = ref(false)
 
@@ -97,54 +105,20 @@ const columns = ref([
     dataIndex: 'label'
   }, {
     title: 'Url',
-    width: 70,
+    width: 350,
     dataIndex: 'url'
   },
 
 
 ])
-Api.get('master-data/type-of-visa').then(rs => {
-  const data = rs.data.data;
-  for (const visaType of data) {
-    columns.value.push({
-      title: visaType.label,
-      dataIndex: 'price_' + visaType.value,
-      width: 250,
-      props: {
-        min: 0,
-        style: `width:'250px'`,
-        prefix: '$'
-      },
-      type: 'number'
-    })
-  }
-  columns.value.push( {
-    title: 'Note',
-    dataIndex: 'not',
-    width: 300,
-  })
-})
 let timeOptions = [];
 const MIN = 8, MAX = 19
-Array.from({length: MAX - MIN + 1}, (v, k) => k + MIN).forEach(item => {
-  let string = item;
-  if (item < 10) {
-    string = '0' + item
-  }
-  timeOptions.push({
-    value: string + ':00',
-    label: string + ':00'
-  })
-  timeOptions.push({
-    value: string + ':30',
-    label: string + ':30'
-  })
-})
+
 
 </script>
 
 <template>
-  <DataListEdit :columns="columns" v-model:value="formState.data">
+  <DataListEdit :nested="1" :columns="columns" v-model:value="formState.data">
     <template #action>
       <a-button @click="submit" class="float-right" type="primary">Save</a-button>
     </template>
