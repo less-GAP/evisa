@@ -1,4 +1,4 @@
-@servers(['web' => '134.122.4.168'])
+@servers(['web' => 'root@134.122.4.168'])
 
 @task('deploy')
     cd /home/evisa
