@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->index();
             $table->string('template')->nullable();
-            $table->string('slug')->index();
+            $table->string('slug')->unique();
             $table->string('status')->index();
             $table->string('image')->nullable();
             $table->string('created_by')->nullable();

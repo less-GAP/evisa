@@ -24,7 +24,8 @@ import {notification} from 'ant-design-vue';
 
 import type {UploadProps} from 'ant-design-vue';
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
-import {InputTags, InputUploadGetPath, FilePicker} from "@/components";
+import {InputTags, InputUploadGetPath, FilePicker, InputCopy} from "@/components";
+
 const prefix = 'page'
 const {
   fetchDetailApi,
@@ -85,13 +86,14 @@ const submit = (status) => {
 };
 
 const closeDetail = function () {
-  router.replace({path: '/'+prefix})
+  router.replace({path: '/' + prefix})
 }
 
 
 </script>
 
 <template>
+
   <a-drawer :closable="false" bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
             @close="closeDetail" :open="true"
             width="90vw">
@@ -122,7 +124,17 @@ const closeDetail = function () {
                              name="title"
                              :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
                 >
-                  <a-input v-model:value="formState.title" placeholder="Title.."/>
+                  <a-input @keypress="formState.slug=formState.title?.slugify()" v-model:value="formState.title"
+                           placeholder="Title.."/>
+                </a-form-item>
+                <a-form-item label="Slug"
+                             name="slug"
+                >
+                  <a-input v-model:value="formState.slug" placeholder="Title.."/>
+                </a-form-item>
+                <a-form-item label="Url"
+                >
+                  <InputCopy :value="$url(formState.slug)" :readonly="true"></InputCopy>
                 </a-form-item>
               </a-col>
 
@@ -131,6 +143,10 @@ const closeDetail = function () {
                 <a-form-item label="Mô tả">
                   <jodit-editor v-if="!loading " style="height: 50vh" v-model="formState.content" :config="{
                 iframe:true,
+                style: {
+                  fontFamily: 'Arial',
+                  fontSize: '13px'
+                },
                  height: '50vh',
                  buttons: [
                    ...Jodit.defaultOptions.buttons,
