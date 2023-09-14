@@ -132,7 +132,10 @@ function registerTable({reload}) {
           <a-image height="50px" class="w-20 h-auto" :src="item.image_url"
                    :alt="item.name"/>
         </template>
-
+        <template #cell[title]="{item,column}">
+          <a class="cursor-pointer text-blue-100" :href="$url('post/'+item.slug)" target="_blank"
+          >{{item.title}}</a>
+        </template>
 
         <template #cell[status]="{item,column}">
           <a-switch @change="updateApi(item.id,{status:item.status})" checkedValue="publish" unCheckedValue="draft"

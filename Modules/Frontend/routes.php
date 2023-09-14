@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Middleware\AdminIsAuthenticated;
 use Modules\Frontend\Actions\Auth\LogoutAction;
 use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
@@ -14,7 +15,9 @@ use Modules\Frontend\Actions\TestFormAction;
 Route::get('/master-data/country/options', \Modules\Frontend\Actions\MasterData\GetCountryOptionsAction::class . '@handle');
 Route::get('/master-data/visa-processing-time/options', \Modules\Frontend\Actions\MasterData\GetProcessingTimeOptionsAction::class . '@handle');
 Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterData\GetOptionsAction::class . '@handle');
-
+Route::middleware([AdminIsAuthenticated::class])->group(function () {
+    Route::view('/preview', 'Frontend::preview')->name('preview');
+});
 Route::middleware(['splade'])->group(function () {
     Route::view('/',  'Frontend::home')->name('home');
     Route::view('/my-account',  'Frontend::my-account.dashboard')->name('my-account');

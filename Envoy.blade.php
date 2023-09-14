@@ -4,6 +4,5 @@
     cd /home/evisa
     git pull origin main
     sh build.sh
-    sh run.sh
-    docker-compose exec app php artisan migrate
+    docker-compose down -v && docker-compose up -d && docker-compose exec app php artisan migrate
 @endtask

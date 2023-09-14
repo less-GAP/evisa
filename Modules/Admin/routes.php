@@ -15,6 +15,7 @@ Route::get('/', function () {
 Route::post('auth/login', \Modules\Admin\Actions\Auth\PostLoginAction::class . '@handle');
 
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
+
     Route::prefix('/auth')->group(function () {
         Route::get('userInfo', GetUserInfoAction::class . '@handle');
     });

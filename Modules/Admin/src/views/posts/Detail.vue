@@ -24,7 +24,7 @@ import {notification} from 'ant-design-vue';
 
 import type {UploadProps} from 'ant-design-vue';
 
-import {InputTags, InputUploadGetPath, FilePicker} from "@/components";
+import {InputTags, InputUploadGetPath, FilePicker,InputCopy} from "@/components";
 import {createApi, newModel, formConfig, fetchDetailApi} from "./meta";
 import {back} from "./meta";
 
@@ -114,9 +114,18 @@ const closeDetail = function () {
               <a-col :span="24">
                 <a-form-item label="Title"
                              name="title"
-                             :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
+                             :rules="[{ required: true }]"
                 >
                   <a-input v-model:value="formState.title" placeholder="Title.."/>
+                </a-form-item>
+                <a-form-item label="Slug"
+                             name="slug"
+                >
+                  <a-input v-model:value="formState.slug" placeholder="Title.."/>
+                </a-form-item>
+                <a-form-item label="Url"
+                >
+                  <InputCopy :value="$url('post/'+formState.slug)" :readonly="true"></InputCopy>
                 </a-form-item>
               </a-col>
 

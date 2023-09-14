@@ -15,22 +15,22 @@ $segment = request()->segments()[count(request()->segments())-1];
                     <div class="flex-shrink-0 max-w-xl xl:w-80 xl:pe-8">
                         <ul class="text-base space-y-1 text-neutral-700 dark:text-neutral-400">
                             <li>
-                                <a class="px-6 py-3 {{$segment=='my-account'?'bg-neutral-100':''}} font-medium rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
-                                   href="/my-account"><span class="w-8 me-2 text-lg">⏳</span><span> Dash board</span></a>
+                                <Link class="px-6 py-3 {{$segment=='my-account'?'bg-neutral-100':''}} font-medium rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                                   href="/my-account"><span class="w-8 me-2 text-lg">⏳</span><span> Dash board</span></Link>
                             </li>
                             <li>
-                                <a class="px-6 py-3 font-medium {{$segment=='my-visa'?'bg-neutral-100':''}} rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
-                                   href="/my-account/my-visa"><span class="w-8 me-2 text-lg">📕</span><span> My Visas</span></a>
+                                <Link class="px-6 py-3 font-medium {{$segment=='my-visa'?'bg-neutral-100':''}} rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                                   href="/my-account/my-visa"><span class="w-8 me-2 text-lg">📕</span><span> My Visas</span></Link>
                             </li>
                             <li>
-                                <a class="px-6 py-3 font-medium  {{$segment=='edit-profile'?'bg-neutral-100':''}}  rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
-                                   href="/my-account/edit-profile"><span class="w-8 me-2 text-lg">🛠</span><span> Edit profile</span></a>
+                                <Link class="px-6 py-3 font-medium  {{$segment=='edit-profile'?'bg-neutral-100':''}}  rounded-full flex items-center hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                                   href="/my-account/edit-profile"><span class="w-8 me-2 text-lg">🛠</span><span> Edit profile</span></Link>
                             </li>
 
 
                             <li class=" border-t border-neutral-200 dark:border-neutral-700"></li>
-                            <li><a class="flex items-center px-6 py-3 font-medium text-red-500" href="/logout"><span
-                                        class="w-8 me-2 text-lg">💡</span>Sign out</a></li>
+                            <li><Link class="flex items-center px-6 py-3 font-medium text-red-500" href="/logout"><span
+                                        class="w-8 me-2 text-lg">💡</span>Sign out</Link></li>
                         </ul>
                     </div>
                     <div class="border-t border-neutral-500 dark:border-neutral-300 md:hidden"></div>
