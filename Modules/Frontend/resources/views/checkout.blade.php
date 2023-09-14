@@ -44,28 +44,28 @@
                         ${{$visaApplication->total_amount}}.00, including
                         ${{$visaApplication->vat_fee}} for VAT
                     </div>
-                    <div
-                        id="paypal-button-container"
-                        class="w-[400px] m-auto css-dev-only-do-not-override-eq3tly ant-result-success">
-                    </div>
+{{--                    <div--}}
+{{--                        id="paypal-button-container"--}}
+{{--                        class="w-[400px] m-auto css-dev-only-do-not-override-eq3tly ant-result-success">--}}
+{{--                    </div>--}}
 
                 </div>
 
             </div>
         </div>
     </section>
-    <x-splade-script>
-        // Loop over each funding source
-        paypal.getFundingSources().forEach(function (fundingSource) {
-        // Initialize the buttons
-        var button = paypal.Buttons({
-        fundingSource: fundingSource,
-        })
-        // Check if the button is eligible
-        if (button.isEligible()) {
-        // Render the standalone button for that funding source
-        button.render('#paypal-button-container')
-        }
-        })
-    </x-splade-script>
+{{--    <x-splade-script>--}}
+{{--        // Loop over each funding source--}}
+{{--        paypal.getFundingSources().forEach(function (fundingSource) {--}}
+{{--        // Initialize the buttons--}}
+{{--        var button = paypal.Buttons({--}}
+{{--        fundingSource: fundingSource,--}}
+{{--        })--}}
+{{--        // Check if the button is eligible--}}
+{{--        if (button.isEligible()) {--}}
+{{--        // Render the standalone button for that funding source--}}
+{{--        button.render('#paypal-button-container')--}}
+{{--        }--}}
+{{--        })--}}
+{{--    </x-splade-script>--}}
 </x-Frontend::layout.default>

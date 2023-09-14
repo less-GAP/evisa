@@ -125,7 +125,7 @@ function registerTable({reload}) {
           </a-button>
         </template>
         <template #cell[image]="{item,column}">
-          <a-image height="50px" class="w-20 h-auto" :src="item.image_url"
+          <a-image v-if="item.image" height="50px" class="w-20 h-auto" :src="item.image_url"
                    :alt="item.name"/>
         </template>
         <template #cell[title]="{item,column}">

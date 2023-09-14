@@ -12,17 +12,11 @@ class PostAction
     public function handle(Request $request)
     {
         $data = $request->all();
-        $insertData = [];
         foreach ($data as $name=>$value){
-            $insertData[]=[
-                'name'=>$name,
-                'created_at'=>Carbon::now(),
-                'updated_at'=>Carbon::now(),
-                'value'=>is_array($value)?json_encode($value):$value
-            ];
+            settings()->set($name,is_array($value)?json_encode($value):$value);
         }
         return [
-            'result'=>Config::upsert($insertData,['name']),
+            'result'=>true,
             'message'=>'Update configuration successfully!'
         ];
     }

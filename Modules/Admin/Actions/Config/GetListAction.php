@@ -11,9 +11,7 @@ class GetListAction
 {
     public function handle(Request $request)
     {
-
         $names = $request->input('names', []);
-        $query = Config::whereIn('name',  $names);
-        return $query->get()->pluck('value', 'name');
+        return settings()->get($names);
     }
 }

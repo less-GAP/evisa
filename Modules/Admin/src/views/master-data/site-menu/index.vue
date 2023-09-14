@@ -51,13 +51,6 @@ const emit = defineEmits(["close"]);
 const formState = reactive({
   data_key: listKey,
   data: [{
-    children: [
-      {},{}
-    ]
-  },{
-    children: [
-      {},{}
-    ]
   }]
 });
 const isShowModal = ref(false)

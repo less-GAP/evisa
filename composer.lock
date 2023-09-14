@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dabe79fa75156c0e8b34511a2390729c",
+    "content-hash": "bd96703d622f7ec93a26377938c48dd4",
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +60,56 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "damodar-bhattarai/settings",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/damodar-bhattarai/settings.git",
+                "reference": "c0ad5e4d9752527a6bf42f45efc4e6e2e5a66182"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/damodar-bhattarai/settings/zipball/c0ad5e4d9752527a6bf42f45efc4e6e2e5a66182",
+                "reference": "c0ad5e4d9752527a6bf42f45efc4e6e2e5a66182",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DamodarBhattarai\\Settings\\SettingsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Setting": "DamodarBhattarai\\Settings\\Facades\\Setting"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/settingsHelper.php"
+                ],
+                "psr-4": {
+                    "DamodarBhattarai\\Settings\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damodar Bhattarai",
+                    "email": "damodar.bhattarai.1999@gmail.com"
+                }
+            ],
+            "description": "Package to store and get general website settings on the fly.",
+            "support": {
+                "issues": "https://github.com/damodar-bhattarai/settings/issues",
+                "source": "https://github.com/damodar-bhattarai/settings/tree/v1.0.2"
+            },
+            "time": "2023-03-01T18:16:26+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
