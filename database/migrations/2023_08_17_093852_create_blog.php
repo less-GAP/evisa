@@ -33,8 +33,6 @@ return new class extends Migration {
             $table->string('class')->index();
             $table->string('class_key')->index();
             $table->string('name')->index();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
         });
     }
 

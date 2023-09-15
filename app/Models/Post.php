@@ -5,12 +5,14 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\CreatedUpdatedByAdmin;
 use App\Traits\HasSlug;
+use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use CreatedUpdatedByAdmin,HasSlug;
+    use CreatedUpdatedByAdmin, HasSlug , HasTags;
+
     public $slugBy = 'title';
     /**
      * The attributes that are mass assignable.
@@ -59,15 +61,20 @@ class Post extends Model
     ];
 
     protected $appends = [
-        'image_url'
+        'image_url',
+        'tags',
+        'url'
     ];
 
-
+    public function getUrlAttribute()
+    {
+        return route('post', $this->slug);
+    }
 
     public function getImageUrlAttribute()
     {
         if ($this->image != '') {
-            return url( $this->image, '', env('APP_ENV') == 'local' ? false : true);
+            return url($this->image, '', env('APP_ENV') == 'local' ? false : true);
         }
         return '';
     }

@@ -86,6 +86,7 @@ class EloquentRouter
             ->paginate($request->input('perPage', 15))
             ->appends($request->query());
     }
+
     public function getAll(Request $request)
     {
         return QueryBuilder::for($this->model)
@@ -94,7 +95,7 @@ class EloquentRouter
             ->allowedFilters($this->config['allowedFilters'] ?? [])
             ->allowedSorts($this->config['allowedSorts'] ?? 'id')
             ->groupBy(\DB::raw($this->config['groupBy'] ?? 'id'))
-            ->limit($request->input('limit',$this->config['limit']??100))
+            ->limit($request->input('limit', $this->config['limit'] ?? 100))
             ->get();
     }
 
@@ -121,20 +122,24 @@ class EloquentRouter
     {
         $model = new $this->model;
         $data = $request->all();
-        $result = $this->model::updateOrCreate([$model->getKeyName() => $request->input($model->getKeyName())], $data);
-
+        if ($request->input($model->getKeyName())) {
+            $result = $this->model::find($request->input($model->getKeyName()))->update($data);
+        } else {
+            $result = $this->model::create($data);
+        }
         return [
             'result' => $result,
             'message' => $request->input($model->getKeyName()) ? 'Update Successfully!' : 'Create Successfully!'
         ];
     }
+
     public function update(Request $request)
     {
         $data = $request->all();
         $result = $this->model::find($request->route('id'))->update($data);
         return [
             'result' => $result,
-            'message' =>'Update Successfully!'
+            'message' => 'Update Successfully!'
         ];
     }
 

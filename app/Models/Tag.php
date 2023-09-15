@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use CreatedUpdatedByAdmin,HasSlug;
-    public $slugBy = 'name';
+    use CreatedUpdatedByAdmin;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,11 +20,12 @@ class Tag extends Model
 
     protected $table = 'tags';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
-        'slug',
+        'class',
+        'class_key',
     ];
 
     /**
@@ -48,16 +48,6 @@ class Tag extends Model
     ];
 
     protected $appends = [
-        'image_url'
     ];
 
-
-
-    public function getImageUrlAttribute()
-    {
-        if ($this->image != '') {
-            return url( $this->image, '', env('APP_ENV') == 'local' ? false : true);
-        }
-        return '';
-    }
 }
