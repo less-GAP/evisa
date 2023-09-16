@@ -2,7 +2,7 @@
 $user = auth('frontend')->user();
 $visaApplications = $user->visa_applications;
 ?>
-<x-Frontend::layout.my-account>
+<x-front::layout.my-account>
     <div class="flex flex-col space-y-8">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full px-1 sm:px-6 lg:px-8">
@@ -72,4 +72,4 @@ $visaApplications = $user->visa_applications;
         </div>
 
     </div>
-</x-Frontend::layout.my-account>
+</x-front::layout.my-account>

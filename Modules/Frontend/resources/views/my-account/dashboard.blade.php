@@ -2,7 +2,7 @@
 $user = auth('frontend')->user();
 $currentLevel = $user->level;
 ?>
-<x-Frontend::layout.my-account>
+<x-front::layout.my-account>
     <div
         class="bg-white dark:bg-neutral-900 dark:border dark:border-neutral-800 shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6"><h3
@@ -44,4 +44,4 @@ $currentLevel = $user->level;
             </dl>
         </div>
     </div>
-</x-Frontend::layout.my-account>
+</x-front::layout.my-account>

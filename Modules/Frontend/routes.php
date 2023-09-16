@@ -16,23 +16,23 @@ Route::get('/master-data/country/options', \Modules\Frontend\Actions\MasterData\
 Route::get('/master-data/visa-processing-time/options', \Modules\Frontend\Actions\MasterData\GetProcessingTimeOptionsAction::class . '@handle');
 Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterData\GetOptionsAction::class . '@handle');
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
-    Route::view('/preview', 'Frontend::preview')->name('preview');
+    Route::view('/preview', 'front::preview')->name('preview');
 });
 Route::middleware(['splade'])->group(function () {
-    Route::view('/',  'Frontend::home')->name('home');
-    Route::view('/my-account',  'Frontend::my-account.dashboard')->name('my-account');
-    Route::view('/my-account/my-visa',  'Frontend::my-account.my-visa')->name('my-visa');
+    Route::view('/',  'front::home')->name('home');
+    Route::view('/my-account',  'front::my-account.dashboard')->name('my-account');
+    Route::view('/my-account/my-visa',  'front::my-account.my-visa')->name('my-visa');
     Route::post('/my-account/edit-profile',  PostEditProfileAction::class.'@handle')->name('post-edit-profile');
     Route::post('/my-account/password',  PostUpdatePasswordAction::class.'@handle')->name('post-edit-password');
-    Route::view('/my-account/edit-profile',  'Frontend::my-account.edit-profile')->name('edit-profile');
+    Route::view('/my-account/edit-profile',  'front::my-account.edit-profile')->name('edit-profile');
 
-    Route::view('/login',  'Frontend::login')->name('login');
-    Route::view('/signup',  'Frontend::signup')->name('signup');
+    Route::view('/login',  'front::login')->name('login');
+    Route::view('/signup',  'front::signup')->name('signup');
     Route::get('/logout',  LogoutAction::class.'@handle')->name('logout');
     Route::post('/login',  PostLoginAction::class.'@handle')->name('post-login');
     Route::post('/signup',  PostSignupAction::class.'@handle')->name('post-signup');
-    Route::view('/forgot',  'Frontend::forgot')->name('forgot');
-    Route::view('/apply',  'Frontend::apply')->name('apply');
+    Route::view('/forgot',  'front::forgot')->name('forgot');
+    Route::view('/apply',  'front::apply')->name('apply');
     Route::get('/checkout',  CheckoutVisaApplication::class.'@handle')->name('checkout');
     Route::post('/visa-application', PostVisaApplication::class.'@handle')->name('visa-application');
 
@@ -47,7 +47,7 @@ Route::middleware(['splade'])->group(function () {
 
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
-    Route::view('/post/{slug}',  'Frontend::post')->name('post');
-    Route::view('/{slug}',  'Frontend::page')->name('page');
+    Route::view('/post/{slug}',  'front::post')->name('post');
+    Route::view('/{slug}',  'front::page')->name('page');
 
 });

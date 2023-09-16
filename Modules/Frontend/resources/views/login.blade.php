@@ -1,4 +1,4 @@
-<x-Frontend::layout.default>
+<x-front::layout.default>
     <div class="container mx-auto">
         <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
             <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
@@ -35,4 +35,4 @@
             </x-splade-form>
         </div>
     </div>
-</x-Frontend::layout.default>
+</x-front::layout.default>

@@ -12,7 +12,7 @@ class TestFormAction
     public function handle(){
 
 
-        return view('Frontend::home', [
+        return view('front::home', [
         ]);
     }
 }

@@ -13,7 +13,7 @@ class CheckoutVisaApplication
     public function handle(Request $request)
     {
 
-        return view('Frontend::checkout', [
+        return view('front::checkout', [
             'visaApplication'=> $request->session()->get('currentVisa')
         ]);
     }

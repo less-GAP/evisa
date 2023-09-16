@@ -10,7 +10,7 @@ class ServiceProvider extends AbstractModuleProvider
 {
     protected $middleware = [];
     protected $routePrefix = '/';
-
+    protected $viewPrefix='front';
     /**
      * Register any application services.
      *
@@ -19,7 +19,7 @@ class ServiceProvider extends AbstractModuleProvider
     public function boot()
     {
         parent::boot();
-        Splade::setRootView('Frontend::root');
+        Splade::setRootView('front::root');
         Splade::defaultToast(function ($toast) {
             $toast->info()->centerTop()->autoDismiss(5);
         });

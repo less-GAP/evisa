@@ -1,4 +1,4 @@
-<x-Frontend::layout.default>
+<x-front::layout.default>
 
     <section class="py-10 md:pt-14 xl:pt-16 md:pb-20 xl:pb-32">
         <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
@@ -68,4 +68,4 @@
 {{--        }--}}
 {{--        })--}}
 {{--    </x-splade-script>--}}
-</x-Frontend::layout.default>
+</x-front::layout.default>

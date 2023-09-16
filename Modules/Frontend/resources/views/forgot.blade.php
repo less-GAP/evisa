@@ -1,4 +1,4 @@
-<x-Frontend::layout.default>
+<x-front::layout.default>
     <div class="container bg-gray-500 mx-auto">
         <div class="flex justify-center px-6 my-12">
             <!-- Row -->
@@ -58,4 +58,4 @@
             </div>
         </div>
     </div>
-</x-Frontend::layout.default>
+</x-front::layout.default>

@@ -17,7 +17,7 @@ class PackageDetailPage
                 Submit::make()->label('Create'),
             ]);
 
-        return view('Frontend::package_detail', [
+        return view('front::package_detail', [
             'form' => $form,
         ]);
     }

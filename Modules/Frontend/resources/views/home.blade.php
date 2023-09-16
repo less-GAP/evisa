@@ -1,4 +1,4 @@
-<x-Frontend::layout.default>
+<x-front::layout.default>
     <section class="relative banner">
         <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
             <img src="/static/images/home/banner.png"
@@ -291,8 +291,8 @@
             </div>
         </div>
     </section>
-{{--   <x-Frontend::posts title="News" tag="news">--}}
-{{--   </x-Frontend::posts>--}}
+   <x-front::posts title="News" tag="news">
+   </x-front::posts>
     <x-splade-script>
         function calculateFee(){
         const value = jQuery('.visa-processing-time:checked').data('value')
@@ -305,6 +305,6 @@
         calculateFee()
         })
     </x-splade-script>
-</x-Frontend::layout.default>
+</x-front::layout.default>
 
 

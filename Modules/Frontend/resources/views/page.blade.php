@@ -5,7 +5,7 @@ use ProtoneMedia\Splade\Facades\SEO;
 
 $page = Page::where('slug', request()->route('slug'))->first();
 if (!$page) {
-    echo view('Frontend::not-found');
+    echo view('front::not-found');
     return ;
 }
 $content = \Blade::render($page->content);
@@ -21,9 +21,9 @@ if ($page->image) {
 }
 ?>
 
-<x-Frontend::layout.default>
+<x-front::layout.default>
     {!! $content !!}
-</x-Frontend::layout.default>
+</x-front::layout.default>
 
 
 

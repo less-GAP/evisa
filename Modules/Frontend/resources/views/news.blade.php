@@ -13,9 +13,9 @@ SEO::openGraphUrl(url('news'));
 
 ?>
 
-<x-Frontend::layout.default>
+<x-front::layout.default>
     {!! $content !!}
-</x-Frontend::layout.default>
+</x-front::layout.default>
 
 
 

@@ -1,4 +1,4 @@
-<x-Frontend::layout.default>
+<x-front::layout.default>
     <div class="container m-auto relative pt-6 sm:pt-10 pb-16 lg:pt-20 lg:pb-28">
         <div
             class="p-5 mx-auto bg-white rounded-xl sm:rounded-3xl lg:rounded-[40px] shadow-lg sm:p-10 lg:p-16 dark:bg-neutral-900">
@@ -90,4 +90,4 @@
             </div>
         </div>
     </div>
-</x-Frontend::layout.default>
+</x-front::layout.default>

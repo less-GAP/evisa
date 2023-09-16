@@ -1,6 +1,6 @@
 
-<x-Frontend::layout.header>
-</x-Frontend::layout.header>
+<x-front::layout.header>
+</x-front::layout.header>
 <x-splade-flash>
     <p v-if="flash.has('message')" v-text="flash.message" />
 </x-splade-flash>
@@ -12,5 +12,5 @@
         </main><!-- #main -->
     </div><!-- #primary -->
 
-<x-Frontend::layout.footer>
-</x-Frontend::layout.footer>
+<x-front::layout.footer>
+</x-front::layout.footer>

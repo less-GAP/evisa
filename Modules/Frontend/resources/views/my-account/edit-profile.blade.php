@@ -2,7 +2,7 @@
 $user = auth('frontend')->user();
 $visaApplications = $user->visa_applications;
 ?>
-<x-Frontend::layout.my-account>
+<x-front::layout.my-account>
     <div class="rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
         <a-row :gutter="50">
             <a-col :lg="12" :span="24">
@@ -35,4 +35,4 @@ $visaApplications = $user->visa_applications;
             </a-col>
         </a-row>
     </div>
-</x-Frontend::layout.my-account>
+</x-front::layout.my-account>
