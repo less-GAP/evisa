@@ -23,15 +23,15 @@ $posts = $postQuery->orderBy('id', 'desc')->paginate(20);
                 @foreach($posts as $post)
                     <div class="col-span-12 sm:col-span-6 lg:col-span-4">
                         <div class="block">
-                            <div class="relative mb-[18px]"><a href="{{$post->url}}"><img
+                            <div class="relative mb-[18px]"><Link href="{{$post->url}}"><img
                                         class="rounded-lg w-full max-w-full"
                                         src="{{$post->image?$post->image_url:url('images/placeholder.jpg')}}"
-                                        alt="10 Content Proofreading Tips to Catch More Avoidable Goofs"></a>
+                                        alt="10 Content Proofreading Tips to Catch More Avoidable Goofs"></Link>
 
                             </div>
-                            <div class="block"><a href="{{$post->url}}"><p
+                            <div class="block"><Link href="{{$post->url}}"><p
                                         class="font-bold text-first-brand text-header-5 tracking-[-0.02em] transition-common hover:text-success">
-                                        {{$post->title}}</p></a>
+                                        {{$post->title}}</p></Link>
                                 <div class="font-medium text-gray-500 text-mini-desc mb-6 mt-[10px]">
                                     <span>{{$post->created_at->format('M d, Y')}}</span><span
                                         class="inline-block ml-5 pl-5 bg-no-repeat bg-[left_center] bg-[url('{{$post->image_url}}')]"></span>

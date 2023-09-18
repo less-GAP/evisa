@@ -25,7 +25,6 @@ $layout = '<x-front::layout.' . ($page->template ? $page->template : 'sidebar') 
 $content = \Blade::render($layout);
 ?>
 
-{!! $layout !!}
-
+{!! $content !!}
 
 
