@@ -309,9 +309,9 @@ SEO::openGraphUrl(url('/'));
     <x-splade-script>
         function calculateFee(){
         const value = jQuery('.visa-processing-time:checked').data('value')
-        jQuery('#lblTotal').text('US$'+jQuery('#applicant')*value['price_'+jQuery('#visatype').val()]+'.00');
+        jQuery('#lblTotal').text('US$'+jQuery('#applicant').val()*value['price_'+jQuery('#visatype').val()]+'.00');
         }
-        jQuery('#visatype').change(function(){
+        jQuery('#visatype,#applicant').change(function(){
         calculateFee()
         })
         jQuery('.visa-processing-time').click(function(){
