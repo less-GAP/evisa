@@ -2,7 +2,7 @@
 $default = [
     'number_of_visa'=>request()->input('applicant',1),
     'type_of_visa'=>request()->input('visatype',"1"),
-    'processing_time'=>request()->input('processing'],"2")
+    'processing_time'=>request()->input('processing',"2")
 ]
 ?>
 <x-front::layout.default>
