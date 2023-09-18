@@ -56,6 +56,7 @@ const props = defineProps({
 const emit = defineEmits(["close"]);
 const formState = reactive({
   content: '',
+  template: 'default',
   tags: []
 });
 const isShowModal = ref(false)
@@ -124,7 +125,7 @@ const closeDetail = function () {
                              name="title"
                              :rules="[{ required: true, message: 'Vui lòng nhập tên sản phẩm!' }]"
                 >
-                  <a-input @keypress="formState.slug=formState.title?.slugify()" v-model:value="formState.title"
+                  <a-input @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}" v-model:value="formState.title"
                            placeholder="Title.."/>
                 </a-form-item>
                 <a-form-item label="Slug"
@@ -189,7 +190,13 @@ const closeDetail = function () {
             <!--                             v-model:value="formState.images"></InputUpload>-->
             <!--              </a-form-item>-->
           </a-card>
+          <a-card class="mt-5" title="Template">
+            <a-select v-model:value="formState.template">
+              <a-select-option value="default">Full Page</a-select-option>
+              <a-select-option value="sidebar">Sidebar Widget</a-select-option>
+            </a-select>
 
+          </a-card>
         </a-col>
       </a-row>
     </a-form>

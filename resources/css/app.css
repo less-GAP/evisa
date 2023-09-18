@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.container{
+    margin: 0 auto
+}
 .ant-btn-primary {
     color: #fff;
     background-color: #1677ff;

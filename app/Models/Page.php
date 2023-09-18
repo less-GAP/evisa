@@ -34,6 +34,7 @@ class Page extends Model
         'data_source_id',
         'source_url',
         'excerpt',
+        'template',
         'content',
         'country',
         'visit_count'

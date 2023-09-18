@@ -1,3 +1,16 @@
+<?php
+
+use ProtoneMedia\Splade\Facades\SEO;
+
+SEO::title(settings('site_title', ''))
+    ->description(settings('site_description', ''))
+    ->keywords(settings('site_keywords', ''));
+SEO::openGraphType('WebPage');
+SEO::openGraphSiteName(settings('site_title', ''));
+SEO::openGraphTitle(settings('site_title', ''));
+SEO::openGraphUrl(url('/'));
+
+?>
 <x-front::layout.default>
     <section class="relative banner">
         <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
@@ -291,8 +304,8 @@
             </div>
         </div>
     </section>
-   <x-front::posts title="News" tag="news">
-   </x-front::posts>
+    <x-front::posts title="News" tag="news">
+    </x-front::posts>
     <x-splade-script>
         function calculateFee(){
         const value = jQuery('.visa-processing-time:checked').data('value')
