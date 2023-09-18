@@ -43,7 +43,11 @@ const formState = reactive(props.value || {
     applicants: [{}, {}, {}, {}, {}],
 
 });
+console.log(props.value)
 
+if (props.value) {
+    Object.assign(formState, props.value)
+}
 const formConfig = reactive({
     "validateTrigger": ["submit", "update:value"],
     "label-align": "top",
@@ -102,7 +106,7 @@ function cutOffTime() {
 
 function calculateDueDate() {
     const procesingTime = getSelectedProcessingTime();
-    if (!procesingTime && !Array.isArray(procesingTime.cut_off)) {
+    if (!procesingTime || !Array.isArray(procesingTime.cut_off)) {
         return;
     }
     let dueDate = dayjs().tz(tz).addBusinessHours(procesingTime.working_hours);

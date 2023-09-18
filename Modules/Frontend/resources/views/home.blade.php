@@ -19,7 +19,7 @@ SEO::openGraphUrl(url('/'));
         </div>
         <div class="container relative z-20 px-4 py-20 mx-auto content lg:py-32 xl:pt-32 xl:pb-56">
             <!-- <legend class="text-white text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] 2xl:text-[100px] uppercase font-black italic leading-none">Make your dream</br>vacation happen!</legend> -->
-            <form method="post" action="{{ route('apply') }}" class="2xl:text-lg">
+            <form method="get" action="{{ route('apply') }}" class="2xl:text-lg">
                 <div class="flex flex-wrap -mx-4">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
                         <div class="has-feedback">
@@ -98,9 +98,9 @@ SEO::openGraphUrl(url('/'));
                         </div>
                         <div class="mt-2 text-base">*This fee excludes US $25 for the government e-visa fees.
                         </div>
-                        <a href="/apply"
+                        <button type="submit" href="/apply"
                            class="flex items-center justify-center p-4 mt-5 text-2xl text-white bg-black 2xl:text-3xl lg:mt-10">Apply
-                            Now</a>
+                            Now</button>
                     </div>
                 </div>
             </form>
