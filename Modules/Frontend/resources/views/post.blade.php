@@ -8,7 +8,6 @@ if (!$page) {
     echo view('front::not-found');
     return;
 }
-$content = \Blade::render($page->content);
 SEO::title($page->title)
     ->description($page->excerpt ?? '')
     ->keywords($page->keywords ?? '');
