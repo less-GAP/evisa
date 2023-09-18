@@ -25,7 +25,7 @@ $posts = $postQuery->orderBy('id', 'desc')->paginate(20);
                         <div class="block">
                             <div class="relative mb-[18px]"><a href="{{$post->url}}"><img
                                         class="rounded-lg w-full max-w-full"
-                                        src="{{$post->image_url}}"
+                                        src="{{$post->image?$post->image_url:url('images/placeholder.jpg')}}"
                                         alt="10 Content Proofreading Tips to Catch More Avoidable Goofs"></a>
 
                             </div>
