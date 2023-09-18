@@ -1,16 +1,16 @@
-
 <x-front::layout.header>
 </x-front::layout.header>
 <x-splade-flash>
-    <p v-if="flash.has('message')" v-text="flash.message" />
+    <p v-if="flash.has('message')" v-text="flash.message"/>
 </x-splade-flash>
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main">
-
+<div id="primary" class="content-area">
+    <main id="main" class="site-main">
+        <div class="container">
             {{ $slot }}
+        </div>
 
-        </main><!-- #main -->
-    </div><!-- #primary -->
+    </main><!-- #main -->
+</div><!-- #primary -->
 
 <x-front::layout.footer>
 </x-front::layout.footer>
