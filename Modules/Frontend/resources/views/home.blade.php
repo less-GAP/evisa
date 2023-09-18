@@ -94,7 +94,7 @@ SEO::openGraphUrl(url('/'));
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 lg:mt-0">
                         <div class="font-semibold uppercase">Service fee:</div>
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span
-                                id="lblTotal" class="">US$98.00</span>
+                                id="lblTotal" class="">--</span>
                         </div>
                         <div class="mt-2 text-base">*This fee excludes US $25 for the government e-visa fees.
                         </div>
@@ -317,6 +317,8 @@ SEO::openGraphUrl(url('/'));
         jQuery('.visa-processing-time').click(function(){
         calculateFee()
         })
+        calculateFee()
+
     </x-splade-script>
 </x-front::layout.default>
 
