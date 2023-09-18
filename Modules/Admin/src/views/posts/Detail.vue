@@ -24,7 +24,7 @@ import {notification} from 'ant-design-vue';
 
 import type {UploadProps} from 'ant-design-vue';
 
-import {InputTags, InputUploadGetPath, FilePicker,InputCopy} from "@/components";
+import {InputTags,InputCategories, InputUploadGetPath, FilePicker,InputCopy} from "@/components";
 import {createApi, newModel, formConfig, fetchDetailApi} from "./meta";
 import {back} from "./meta";
 
@@ -86,7 +86,7 @@ const closeDetail = function () {
 </script>
 
 <template>
-  <a-drawer :closable="false" bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
+  <a-drawer append-to-body :closable="false" bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
             @close="closeDetail" :open="visible"
             width="90vw">
     <a-form v-if="formState" layout="vertical"
@@ -177,7 +177,13 @@ const closeDetail = function () {
             <!--                             v-model:value="formState.images"></InputUpload>-->
             <!--              </a-form-item>-->
           </a-card>
-          <a-card class="mt-5">
+          <a-card class="!mt-5">
+            <a-form-item style="width:100%" label="Categories">
+              <InputCategories v-model:value="formState.categories"></InputCategories>
+            </a-form-item>
+
+          </a-card>
+          <a-card class="!mt-5">
             <a-form-item style="width:100%" label="Tags">
               <InputTags v-model:value="formState.tags"></InputTags>
             </a-form-item>

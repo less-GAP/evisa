@@ -11,13 +11,14 @@ export default defineComponent({
   },
   emits: ['change', 'update:value'],
   setup(props, {emit, attrs}) {
+    const form = reactive({})
     const state = reactive({
       tags: [...props.value],
       inputVisible: false,
       fetching: false,
       inputValue: '',
     });
-    watch(()=>props.value,function(){
+    watch(() => props.value, function () {
       state.tags = props.value
     })
     const options = ref([]);
@@ -25,22 +26,33 @@ export default defineComponent({
     const addItem = () => {
     };
     const fetch = function () {
-      Api.get('taxonomy/all?filter[type]=tag').then(rs => {
+      Api.get('taxonomy/all?filter[type]=category').then(rs => {
         options.value = rs.data
       })
     }
+
+    function handleChange(value) {
+      emit('change', state.tags)
+      emit('update:value', state.tags)
+    }
+
     fetch();
     return {
+      handleChange,
+      addCategory() {
+        Api.post('taxonomy', {name: form.name, type: 'category'}).then(rs => {
+          fetch();
+          state.tags.push(rs.data.name)
+          handleChange();
+        })
+      },
+      form,
       fetch,
       addItem,
       options,
       inputRef,
       state,
-      handleChange(value) {
-        console.log(444,value)
-        emit('change', state.tags)
-        emit('update:value', state.tags)
-      },
+
       handleClose(removedTag) {
         const tags = state.tags.filter(tag => tag !== removedTag);
         state.tags = tags;
@@ -81,19 +93,22 @@ export default defineComponent({
 </script>
 
 <template>
-  <a-select
-    @change="handleChange"
-    v-model:value="state.tags"
-    mode="tags"
-    :field-names="{ label: 'name', value: 'name' }"
-    :token-separators="[',']"
-    placeholder="Select tags"
-    style="width: 100%;height:100px"
-    :filter-option="false"
-    :not-found-content="state.fetching ? undefined : null"
-    :options="options"
-  >
+  <a-checkbox-group @change="handleChange" class="!mt-5" v-model:value="state.tags">
+    <template v-for="option in options">
+      <p class="!w-full">
+        <a-checkbox :value="option.name">{{ option.name }}</a-checkbox>
+      </p>
+    </template>
+  </a-checkbox-group>
+  <a-divider />
+  <a-form class="!mt-5" :model="form" validate-trigger="['submit']" @finish="addCategory()" layout="inline">
+    <a-form-item  name="name" :rules="[{required:true}]">
+      <a-input v-model:value="form.name"></a-input>
+    </a-form-item>
+    <a-form-item>
 
-  </a-select>
+      <a-button html-type="submit">Add</a-button>
+    </a-form-item>
+  </a-form>
 
 </template>

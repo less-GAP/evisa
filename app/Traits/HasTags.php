@@ -5,13 +5,14 @@ namespace App\Traits;
 
 
 use App\Models\Tag;
+use App\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Builder;
 
 trait HasTags
 {
     public function tag_models()
     {
-        return $this->hasMany(Tag::class, 'class_key')->where('class', static::class);
+        return $this->hasMany(Taxonomy::class, 'class_key')->where('type','tag')->where('class', static::class);
     }
 
     public function getTagsAttribute()
@@ -23,8 +24,9 @@ trait HasTags
     {
         $this->tag_models()->delete();
         foreach ($tags as $tag) {
-            Tag::create([
+            Taxonomy::create([
                 'name' => \Str::slug($tag)
+                , 'type' => 'tag'
                 , 'class_key' => $this->getKey()
                 , 'class' => static::class
             ]);

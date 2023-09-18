@@ -26,7 +26,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //        Route::delete('{id}', DeleteUserAction::class . '@handle');
 //    });
     EloquentRouter::prefix('user')
-        ->routes(function(){
+        ->routes(function () {
             Route::get('/options', \Modules\Admin\Actions\User\GetUserOptionsAction::class . '@handle');
         })
         ->handle(\App\Models\User::class,
@@ -35,7 +35,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             ]
         );
     EloquentRouter::prefix('customer')
-        ->routes(function(){
+        ->routes(function () {
         })
         ->handle(\App\Models\VisaUser::class,
             [
@@ -43,7 +43,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             ]
         );
     EloquentRouter::prefix('visa-application')
-        ->routes(function(){
+        ->routes(function () {
             Route::post('/', \Modules\Admin\Actions\VisaApplication\PostIndexAction::class . '@handle');
             Route::post('/status', \Modules\Admin\Actions\VisaApplication\PostStatusAction::class . '@handle');
             Route::post('/assign', \Modules\Admin\Actions\VisaApplication\PostAssignAction::class . '@handle');
@@ -52,10 +52,10 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         })
         ->handle(\App\Models\VisaApplication::class,
             [
-                'allowedIncludes' => ['applicants','history','assignees','user'],
+                'allowedIncludes' => ['applicants', 'history', 'assignees', 'user'],
                 'allowedFilters' => [
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')
-                    ,AllowedFilter::custom('status', new \App\Builder\Filters\SearchLikeMultipleField, 'status')
+                    , AllowedFilter::custom('status', new \App\Builder\Filters\SearchLikeMultipleField, 'status')
                 ]
             ]
         );
@@ -65,7 +65,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //                'allowedIncludes' => ['tags'],
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'title')]
             ]
-        )->routes(function(){
+        )->routes(function () {
 
         });
     EloquentRouter::prefix('page')
@@ -74,7 +74,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 //                'allowedIncludes' => ['tags'],
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'title')]
             ]
-        )->routes(function(){
+        )->routes(function () {
 
         });
     EloquentRouter::prefix('country')
@@ -86,14 +86,14 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
 
                 ]
             ]
-        )->routes(function(){
+        )->routes(function () {
 
         });
     EloquentRouter::prefix('master-data')
         ->handle(\App\Models\MasterData::class,
             [
             ]
-        )->routes(function(){
+        )->routes(function () {
             Route::get('{listKey}/data', \Modules\Admin\Actions\MasterData\GetOptionsAction::class . '@handle');
         });
     EloquentRouter::prefix('visa-customer-level')
@@ -103,16 +103,20 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name,code')
                 ]
             ]
-        )->routes(function(){
+        )->routes(function () {
 
         });
 
-    EloquentRouter::prefix('tag')
-        ->handle(\App\Models\Tag::class,
+    EloquentRouter::prefix('taxonomy')
+        ->handle(\App\Models\Taxonomy::class,
             [
-                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')]
+                'allowedFilters' => [
+                    AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')
+                    ,AllowedFilter::exact('type')
+                ]
+
             ]
-        )->routes(function(){
+        )->routes(function () {
 
         });
     EloquentRouter::prefix('file')
@@ -120,7 +124,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             [
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'file_name')]
             ]
-        )->routes(function(){
+        )->routes(function () {
             Route::post('/Upload', \Modules\Admin\Actions\File\PostUploadAction::class . '@handle');
             Route::post('/Info', \Modules\Admin\Actions\File\PostInfoAction::class . '@handle');
         });
@@ -193,7 +197,6 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::post('activeList', \Modules\Admin\Actions\CustomerGroup\PostActiveListAction::class . '@handle');
         Route::delete('{id}', \Modules\Admin\Actions\CustomerGroup\DeleteAction::class . '@handle');
     });
-
 
 
     Route::prefix('/provinces')->group(function () {

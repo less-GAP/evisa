@@ -68,7 +68,9 @@ import RemoteSelect from "./RemoteSelect.vue"
 import InputTags from "./InputTags.vue"
 import DataListEdit from "./DataListEdit.vue"
 import ApiData from "./ApiData.vue"
+import InputCategories from "./InputCategories.vue"
 export {
+  InputCategories,
   ApiData,
   DataListEdit,
   InputTags,

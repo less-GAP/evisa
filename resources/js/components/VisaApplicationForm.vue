@@ -36,14 +36,13 @@ const today = ref(dayjs().tz(tz))
 setInterval(() => {
     today.value = dayjs().tz(tz)
 }, 5000)
-const formState = reactive(props.value || {
+const formState = reactive( {
     number_of_visa: 1,
     type_of_visa: "1",
     processing_time: "2",
     applicants: [{}, {}, {}, {}, {}],
 
 });
-console.log(props.value)
 
 if (props.value) {
     Object.assign(formState, props.value)

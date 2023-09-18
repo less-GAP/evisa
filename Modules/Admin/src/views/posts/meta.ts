@@ -52,7 +52,8 @@ const columns = [
 const newModel = {
   content: '',
   type: 'post',
-  tags: []
+  tags: [],
+  categories: []
 }
 
 const {

@@ -7,7 +7,7 @@ import router from "@/router";
 import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {UseDataTable} from "@/utils/UseDataTable";
 
-const prefix = router.currentRoute.value.meta.api ? router.currentRoute.value.meta.api : router.currentRoute.value.path
+const prefix = 'post'
 const {
   fetchListApi,
   createApi,

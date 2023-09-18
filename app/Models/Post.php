@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\CreatedUpdatedByAdmin;
+use App\Traits\HasCategories;
 use App\Traits\HasSlug;
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use CreatedUpdatedByAdmin, HasSlug , HasTags;
+    use CreatedUpdatedByAdmin, HasSlug , HasTags ,HasCategories;
 
     public $slugBy = 'title';
     /**
@@ -63,6 +64,7 @@ class Post extends Model
     protected $appends = [
         'image_url',
         'tags',
+        'categories',
         'url'
     ];
 
