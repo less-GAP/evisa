@@ -18,9 +18,9 @@ SEO::openGraphUrl(url($page->slug));
 if ($page->image) {
     SEO::openGraphImage(url($page->image));
 }
-$layout = '<x-front::layout.' . ($page->template ? $page->template : 'default') . '>
+$layout = '<x-front::layout.' . ($page->template ? $page->template : 'sidebar') . '>
 ' . $page->content . '
-</x-front::layout.' . ($page->template ? $page->template : 'default') . '>';
+</x-front::layout.' . ($page->template ? $page->template : 'sidebar') . '>';
 
 $content = \Blade::render($layout);
 ?>
