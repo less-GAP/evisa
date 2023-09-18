@@ -17,13 +17,13 @@ return new class extends Migration {
             $table->string('type')->index();
         });
         Schema::create('taxonomy_model', function (Blueprint $table) {
-            $table->id();
             $table->integer('taxonomy_id')->index();
             $table->string('class')->index();
+            $table->string('taxonomy_type')->index();
             $table->string('class_key')->index();
         });
         Schema::table('taxonomy_model', function (Blueprint $table) {
-            $table->unique(['taxonomy_id', 'class', 'class_key']);
+            $table->unique(['taxonomy_id', 'class', 'class_key','taxonomy_type']);
         });
     }
 

@@ -12,25 +12,24 @@ trait HasTags
 {
     public function tag_models()
     {
-        return $this->hasMany(Taxonomy::class, 'class_key')->where('type','tag')->where('class', static::class);
+        return $this->belongsToMany(Taxonomy::class, 'taxonomy_model', 'class_key', 'taxonomy_id')->where('taxonomy_type', 'tag')->where('class', static::class);
     }
 
     public function getTagsAttribute()
     {
-        return $this->tag_models()->pluck('name');
+        return $this->tag_models()->pluck('id');
     }
 
     public function syncTags($tags)
     {
-        $this->tag_models()->delete();
-        foreach ($tags as $tag) {
-            Taxonomy::create([
-                'name' => \Str::slug($tag)
-                , 'type' => 'tag'
-                , 'class_key' => $this->getKey()
-                , 'class' => static::class
-            ]);
+        $data = [];
+        foreach ($tags as $id){
+            $data[$id] = [
+                'class' => static::class
+                ,'taxonomy_type' => 'tag'
+            ];
         }
+        $this->tag_models()->where('taxonomy_type', 'tag')->sync($data);
 
     }
 

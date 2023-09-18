@@ -29,17 +29,25 @@ export default defineComponent({
         options.value = rs.data
       })
     }
+    const form = reactive({})
+    function handleChange(value) {
+      emit('change', state.tags)
+      emit('update:value', state.tags)
+    }
+
     fetch();
     return {
+      form,
       fetch,
       addItem,
       options,
       inputRef,
       state,
-      handleChange(value) {
-        console.log(444,value)
-        emit('change', state.tags)
-        emit('update:value', state.tags)
+      handleChange,
+      addCategory() {
+        Api.post('taxonomy', {name: form.name, type: 'tag'}).then(rs => {
+          fetch();
+        })
       },
       handleClose(removedTag) {
         const tags = state.tags.filter(tag => tag !== removedTag);
@@ -82,18 +90,28 @@ export default defineComponent({
 
 <template>
   <a-select
+    mode="multiple"
     @change="handleChange"
     v-model:value="state.tags"
-    mode="tags"
-    :field-names="{ label: 'name', value: 'name' }"
+    :field-names="{ label: 'name', value: 'id' }"
     :token-separators="[',']"
     placeholder="Select tags"
-    style="width: 100%;height:100px"
+    style="width: 100%;"
     :filter-option="false"
     :not-found-content="state.fetching ? undefined : null"
     :options="options"
   >
 
   </a-select>
+  <a-divider />
 
+  <a-form class="!mt-5" :model="form" validate-trigger="['submit']" @finish="addCategory()" layout="inline">
+    <a-form-item  name="name" :rules="[{required:true}]">
+      <a-input v-model:value="form.name"></a-input>
+    </a-form-item>
+    <a-form-item>
+
+      <a-button html-type="submit">Add</a-button>
+    </a-form-item>
+  </a-form>
 </template>

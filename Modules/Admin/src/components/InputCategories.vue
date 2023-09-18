@@ -42,8 +42,6 @@ export default defineComponent({
       addCategory() {
         Api.post('taxonomy', {name: form.name, type: 'category'}).then(rs => {
           fetch();
-          state.tags.push(rs.data.name)
-          handleChange();
         })
       },
       form,
@@ -96,7 +94,7 @@ export default defineComponent({
   <a-checkbox-group @change="handleChange" class="!mt-5" v-model:value="state.tags">
     <template v-for="option in options">
       <p class="!w-full">
-        <a-checkbox :value="option.name">{{ option.name }}</a-checkbox>
+        <a-checkbox :value="option.id">{{ option.name }}</a-checkbox>
       </p>
     </template>
   </a-checkbox-group>
