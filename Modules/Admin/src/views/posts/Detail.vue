@@ -116,7 +116,8 @@ const closeDetail = function () {
                              name="title"
                              :rules="[{ required: true }]"
                 >
-                  <a-input v-model:value="formState.title" placeholder="Title.."/>
+                  <a-input @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}" v-model:value="formState.title"
+                           placeholder="Title.."/>
                 </a-form-item>
                 <a-form-item label="Slug"
                              name="slug"
