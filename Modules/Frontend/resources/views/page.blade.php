@@ -26,9 +26,7 @@ $content = \Blade::render($page->content);
 
 <x-front::layout.sidebar>
 
-    <div class="prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert">
         {!! $content !!}
-    </div>
 </x-front::layout.sidebar>
 
 

@@ -1,12 +1,17 @@
 <template>
   <a-config-provider v-bind="$style.antdv" :getPopupContainer="getPopupContainer">
-    <c-reset />
+    <c-reset/>
     <a-style-provider hash-priority="high">
-      <router-view/>
+      <router-view v-slot="{ Component }">
+        <transition>
+          <keep-alive :max="5">
+            <component :is="Component" />
+          </keep-alive>
+        </transition>
+      </router-view>
     </a-style-provider>
   </a-config-provider>
 </template>
-
 <script>
 
 export default {

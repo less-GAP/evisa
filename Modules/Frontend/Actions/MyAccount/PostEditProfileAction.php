@@ -14,11 +14,11 @@ class PostEditProfileAction
         $user = frontend_user();
         $data = $request->only([
             'full_name'
-            , 'phone'
+            , 'phone'r
             , 'email'
         ]);
          $user->fill($data)->save();
-        Toast::message('Update Infomartion successfully!')
+        Toast::message('Update Information successfully!')
             ->success()
             ->centerTop();
         return redirect('/my-account/edit-profile');
