@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait HasTags
 {
+
     public function tag_models()
     {
         return $this->belongsToMany(Taxonomy::class, 'taxonomy_model', 'class_key', 'taxonomy_id')->where('taxonomy_type', 'tag')->where('class', static::class);
@@ -22,14 +23,22 @@ trait HasTags
 
     public function syncTags($tags)
     {
+        $type = 'tag';
         $data = [];
-        foreach ($tags as $id){
-            $data[$id] = [
+        foreach ($tags as $id) {
+            $data[] = [
                 'class' => static::class
-                ,'taxonomy_type' => 'tag'
+                , 'taxonomy_type' => $type
+                , 'taxonomy_id' => $id
+                , 'class_key' => $this->getKey()
             ];
         }
-        $this->tag_models()->where('taxonomy_type', 'tag')->sync($data);
+        \DB::table('taxonomy_model')->where([
+            'class' => static::class
+            , 'taxonomy_type' => $type
+            , 'class_key' => $this->getKey()
+        ])->whereNotIn('taxonomy_id',$tags)->delete();
+        \DB::table('taxonomy_model')->insertOrIgnore($data);
 
     }
 
