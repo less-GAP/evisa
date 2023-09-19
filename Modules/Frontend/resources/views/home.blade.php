@@ -304,8 +304,7 @@ SEO::openGraphUrl(url('/'));
             </div>
         </div>
     </section>
-    <x-front::posts title="News" tag="news">
-    </x-front::posts>
+
     <x-splade-script>
         function calculateFee(){
         const value = jQuery('.visa-processing-time:checked').data('value')
