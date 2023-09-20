@@ -55,10 +55,10 @@
     @finish="submit"
   >
     <a-form-item name="site_title" label="Site title" :rules="[{ required: true }]">
-      <a-input autocomplete="off" v-model:value="formState.site_title"/>
+      <a-input :showCount="true" maxlength="55"  autocomplete="off" v-model:value="formState.site_title"/>
     </a-form-item>
     <a-form-item name="site_description" label="Site description" :rules="[{ required: true }]">
-      <a-textarea autocomplete="off" v-model:value="formState.site_description"/>
+      <a-textarea :showCount="true" maxlength="160"  autocomplete="off" v-model:value="formState.site_description"/>
     </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
       <InputUploadGetPath width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
