@@ -40,7 +40,7 @@ const formState = reactive( {
     number_of_visa: 1,
     type_of_visa: "1",
     processing_time: "2",
-    applicants: [{}, {}, {}, {}, {}],
+    applicants: [{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {}],
 
 });
 
@@ -457,7 +457,7 @@ const currentTime = useDateFormat(useNow(), formatter)
                 <div class="flex flex-wrap -mx-4" v-if="current == 1">
                     <div class="w-full px-4 md:w-1/2 lg:w-2/3">
                         <a-tabs v-model:activeKey="activeKey">
-                            <a-tab-pane v-for="number of formState.number_of_visa" :key="number"
+                            <a-tab-pane v-for="number of parseInt(formState.number_of_visa)" :key="number"
                                         :tab="'Applicant ' + number">
                                 <ApplicantForm prefix="applicants" :index="number-1"
                                                v-model:value="formState.applicants[number - 1]"></ApplicantForm>
@@ -465,13 +465,13 @@ const currentTime = useDateFormat(useNow(), formatter)
                         </a-tabs>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                        <a-form-item prop="contact_name" label="Contact Name" :rules="[{ required: true }]">
+                        <a-form-item name="contact_name" label="Contact Name" :rules="[{ required: true }]">
                             <a-input v-model:value="formState.contact_name"/>
                         </a-form-item>
-                        <a-form-item prop="contact_email" label="Contact Email" :rules="[{ required: true }]">
+                        <a-form-item name="contact_email" label="Contact Email" :rules="[{ required: true }]">
                             <a-input v-model:value="formState.contact_email"/>
                         </a-form-item>
-                        <a-form-item prop="contact_phone" label="Contact Phone" :rules="[{ required: true }]">
+                        <a-form-item name="contact_phone" label="Contact Phone" :rules="[{ required: true }]">
                             <a-input v-model:value="formState.contact_phone"/>
                         </a-form-item>
                         <div class="font-semibold uppercase">Service fee:</div>
