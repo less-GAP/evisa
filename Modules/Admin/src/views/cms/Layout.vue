@@ -32,6 +32,12 @@ const items = ref([
       icon: () => h(AppstoreOutlined),
       href: '/master-data/type-of-visa',
       label: 'Type of visa',
+    },
+    {
+      key: 'site-menu',
+      icon: () => h(AppstoreOutlined),
+      href: '/master-data/site-menu',
+      label: 'Site menu',
     }
 
   ])

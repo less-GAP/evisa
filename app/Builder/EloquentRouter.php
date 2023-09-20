@@ -122,8 +122,8 @@ class EloquentRouter
     {
         $model = new $this->model;
         $data = $request->all();
-        if ($request->input($model->getKeyName())) {
-            $result = $this->model::find($request->input($model->getKeyName()))->update($data);
+        if ($request->input($model->getKeyName()) && $modelDb = $this->model::where($model->getKeyName(), $request->input($model->getKeyName()))->first()) {
+            $result = $modelDb->update($data);
         } else {
             $result = $this->model::create($data);
         }

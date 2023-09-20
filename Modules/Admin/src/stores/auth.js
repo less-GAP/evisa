@@ -12,10 +12,41 @@ export const useAuthStore = defineStore("auth", {
     setUser(user) {
       this.user = user
     },
+    oneCharName(isFull) {
+      const user = this.user
+
+      if (user && user.full_name) {
+        if(isFull){
+          return user.full_name;
+        }else{
+          const fullNameParts = user.full_name.split(" ");
+          const lastWord = fullNameParts[fullNameParts.length - 1];
+          if (lastWord.length > 0) {
+            return lastWord.charAt(0);
+          }
+        }
+      }
+      return "N/A";
+    },
+    hasPermission(permission) {
+      return true;
+      // const user = this.user
+      // if (!user && permission) {
+      //   return false;
+      // }
+      // if (!permission || user?.app_permissions?.includes('*')) {
+      //   return true
+      // }
+      //
+      // const checkArr = permission.split('.')
+      // if (checkArr.length > 1) {
+      //   return user.app_permissions.includes('*') || user.app_permissions.includes(permission) || user.app_permissions.includes(checkArr[0] + '.*');
+      // }
+      // return user.app_permissions.includes(permission+'.*') || user.app_permissions.includes(permission);
+    },
     logout() {
       this.$reset()
       router.replace('login')
-
     },
     isLogin() {
       return this.user != null

@@ -17,9 +17,10 @@ import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import DataListEdit from "@/components/DataListEdit.vue";
 import {Switch} from "ant-design-vue";
 import Api from "@/utils/Api";
+import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 const prefix = 'master-data'
-const listKey = 'site-menu'
+const listKey = ref(router.currentRoute.value.params.id)
 const {
   fetchListApi,
   createApi,
@@ -49,16 +50,15 @@ const props = defineProps({
 })
 const emit = defineEmits(["close"]);
 const formState = reactive({
-  data_key: listKey,
-  data: [{
-  }]
+  data_key: listKey.value,
+  data: [{}]
 });
 const isShowModal = ref(false)
 
 const fetch = async function () {
   loading.value = true;
   loading.value = true
-  const value = await fetchDetailApi(listKey)
+  const value = await fetchDetailApi(listKey.value)
   if (value.data) {
     Object.assign(formState, value.data)
   }
@@ -111,22 +111,26 @@ const MIN = 8, MAX = 19
 </script>
 
 <template>
-  <DataListEdit :nested="1" :columns="columns" v-model:value="formState.data">
-    <template #action>
-      <a-button @click="submit" class="float-right" type="primary">Save</a-button>
-    </template>
-    <template #cell[cut_off]="{item}">
-      <a-select
-        v-model:value="item.cut_off"
-        mode="multiple"
-        style="width: 100%"
-        placeholder="Please select"
-        :options="timeOptions"
-        @change="handleChange"
-      ></a-select>
-    </template>
-  </DataListEdit>
-
+  <LayoutAuthenticated>
+    <h1 v-if="listKey=='site-menu'">Main menu</h1>
+    <h1 v-if="listKey=='footer-menu'">Footer menu</h1>
+    <a-divider></a-divider>
+    <DataListEdit :nested="1" :columns="columns" v-model:value="formState.data">
+      <template #action>
+        <a-button @click="submit" class="float-right" type="primary">Save</a-button>
+      </template>
+      <template #cell[cut_off]="{item}">
+        <a-select
+          v-model:value="item.cut_off"
+          mode="multiple"
+          style="width: 100%"
+          placeholder="Please select"
+          :options="timeOptions"
+          @change="handleChange"
+        ></a-select>
+      </template>
+    </DataListEdit>
+  </LayoutAuthenticated>
 </template>
 
 <style>

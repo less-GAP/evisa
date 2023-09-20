@@ -33,14 +33,7 @@ export default [{
       name: "data-country",
       component: () => import("./country/index.vue"),
     },
-    {
-      meta: {
-        title: "Site Menu",
-      },
-      path: "/master-data/site-menu",
-      name: "site-menu",
-      component: () => import("./site-menu/index.vue"),
-    },
+
     {
       meta: {
         title: "Processing Time",

@@ -1,3 +1,6 @@
+<?php
+$footerMenus = master_data('footer-menu')->toArray();
+?>
 <footer class="main-footer relative">
     <div class="footer-top lg:py-24 py-10 relative">
         <div class="footer-bg absolute z-10 w-full h-full top-0 left-0 overflow-hidden">
@@ -6,36 +9,12 @@
         </div>
         <div class="container px-4 mx-auto relative z-30">
             <div class="uppercase font-black xl:text-3xl md:text-2xl text-xl">Our LINK</div>
-            <div class="flex flex-wrap -mx-4 mt-5 md:mt-10 xl:mt-14 text-lg xl:text-xl">
-                <div class="w-1/2 lg:w-1/3 2xl:w-1/4 px-4 last:mb-0 mb-5 md:mb-0">
-                    <ul class="flex flex-col space-y-3">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#">How to apply</a></li>
-                        <li><a href="#">Visa fee</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">E-visa</a></li>
-                        <li><a href="#">Apply online</a></li>
-                    </ul>
-                </div>
-                <div class="w-1/2 lg:w-1/3 2xl:w-1/4 px-4 last:mb-0 mb-5 md:mb-0">
-                    <ul class="flex flex-col space-y-3">
-                        <li><a href="#">Customer testimonials</a></li>
-                        <li><a href="#">Application status</a></li>
-                        <li><a href="#">News & updates</a></li>
-                        <li><a href="#">Questions and answers</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Terms and conditions</a></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/2 lg:w-1/3 2xl:w-1/4 px-4 last:mb-0 mb-5 md:mb-0">
-                    <ul class="flex flex-col space-y-3">
-                        <li><a href="#">Customer testimonials</a></li>
-                        <li><a href="#">Application status</a></li>
-                        <li><a href="#">News & updates</a></li>
-                        <li><a href="#">Questions and answers</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
+            <div class="flex px-4 flex-wrap -mx-4 mt-5 md:mt-10 xl:mt-14 text-lg xl:text-xl">
+                <ul class="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 md:gap-4">
+                    @foreach($footerMenus as $footerMenu)
+                        <li><a href="{{$footerMenu['url']}}">{{$footerMenu['label']}}</a></li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
@@ -44,13 +23,15 @@
             <div class="flex flex-wrap">
                 <div class="w-full md:w-1/2 lg:w-1/3 text-center md:text-left">
                     <a href="/">
-                        <img src="/static/images/logo-eVisa.png" alt="eVisa" class="max-w-[150px] brightness-0 invert inline-block">
+                        <img src="/static/images/logo-eVisa.png" alt="eVisa"
+                             class="max-w-[150px] brightness-0 invert inline-block">
                     </a>
                 </div>
                 <div
                     class="w-full md:w-1/2 lg:w-2/3 mt-5 md:mt-0 text-center md:text-right md:text-base text-[12px]">
                     <div class="">© e-VISA USA LLC. All Rights Reserved<br/>Website Design and Website Development
-                        by less[GAP] Solutions</div>
+                        by less[GAP] Solutions
+                    </div>
                 </div>
             </div>
         </div>

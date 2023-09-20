@@ -2,10 +2,10 @@
   <a-config-provider v-bind="$style.antdv" :getPopupContainer="getPopupContainer">
     <c-reset/>
     <a-style-provider hash-priority="high">
-      <router-view v-slot="{ Component }">
+      <router-view  v-slot="{ Component }">
         <transition>
           <keep-alive :max="5">
-            <component :is="Component" />
+            <component :key="$route.fullPath" :is="Component"/>
           </keep-alive>
         </transition>
       </router-view>
