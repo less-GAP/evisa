@@ -9,7 +9,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
             <div class="container relative px-4 mx-auto lg:flex lg:items-center">
                 <div class="relative z-50 flex items-center justify-between">
                     <Link href="/" class="">
-                        <img src="{{url(settings('site_icon','/static/images/logo-eVisa.png?v=1691981753'))}}"
+                        <img src="{{url(settings('site_logo','/static/images/logo-eVisa.png?v=1691981753'))}}"
                              alt="eVisa" class="max-w-[150px]">
                     </Link>
                     <button class="relative overflow-hidden rounded-full outline-none lg:hidden navbar-toggle"
