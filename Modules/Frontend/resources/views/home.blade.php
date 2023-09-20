@@ -96,8 +96,7 @@ SEO::openGraphUrl(url('/'));
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span
                                 id="lblTotal" class="">--</span>
                         </div>
-                        <div class="mt-2 text-base">*This fee excludes US $25 for the government e-visa fees.
-                        </div>
+                        <div class="mt-2 text-base">All fee includes the standard government e-visa fees.</div>
                         <button type="submit" href="/apply"
                                 class="flex items-center justify-center p-4 mt-5 text-2xl text-white bg-black 2xl:text-3xl lg:mt-10">
                             Apply

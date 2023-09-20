@@ -337,8 +337,7 @@ const currentTime = useDateFormat(useNow(), formatter)
                                 calculateFee()
                             }}</span>
                         </div>
-                        <div class="mt-2 text-base">*This fee excludes US $25 for the goverment e-visa fees.
-                        </div>
+                        <div class="mt-2 text-base">All fee includes the standard government e-visa fees.</div>
                         <button @click="nextStep" type="button"
                                 class="flex items-center justify-center transition p-4 mt-5 text-2xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-3xl w-full">
                             Next Step
