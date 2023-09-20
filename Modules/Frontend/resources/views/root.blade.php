@@ -7,7 +7,7 @@
     @vite(['resources/js/app.js'])
     @spladeHead
     <link rel='stylesheet' id='lessGAP-theme-style-css' href='/static/style.css?ver=6.3' type='text/css' media='all'/>
-    <link rel="icon" type="image/png" sizes="32x32" href="{{url(setting('site_icon'))}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url(settings('site_icon'))}}">
     <link rel='stylesheet' id='lessGAP-font-NeueKabel-css'
           href='{{ asset('static/webfonts/NeueKabel/stylesheet.css') }}'
           type='text/css' media='all'/>
