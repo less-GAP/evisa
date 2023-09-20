@@ -127,7 +127,7 @@ const closeDetail = function () {
                              name="title"
                              :rules="[{ required: true }]"
                 >
-                  <a-input @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}" v-model:value="formState.title"
+                  <a-input :showCount="true" maxlength="55" @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}" v-model:value="formState.title"
                            placeholder="Title.."/>
                 </a-form-item>
                 <a-form-item label="Slug"
@@ -171,8 +171,8 @@ const closeDetail = function () {
                   ]
               }"/>
                 </a-form-item>
-                <a-form-item label="Mô tả ngắn">
-                  <a-textarea v-model:value="formState.excerpt" placeholder="Excerpt..." :rows="4"/>
+                <a-form-item name="excerpt" :rules="[{ required: true }]" label="Mô tả ngắn">
+                  <a-textarea :showCount="true" maxlength="160" v-model:value="formState.excerpt" placeholder="Excerpt..." :rows="4"/>
                 </a-form-item>
               </a-col>
             </a-row>
