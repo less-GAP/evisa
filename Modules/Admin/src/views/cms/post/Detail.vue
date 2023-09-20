@@ -38,7 +38,7 @@ const showPicker = ref(false);
 const activeKey = ref('1');
 
 const formRef = ref();
-const onSelectImage = function () {
+let onSelectImage = function () {
 };
 const props = defineProps({
   value: {
