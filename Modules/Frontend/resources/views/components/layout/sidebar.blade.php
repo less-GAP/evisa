@@ -4,9 +4,9 @@
         <div class="w-full md:w-2/3 flex flex-col items-center px-3">
             {{$slot}}
         </div>
-        <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
+        <aside class="w-full md:w-1/3 relative flex flex-col items-center px-3">
 
-            <div class="w-full bg-white shadow flex flex-col my-4 p-6">
+            <div class="w-full bg-white sticky top-0 shadow flex flex-col my-4 p-6">
                 <p class="text-xl uppercase font-semibold pb-5">Why apply with us?</p>
                 <ul class="pl-5 list-none md:list-disc">
                     <li>
