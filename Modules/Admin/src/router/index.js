@@ -14,24 +14,7 @@ let routes = [
     name: "dashboard",
     component: Home,
   },
-  {
-    meta: {
-      title: "Posts",
-    },
-    path: "/post",
-    name: "post",
-    component: () => import("@/views/posts/index.vue"),
-    children: [
-      {
-        meta: {
-          title: "Posts",
-        },
-        path: "/post/:id",
-        name: "post-detail",
-        component: () => import("@/views/posts/Detail.vue"),
-      }
-    ]
-  },
+
 
   {
     meta: {
@@ -42,14 +25,6 @@ let routes = [
     component: () => import("@/views/users/ProfileView.vue"),
   },
 
-  {
-    meta: {
-      title: "Phương thức thanh toán",
-    },
-    path: "/payment-method/:id",
-    name: "payment-method-detail",
-    component: () => import("@/views/payment-method/Detail.vue"),
-  },
   {
     meta: {
       title: "Emails",
