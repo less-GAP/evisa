@@ -24,9 +24,11 @@ import {notification} from 'ant-design-vue';
 
 import type {UploadProps} from 'ant-design-vue';
 
-import {InputTags,InputCategories, InputUploadGetPath, FilePicker,InputCopy} from "@/components";
+import {InputTags, InputCategories, InputUploadGetPath, FilePicker, InputCopy} from "@/components";
 import {createApi, newModel, formConfig, fetchDetailApi} from "./meta";
 import {back} from "./meta";
+
+const routePrefix = '/content-management/post'
 
 const mainStore = useMainStore();
 
@@ -75,18 +77,17 @@ const submit = (status) => {
     })
 
 };
-
+const visible = ref(true)
 const closeDetail = function () {
-  props.visible = false;
-  emit('close');
-  back()
+  router.replace(routePrefix)
 }
 
 
 </script>
 
 <template>
-  <a-drawer append-to-body :closable="false" bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
+  <a-drawer append-to-body :closable="false"
+            bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
             @close="closeDetail" :open="visible"
             width="90vw">
     <a-form v-if="formState" layout="vertical"
@@ -116,7 +117,8 @@ const closeDetail = function () {
                              name="title"
                              :rules="[{ required: true }]"
                 >
-                  <a-input @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}" v-model:value="formState.title"
+                  <a-input @keyup="($event)=>{formState.slug=String($event.target.value).slugify()}"
+                           v-model:value="formState.title"
                            placeholder="Title.."/>
                 </a-form-item>
                 <a-form-item label="Slug"

@@ -8,6 +8,7 @@ import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {UseDataTable} from "@/utils/UseDataTable";
 
 const prefix = 'post'
+const routePrefix = '/content-management/post'
 const {
   fetchListApi,
   createApi,
@@ -21,7 +22,7 @@ const itemActions = [
     label: 'Edit',
     action: (item, reload) => {
       //showEditUser({}, reload)
-      router.replace(prefix + '/' + item.id)
+      router.replace(routePrefix + '/' + item.id)
     }
   },
   {
@@ -40,7 +41,7 @@ const listActions = [
     label: 'Add',
     action: (reload) => {
       //showEditUser({}, reload)
-      router.replace(prefix + '/new')
+      router.replace(routePrefix + '/new')
     }
   }
 ]

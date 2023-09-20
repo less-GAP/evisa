@@ -27,6 +27,8 @@ import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
 import {InputTags, InputUploadGetPath, FilePicker, InputCopy} from "@/components";
 
 const prefix = 'page'
+const routePrefix = '/content-management/page'
+
 const {
   fetchDetailApi,
   createApi,
@@ -87,7 +89,7 @@ const submit = (status) => {
 };
 
 const closeDetail = function () {
-  router.replace({path: '/' + prefix})
+  router.replace({path: routePrefix})
 }
 
 

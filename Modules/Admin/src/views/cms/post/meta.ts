@@ -2,12 +2,12 @@ import router from "@/router";
 import {UseFeature} from "@/utils/UseFeature";
 
 const prefix = 'post'
-
+const routePrefix = '/content-management/post'
 const itemActions = [{
   label: 'Edit',
   action: (item,reload) => {
     //showEditUser({}, reload)
-    router.replace('/' + prefix + '/'+item.id)
+    router.replace(routePrefix+ '/'+item.id)
   }
 }]
 const listActions = [
@@ -15,7 +15,7 @@ const listActions = [
     label: 'Add',
     action: (reload) => {
       //showEditUser({}, reload)
-      router.replace('/' + prefix + '/new')
+      router.replace(routePrefix + '/new')
     }
   }
 ]
