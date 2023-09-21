@@ -147,6 +147,9 @@ h1, h2, h3, h4 {
 #page-content img {
     height: auto!important;
 }
+#page-content ul {
+   list-style: disc;
+}
 .ant-input {
     border: unset !important;
     background-color: rgb(249 250 251);
