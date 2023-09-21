@@ -36,7 +36,7 @@ $posts = $postQuery->orderBy('id', 'desc')->paginate(20);
                                     <span>{{$post->created_at->format('M d, Y')}}</span><span
                                         class="inline-block ml-5 pl-5 bg-no-repeat bg-[left_center] bg-[url('{{$post->image_url}}')]"></span>
                                 </div>
-                                <p class="text-base font-medium text-gray-500">{{$post->excerpt}}</p></div>
+{{--                                <p class="text-base font-medium text-gray-500">{{$post->excerpt}}</p></div>--}}
                         </div>
                     </div>
 

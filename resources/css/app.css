@@ -144,7 +144,9 @@ h1, h2, h3, h4 {
     width: 100%;
     flex: unset;
 }
-
+#page-content img {
+    height: auto!important;
+}
 .ant-input {
     border: unset !important;
     background-color: rgb(249 250 251);
