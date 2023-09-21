@@ -2,13 +2,16 @@
 
 use ProtoneMedia\Splade\Facades\SEO;
 
-
+SEO::title(settings('site_title', ''))
+    ->description(settings('site_description', ''))
+    ->keywords(settings('site_keywords', ''));
+SEO::openGraphType('WebPage');
+SEO::openGraphSiteName(settings('site_title', ''));
+SEO::openGraphTitle(settings('site_title', ''));
+SEO::openGraphUrl(url('/'));
 
 ?>
 <x-front::layout.default>
-    @seoTitle(settings('site_title', ''))
-    @seoDescription(settings('site_description', '')
-    @seoKeywords(settings('site_keywords', ''))
     <section class="relative banner">
         <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
             <img src="/static/images/home/banner.png"
