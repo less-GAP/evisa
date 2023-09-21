@@ -1,7 +1,7 @@
 
 <x-front::layout.default>
     <div class="container bg-white mx-auto flex flex-wrap py-6">
-        <div class="w-full md:w-2/3 flex flex-col items-center px-3">
+        <div class="w-full md:w-2/3 flex flex-col items-center px-10">
             {{$slot}}
         </div>
         <aside class="w-full md:w-1/3 relative flex flex-col items-center px-3">
