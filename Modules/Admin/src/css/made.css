@@ -527,10 +527,7 @@ body h3 {
   /* color of the scrollbar track on hover */
 }
 
-a:active,
-a:hover {
-  color: #2CB34A;
-}
+
 
 .made-die-message,
 p {

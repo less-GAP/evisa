@@ -111,7 +111,6 @@ const MIN = 8, MAX = 19
 </script>
 
 <template>
-  <LayoutAuthenticated>
     <h1 v-if="listKey=='site-menu'">Main menu</h1>
     <h1 v-if="listKey=='footer-menu'">Footer menu</h1>
     <a-divider></a-divider>
@@ -130,7 +129,6 @@ const MIN = 8, MAX = 19
         ></a-select>
       </template>
     </DataListEdit>
-  </LayoutAuthenticated>
 </template>
 
 <style>

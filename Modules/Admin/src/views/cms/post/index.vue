@@ -98,8 +98,7 @@ function registerTable({reload}) {
 </script>
 
 <template>
-  <LayoutAuthenticated>
-    <SectionMain>
+
       <DataTable @register="registerTable" v-bind="tableConfig">
         <template #cellAction[delete]="{item,actionMethod}">
           <a-popconfirm
@@ -143,8 +142,6 @@ function registerTable({reload}) {
                     v-model:checked="item.status"/>
         </template>
       </DataTable>
-    </SectionMain>
-    <router-view></router-view>
-  </LayoutAuthenticated>
+
 
 </template>

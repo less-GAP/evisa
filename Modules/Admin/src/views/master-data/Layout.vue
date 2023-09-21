@@ -52,7 +52,13 @@ function menuClick({item}) {
       <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
-        <router-view/>
+        <router-view  v-slot="{ Component }">
+          <transition>
+            <keep-alive :max="5">
+              <component :key="$route.fullPath"  :is="Component"/>
+            </keep-alive>
+          </transition>
+        </router-view>
       </a-layout-content>
     </a-layout>
   </LayoutAuthenticated>

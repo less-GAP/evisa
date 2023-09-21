@@ -18,7 +18,7 @@ import router from "@/router";
                 <li v-if="$auth.hasPermission(menu.permission)">
                   <div v-if="menu.to !== null"
                        :class="menu.disable ? 'opacity-50 pointer-events-none cursor-not-allowed' : ''">
-                    <router-link :to="menu.to" :class="router.currentRoute.value.path.includes(menu.to || menu.path)
+                    <router-link :to="menu.to" :class="$route.matched.filter(matched=>matched.path.includes(menu.to)).length
                     ? 'flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-300 group bg-gray-300' :
                     'flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-300 group'"
                                  v-if="!menu.children">
@@ -27,8 +27,10 @@ import router from "@/router";
                                 :w="'w-' + $style.menu.iconSize" :size="$style.menu.iconSize"/>
                       <span class="ml-3" sidebar-toggle-item="">{{ menu.label }}</span>
                     </router-link>
-                    <button type="button" class="w-full flex items-center p-2 text-base text-gray-900 rounded-lg
-                hover:bg-gray-300 group  " :aria-controls="key" :data-collapse-toggle="key" v-else>
+                    <button type="button" :class="menu.children.filter(child=>$route.fullPath.includes(child.to)).length
+                    ? 'flex items-center w-full p-2 text-base text-gray-900 rounded-lg hover:bg-gray-300 group bg-gray-300' :
+                    'w-full flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-300 group '"
+                            :aria-controls="key" :data-collapse-toggle="key" v-else>
                       <BaseIcon v-if="menu.icon" :path="menu.icon" class="flex-none"
                                 :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
                                 :w="'w-' + $style.menu.iconSize" :size="$style.menu.iconSize"/>
@@ -39,10 +41,12 @@ import router from "@/router";
                               d="m1 1 4 4 4-4"/>
                       </svg>
                     </button>
-                    <ul :id="key" class="hidden py-2 space-y-2" :class="$appState.showMenu ? 'block' : ''">
+                    <ul v-if="menu.children && menu.children.length" :id="key" class=" py-2 space-y-2"
+                        :class="menu.children?.filter(child=>$route.fullPath.includes(child.to)).length ? 'block' : 'hidden'">
                       <li v-for="(child, index) in menu.children" :key="index">
                         <router-link :to="child.to"
-                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300  ">
+                                     :class="$route.fullPath.includes(child.to) ? 'text-blue-500' : ''"
+                                     class="flex items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:!text-blue-500 ">
                           {{ child.label }}
                         </router-link>
                       </li>

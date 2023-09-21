@@ -86,10 +86,7 @@ const closeDetail = function () {
 </script>
 
 <template>
-  <a-drawer append-to-body :closable="false"
-            bodyStyle="position:relative;display:flex;flex-direction:column;height:100vh;"
-            @close="closeDetail" :open="visible"
-            width="90vw">
+
     <a-form v-if="formState" layout="vertical"
             v-bind="formConfig"
             ref="formRef"
@@ -194,7 +191,6 @@ const closeDetail = function () {
         </a-col>
       </a-row>
     </a-form>
-  </a-drawer>
   <a-modal append-to-body v-model:open="showPicker" style="z-index:99999;top: 2vh;height:98vh" height="96vh"
            width="90vw"
            title="Select file">
