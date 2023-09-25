@@ -120,12 +120,21 @@ $dropdownMenus = array_slice($menus, 6, -1);
                     <li>
                         <a href="#" class="hover:text-black">Contact</a>
                     </li>
-                    <li>
-                        <a href="/login" class="hover:text-black">Login</a>
-                    </li>
-                    <li>
-                        <a href="/signup" class="hover:text-black">Register</a>
-                    </li>
+                    @if(auth('frontend')->check())
+                        <li>
+                            Welcome, <a href="/profile" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
+                        </li>
+                        <li>
+                            <a href="/logout" class="hover:text-black">Logout</a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="/login" class="hover:text-black">Login</a>
+                        </li>
+                        <li>
+                            <a href="/signup" class="hover:text-black">Register</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
 
