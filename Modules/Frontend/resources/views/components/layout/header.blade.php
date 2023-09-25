@@ -114,9 +114,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                 </x-splade-toggle>
                 <ul class="absolute  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0"
                     id="topbar-menu">
-                    <li>
-                        <a href="/about-us" class="hover:text-black">About</a>
-                    </li>
+
                     <li>
                         <a href="/countact-us" class="hover:text-black">Contact</a>
                     </li>
