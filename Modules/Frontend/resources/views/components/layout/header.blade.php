@@ -115,14 +115,14 @@ $dropdownMenus = array_slice($menus, 6, -1);
                 <ul class="absolute  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0"
                     id="topbar-menu">
                     <li>
-                        <a href="#" class="hover:text-black">About</a>
+                        <a href="/about-us" class="hover:text-black">About</a>
                     </li>
                     <li>
-                        <a href="#" class="hover:text-black">Contact</a>
+                        <a href="/countact-us" class="hover:text-black">Contact</a>
                     </li>
                     @if(auth('frontend')->check())
                         <li>
-                            Welcome, <a href="/profile" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
+                            Welcome, <a href="/my-acocunt" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
                         </li>
                         <li>
                             <a href="/logout" class="hover:text-black">Logout</a>
