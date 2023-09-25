@@ -104,7 +104,7 @@ function registerTable({reload}) {
       </template>
       <template #cell[customer_level]="{item,column}">
 
-        <RemoteSelect @change="updateApi(item.id,{customer_level:item.customer_level})"
+        <RemoteSelect style="width:150px" @change="updateApi(item.id,{customer_level:item.customer_level})"
                       v-model:value="item.customer_level" url="visa-customer-level/all" valueKey="id"
                       labelKey="name"></RemoteSelect>
 

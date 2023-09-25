@@ -167,6 +167,6 @@ h1, h2, h3, h4 {
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
     height: 100%;
 }
-#page-content form{
+#page-content,#page-content form{
     width:100%
 }
