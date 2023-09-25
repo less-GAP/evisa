@@ -116,11 +116,11 @@ $dropdownMenus = array_slice($menus, 6, -1);
                     id="topbar-menu">
 
                     <li>
-                        <a href="/countact-us" class="hover:text-black">Contact</a>
+                        <a href="/contact-us" class="hover:text-black">Contact</a>
                     </li>
                     @if(auth('frontend')->check())
                         <li>
-                            Welcome, <a href="/my-acocunt" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
+                            Welcome, <a href="/my-account" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
                         </li>
                         <li>
                             <a href="/logout" class="hover:text-black">Logout</a>
