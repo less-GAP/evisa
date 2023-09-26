@@ -96,9 +96,55 @@ function calculateFee() {
             </a-descriptions-item>
             <a-descriptions-item label="Number of applicants"><b>{{ value.number_of_visa }}</b></a-descriptions-item>
             <a-descriptions-item label="Type of visas"><b>E-Visa (1 Month Single Entry)</b></a-descriptions-item>
-            <a-descriptions-item label="Processing Time"><b>{{ ProcessingTimes[value.processing_time].label }}</b>
+            <a-descriptions-item label="Processing Time"><b>
+              <RemoteSelect url="master-data/visa-processing-time/data" :disabled="true" :value="value.processing_time"></RemoteSelect>
+            </b>
             </a-descriptions-item>
-            <a-descriptions-item label="Intended entry ports"><b>Tan Son Nhat Int Airport (Ho Chi Minh City)</b>
+            <a-descriptions-item label="Intended entry ports"><b>
+              <a-select class="w-full  border-0 rounded-none cursor-pointer" :disabled="true"
+                        v-model:value="value.entry_port" style="width: 300px"
+              >
+                <a-select-opt-group>
+                  <template #label>
+                    <b class="text-blue text-lg">
+                      International Airports
+                    </b>
+                  </template>
+                  <a-select-option value="1">Noi Bai Int Airport (Ha Noi)</a-select-option>
+                  <a-select-option value="2">Cat Bi Int Airport (Hai Phong)</a-select-option>
+                  <a-select-option value="3">Cam Ranh Int Airport (Khanh Hoa)</a-select-option>
+                  <a-select-option value="4">Can Tho International Airport</a-select-option>
+                  <a-select-option value="5">Da Nang International Airport</a-select-option>
+                  <a-select-option value="6">Phu Bai Int Airport</a-select-option>
+                  <a-select-option value="7">Phu Quoc International Airport</a-select-option>
+                  <a-select-option value="8">Tan Son Nhat Int Airport (Ho Chi Minh City)
+                  </a-select-option>
+                </a-select-opt-group>
+                <a-select-opt-group>
+                  <template #label>
+                    <b class="text-blue text-lg">
+                      Landports
+                    </b>
+                  </template>
+                  <a-select-option value="9">Bo Y Landport</a-select-option>
+                  <a-select-option value="10">Cha Lo Landport</a-select-option>
+                  <a-select-option value="11">Cau Treo Landport</a-select-option>
+                  <a-select-option value="12">Huu Nghi Landport</a-select-option>
+                  <a-select-option value="13">Ha Tien Landport</a-select-option>
+                  <a-select-option value="14">Lao Bao Landport</a-select-option>
+                  <a-select-option value="15">Lao Cai Landport</a-select-option>
+                  <a-select-option value="16">La Lay Landport</a-select-option>
+                  <a-select-option value="17">Moc Bai Landport</a-select-option>
+                  <a-select-option value="18">Mong Cai Landport</a-select-option>
+                  <a-select-option value="19">Nam Can Landport</a-select-option>
+                  <a-select-option value="20">Na Meo Landport</a-select-option>
+                  <a-select-option value="21">Song Tien Landport</a-select-option>
+                  <a-select-option value="22">Tinh Bien Landport</a-select-option>
+                  <a-select-option value="23">Tay Trang Landport</a-select-option>
+                  <a-select-option value="24">Xa Mat Landport</a-select-option>
+                </a-select-opt-group>
+              </a-select>
+            </b>
             </a-descriptions-item>
             <a-descriptions-item label="Date of Arrival">
               <b>{{ $format.formatDateTime(value.date_arrival) }}</b>

@@ -33,7 +33,7 @@ const itemActions = [
     label: 'View',
     action: (item, reload) => {
       //showEditUser({}, reload)
-      router.replace('/visa/' + props.status + '/' + item.id)
+      router.push('/visa/' + props.status + '/' + item.id)
     }
   }
 ]

@@ -6,4 +6,5 @@
     sh build.sh
     docker-compose down -v && docker-compose up -d
     docker-compose exec app php artisan migrate
+    docker image rm $(docker image ls -f 'dangling=true' -q)
 @endtask
