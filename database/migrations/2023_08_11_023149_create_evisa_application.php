@@ -57,7 +57,7 @@ return new class extends Migration
             $table->string('user')->nullable();
             $table->string('type')->nullable();
             $table->text('comment')->nullable();
-            $table->longText('data')->default('[]');
+            $table->longText('data')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
