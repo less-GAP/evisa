@@ -5,6 +5,7 @@ namespace Modules\Frontend\Actions\Auth;
 
 
 use App\Models\VisaUser;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Modules\Frontend\Requests\SignupRequest;
 use ProtoneMedia\Splade\Facades\Toast;
