@@ -17,10 +17,9 @@ const login = () => {
                     props.success()
                 }).catch(() => {
                     window.location.reload()
-
                 })
-
-            }).requestCode()
+            }
+        }).requestCode()
     })
 }
 </script>
