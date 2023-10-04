@@ -15,7 +15,7 @@ const login = () => {
             callback: (response) => {
                 try {
                     const result = Api.post(props.login_url, response)
-                    success()
+                    props.success()
                 } catch (e) {
                     window.location.reload()
                 }
