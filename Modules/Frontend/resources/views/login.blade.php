@@ -33,7 +33,7 @@
 
                     <GoogleLogin login_url="{{url('auth/google')}}"
                                  :callback="()=>$splade.visit('/my-account')"
-                                 client_id="740173409691-mhrs1kqmnl6btjp6991rkeptl2dor47s.apps.googleusercontent.com">
+                                 client_id="{{settings('login_google_id')}}">
 
                     </GoogleLogin>
                 </a-card>
