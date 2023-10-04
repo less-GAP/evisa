@@ -5,6 +5,7 @@ namespace Modules\Frontend\Actions\Auth;
 
 
 use App\Models\VisaUser;
+use Google_Client;
 use Google_Service_Oauth2;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
