@@ -19,6 +19,7 @@ class SocialAuthAction
         \Config::set('services.' . $provider, [
             'client_id' => $configs['login_' . $provider . '_id']
             , 'client_secret' => $configs['login_' . $provider . '_secret']
+            , 'redirect' =>url('')
         ]);
 
         $socialUser = Socialite::driver($provider)->user();
