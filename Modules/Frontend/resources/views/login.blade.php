@@ -31,11 +31,13 @@
                         class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
                         :spinner="true"/>
 
-                    <GoogleLogin login_url="{{url('auth/google')}}"
-                                 :callback="()=>$splade.visit('/my-account')"
-                                 client_id="{{settings('login_google_id')}}">
+                    @if(settings('login_google')=='active')
+                        <GoogleLogin login_url="{{url('auth/google')}}"
+                                     :callback="()=>$splade.visit('/my-account')"
+                                     client_id="{{settings('login_google_id')}}">
 
-                    </GoogleLogin>
+                        </GoogleLogin>
+                    @endif
                 </a-card>
             </x-splade-form>
         </div>
