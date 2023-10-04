@@ -23,7 +23,9 @@ class SocialAuthAction
         $client->setClientSecret($configs['login_' . $provider . '_secret']);
         $client->setRedirectUri(url(''));
 
-        $accessToken = $client->fetchAccessTokenWithAuthCode($request->input('code'));
+        $token = $client->fetchAccessTokenWithAuthCode($request->input('code'));
+        $client->setAccessToken($token['access_token']);
+
         $google_oauth = new Google_Service_Oauth2($client);
         $google_account_info = $google_oauth->userinfo->get();
 
