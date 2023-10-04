@@ -5,6 +5,7 @@ use Modules\Admin\Middleware\AdminIsAuthenticated;
 use Modules\Frontend\Actions\Auth\LogoutAction;
 use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
+use Modules\Frontend\Actions\Auth\SocialAuthAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
 use Modules\Frontend\Actions\MyAccount\PostEditProfileAction;
 use Modules\Frontend\Actions\MyAccount\PostUpdatePasswordAction;
@@ -23,6 +24,7 @@ Route::middleware(['splade'])->group(function () {
 
     Route::view('/', 'front::home')->name('home');
     Route::post('/form', SubmitFormAction::class . '@handle');
+    Route::post('/auth/{provider}', SocialAuthAction::class . '@handle');
 
     Route::view('/my-account', 'front::my-account.dashboard')->name('my-account');
     Route::view('/my-account/my-visa', 'front::my-account.my-visa')->name('my-visa');
