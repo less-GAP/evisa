@@ -5,6 +5,7 @@ namespace Modules\Frontend\Actions\Auth;
 
 
 use App\Models\VisaUser;
+use Google_Service_Oauth2;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Modules\Frontend\Requests\SignupRequest;
@@ -16,18 +17,21 @@ class SocialAuthAction
     {
         $provider = $request->route('provider');
         $configs = settings(['login_' . $provider . '_id', 'login_' . $provider . '_secret']);
-        \Config::set('services.' . $provider, [
-            'client_id' => $configs['login_' . $provider . '_id']
-            , 'client_secret' => $configs['login_' . $provider . '_secret']
-            , 'redirect' =>url('')
-        ]);
 
-        $socialUser = Socialite::driver($provider)->user();
+        $client = new Google_Client();
+        $client->setClientId($configs['login_' . $provider . '_id']);
+        $client->setClientSecret($configs['login_' . $provider . '_secret']);
+        $client->setRedirectUri(url(''));
+
+        $accessToken = $client->fetchAccessTokenWithAuthCode($request->input('code'));
+        $google_oauth = new Google_Service_Oauth2($client);
+        $google_account_info = $google_oauth->userinfo->get();
+
         $user = VisaUser::updateOrCreate([
-            'email' => $socialUser->getEmail()
+            'email' => $google_account_info->email
         ],
             [
-                'full_name' => $socialUser->getName()
+                'full_name' => $google_account_info->name
             ]
         );
         auth('frontend')->login($user);
