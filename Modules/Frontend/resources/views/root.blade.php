@@ -150,6 +150,10 @@
         position: fixed;
     }
 
+    #site-main{
+        padding-top: 15px;
+    }
+
     #page-content table td, #page-content table th {
         border-width: thin;
         padding: 10px;

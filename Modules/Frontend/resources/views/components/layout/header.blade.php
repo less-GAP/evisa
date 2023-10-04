@@ -112,7 +112,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                         @endif
                     </ul>
                 </x-splade-toggle>
-                <ul class="absolute hidden md:visible  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0"
+                <ul class="absolute hidden md:visible  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-5 lg:right-8 lg:-translate-y-0"
                     id="topbar-menu">
 
                     <li>
