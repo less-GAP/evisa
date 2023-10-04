@@ -3,7 +3,6 @@
 use ProtoneMedia\Splade\Facades\SEO;
 
 
-
 ?>
 <x-front::layout.default>
     @seoTitle(settings('site_title', ''))
@@ -94,11 +93,10 @@ use ProtoneMedia\Splade\Facades\SEO;
                                 id="lblTotal" class="">--</span>
                         </div>
                         <div class="mt-2 text-base">All fee includes the standard government e-visa fees.</div>
-                        <button type="submit" href="/apply"
-                                class="flex items-center justify-center p-4 mt-5 text-2xl text-white bg-black 2xl:text-3xl lg:mt-10">
-                            Apply
-                            Now
-                        </button>
+                        <a href="/apply">
+                            <x-front::button>Apply Now</x-front::button>
+
+                        </a>
                     </div>
                 </div>
             </form>
@@ -296,8 +294,9 @@ use ProtoneMedia\Splade\Facades\SEO;
             <div class="mt-10">
                 <div class="text-center">
                     <a href="/apply"
-                       class="inline-block px-6 pt-3 pb-2 text-lg font-semibold text-white uppercase bg-black md:px-12 xl:px-20">Apply
-                        now</a>
+                       class="inline-block uppercase">
+                        <x-front::button>Apply Now</x-front::button>
+                    </a>
                 </div>
             </div>
         </div>

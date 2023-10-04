@@ -33,7 +33,9 @@
                                         autocomplete="off"/>
                         <x-splade-submit
                             class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
-                            :spinner="true"/>
+                            :spinner="true">
+                            Signup
+                        </x-splade-submit>
 
                     </a-card>
                 </x-splade-form>

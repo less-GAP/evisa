@@ -22,7 +22,7 @@ $content = \Blade::render($page->content);
     @if ($page->image)
         @seoOpenGraphImage(url($page->image))
     @endif
-    <h1 class="text-center mb-5 text-neutral-900 text-left font-semibold text-3xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100 max-w-4xl "
+    <h1 class="text-left w-full mb-5 text-neutral-900 text-left font-semibold text-3xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100"
         title="{{$page->title}}">{{$page->title}}</h1>
     <div id="page-content">
 

@@ -1,7 +1,7 @@
 
 <x-front::layout.default>
-    <div class="container bg-white mx-auto flex flex-wrap py-6">
-        <div class="w-full md:w-2/3 flex flex-col items-center px-10">
+    <div class="container mx-auto flex flex-wrap py-6">
+        <div class="w-full md:w-2/3 flex flex-col items-center px-4">
             {{$slot}}
         </div>
         <aside class="w-full md:w-1/3 relative flex flex-col items-center px-3">
@@ -44,9 +44,9 @@
                         </p>
                     </li>
                 </ul>
-                <Link href="/apply"
-                      class="w-full bg-black text-white  text-lg font-semibold text-white uppercase  rounded flex items-center justify-center px-2 py-3 mt-4">
-                    Apply now
+                <Link href="/apply">
+                    <x-front::button class="w-full">Apply Now</x-front::button>
+
                 </Link>
             </div>
 

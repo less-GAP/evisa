@@ -36,11 +36,11 @@ const today = ref(dayjs().tz(tz))
 setInterval(() => {
     today.value = dayjs().tz(tz)
 }, 5000)
-const formState = reactive( {
+const formState = reactive({
     number_of_visa: 1,
     type_of_visa: "1",
     processing_time: "2",
-    applicants: [{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {},{}, {}, {}, {}, {}],
+    applicants: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
 
 });
 
@@ -193,6 +193,8 @@ const currentTime = useDateFormat(useNow(), formatter)
                 },
                 {
                     title: 'Review & Payment',
+                                  disabled:true
+
                 },
             ]"></a-steps>
         </div>
@@ -496,17 +498,17 @@ const currentTime = useDateFormat(useNow(), formatter)
                                   sub-title="Order number: 2017182818828182881 We will contact with you soon, please wait.">
                         </a-result>
                     </div>
-                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-                        <div class="mb-4">
-                            <button
-                                class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">
-                                Pay with PayPal - $253.00
-                            </button>
-                        </div>
-                        <div class="text-xs text-gray-500 italic text-center">You'll be charged $253, including
-                            $48 for VAT in Italy
-                        </div>
-                    </div>
+                    <!--                    <div class="w-full px-4 md:w-1/2 lg:w-1/3">-->
+                    <!--                        <div class="mb-4">-->
+                    <!--                            <button-->
+                    <!--                                class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">-->
+                    <!--                                Pay with PayPal - $253.00-->
+                    <!--                            </button>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="text-xs text-gray-500 italic text-center">You'll be charged $253, including-->
+                    <!--                            $48 for VAT in Italy-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
 
             </a-form>

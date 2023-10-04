@@ -3,7 +3,7 @@ $menus = master_data('site-menu')->toArray();
 $mainMenus = array_slice($menus, 0, 5);
 $dropdownMenus = array_slice($menus, 6, -1);
 ?>
-<header class="relative z-50 main-header">
+<header class=" z-[9999] w-full border-b   main-header">
     <div class="header-2">
         <nav class="py-2 bg-white lg:py-5">
             <div class="container relative px-4 mx-auto lg:flex lg:items-center">
@@ -47,7 +47,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                     </div>
 
                     <ul :class="toggled?'active':''"
-                        class="flex-col absolute z-9999 lg:static lg:items-center flex lg:flex-row lg:ml-auto mt-1 lg:mt-0 lg:static absolute top-[51px] left-0 w-full lg:w-auto bg-white shadow-sm lg:shadow-none transition py-5 lg:py-0"
+                        class="flex-col shadow h-[600px] md:h-[auto] overflow-y-auto md:overflow-visible absolute z-[9999] lg:static lg:items-center flex lg:flex-row lg:ml-auto mt-1 lg:mt-0 lg:static absolute top-[51px] left-0 w-full lg:w-auto bg-white shadow-sm lg:shadow-none transition py-5 lg:py-0"
                         id="navbar-collapse">
                         @foreach($mainMenus as $menu)
                             <li class="relative group">
@@ -59,7 +59,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                                         class="absolute top-0 right-[18px] lg:right-0 flex items-center justify-center w-5 h-5 menu-toggle transition -translate-y-1/2 cursor-pointer top-1/2 -mt-[2px]"><i
                                             class="text-xs fa-solid fa-chevron-down"></i></span>
                                     <ul
-                                        class="z-50 list-disc lg:list-none flex-col ml-10 lg:ml-0 w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 opacity-1 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
+                                        class="z-50 list-disc lg:list-none flex-col pl-10 lg:shadow lg:pl-0 lg:ml-0 w-full lg:absolute lg:flex sub-menu lg:group-hover:opacity-100 opacity-1 lg:opacity-0 lg:pointer-events-none lg:group-hover:pointer-events-auto lg:w-max top-full lg:pt-6">
                                         @foreach($menu['children'] as $child)
                                             <li class="relative bg-white">
                                                 <Link href="{{$child['url']??''}}"
@@ -112,7 +112,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                         @endif
                     </ul>
                 </x-splade-toggle>
-                <ul class="absolute  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0"
+                <ul class="absolute hidden md:visible  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-4 lg:right-8 lg:-translate-y-0"
                     id="topbar-menu">
 
                     <li>
