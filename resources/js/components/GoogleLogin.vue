@@ -5,7 +5,7 @@ import Api from "../utils/Api";
 const props = defineProps({
     client_id: String,
     login_url: String,
-    callback: Function,
+    success: Function,
 })
 const login = () => {
     googleSdkLoaded((google) => {
@@ -15,7 +15,7 @@ const login = () => {
             callback: (response) => {
                 try {
                     const result = Api.post(props.login_url, response)
-                    callback()
+                    success()
                 } catch (e) {
                     window.location.reload()
                 }

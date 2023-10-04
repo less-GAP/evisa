@@ -33,7 +33,7 @@
 
                     @if(settings('login_google')=='active')
                         <GoogleLogin login_url="{{url('auth/google')}}"
-                                     :callback="()=>$splade.visit('/my-account')"
+                                     :success="()=>$splade.visit('/my-account')"
                                      client_id="{{settings('login_google_id')}}">
 
                         </GoogleLogin>

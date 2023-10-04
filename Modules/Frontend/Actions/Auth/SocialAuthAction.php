@@ -41,6 +41,6 @@ class SocialAuthAction
         Toast::message('Login successfully!')
             ->success()
             ->centerTop();
-        return redirect('/my-account');
+        return $user;
     }
 }
