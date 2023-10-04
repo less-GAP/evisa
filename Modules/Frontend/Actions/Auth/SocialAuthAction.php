@@ -14,8 +14,6 @@ class SocialAuthAction
 {
     public function handle(Request $request)
     {
-        $data = $request->all();
-        $data['password'] = \Hash::make($data['password']);
         $provider = $request->route('provider');
         $configs = settings(['login_' . $provider . '_id', 'login_' . $provider . '_secret']);
         \Config::set('services.' . $provider, [
