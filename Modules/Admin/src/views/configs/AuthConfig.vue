@@ -60,7 +60,7 @@ const cancel = function () {
     <a-form-item v-if="formState.login_google=='active'" name="login_google_id" label="Client Id" :rules="[{ required: true }]">
       <a-input :showCount="true" autocomplete="off" v-model:value="formState.login_google_id"/>
     </a-form-item>
-    <a-form-item v-if="formState.login_google=='inactive'" name="login_google_secret" label="Client Secret" :rules="[{ required: true }]">
+    <a-form-item v-if="formState.login_google=='active'" name="login_google_secret" label="Client Secret" :rules="[{ required: true }]">
       <a-input :showCount="true" autocomplete="off" v-model:value="formState.login_google_secret"/>
     </a-form-item>
 
