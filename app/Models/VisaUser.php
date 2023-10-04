@@ -25,7 +25,6 @@ class VisaUser extends Authenticatable
         'customer_level_expired_at',
         'email',
         'phone',
-        'phone',
         'type',
         'status',
         'password',

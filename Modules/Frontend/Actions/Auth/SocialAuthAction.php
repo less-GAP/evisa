@@ -16,15 +16,21 @@ class SocialAuthAction
         $data = $request->all();
         $data['password'] = \Hash::make($data['password']);
         $provider = $request->route('provider');
-        $configs = settings(['login_'.$provider.'_id','login_'.$provider.'_secret']);
-        \Config::set('services.'.$provider, [
-            'client_id'=>$configs['login_'.$provider.'_id']
-           , 'client_secret'=>$configs['login_'.$provider.'_secret']
+        $configs = settings(['login_' . $provider . '_id', 'login_' . $provider . '_secret']);
+        \Config::set('services.' . $provider, [
+            'client_id' => $configs['login_' . $provider . '_id']
+            , 'client_secret' => $configs['login_' . $provider . '_secret']
         ]);
 
-        $user = Socialite::driver($provider)->user();
-        return $user;
-//        auth('frontend')->login($user);
+        $socialUser = Socialite::driver($provider)->user();
+        $user = VisaUser::updateOrCreate([
+            'email' => $socialUser->getEmail()
+        ],
+            [
+                'full_name' => $socialUser->getName()
+            ]
+        );
+        auth('frontend')->login($user);
         Toast::message('Login successfully!')
             ->success()
             ->centerTop();
