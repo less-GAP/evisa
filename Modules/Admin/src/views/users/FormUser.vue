@@ -42,16 +42,12 @@ fetch();
 
 
 const submit = () => {
-  formRef.value
-    .validate()
-    .then(() => {
-      createApi({...formState}).then(rs => {
-        Object.assign(formState, rs.data.result)
-      });
-    })
+  createApi({...formState}).then(rs => {
+    Object.assign(formState, rs.data.result)
+  });
 };
 const closeDetail = function () {
-  router.replace({path: '/'+prefix})
+  router.replace({path: '/' + prefix})
 }
 
 </script>
