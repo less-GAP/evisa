@@ -36,7 +36,13 @@
                             :spinner="true">
                             Signup
                         </x-splade-submit>
+                        @if(settings('login_google')=='active')
+                            <GoogleLogin login_url="{{url('auth/google')}}"
+                                         :callback="()=>$splade.visit('/my-account')"
+                                         client_id="{{settings('login_google_id')}}">
 
+                            </GoogleLogin>
+                        @endif
                     </a-card>
                 </x-splade-form>
         </div>
