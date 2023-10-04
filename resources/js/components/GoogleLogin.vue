@@ -13,15 +13,14 @@ const login = () => {
             client_id: props.client_id,
             scope: 'email profile openid',
             callback: (response) => {
-                try {
-                    Api.post(props.login_url, response).then(() => {
-                        props.success()
-                    })
-                } catch (e) {
+                Api.post(props.login_url, response).then(() => {
+                    props.success()
+                }).catch(() => {
                     window.location.reload()
-                }
-            }
-        }).requestCode()
+
+                })
+
+            }).requestCode()
     })
 }
 </script>
