@@ -6,7 +6,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 const items = ref([
     {
-      key: 'General',
+      key: 'config-general',
       icon: () => h(MailOutlined),
       label: 'General',
       href: '/configs/general',
@@ -14,11 +14,18 @@ const items = ref([
     },
 
     {
-      key: 'smtp',
+      key: 'config-smtp',
       icon: () => h(AppstoreOutlined),
       href: '/configs/smtp',
       label: 'SMTP',
       title: 'SMTP',
+    },
+    {
+      key: 'config-auth',
+      icon: () => h(AppstoreOutlined),
+      href: '/configs/auth',
+      label: 'Authenticate',
+      title: 'Authenticate',
     }
 
 
@@ -35,7 +42,7 @@ function menuClick({item}) {
 <template>
   <LayoutAuthenticated>
     <a-layout>
-      <a-menu @click="menuClick" mode="horizontal" :items="items">
+      <a-menu :selectedKeys="[$appState.currentRoute?.name]" @click="menuClick" mode="horizontal" :items="items">
       </a-menu>
       <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"

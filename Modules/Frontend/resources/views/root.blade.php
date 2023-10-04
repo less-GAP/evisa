@@ -149,7 +149,9 @@
     .fixed {
         position: fixed;
     }
-
+    #primary{
+        min-height: 80vh;
+    }
     #site-main{
         padding-top: 15px;
     }

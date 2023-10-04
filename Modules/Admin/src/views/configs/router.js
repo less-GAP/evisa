@@ -21,6 +21,14 @@ export default [{
       path: "/configs/smtp",
       name: "config-smtp",
       component: () => import("./SMTPConfig.vue"),
+    } ,
+    {
+      meta: {
+        title: "Authenticate Configuration",
+      },
+      path: "/configs/auth",
+      name: "config-auth",
+      component: () => import("./AuthConfig.vue"),
     }
   ]
 }]
