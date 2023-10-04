@@ -14,8 +14,9 @@ const login = () => {
             scope: 'email profile openid',
             callback: (response) => {
                 try {
-                    const result = Api.post(props.login_url, response)
-                    props.success()
+                    Api.post(props.login_url, response).then(() => {
+                        props.success()
+                    })
                 } catch (e) {
                     window.location.reload()
                 }
