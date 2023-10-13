@@ -42,7 +42,7 @@ import router from "@/router";
                       </svg>
                     </button>
                     <ul v-if="menu.children && menu.children.length" :id="key" class=" py-2 space-y-2"
-                        :class="menu.children?.filter(child=>$route.fullPath.includes(child.to)).length ? 'block' : 'hidden'">
+                        :class="$appState.showMenu &&menu.children?.filter(child=>$route.fullPath.includes(child.to)).length ? 'block' : 'hidden'">
                       <li v-for="(child, index) in menu.children" :key="index">
                         <router-link :to="child.to"
                                      :class="$route.fullPath.includes(child.to) ? 'text-blue-500' : ''"

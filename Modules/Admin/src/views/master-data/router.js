@@ -50,5 +50,13 @@ export default [{
       name: "type-of-visa",
       component: () => import("./type-of-visa/index.vue"),
     },
+    {
+      meta: {
+        title: "Faqs",
+      },
+      path: "/master-data/faqs",
+      name: "faqs",
+      component: () => import("./faq/index.vue"),
+    },
   ]
 }]

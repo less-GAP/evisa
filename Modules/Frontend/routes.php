@@ -7,10 +7,12 @@ use Modules\Frontend\Actions\Auth\PostLoginAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\Auth\SocialAuthAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
+use Modules\Frontend\Actions\CheckStatusAction;
 use Modules\Frontend\Actions\MyAccount\PostEditProfileAction;
 use Modules\Frontend\Actions\MyAccount\PostUpdatePasswordAction;
 use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\PostVisaApplication;
+use Modules\Frontend\Actions\ProcessPaymentAction;
 use Modules\Frontend\Actions\SubmitFormAction;
 use Modules\Frontend\Actions\TestFormAction;
 
@@ -20,10 +22,13 @@ Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterDat
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::view('/preview', 'front::preview')->name('preview');
 });
+Route::post('/process-payment', ProcessPaymentAction::class . '@handle');
+
 Route::middleware(['splade'])->group(function () {
 
     Route::view('/', 'front::home')->name('home');
     Route::post('/form', SubmitFormAction::class . '@handle');
+    Route::post('/check-status', CheckStatusAction::class . '@handle');
     Route::post('/auth/{provider}', SocialAuthAction::class . '@handle');
 
     Route::view('/my-account', 'front::my-account.dashboard')->name('my-account');

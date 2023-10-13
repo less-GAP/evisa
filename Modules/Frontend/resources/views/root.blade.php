@@ -18,6 +18,7 @@
           type='text/css' media='all'/>
     <link rel='shortlink' href='https://evisadirect.com/'/>
     <script src="{{ asset('static/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
     @vite(['resources/js/app.js'])
     @spladeHead
 </head>

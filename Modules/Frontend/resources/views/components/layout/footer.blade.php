@@ -26,11 +26,21 @@ $footerMenus = master_data('footer-menu')->toArray();
                         <img src="/static/images/logo-eVisa.png" alt="eVisa"
                              class="max-w-[150px] brightness-0 invert inline-block">
                     </a>
+                    <br>
+                    <br>
+                    © e-VISA USA LLC. All Rights Reserved<br/>Website Design and Website Development
+                    by less[GAP] Solutions
                 </div>
                 <div
                     class="w-full md:w-1/2 lg:w-2/3 mt-5 md:mt-0 text-center md:text-right md:text-base text-[12px]">
-                    <div class="">© e-VISA USA LLC. All Rights Reserved<br/>Website Design and Website Development
-                        by less[GAP] Solutions
+                    <div class="">
+                        Traversia LLC<br/>
+                        11536 Harry Hines Blvd<br/>
+                        Unit 203<br/>
+                        Dallas, TX  75229<br/>
+                        Email: <a href="mailto:traversiallc@gmail.com">traversiallc@gmail.com</a>
+                        <br/>
+
                     </div>
                 </div>
             </div>

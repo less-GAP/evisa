@@ -11,6 +11,7 @@ if (!$page) {
 
 $content = \Blade::render($page->content);
 ?>
+
 <x-front::layout.sidebar>
     @seoTitle($page->title)
     @seoDescription($page->excerpt ?? '')

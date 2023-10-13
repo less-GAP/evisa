@@ -1,6 +1,6 @@
 <script setup>
 import {ref, h} from "vue";
-import {AppstoreOutlined, MailOutlined} from '@ant-design/icons-vue';
+import {AppstoreOutlined, MailOutlined, QuestionOutlined} from '@ant-design/icons-vue';
 import router from "@/router";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
@@ -32,6 +32,12 @@ const items = ref([
       icon: () => h(AppstoreOutlined),
       href: '/master-data/type-of-visa',
       label: 'Type of visa',
+    },
+    {
+      key: 'faqs',
+      icon: () => h(QuestionOutlined),
+      href: '/master-data/faqs',
+      label: 'Faqs',
     }
 
   ])
@@ -52,10 +58,10 @@ function menuClick({item}) {
       <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
-        <router-view  v-slot="{ Component }">
+        <router-view v-slot="{ Component }">
           <transition>
             <keep-alive :max="5">
-              <component :key="$route.fullPath"  :is="Component"/>
+              <component :key="$route.fullPath" :is="Component"/>
             </keep-alive>
           </transition>
         </router-view>

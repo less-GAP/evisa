@@ -94,7 +94,7 @@ const closeDetail = function () {
             @finish="onFinish"
     >
       <a-card body-style="padding:10px;height:55px;"
-              class="bg-gray-50 shadow ">
+              class="bg-gray-50  ">
         <a-button :icon="h(ArrowLeftOutlined)" class="float-left" type="link" @click="closeDetail"> Back to list
         </a-button>
         <a-space class="flex items-end float-right " align="right">

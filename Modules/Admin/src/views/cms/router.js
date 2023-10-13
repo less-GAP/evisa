@@ -33,6 +33,7 @@ export default [{
       component: () => import("./post/index.vue"),
 
     },
+
     {
       meta: {
         title: "Posts",
@@ -40,6 +41,23 @@ export default [{
       path: "/content-management/post/:id",
       name: "content-management-post-detail",
       component: () => import("./post/Detail.vue"),
+    },
+    {
+      meta: {
+        title: "Faqs",
+      },
+      path: "/content-management/faq",
+      name: "content-management-faq",
+      component: () => import("./faq/index.vue"),
+
+    },
+    {
+      meta: {
+        title: "Faqs",
+      },
+      path: "/content-management/faq/:id",
+      name: "content-management-faq-detail",
+      component: () => import("./faq/Detail.vue"),
     },
     {
       meta: {

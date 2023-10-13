@@ -32,6 +32,10 @@ export default [
         label: "Post",
       },
       {
+        to: "/content-management/faq",
+        label: "Faq",
+      },
+      {
         to: "/content-management/menu/site-menu",
         label: "Main Menu",
       },

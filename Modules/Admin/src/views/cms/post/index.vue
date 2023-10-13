@@ -27,7 +27,7 @@ const itemActions = [
   },
   {
     label: 'Delete',
-    class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
+    class: 'font-medium !text-red-600 dark:!text-red-500 hover:underline',
     action(item, reload) {
       deleteApi(item.id).then(rs => {
       }).finally(() => {

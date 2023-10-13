@@ -4,7 +4,8 @@ import {useMainStore} from "@/stores/main";
 import {mdiEye, mdiTrashCan} from "@mdi/js";
 import {Button, Input, InputUpload} from "@/components/index";
 import BaseIcon from "@/components/BaseIcon.vue";
-import {DownOutlined, ReloadOutlined, SearchOutlined} from "@ant-design/icons-vue";
+import {DownOutlined, ReloadOutlined, SearchOutlined, DragOutlined} from "@ant-design/icons-vue";
+import draggable from "vuedraggable";
 
 const emit = defineEmits(["register"]);
 
@@ -174,6 +175,18 @@ const rowSelection = computed(() => {
     }),
   };
 })
+const dragOptions = {
+  animation: 200,
+  group: "description",
+  disabled: false,
+  ghostClass: "ghost"
+}
+const checkMove = function (evt) {
+  evt.draggedContext.element.order = evt.draggedContext.futureIndex
+  evt.relatedContext.element.order = evt.draggedContext.index
+  emit('order', evt.draggedContext.element, evt.draggedContext.futureIndex)
+  emit('order', evt.relatedContext.element, evt.draggedContext.index)
+}
 reload()
 </script>
 
@@ -203,16 +216,7 @@ reload()
         </a-button>
         <slot name="filter" v-bind="{tableConfig,filter,reload}"></slot>
         <slot name="sort" v-bind="{tableConfig,sort,filter,reload}">
-          <a-select
-            v-if="showSort"
-            style="width: 140px"
-            placeholder="Order by..."
-            v-model:value="orderBy"
-            @change="reload"
-          >
-            <a-select-option v-for="sort in showSort" :key="sort.value" :value="sort.value">{{ sort.label }}
-            </a-select-option>
-          </a-select>
+
         </slot>
 
       </a-space>
@@ -240,6 +244,10 @@ reload()
                 class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
               </label>
             </th>
+            <th v-if="showSort" width="30" scope="col"
+                class="p-2 whitespace-nowrap">
+              #
+            </th>
 
             <th v-for="column in columns" scope="col" :width="column.width?column.width:'auto'"
                 class="p-2 whitespace-nowrap">
@@ -254,58 +262,73 @@ reload()
             </th>
           </tr>
           </thead>
-          <tbody v-if="data && data.length" class="text-sm divide-y divide-gray-100">
-          <tr v-for="(item,index) in data" :key="item[tableConfig.item_key]"
-              v-bind:class="{'border-b':(index%2===0)}">
-            <td v-if="showSelection" class="p-2 whitespace-nowrap">
-              <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
-                     class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
-                v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
-                class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              </label>
-            </td>
+          <draggable :move="checkMove" v-if="data && data.length" v-bind="dragOptions" v-model="data" itemKey="value"
+                     class="ant-table-tbody text-sm divide-y divide-gray-100" item-key="id"
+                     handle=".drag-handle"
+                     tag="tbody">
+            <template #item="{ element:item ,index }">
 
-            <td :data-label="column.title" v-for="column in columns"
-                :class="'p-2 ' + (column.class ? column.class : '')">
-              <template v-if="item.render">
-                {{ item.render(item) }}
-              </template>
-              <slot v-else-if="column.format" :name="'cell['+column.key+']'" v-bind="{item,column,index}">
-                {{ column.format(item[column.key]) }}
-              </slot>
-              <slot v-else :name="'cell['+column.key+']'" v-bind="{item,column,index}">
-                {{ $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key] }}
-              </slot>
-
-            </td>
-            <td v-if="itemActions.length " class="flex flex-wrap justify-center p-2 whitespace-nowrap">
-              <!-- Modal toggle -->
-              <template v-for="itemAction in itemActions">
-                <slot :name="'cellAction['+itemAction.key+']'"
-                      v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
-                  <a-popconfirm v-if="itemAction.confirm" @confirm="itemAction.action(item,reload)"
-                                title="Are you sure？">
-                    <a-button
-                      :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
-                      type="link"
-                    >
-                      {{ itemAction.label }}
-                    </a-button>
-                  </a-popconfirm>
-                  <a-button
-                    v-else
-                    @click="itemAction.action(item,reload)"
-                    :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
-                    type="link"
-                  >
-                    {{ itemAction.label }}
+              <tr :key="item[tableConfig.item_key]"
+                  v-bind:class="{'border-b':(index%2===0)}">
+                <td v-if="showSelection" class="p-2 whitespace-nowrap">
+                  <label :for="'checkbox-table-search-'+item[tableConfig.item_key]"
+                         class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> <input
+                    v-model="selectedItems" :id="item[tableConfig.item_key]" :value="item" type="checkbox"
+                    class="w-4 h-4 text-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  </label>
+                </td>
+                <td v-if="showSort" class="p-2 whitespace-nowrap">
+                  <a-button type="primary" primary>
+                    <template #icon>
+                      <DragOutlined class="drag-handle"></DragOutlined>
+                    </template>
                   </a-button>
+                </td>
 
-                </slot>
-              </template>
-            </td>
-          </tr>
-          </tbody>
+                <td :data-label="column.title" v-for="column in columns"
+                    :class="'p-2 ' + (column.class ? column.class : '')">
+                  <template v-if="item.render">
+                    {{ item.render(item) }}
+                  </template>
+                  <slot v-else-if="column.format" :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+                    {{ column.format(item[column.key]) }}
+                  </slot>
+                  <slot v-else :name="'cell['+column.key+']'" v-bind="{item,column,index}">
+                    {{
+                      $style['format'][column.key] ? $style['format'][column.key](item[column.key]) : item[column.key]
+                    }}
+                  </slot>
+
+                </td>
+                <td v-if="itemActions.length " class="flex flex-wrap justify-center p-2 whitespace-nowrap">
+                  <!-- Modal toggle -->
+                  <template v-for="itemAction in itemActions">
+                    <slot :name="'cellAction['+itemAction.key+']'"
+                          v-bind="{item ,itemAction, actionMethod(){itemAction.action(item,reload)}}">
+                      <a-popconfirm v-if="itemAction.confirm" @confirm="itemAction.action(item,reload)"
+                                    title="Are you sure？">
+                        <a-button
+                          :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                          type="link"
+                        >
+                          {{ itemAction.label }}
+                        </a-button>
+                      </a-popconfirm>
+                      <a-button
+                        v-else
+                        @click="itemAction.action(item,reload)"
+                        :class="itemAction.class?itemAction.class :'font-medium text-blue-600 dark:text-blue-500 hover:underline'"
+                        type="link"
+                      >
+                        {{ itemAction.label }}
+                      </a-button>
+
+                    </slot>
+                  </template>
+                </td>
+              </tr>
+            </template>
+          </draggable>
         </table>
       </slot>
       <a-empty class="my-10" :description="false" v-if="data?.length === 0 && pagination.total ===0"/>

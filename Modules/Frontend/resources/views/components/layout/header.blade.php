@@ -3,7 +3,7 @@ $menus = master_data('site-menu')->toArray();
 $mainMenus = array_slice($menus, 0, 5);
 $dropdownMenus = array_slice($menus, 6, -1);
 ?>
-<header class=" z-[9999] w-full border-b   main-header">
+<header class=" -z-[9999] w-full border-b   main-header">
     <div class="header-2">
         <nav class="py-2 bg-white lg:py-5">
             <div class="container relative px-4 mx-auto lg:flex lg:items-center">
@@ -49,6 +49,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                     <ul :class="toggled?'active':''"
                         class="flex-col shadow h-[600px] md:h-[auto] overflow-y-auto md:overflow-visible absolute z-[9999] lg:static lg:items-center flex lg:flex-row lg:ml-auto mt-1 lg:mt-0 lg:static absolute top-[51px] left-0 w-full lg:w-auto bg-white shadow-sm lg:shadow-none transition py-5 lg:py-0"
                         id="navbar-collapse">
+
                         @foreach($mainMenus as $menu)
                             <li class="relative group">
                                 <Link href="{{$menu['url']??''}}"
@@ -70,6 +71,7 @@ $dropdownMenus = array_slice($menus, 6, -1);
                                 @endif
                             </li>
                         @endforeach
+
                         @if(count($dropdownMenus))
                             <li class="relative group navbar-toggle">
                                 <button class="relative hidden overflow-hidden rounded-full outline-none lg:block">
@@ -115,12 +117,14 @@ $dropdownMenus = array_slice($menus, 6, -1);
                 <ul class="absolute hidden md:visible  space-x-2 text-gray-500 -translate-y-1/2 md:flex md:text-base lg:text-sm md:top-1/2 md:right-20 lg:-top-5 lg:right-8 lg:-translate-y-0"
                     id="topbar-menu">
 
+
                     <li>
                         <a href="/contact-us" class="hover:text-black">Contact</a>
                     </li>
                     @if(auth('frontend')->check())
                         <li>
-                            Welcome, <a href="/my-account" class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
+                            Welcome, <a href="/my-account"
+                                        class="hover:text-black">{{auth('frontend')->user()->full_name}}</a>
                         </li>
                         <li>
                             <a href="/logout" class="hover:text-black">Logout</a>

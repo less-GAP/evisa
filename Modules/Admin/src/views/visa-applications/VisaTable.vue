@@ -40,8 +40,18 @@ const itemActions = [
 const listActions = []
 const columns = [
   {
+    title: 'Code',
+    key: 'order_no',
+    width: 200
+  },
+  {
     title: 'Contact name',
     key: 'contact_name',
+    width: 200
+  },
+  {
+    title: 'Contact email',
+    key: 'contact_email',
     width: 200
   },
   {

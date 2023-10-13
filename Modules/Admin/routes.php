@@ -68,6 +68,15 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function () {
 
         });
+    EloquentRouter::prefix('faq')
+        ->handle(\App\Models\Faq::class,
+            [
+                'allowedSorts' => ['order','id'],
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'question')]
+            ]
+        )->routes(function () {
+
+        });
     EloquentRouter::prefix('page')
         ->handle(\App\Models\Page::class,
             [

@@ -39,6 +39,7 @@ class VisaApplication extends Model
         'user_id',
         'status',
         'approval_status',
+        'square_payment_complete_at',
     ];
 
     /**
@@ -59,6 +60,7 @@ class VisaApplication extends Model
     protected $casts = [
         'est_delivery_time' => 'datetime',
         'date_arrival' => 'datetime',
+        'square_payment_complete_at' => 'datetime',
 //        'password' => 'hashed',
     ];
 

@@ -29,6 +29,13 @@ export default [{
       path: "/configs/auth",
       name: "config-auth",
       component: () => import("./AuthConfig.vue"),
+    },{
+      meta: {
+        title: "Payment Configuration",
+      },
+      path: "/configs/payment",
+      name: "config-payment",
+      component: () => import("./PaymentConfig.vue"),
     }
   ]
 }]
