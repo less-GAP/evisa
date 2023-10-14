@@ -3,7 +3,7 @@
 @task('deploy')
     cd /home/evisa
     git pull origin main
-    sh build.sh
+    docker build  -t registry.digitalocean.com/lessgap/evisa:latest . --build-arg APP_ADMIN={{ env('APP_ADMIN') }}
     docker-compose down -v && docker-compose up -d
     docker-compose exec app php artisan migrate
     docker image rm $(docker image ls -f 'dangling=true' -q)
