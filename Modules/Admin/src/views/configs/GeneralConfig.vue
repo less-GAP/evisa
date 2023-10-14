@@ -11,6 +11,10 @@
     'site_logo',
     'site_icon',
     'site_description',
+
+    'copy_right',
+    'site_login_bg',
+    'site_login_bg_dynamic',
   ]
 
   const emit = defineEmits(["success", "cancel"]);
@@ -60,12 +64,23 @@
     <a-form-item name="site_description" label="Site description" :rules="[{ required: true }]">
       <a-textarea :showCount="true" maxlength="160"  autocomplete="off" v-model:value="formState.site_description"/>
     </a-form-item>
+    <a-form-item name="copy_right" label="Copyright" :rules="[{ required: true }]">
+        <a-textarea autocomplete="off" v-model:value="formState.copy_right"/>
+      </a-form-item>
+      <a-form-item name="site_login_bg" label="Login background">
+        <InputUploadGetPath width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_login_bg">
+        </InputUploadGetPath>
+      </a-form-item>
+      <a-form-item name="site_login_bg_dynamic" label="Dynamic Login background (URL)">
+        <a-input autocomplete="off" addon-before="https://source.unsplash.com/random/?" addon-after="/" class="rounded-lg" v-model:value="formState.site_login_bg_dynamic"/>
+        <div class="small">https://source.unsplash.com/random/?screenprinting</div>
+      </a-form-item>
     <a-form-item name="site_logo" label="Site Logo" :rules="[{ required: true }]">
       <InputUploadGetPath width="200px" alt="Site logo" autocomplete="off" v-model:value="formState.site_logo">
       </InputUploadGetPath>
     </a-form-item>
-    <a-form-item name="site_icon" label="Site Icon" :rules="[{ required: true }]">
-      <InputUploadGetPath width="100px" alt="Site Icon" autocomplete="off" v-model:value="formState.site_icon">
+    <a-form-item name="site_icon" label="Favicon" :rules="[{ required: true }]">
+      <InputUploadGetPath width="100px" alt="Favicon" autocomplete="off" v-model:value="formState.site_icon">
       </InputUploadGetPath>
     </a-form-item>
 

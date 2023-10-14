@@ -11,6 +11,11 @@
     'square_access_token',
     'square_location_id',
     'square_environment',
+
+    'paypal_client_id',
+    'paypal_client_secret',
+    'stripe_publishable_key',
+    'stripe_secret_key',
   ]
 
   const emit = defineEmits(["success", "cancel"]);
@@ -54,6 +59,9 @@
     v-bind="formConfig"
     @finish="submit"
   >
+
+  <a-Divider class="!font-bold !text-blue-700" dashed orientation="left" orientation-margin="0" plain>Square</a-Divider>
+
     <a-form-item name="square_app_id" label="Square App Id" :rules="[{ required: true }]">
       <a-input :showCount="true" maxlength="55"  autocomplete="off" v-model:value="formState.square_app_id"/>
     </a-form-item>
@@ -70,6 +78,26 @@
         <a-select-option value="custom">Custom</a-select-option>
       </a-select>
     </a-form-item>
+
+
+    <a-Divider class="!font-bold !text-blue-700" dashed orientation="left" orientation-margin="0" plain>Paypal</a-Divider>
+    <a-form-item name="paypal_client_id" label="Paypal Client ID">
+        <a-input autocomplete="off" v-model:value="formState.paypal_client_id" class="rounded border-gray-300"/>
+    </a-form-item>
+
+    <a-form-item name="paypal_client_secret" label="Paypal Client Secret">
+        <a-input autocomplete="off" v-model:value="formState.paypal_client_secret" class="rounded border-gray-300"/>
+    </a-form-item>
+
+    <a-Divider class="!font-bold !text-blue-700" dashed orientation="left" orientation-margin="0" plain>Stripe</a-Divider>
+    <a-form-item name="stripe_publishable_key" label="Stripe Publishable Key">
+        <a-input autocomplete="off" v-model:value="formState.stripe_publishable_key" class="rounded border-gray-300"/>
+    </a-form-item>
+
+    <a-form-item name="stripe_secret_key" label="Stripe Secret Key">
+        <a-input autocomplete="off" v-model:value="formState.stripe_secret_key" class="rounded border-gray-300"/>
+    </a-form-item>
+
 
 
     <a-form-item>

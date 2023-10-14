@@ -36,6 +36,62 @@ export default [{
       path: "/configs/payment",
       name: "config-payment",
       component: () => import("./PaymentConfig.vue"),
-    }
+    },
+    {
+      meta: {
+        title: "Posts Configuration",
+      },
+      path: "/configs/postspages",
+      name: "config-postspages",
+      component: () => import("./PostsConfig.vue"),
+    },
+    {
+      meta: {
+        title: "QuickBooks Configuration",
+      },
+      path: "/configs/quickbooks",
+      name: "config-quickbooks",
+      component: () => import("./QuickBooksConfig.vue"),
+    },
+    {
+      meta: {
+        title: "CloudFlare Configuration",
+      },
+      path: "/configs/cloudflare",
+      name: "config-cloudflare",
+      component: () => import("./CloudFlareConfig.vue"),
+    },
+    {
+      meta: {
+        title: "Google API Configuration",
+      },
+      path: "/configs/google",
+      name: "config-google",
+      component: () => import("./GoogleConfig.vue"),
+    },
+    {
+      meta: {
+        title: "Facebook API Configuration",
+      },
+      path: "/configs/facebook",
+      name: "config-facebook",
+      component: () => import("./FacebookConfig.vue"),
+    },
+    {
+      meta: {
+        title: "Marketing Configuration",
+      },
+      path: "/configs/marketing",
+      name: "config-marketing",
+      component: () => import("./MarketingConfig.vue"),
+    },
+    {
+      meta: {
+        title: "Social Configuration",
+      },
+      path: "/configs/social",
+      name: "config-social",
+      component: () => import("./SocialConfig.vue"),
+    },
   ]
 }]

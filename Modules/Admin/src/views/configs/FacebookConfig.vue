@@ -1,0 +1,77 @@
+<script setup>
+  import {reactive, ref} from "vue";
+  import {message} from 'ant-design-vue';
+
+  import Api from "@/utils/Api";
+  import validateMessages from "@/utils/validateMessages";
+  import {InputUpload, InputUploadGetPath} from "@/components";
+
+  // export default {
+  //   components: {}
+  // }
+
+
+  const configNames = [
+    'facebook_id',
+    'facebook_secret',
+  ]
+
+  const emit = defineEmits(["success", "cancel"]);
+  const loading = ref(false)
+  const error = ref(null)
+  const formState = reactive({});
+  const formConfig = reactive({
+    "validateTrigger": "submit",
+    "label-align": "top",
+    "model": formState,
+    labelCol: {span: 24},
+    wrapperCol: {span: 24},
+    "validate-messages": validateMessages,
+  });
+  const fetch = function () {
+    loading.value = true
+    Api.get('config', {params: {names: configNames}}).then(result => {
+      Object.assign(formState, result.data)
+    }).catch(e => {
+    }).finally(loading.value = false)
+  }
+  fetch();
+  const submit = async function () {
+    loading.value = true
+    Api.post('config', formState).then(result => {
+      emit('success', result)
+    }).catch(e => {
+    }).finally(loading.value = false)
+  }
+
+  const cancel = function () {
+    emit('cancel')
+  }
+
+</script>
+
+<template>
+
+  <a-form
+    autocomplete="off"
+    v-bind="formConfig"
+    @finish="submit"
+  >
+
+    <a-Divider class="!font-bold !text-blue-700" dashed orientation="left" orientation-margin="0" plain>Facebook</a-Divider>
+    <a-form-item name="facebook_id" label="Facebook ID">
+        <a-input autocomplete="off" v-model:value="formState.facebook_id" class="rounded border-gray-300"/>
+    </a-form-item>
+
+    <a-form-item name="facebook_secret" label="Facebook Secret">
+        <a-input autocomplete="off" v-model:value="formState.facebook_secret" class="rounded border-gray-300"/>
+    </a-form-item>
+
+    <a-form-item>
+      <a-space>
+        <a-button :loading="loading" type="primary" html-type="submit">Submit</a-button>
+      </a-space>
+    </a-form-item>
+  </a-form>
+
+</template>
