@@ -183,7 +183,7 @@ reload()
   <a-row :gutter="20">
     <a-col flex="1">
       <div class="relative text-center overflow-x-auto sm:rounded-lg">
-        <div :loading="loading" class="flex items-center justify-between">
+        <div :loading="loading" class="flex items-center justify-between  bg-white dark:bg-gray-800">
           <a-pagination v-if="pagination?.total" :showSizeChanger="showSizeChanger" @change="reload"
                         v-model:current="pagination.page"
                         v-model:pageSize="pagination.perPage" :total="pagination.total">
@@ -260,7 +260,7 @@ reload()
               <file-outlined style="margin:0 auto;font-size: 30px"/>
             </div>
             <div
-              class="absolute whitespace-nowrap text-center overflow-hidden text-ellipsis -bottom-[40px] w-full pl-2 pr-2 ">
+              class="absolute whitespace-nowrap text-center overflow-hidden text-ellipsis -bottom-[40px] bg-white w-full pl-2 pr-2 ">
               {{ image.file_name }}
             </div>
           </div>

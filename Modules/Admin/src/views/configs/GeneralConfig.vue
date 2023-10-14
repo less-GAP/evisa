@@ -80,7 +80,7 @@
       </InputUploadGetPath>
     </a-form-item>
     <a-form-item name="site_icon" label="Favicon" :rules="[{ required: true }]">
-      <InputUploadGetPath width="100px" alt="Favicon" autocomplete="off" v-model:value="formState.site_icon">
+      <InputUploadGetPath width="200px" alt="Favicon" autocomplete="off" v-model:value="formState.site_icon">
       </InputUploadGetPath>
     </a-form-item>
 

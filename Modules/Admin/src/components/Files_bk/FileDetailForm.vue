@@ -29,10 +29,11 @@ const handleDelete = async function () {
 <template>
 
   <a-row :gutter="20">
-    <a-col :span="8">
-      <InputUploadGetPath :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" v-model:value="value.site_path"></InputUploadGetPath>
+    <a-col :span="12">
+      <InputUploadGetPath width="100%" :dir="value.file_dir" :id="value?.id" :buttonConfig="{type:'primary'}" label="Replace" class="w-full"
+                   v-model:value="value.site_path"></InputUploadGetPath>
     </a-col>
-    <a-col :span="16">
+    <a-col :span="12">
       <a-descriptions size="small" :column="1">
         <a-descriptions-item label="Uploaded on"><b>{{ $format.formatDateTime(value.created_at) }}</b>
         </a-descriptions-item>
@@ -79,7 +80,7 @@ const handleDelete = async function () {
         <template #icon>
           <question-circle-outlined style="color: red"/>
         </template>
-        <a-button class="ml-10" style="float:right"  type="primary" danger href="#">Delete</a-button>
+        <a-button class="mr-10" style="float:right"  type="primary" danger href="#">Delete</a-button>
       </a-popconfirm>
     </a-form-item>
   </a-form>
