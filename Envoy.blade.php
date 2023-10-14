@@ -1,3 +1,8 @@
+@setup
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+@endsetup
+
 @servers(['web' => 'root@134.122.4.168'])
 
 @task('deploy')
