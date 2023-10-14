@@ -46,6 +46,11 @@ services:
     depends_on:
       - admin_dev
       - frontend_dev
+  redis:
+    image: 'redis'
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
 #    nginx:
 #        build: ./docker/nginx
 #        links:

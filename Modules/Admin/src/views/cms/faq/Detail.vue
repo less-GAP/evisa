@@ -79,7 +79,7 @@ const submit = (status) => {
 };
 const visible = ref(true)
 const closeDetail = function () {
-  router.replace(routePrefix)
+    router.replace(routePrefix)
 }
 
 

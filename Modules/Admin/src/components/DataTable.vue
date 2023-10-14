@@ -278,11 +278,12 @@ reload()
                   </label>
                 </td>
                 <td v-if="showSort" class="p-2 whitespace-nowrap">
-                  <a-button type="primary" primary>
+                  <a-button type="primary" class="mr-1" primary>
                     <template #icon>
                       <DragOutlined class="drag-handle"></DragOutlined>
                     </template>
                   </a-button>
+                  {{ index + 1 }}
                 </td>
 
                 <td :data-label="column.title" v-for="column in columns"

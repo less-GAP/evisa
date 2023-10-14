@@ -8,12 +8,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 <template>
   <LayoutAuthenticated>
-    <router-view  v-slot="{ Component }">
-      <transition>
-        <keep-alive :max="5">
-            <component :key="$route.fullPath"  :is="Component"/>
-        </keep-alive>
-      </transition>
+    <router-view >
     </router-view>
   </LayoutAuthenticated>
 
