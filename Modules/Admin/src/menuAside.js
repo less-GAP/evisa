@@ -3,6 +3,7 @@ import {
   mdiCog,
   mdiAccountMultiple,
   mdiDatabase,
+  mdiMessageText,
   mdiAccountGroupOutline,
   mdiBookOpenOutline,
   mdiFileDocumentMultipleOutline
@@ -55,7 +56,12 @@ export default [
     label: "User",
     icon: mdiAccountMultiple,
   },
-
+  {
+    to: "/email",
+    permission: 'email.list',
+    label: "Email",
+    icon: mdiMessageText,
+  },
   {
     to: null,
     label: "Platform",

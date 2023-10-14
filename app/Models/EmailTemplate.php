@@ -23,10 +23,12 @@ class EmailTemplate extends BaseModel
     protected $fillable = [
         'email_title',
         'status',
+        'email_reply_to',
         'email_from',
         'email_cc',
         'email_bcc',
         'email_content',
+        'content_type',
         'created_by',
         'updated_by',
     ];
@@ -46,6 +48,8 @@ class EmailTemplate extends BaseModel
      */
     protected $casts = [
         //'product_descr' => 'array',
+        'email_cc' => 'array',
+        'email_bcc' => 'array',
     ];
 
 }

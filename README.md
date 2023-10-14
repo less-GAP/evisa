@@ -18,32 +18,34 @@
 #### Setup
 
 ```bash
-cp .env.example .env
-touch database.sqlite
+cp .env.example .env 
 ```
+#### Login to docker registry
 
+```bash
+docker login registry.digitalocean.com
+username: dop_v1_c7be1b46ddd7ed4767f506f0070228a4088f77ad925b19402cf41a30f3aba8c1
+password: dop_v1_c7be1b46ddd7ed4767f506f0070228a4088f77ad925b19402cf41a30f3aba8c1
+```
+Update mysql database information 
 #### Run local development
 
 ```bash
 sh dev.sh
 ```
-#### Init database and data
-
+#### Init database and data for new setup
+Open new terminal
 ```bash
 sh init.sh
 ```
 * [Frontend url] (http://localhost:9100/)
 * [Admin url] (http://localhost:9200/)
 
-#### Build for production
+#### Deploy to production
+Add public key to server first
 
+Deploy script were defined in Envoy.blade.php
 ```bash
-docker login http://137.184.69.74:5555
-sh build.sh
+sh deploy.sh
 ```
 
-#### Run production
-
-```bash
-docker-compose up
-```

@@ -4,6 +4,8 @@ use App\Builder\EloquentRouter;
 use App\Models\EmailTemplate;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Actions\Auth\SocialAuthAction;
+use Modules\Admin\Actions\GetPublicConfig;
 use Modules\Admin\Actions\GetUserInfoAction;
 use Modules\Admin\Actions\User\DeleteUserAction;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
@@ -13,6 +15,8 @@ Route::get('/', function () {
     return 'admin api';
 });
 Route::post('auth/login', \Modules\Admin\Actions\Auth\PostLoginAction::class . '@handle');
+Route::get('/public/config', GetPublicConfig::class . '@handle');
+Route::post('/auth/social/{provider}', SocialAuthAction::class . '@handle');
 
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
 
@@ -71,7 +75,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     EloquentRouter::prefix('faq')
         ->handle(\App\Models\Faq::class,
             [
-                'allowedSorts' => ['order','id'],
+                'allowedSorts' => ['order', 'id'],
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'question')]
             ]
         )->routes(function () {
@@ -121,7 +125,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
             [
                 'allowedFilters' => [
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')
-                    ,AllowedFilter::exact('type')
+                    , AllowedFilter::exact('type')
                 ]
 
             ]
@@ -183,6 +187,21 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     });
 
     Route::prefix('/series')->group(function () {
+        EloquentRouter::prefix('email')
+            ->handle(
+                \App\Models\Email::class,
+                [
+                    'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_to')]
+                ]
+            );
+        EloquentRouter::prefix('email-template')
+            ->handle(
+                \App\Models\EmailTemplate::class,
+                [
+                    'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_content')]
+                ]
+            );
+
         Route::get('list', \Modules\Admin\Actions\Series\GetSeriesListAction::class . '@handle');
         Route::get('customer-groups', \Modules\Admin\Actions\Series\GetCustomerGroupsAction::class . '@handle');
         Route::get('{id}', \Modules\Admin\Actions\Series\GetSeriesDetailAction::class . '@handle');
@@ -257,6 +276,20 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         Route::get('{id}', \Modules\Admin\Actions\Orders\GetDetailAction::class . '@handle');
         Route::post('activeList', \Modules\Admin\Actions\Orders\PostActiveListAction::class . '@handle');
     });
+    EloquentRouter::prefix('email')
+        ->handle(
+            \App\Models\Email::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_to')]
+            ]
+        );
+    EloquentRouter::prefix('email-template')
+        ->handle(
+            \App\Models\EmailTemplate::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_content')]
+            ]
+        );
 
 
 });

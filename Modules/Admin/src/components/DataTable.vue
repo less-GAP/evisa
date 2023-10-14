@@ -229,7 +229,7 @@ reload()
         <slot name="action" v-bind="{selectedItems,data,reload}"></slot>
       </a-space>
     </div>
-    <div class="overflow-auto scroll-smooth flex-1 w-full bg-white shadow rounded-lg my-5">
+    <div class="overflow-hidden scroll-smooth flex-1 w-full bg-white shadow rounded-lg my-5">
       <a-skeleton active class="p-10" v-if="loading"/>
       <slot v-else name="table" v-bind="{tableConfig,tableData,data,columns,selectionActions,reload}">
 
@@ -287,7 +287,7 @@ reload()
                 </td>
 
                 <td :data-label="column.title" v-for="column in columns"
-                    :class="'p-2 ' + (column.class ? column.class : '')">
+                    :class="'p-2  whitespace-nowrap ' + (column.class ? column.class : '')">
                   <template v-if="item.render">
                     {{ item.render(item) }}
                   </template>

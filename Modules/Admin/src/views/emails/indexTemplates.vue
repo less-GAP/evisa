@@ -1,135 +1,139 @@
 <script setup>
-import {reactive, ref, h} from "vue";
-import {mdiDelete} from "@mdi/js";
-import {DataTable} from "@/components";
-import {DeleteOutlined} from '@ant-design/icons-vue';
-
-import Api from "@/utils/Api";
+import {reactive, ref, h, watch} from "vue";
+import {mdiBallotOutline, mdiDelete} from "@mdi/js";
+import {Modal, DataTable} from "@/components";
 import router from "@/router";
 
+import {UseEloquentRouter} from "@/utils/UseEloquentRouter";
+import {UseDataTable} from "@/utils/UseDataTable";
 
-const modalState = ref({
-  visible: false,
-  value: null,
-  success: () => {
-  },
-  cancel: () => {
-  },
-});
+const prefix = 'email-template'
+const routePath = '/email/templates'
+const {
+  fetchListApi,
+  createApi,
+  deleteApi,
+  updateApi
+} = UseEloquentRouter(prefix)
+const isShowModal = ref(false)
 
-function showEdit(value, success) {
-  modalState.value.visible = true;
-  modalState.value.value = value;
-  modalState.value.success = success;
+const itemActions = [
+  {
+    label: 'Edit',
+    action: (item, reload) => {
+      //showEditUser({}, reload)
+      router.push(routePath + '/' + item.id)
+    }
+  },
+  {
+    label: 'Delete',
+    class: 'font-medium !text-red-600 !dark:text-red-500 hover:underline',
+    confirm: true,
+    action(item, reload) {
+      deleteApi(item.id).then(rs => {
+      }).finally(() => {
+        reload();
+      });
+    }
+  }
+]
+const listActions = [
+  {
+    label: 'Add',
+    action: (reload) => {
+      //showEditUser({}, reload)
+      router.replace(routePath + '/new')
+    }
+  }
+]
+const columns = [
+
+  {
+    title: 'Title',
+    key: 'email_title',
+
+  }, {
+    title: 'Reply To',
+    key: 'email_reply_to',
+
+  },
+  {
+    title: 'Status',
+    key: 'status',
+    width: 100
+  },
+  {
+    title: 'Created at',
+    key: 'created_at',
+    width: 200
+  },
+]
+
+
+const tableConfig = UseDataTable(fetchListApi, {
+  columns,
+  listActions,
+  itemActions
+})
+let reloadTable = () => {
 }
 
-const tableConfig = {
-  api: (params) => Api.get('email-template/list', {params}),
-  addAction: (reload) => {
-    // showEdit(null, reload)
-    router.replace('/email/templates/form/' )
-  },
-  itemActions: [
-    // {
-    //   label: 'View'
-    //   , key: 'view'
-    //   , icon: mdiEye
-    //   , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-    //   , action(item, reload) {
-    //     router.replace('/users/' + item.id)
-    //   }
-    // },
-    {
-      label: 'Edit'
-      , key: 'edit'
-      , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
-      , action(item, reload) {
-        router.replace('/email/templates/form/' + item.id)
-      }
-    },
-    {
-      label: ''
-      , class: 'font-medium text-red-600 dark:text-red-500 hover:underline'
-      , icon: mdiDelete
-      , key: 'delete'
-      , action(item, reload) {
-        Api.delete('email-template/' + item.id).then(reload)
-      }
-    }
+watch(router.currentRoute, (data) => {
+  if (data.path === routePath) {
+    reloadTable()
+  }
+});
 
-  ],
-  columns: [
-     {title: 'Title', key: 'email_title'}
-    , {title: 'Status', key: 'status'}
-    , {title: 'Updated By', key: 'updated_by'}
-    , {title: 'Updated At', key: 'updated_at'}
-  ],
-  selectionActions: [
-    // {
-    //   title: 'Active',
-    //   action(selectedKeys) {
-    //     return Api.post('user/activeList', selectedKeys)
-    //   }, complete() {
-    //     alert('success')
-    //   }
-    // }
-    // , {
-    //   title: 'DeActive', action(selectedKeys) {
-    //     return Api.post('user/activeList', selectedKeys)
-    //   }, complete() {
-    //     alert('success')
-    //   }
-    // }
-    // , {
-    //   title: 'Delete',
-    //   action(selectedKeys) {
-    //     return Api.post('user/deleteList', selectedKeys)
-    //   },
-    //   complete() {
-    //     alert('success')
-    //   }
-    // }
-  ]
+function registerTable({reload}) {
+  reloadTable = reload
 }
 
 </script>
 
 <template>
-  <DataTable v-bind="tableConfig">
+  <DataTable @register="registerTable" v-bind="tableConfig">
     <template #cellAction[delete]="{item,actionMethod}">
       <a-popconfirm
-        title="Are you sure?"
+        title="Bạn muốn xóa sản phẩm này?"
         ok-text="Yes"
         cancel-text="No"
         @confirm="actionMethod"
       >
         <a-button
           type="text"
-          v-if="item.role !== 'admin'"
           danger
           :icon="h(DeleteOutlined)"
           label=""
           :outline="true"
         >
-
         </a-button>
-
       </a-popconfirm>
     </template>
-    <template #cell[full_name]="{item,column}">
-      <img class="w-10 h-10 float-left rounded-full" :src="item.profile_photo_url"
-           :alt="item.full_name">
-      <div class="pl-3 float-left">
-        <div class="text-base font-semibold">{{ item.full_name }}</div>
-        <div class="font-normal text-gray-500">{{ item.email }}</div>
-      </div>
+    <template #cellAction[edit]="{item,actionMethod}">
+      <a-button
+        class="mr-5"
+        type="text"
+        :icon="h(FormOutlined)"
+        label=""
+        :outline="true"
+        @click="actionMethod"
+      >
+      </a-button>
     </template>
-    <template #cell[status]>
-      <div class="flex items-center">
-        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
-        Offline
-      </div>
+    <template #cell[image]="{item,column}">
+      <a-image height="50px" class="w-20 h-auto" :src="item.image"
+               :alt="item.name"/>
+    </template>
+
+    <template #cell[status]="{item,column}">
+      <a-switch @change="updateApi(item.id,{status:item.status})" checkedValue="active" unCheckedValue="inactive"
+                v-model:checked="item.status"/>
+    </template>
+    <template #cell[is_default]="{item,column}">
+      <a-switch @change="updateApi(item.id,{is_default:item.is_default})" :checkedValue="1" :unCheckedValue="0"
+                v-model:checked="item.is_default"/>
     </template>
   </DataTable>
+  <router-view></router-view>
 
 </template>

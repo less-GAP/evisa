@@ -69,8 +69,10 @@ import InputTags from "./InputTags.vue"
 import DataListEdit from "./DataListEdit.vue"
 import ApiData from "./ApiData.vue"
 import InputCategories from "./InputCategories.vue"
+import GoogleLogin from "./GoogleLogin.vue"
 export {
   InputCategories,
+  GoogleLogin,
   ApiData,
   DataListEdit,
   InputTags,

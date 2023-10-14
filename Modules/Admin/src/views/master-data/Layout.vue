@@ -33,12 +33,7 @@ const items = ref([
       href: '/master-data/type-of-visa',
       label: 'Type of visa',
     },
-    {
-      key: 'faqs',
-      icon: () => h(QuestionOutlined),
-      href: '/master-data/faqs',
-      label: 'Faqs',
-    }
+
 
   ])
 ;

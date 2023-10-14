@@ -1,5 +1,5 @@
-
 <x-front::layout.default>
+
     <div class="container mx-auto flex flex-wrap py-6">
         <div class="w-full md:w-2/3 flex flex-col items-center px-4">
             {{$slot}}
@@ -10,7 +10,7 @@
                 <p class="text-xl uppercase font-semibold pb-5">Why apply with us?</p>
                 <ul class="pl-5 list-none md:list-disc">
                     <li>
-                        <b >
+                        <b>
                             Takes less than 5 minutes
                         </b>
                         <p>
@@ -18,15 +18,16 @@
                         </p>
                     </li>
                     <li>
-                        <b >
+                        <b>
                             EXPERT REVIEW
                         </b>
                         <p>
-                            Our immigration experts review all information and documents to ensure they meet the requirements.
+                            Our immigration experts review all information and documents to ensure they meet the
+                            requirements.
                         </p>
                     </li>
                     <li>
-                        <b >
+                        <b>
 
                             MONEY-BACK GUARANTEE
                         </b>
@@ -35,7 +36,7 @@
                         </p>
                     </li>
                     <li>
-                        <b >
+                        <b>
 
                             PROMPT SUPPORT
                         </b>
