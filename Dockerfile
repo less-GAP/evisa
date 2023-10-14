@@ -15,6 +15,7 @@ FROM node:19 AS node
 FROM registry.digitalocean.com/lessgap/laravel-php82:latest
 WORKDIR /app
 ARG APP_ADMIN
+RUN echo ${APP_ADMIN}
 COPY --from=admin /app/public ./public/${APP_ADMIN}
 RUN mkdir ./storage
 RUN mkdir ./storage/logs
