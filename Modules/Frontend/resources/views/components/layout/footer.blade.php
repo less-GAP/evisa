@@ -34,13 +34,9 @@ $footerMenus = master_data('footer-menu')->toArray();
                 <div
                     class="w-full md:w-1/2 lg:w-2/3 mt-5 md:mt-0 text-center md:text-right md:text-base text-[12px]">
                     <div class="">
-                        Traversia LLC<br/>
-                        11536 Harry Hines Blvd<br/>
-                        Unit 203<br/>
-                        Dallas, TX  75229<br/>
-                        Email: <a href="mailto:traversiallc@gmail.com">traversiallc@gmail.com</a>
-                        <br/>
-
+                        <strong>Traversia LLC</strong><br/>
+                        11536 Harry Hines Blvd, Unit 203, Dallas, TX  75229<br/>
+                        <strong>Email:</strong> <a href="mailto:traversiallc@gmail.com">traversiallc@gmail.com</a>
                     </div>
                 </div>
             </div>
