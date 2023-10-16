@@ -46,5 +46,7 @@ class DatabaseSeeder extends Seeder
             'data' => json_decode('[{"children":[],"label":"Home","url":"/"},{"children":[],"label":"Apply online","url":"/apply"},{"children":[],"label":"Visa fees","url":null},{"children":[],"label":"How to apply","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"FAQs","url":"/faqs"},{"children":[],"label":"News","url":"/news"},{"children":[],"label":"Vietnam Visa Requirements","url":"/post/vietnam-visa-requirements"},{"children":[],"label":"How to get a Vietnam visa","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"Vietnam visa exemption","url":"/post/vietnam-visa-exemption-all-you-need-to-know-2023"},{"children":[],"label":"Emergency visa","url":"/vietnam-emergency-visa"},{"children":[],"label":"Business visa","url":"/post/vietnam-business-visa"},{"children":[],"label":"Photo requirements","url":"/post/vietnam-visa-photo-guidelines"},{"children":[],"label":"Visa types","url":"/post/6-major-types-of-vietnam-visa"},{"children":[],"url":"/contact-us","label":"Contact us"},{"children":[],"label":"All guides","url":"/faqs"}]', true),
         ]);
 
+        \App\Models\VisaCustomerLevel::factory()->create();
+
     }
 }
