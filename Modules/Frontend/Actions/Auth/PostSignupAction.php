@@ -15,6 +15,7 @@ class PostSignupAction
         $data = $request->all();
         $data['password'] = \Hash::make($data['password']);
         $user = VisaUser::create($data);
+        lessgap_handle_event('after_customer_signup', ['user' => $user]);
 //        auth('frontend')->login($user);
         Toast::message('Signup successfully!')
             ->success()

@@ -23,5 +23,6 @@ class ServiceProvider extends AbstractModuleProvider
         Splade::defaultToast(function ($toast) {
             $toast->info()->centerTop()->autoDismiss(5);
         });
+
     }
 }

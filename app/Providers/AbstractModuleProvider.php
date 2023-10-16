@@ -48,6 +48,9 @@ class AbstractModuleProvider extends ServiceProvider
         if (!$this->viewPrefix) {
             $this->viewPrefix = $dirName;
         }
+        if (is_file($this->dir . '/register_events.php')) {
+            require $this->dir . '/register_events.php';
+        }
         if (is_dir($this->dir . '/resources/views')) {
             $this->loadViewsFrom($this->dir . '/resources/views', $this->viewPrefix);
 

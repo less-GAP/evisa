@@ -10,7 +10,8 @@ export const useStyleStore = defineStore("style", {
       sidebarCollapsedWidth:'100px',
     },
     format:{
-      'created_at':Format.formatDateTime
+      'sent_at':Format.formatDateTime
+      ,'created_at':Format.formatDateTime
       ,'updated_at':Format.formatDateTime
       ,'est_delivery_time':Format.formatDateTime
       ,'date_arrival':Format.formatDateTime

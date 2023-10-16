@@ -7,7 +7,12 @@ import {RemoteSelect} from "@/components";
 
 
 const listUser = ref();
-const configNames = ["email_template_register", "email_template_thankyou"];
+const configNames = [
+  "email_template_signup"
+  , "email_template_auto_signup"
+  , "email_template_reset_password"
+  , "email_template_thank_you"
+];
 
 const emit = defineEmits(["success", "cancel"]);
 const loading = ref(false);
@@ -77,7 +82,7 @@ const updateList = function (evt) {
       <RemoteSelect
         url="email-template/all"
         valueKey="id"
-        labelKey="email_title"
+        labelKey="name"
         v-model:value="formState.email_template_signup"
       ></RemoteSelect>
     </a-form-item>
@@ -88,7 +93,7 @@ const updateList = function (evt) {
       <RemoteSelect
         url="email-template/all"
         valueKey="id"
-        labelKey="email_title"
+        labelKey="name"
         v-model:value="formState.email_template_auto_signup"
       ></RemoteSelect>
     </a-form-item>
@@ -99,19 +104,19 @@ const updateList = function (evt) {
       <RemoteSelect
         url="email-template/all"
         valueKey="id"
-        labelKey="email_title"
+        labelKey="name"
         v-model:value="formState.email_template_reset_password"
       ></RemoteSelect>
     </a-form-item>
     <a-form-item
-      name="email_template_thankyou"
+      name="email_template_thank_you"
       label="Visa Apply confirm email"
     >
       <RemoteSelect
         url="email-template/all"
         valueKey="id"
-        labelKey="email_title"
-        v-model:value="formState.email_template_thankyou"
+        labelKey="name"
+        v-model:value="formState.email_template_thank_you"
       ></RemoteSelect>
     </a-form-item>
 

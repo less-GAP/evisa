@@ -5,13 +5,7 @@ import router from "@/router";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
 const items = ref([
-  {
-    key: 'email-history',
-    icon: () => h(MailOutlined),
-    label: 'History',
-    href: '/email/history',
-    title: 'History',
-  },
+
   {
     key: 'email-templates',
     icon: () => h(AppstoreOutlined),

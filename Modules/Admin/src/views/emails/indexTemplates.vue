@@ -26,6 +26,13 @@ const itemActions = [
     }
   },
   {
+    label: 'Clone',
+    action: (item, reload) => {
+      //showEditUser({}, reload)
+      router.push(routePath + '/' + item.id+'/clone')
+    }
+  },
+  {
     label: 'Delete',
     class: 'font-medium !text-red-600 !dark:text-red-500 hover:underline',
     confirm: true,
@@ -49,10 +56,15 @@ const listActions = [
 const columns = [
 
   {
-    title: 'Title',
-    key: 'email_title',
+    title: 'Name',
+    key: 'name',
 
   }, {
+    title: 'Mail Title',
+    key: 'email_title',
+
+  },
+  {
     title: 'Reply To',
     key: 'email_reply_to',
 

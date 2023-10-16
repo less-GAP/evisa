@@ -3,6 +3,7 @@
 namespace Lessgap;
 
 use Illuminate\Support\ServiceProvider;
+use Lessgap\Events\EventManager;
 use Lessgap\Events\NotificationEventHandler;
 use Lessgap\Notifications\LessgapNotification;
 use Illuminate\Contracts\Foundation\Application;
@@ -16,6 +17,9 @@ class LessgapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->singleton(EventManager::class, function (Application $app) {
+            return new EventManager();
+        });
         $this->app->singleton(EmailService::class, function (Application $app) {
             return new EmailService();
         });
@@ -29,6 +33,7 @@ class LessgapServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        require __DIR__."/Helper.php";
 
     }
 }

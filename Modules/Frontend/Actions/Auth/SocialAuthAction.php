@@ -29,7 +29,9 @@ class SocialAuthAction
 
         $google_oauth = new Google_Service_Oauth2($client);
         $google_account_info = $google_oauth->userinfo->get();
-
+        $exist = VisaUser::where([
+            'email' => $google_account_info->email
+        ])->first();
         $user = VisaUser::updateOrCreate([
             'email' => $google_account_info->email
         ],
@@ -37,6 +39,10 @@ class SocialAuthAction
                 'full_name' => $google_account_info->name
             ]
         );
+        if (!$exist) {
+            lessgap_handle_event('after_customer_signup', ['user' => $user]);
+        }
+
         auth('frontend')->login($user);
         Toast::message('Login successfully!')
             ->success()

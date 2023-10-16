@@ -1,11 +1,30 @@
 export default [
   {
     meta: {
+      title: "Email History",
+    },
+    path: "/email-histories",
+    name: "email-history",
+    component: () => import("./indexHistory.vue"),
+    children: [
+      {
+        meta: {
+          title: "Email History",
+        },
+        path: "/email-histories/:id",
+        name: "email-history-detail",
+        component: () => import("./EmailDetail.vue"),
+
+      }
+    ]
+  },
+  {
+    meta: {
       title: "Emails",
     },
-    path: "/email",
     name: "email",
-    redirect: '/email/history',
+    path: "/email",
+    redirect:'/email/templates',
     component: () => import("./EmailLayout.vue"),
     children: [{
       meta: {
@@ -19,33 +38,14 @@ export default [
           meta: {
             title: "Email Templates",
           },
-          path: "/email/templates/:id",
+          path: "/email/templates/:id/:type?",
           name: "email-templates-form",
           component: () => import("./FormEmailTemplate.vue"),
-
-        }
+        },
       ]
     },
 
-      {
-        meta: {
-          title: "Email History",
-        },
-        path: "/email/history",
-        name: "email-history",
-        component: () => import("./indexHistory.vue"),
-        children: [
-          {
-            meta: {
-              title: "Email History",
-            },
-            path: "/email/history/:id",
-            name: "email-history-detail",
-            component: () => import("./EmailDetail.vue"),
 
-          }
-        ]
-      },
       {
         meta: {
           title: "Email Config",

@@ -23,12 +23,17 @@ class Email extends Model
     protected $fillable = [
         'template_id',
         'status',
+        'sent_at',
         'email_title',
+        'email_data',
         'email_cc',
+        'email_to',
         'email_bcc',
         'email_content',
         'created_by',
         'updated_by',
+        'reference_class',
+        'reference_key',
     ];
 
     /**
@@ -45,7 +50,10 @@ class Email extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        //'product_descr' => 'array',
+        'sent_at' => 'datetime',
+        'email_data' => 'array',
+        'email_cc' => 'array',
+        'email_bcc' => 'array',
     ];
 
 }

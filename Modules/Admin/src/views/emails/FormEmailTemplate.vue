@@ -33,7 +33,7 @@ const loading = ref(true)
 const error = ref(null)
 const formState = reactive({
   isNew: true,
-  full_name: "",
+  name: "",
   email_cc: [],
   email_bcc: [],
   username: "",
@@ -57,11 +57,15 @@ const fetch = async function (id) {
   Api.get('email-template/' + id).then(result => {
     loading.value = false
     Object.assign(formState, result.data)
+    if (router.currentRoute.value.params.type == 'clone') {
+      formState.id = null
+      formState.name = null
+    }
   })
 
 }
 if (id) {
-   fetch(id)
+  fetch(id)
 }
 const submit = async function () {
   loading.value = true
@@ -144,6 +148,9 @@ const buttons = reactive([
           </div>
           <a-row style="height:calc(100vh - 100px);" class="p-5" :gutter="20">
             <a-col :span="8">
+              <a-form-item class="w-full " name="name" label="Template name" :rules="[{ required: true }]">
+                <a-input autocomplete="off" v-model:value="formState.name"/>
+              </a-form-item>
               <a-form-item class="w-full " name="email_title" label="Mail title" :rules="[{ required: true }]">
                 <a-input autocomplete="off" v-model:value="formState.email_title"/>
               </a-form-item>

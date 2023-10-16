@@ -8,7 +8,7 @@ import router from "@/router";
 import {ApiData} from "@/components";
 
 const prefix = 'email/history'
-const routeList = '/' + prefix
+const routeList = '/email-histories'
 const props = defineProps({
   value: Object
 })

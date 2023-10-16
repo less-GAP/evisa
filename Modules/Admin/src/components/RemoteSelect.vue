@@ -9,7 +9,7 @@
   >
     <template :key="option[valueKey]" v-for="option in filteredOptions">
       <slot name="option" v-bind="{option,valueKey,labelKey}">
-        <a-select-option :value="option[valueKey]">
+        <a-select-option :value="typeof inputValue == 'string'?String(option[valueKey]):option[valueKey]">
           {{ option[labelKey] }}
         </a-select-option>
       </slot>
