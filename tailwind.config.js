@@ -9,7 +9,7 @@ export default {
         "./vendor/protonemedia/laravel-splade/lib/**/*.vue",
         "./vendor/protonemedia/laravel-splade/resources/views/**/*.blade.php",
         "./Modules/Frontend/resources/views/**/*.php",
-        "./Modules/Frontend/resources/views/**/*/*.php",
+        "./Modules/Frontend/resources/views/**/**/**.php",
         "./resources/js/**/*.vue",
         './resources/**/*.css',
         // "./app/Forms/*.php",

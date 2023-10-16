@@ -5,7 +5,7 @@ import {createPinia} from "pinia";
 import Antd from 'ant-design-vue';
 import {createApp} from "vue/dist/vue.esm-bundler.js";
 import {renderSpladeApp, SpladePlugin} from "@protonemedia/laravel-splade";
-
+import VueCountdown from '@chenfengyuan/vue-countdown';
 const pinia = createPinia();
 import VisaApplicationForm from './components/VisaApplicationForm.vue';
 import PaypalCheckout from './components/PaypalCheckout.vue';
@@ -31,6 +31,7 @@ createApp({
         , GoogleLogin
         , Swiper
         , SwiperSlide
+        , VueCountdown
     },
 }).use(pinia).use(Antd)
     .mount(el)

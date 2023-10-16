@@ -27,6 +27,7 @@ class VisaUser extends Authenticatable
         'phone',
         'type',
         'status',
+        'require_change_password',
         'password',
     ];
 

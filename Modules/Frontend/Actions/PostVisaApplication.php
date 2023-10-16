@@ -5,6 +5,7 @@ namespace Modules\Frontend\Actions;
 
 use App\Models\VisaApplication;
 use App\Models\VisaApplicationApplicant;
+use App\Models\VisaUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,23 @@ class PostVisaApplication
             $visaData['status'] = 'pending-preview';
             $visaData['payment_status'] = 'waiting';
             $visaData['user_id'] = auth('frontend')->user() ? auth('frontend')->user()->id : null;
+
             $visaApplication = VisaApplication::create($visaData);
+            if (!$visaData['user_id'] && !$user = VisaUser::where('email', $visaData['contact_email'])->first()) {
+                $password = \Str::random(8);
+                $user = VisaUser::updateOrCreate([
+                    'email' => $visaApplication->contact_email
+                ],
+                    [
+                        'full_name' => $visaApplication->contact_name,
+                        'password' => \Hash::make($password),
+                        'require_change_password' => 1,
+                        'email_verified_at' => Carbon::now()
+                    ]
+                );
+                lessgap_handle_event('after_customer_auto_signup', ['user' => $user, 'password' => $password]);
+
+            }
             $documents = $request->input('applicants', []);
             for ($i = 0; $i < $visaApplication->number_of_visa; $i++) {
                 $data = $documents[$i];
@@ -41,8 +58,11 @@ class PostVisaApplication
 
             return $visaApplication;
         } catch (\Throwable $exception) {
-           \Log::error($exception);
-           throw new \Exception('System Error!');
+            \Log::error($exception);
+            if (env('APP_DEBUG')) {
+                throw $exception;
+            }
+            throw new \Exception('System Error!');
         }
     }
 }

@@ -3,7 +3,7 @@
 global $eventManager;
 $eventManager = new Lessgap\Events\EventManager;
 
-function lessgap_register_event($eventName, $handler)
+function lessgap_register_event_handler($eventName, $handler)
 {
     global $eventManager;
     $eventManager->registerEvent($eventName, $handler);

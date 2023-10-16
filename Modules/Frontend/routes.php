@@ -38,6 +38,7 @@ Route::middleware(['splade'])->group(function () {
     Route::view('/my-account/edit-profile', 'front::my-account.edit-profile')->name('edit-profile');
 
     Route::view('/login', 'front::login')->name('login');
+    Route::view('/reset-password', 'front::reset-password')->name('reset-password');
     Route::view('/signup', 'front::signup')->name('signup');
     Route::get('/logout', LogoutAction::class . '@handle')->name('logout');
     Route::post('/login', PostLoginAction::class . '@handle')->name('post-login');

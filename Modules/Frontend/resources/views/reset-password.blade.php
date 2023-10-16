@@ -23,28 +23,22 @@
         </div>
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
-            <x-splade-form :validateTrigger="'submit'" action="/login" method="POST">
+            <x-splade-form :validateTrigger="'submit'" action="/reset-password" method="POST">
                 <a-card class="px-4 " body-style="width:500px">
                     <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
-                    <x-splade-input name="password" type="password" label="Password" required autocomplete="off"/>
                     <x-splade-submit
                         class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
-                        :spinner="true"/>
+                        :spinner="true">Send Code
+                    </x-splade-submit>
                     <div class="inline-flex w-full">
-                        <Link class="mr-5 w-1/2" href="/reset-password">
-                            <x-front::button link>Reset</x-front::button>
-                        </Link>
-                        <Link class=" w-1/2" href="/signup">
-                            <x-front::button link>Signup</x-front::button>
+{{--                        <vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="\{ days, hours, minutes, seconds \}">--}}
+{{--                            \{\{ seconds \}\} seconds.--}}
+{{--                        </vue-countdown>--}}
+                        <Link href="/login">
+                            <x-front::button link>Login</x-front::button>
                         </Link>
                     </div>
-                    @if(settings('login_google')=='active')
-                        <GoogleLogin login_url="{{url('auth/google')}}"
-                                     :success="()=>$splade.visit('/my-account')"
-                                     client_id="{{settings('login_google_id')}}">
 
-                        </GoogleLogin>
-                    @endif
                 </a-card>
             </x-splade-form>
         </div>
