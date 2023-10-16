@@ -46,8 +46,8 @@ $dropdownMenus = array_slice($menus, 6, -1);
                         </span>
                     </div>
 
-                    <div class="flex flex-col lg:ml-auto lg:items-end">
-                        <ul class="hidden md:visible space-x-2 text-gray-500 md:flex md:text-base lg:text-sm"
+                    <div class="flex flex-col lg:ml-auto lg:items-end" id="navbar-collapse" :class="toggled?'active h-auto':'h-[0px] p-0 lg:h-auto'">
+                        <ul class="lg:space-x-2 text-gray-500 flex flex-col lg:flex-row md:text-base lg:text-sm px-5 mt-7 lg:mt-0 lg:px-0"
                             id="topbar-menu">
         
                             <li>
@@ -70,9 +70,8 @@ $dropdownMenus = array_slice($menus, 6, -1);
                                 </li>
                             @endif
                         </ul>
-                        <ul :class="toggled?'active':''"
-                            class="flex-col h-[600px] md:h-[auto] overflow-y-auto md:overflow-visible lg:static lg:items-center flex lg:flex-row mt-1 w-full lg:w-auto bg-white shadow-sm lg:shadow-none py-5 lg:py-0"
-                            id="navbar-collapse">
+                        <ul class="flex-col h-[600px] md:h-[auto] overflow-y-auto md:overflow-visible lg:static lg:items-center flex lg:flex-row mt-1 w-full lg:w-auto bg-white shadow-sm lg:shadow-none py-5 lg:py-0"
+                            >
     
                             @foreach($mainMenus as $menu)
                                 <li class="relative group">
