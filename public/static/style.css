@@ -70,8 +70,8 @@
     pointer-events: auto;
 }
 
+@media screen and (min-width: 1024px) {
 .lessGAP .main-header #topbar-menu li + li:before {
-    @media screen and (min-width: 1024px) {
         content: "|";
         display: inline-block;
         padding-right: 6px;
@@ -183,4 +183,21 @@
 .lessGAP .tabs .tab-navs a:hover, .lessGAP .tabs .tab-navs a.active {
     background-color: #000;
     color: #fff;
+}
+
+.lessGAP #evisasidebar h3 {
+    margin: .5rem 0;
+}
+
+#page-content table,
+#page-content ul,
+#page-content ol,
+#page-content dl,
+#page-content blockquote,#page-content dl,#page-content dd,#page-content h1,#page-content h2,#page-content h3,#page-content h4,#page-content h5,#page-content h6,#page-content hr,#page-content figure,#page-content p,#page-content pre {
+    margin-bottom: 1rem;
+}
+
+#page-content ul,
+#page-content ol{
+    padding-left: 1rem;
 }

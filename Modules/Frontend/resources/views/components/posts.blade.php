@@ -19,7 +19,7 @@ $posts = $postQuery->orderBy('id', 'desc')->paginate(20);
     @endif
     <div class="tabContents w-full clear-both">
         <div class="tabBox" id="allArticles">
-            <div class="grid grid-cols-12 gap-x-[30px] gap-y-[74px]">
+            <div class="grid grid-cols-12 gap-x-[30px] gap-y-[34px]">
                 @foreach($posts as $post)
                     <div class="col-span-12 sm:col-span-6 lg:col-span-4">
                         <div class="block">
@@ -30,9 +30,9 @@ $posts = $postQuery->orderBy('id', 'desc')->paginate(20);
 
                             </div>
                             <div class="block"><Link href="{{$post->url}}"><p
-                                        class="font-bold text-first-brand text-header-5 tracking-[-0.02em] transition-common hover:text-success">
+                                        class="text-lg font-bold text-first-brand text-header-5 tracking-[-0.02em] transition-common hover:text-success">
                                         {{$post->title}}</p></Link>
-                                <div class="font-medium text-gray-500 text-mini-desc mb-6 mt-[10px]">
+                                <div class="font-medium text-gray-500 text-mini-desc mb-6">
                                     <span>{{$post->created_at->format('M d, Y')}}</span><span
                                         class="inline-block ml-5 pl-5 bg-no-repeat bg-[left_center] bg-[url('{{$post->image_url}}')]"></span>
                                 </div>

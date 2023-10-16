@@ -11,6 +11,6 @@ if (!empty($attributes['link'])) {
 }
 ?>
 <button type="submit"
-        class="flex items-center w-full justify-center uppercase p-4 mt-5 text-2xl {{$style}} 2xl:text-3xl lg:mt-10 uppercase leading-none">
+        class="flex items-center w-full justify-center uppercase pt-4 pb-3 px-[2rem] mt-5 text-2xl {{$style}} 2xl:text-3xl lg:mt-10 uppercase leading-none">
     {{$slot}}
 </button>
