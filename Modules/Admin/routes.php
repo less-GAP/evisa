@@ -283,6 +283,13 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_to')]
             ]
         );
+    EloquentRouter::prefix('contact')
+        ->handle(
+            \App\Models\Contact::class,
+            [
+                'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email,title')]
+            ]
+        );
     EloquentRouter::prefix('email-template')
         ->handle(
             \App\Models\EmailTemplate::class,

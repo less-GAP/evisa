@@ -1,6 +1,7 @@
 // https://pictogrammers.com/library/mdi/
 import {
   mdiCog,
+  mdiContacts,
   mdiAccountMultiple,
   mdiDatabase,
   mdiMessageText,
@@ -44,7 +45,7 @@ export default [
     label: "Pages",
     icon: mdiBookOpenPageVariant,
   },
-  
+
   {
     to: "/content-management/faq",
     label: "FAQs",
@@ -59,6 +60,11 @@ export default [
     to: "/content-management/menu/footer-menu",
     label: "Footer Menu",
     icon: mdiViewWeek,
+  },
+  {
+    to: "/contact",
+    label: "Contacts",
+    icon: mdiContacts,
   },
   // {
   //   label: "Content",
