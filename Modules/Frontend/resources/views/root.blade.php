@@ -23,7 +23,6 @@
     @elseif(settings('square_environment')=='production')
         <script src="https://web.squarecdn.com/v1/square.js"></script>
     @endif
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 
     @vite(['resources/js/app.js'])
     @spladeHead

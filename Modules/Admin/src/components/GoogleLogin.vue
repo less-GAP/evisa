@@ -7,6 +7,7 @@ const props = defineProps({
     login_url: String,
     success: Function,
 })
+const emit =defineEmits(['success'])
 const login = () => {
     googleSdkLoaded((google) => {
         google.accounts.oauth2.initCodeClient({

@@ -28,17 +28,16 @@
                     <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
                     <x-splade-input name="password" type="password" label="Password" required autocomplete="off"/>
                     @if(settings('recaptcha_auth_enable') == 'active')
-                        <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}" v-slot="{ result }">
-                            <x-splade-input v-bind:value="result" name="captcha" type="hidden" required
-                                            autocomplete="off"/>
-                            <span v-text="result"></span>
+                        <x-splade-input name="captcha" type="hidden" required
+                                        autocomplete="off"/>
+                        <Recaptcha v-model:value="form.captcha" action="test"
+                                   site_key="{{settings('recaptcha_site_key')}}" v-slot="{ result }">
                             <x-splade-submit
                                 v-bind:disabled="!result"
                                 data-badge="inline"
                                 class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
                                 :spinner="true"/>
                         </Recaptcha>
-                        <br/>
                     @else
                         <x-splade-submit
                             data-badge="inline"

@@ -1,22 +1,24 @@
 <script setup>
 import {ref, onMounted} from "vue";
 import {load} from 'recaptcha-v3'
-
+const emit = defineEmits(["update:value"]);
 const result = ref(null);
 const container = ref(null);
 const props = defineProps({
     site_key: String,
+    value: String,
     action: String,
 })
 onMounted(() => {
     load(props.site_key, {
         badge: 'inline',
         useRecaptchaNet: true,
+        autoHideBadge: true,
         container: container.value,
-        autoHideBadge: true
     }).then((recaptcha) => {
-        recaptcha.execute().then(function (token) {
+        recaptcha.execute('login').then(function (token) {
             result.value = token
+            emit('update:value', token)
             // Add your logic to submit to your backend server here.
         });
     })
