@@ -2,8 +2,8 @@
 
 
 ?>
-<div class="container px-4 py-10 mx-auto ">
-    <div class="max-w-4xl mx-auto list-questions">
+<div class="container py-10 mx-auto ">
+    <div class="max-w-4xl list-questions">
         <x-splade-form :validateTrigger="'submit'" action="/check-status" method="POST">
                 <x-splade-input name="code" label="Booking Number:" type="text" required autocomplete="off"/>
                 <x-splade-input name="email" type="email" label="Email" required autocomplete="off"/>
