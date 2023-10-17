@@ -1,10 +1,9 @@
 <x-front::layout.default>
-    <div class="container mx-auto">
+    <div class="pt-10 mx-auto">
         <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
             <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                 <div class="bg-white h-1/3"></div>
-                <div class="h-1/3"
-                     style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                <div class="h-1/3" style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
                 </div>
                 <div class="bg-white h-1/3"></div>
             </div>
@@ -24,7 +23,7 @@
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
                 <x-splade-form  :validateTrigger="'submit'" action="/signup" method="POST">
-                    <a-card class="px-4 " body-style="width:500px">
+                    <a-card class="px-4 ">
                         <x-splade-input required name="full_name" label="Full Name"  autocomplete="off"/>
                         <x-splade-input required name="phone" label="Phone"  autocomplete="off"/>
                         <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
