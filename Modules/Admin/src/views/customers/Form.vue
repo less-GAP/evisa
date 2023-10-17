@@ -60,7 +60,9 @@ const closeDetail = function () {
   <a-drawer :closable="false" style="position:relative;display:flex;flex-direction:column;height:100vh;"
             @close="closeDetail" :open="true" width="80vw">
     <a-form
+      :model="formState"
       autocomplete="off"
+      ref="formRef"
       v-bind="$config.formConfig"
       @finish="submit"
     >
@@ -76,32 +78,17 @@ const closeDetail = function () {
           <a-button @click="submit()" :loading="loading" type="primary">Save</a-button>
         </a-space>
       </div>
-      <a-form-item name="username" label="UserName" :rules="[{ required: true }]">
-        <a-input autocomplete="off" v-model:value="formState.username"/>
-      </a-form-item>
+
       <a-form-item name="full_name" label="Full Name" :rules="[{ required: true }]">
         <a-input v-model:value="formState.full_name"/>
       </a-form-item>
       <a-form-item name="email" label="Email" :rules="[{ type: 'email',required: true  }]">
         <a-input v-model:value="formState.email"/>
       </a-form-item>
-      <a-form-item label="Role" name="role">
-        <a-radio-group v-model:value="formState.role">
-          <a-radio value="user" name="type">User</a-radio>
-          <a-radio value="admin" name="type">Admin</a-radio>
-        </a-radio-group>
+      <a-form-item name="phone" label="Phone" :rules="[{required: true  }]">
+        <a-input v-model:value="formState.phone"/>
       </a-form-item>
-      <a-form-item
-        label="Password"
-        name="password"
-        :rules="formState.isNew?[{ required: true, message: 'Please input your password!' }]:[]"
-      >
-        <a-input-password autocomplete="off" v-model:value="formState.password">
-          <template #prefix>
-            <LockOutlined class="site-form-item-icon"/>
-          </template>
-        </a-input-password>
-      </a-form-item>
+
 
 
     </a-form>

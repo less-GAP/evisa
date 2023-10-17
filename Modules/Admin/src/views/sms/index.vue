@@ -18,12 +18,20 @@ const auth = useAuthStore();
 
 const isShowModal = ref(false)
 const editProduct = ref(null);
-
+const routePath = '/sms'
 function showEditUser(user, reload) {
   isShowModal.value = true;
   editProduct.value = user;
 }
-
+const listActions = [
+  {
+    label: 'Add',
+    action: (reload) => {
+      //showEditUser({}, reload)
+      router.replace(routePath + '/new')
+    }
+  }
+]
 const tableConfig = {
   tableConfig: {
     sticky: true,
@@ -39,47 +47,7 @@ const tableConfig = {
     },
     ifShow: auth.hasPermission('SMS.create')
   },
-  itemActions: [
-    {
-      label: 'View',
-      class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline',
-      icon: mdiEye,
-      key: 'view',
-      action(item, reload) {
-        window.open(
-          item.preview_url,
-          '_blank'
-        );
-      }
-    },
-    {
-      ifShow: auth.hasPermission('SMS.update'),
-      label: '',
-      class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline',
-      icon: mdiDelete,
-      key: 'edit',
-      action(item, reload) {
-        router.push('/sms/' + item.id)
-      }
-    },
-    {
-      ifShow: auth.hasPermission('SMS.delete'),
-      label: '',
-      class: 'font-medium text-red-600 dark:text-red-500 hover:underline',
-      icon: mdiDelete,
-      key: 'delete',
-      action(item, reload) {
-        Api.delete('sms/' + item.id).then(rs => {
-          notification[rs.data.code == 0 ? 'error' : 'success']({
-            message: 'Notification',
-            description: rs.data.message,
-          });
-        }).finally(() => {
-          reload();
-        });
-      }
-    }
-  ],
+  listActions,
   columns: [
     {
       title: 'Phone',

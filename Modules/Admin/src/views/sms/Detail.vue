@@ -14,11 +14,11 @@ const customers = ref([]);
 
 const fetch = function () {
   loading.value = true
-  Api.get('customer/list').then(result => {
+  Api.get('customer/all').then(result => {
     // Object.assign(formState.lists, result.data.data)
-    customers.value = result.data.data.map(item => {
+    customers.value = result.data.map(item => {
       return {
-        label: item.name + ' (' + item.phone + ')',
+        label: item.full_name + ' (' + item.phone + ')',
         value: item.phone
       }
     })
