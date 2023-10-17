@@ -24,13 +24,14 @@ const submit = async () => {
 };
 const login_google = ref(false);
 const google_id = ref();
-const fetchConfig = function (){
-  Api.get('/public/config').then(rs=>{
+const fetchConfig = function () {
+  Api.get('/public/config').then(rs => {
     google_id.value = rs.data.login_google_id
     login_google.value = rs.data.login_google
   })
 }
-const afterLogin = function (){
+const afterLogin = function (user) {
+  useAuthStore().setUser(user)
   router.replace("/");
 }
 fetchConfig()
@@ -77,7 +78,8 @@ fetchConfig()
         </a-form>
 
         <hr class="my-6 border-gray-300 w-full">
-        <GoogleLogin v-if="login_google && google_id" login_url="/auth/social/google" :success="afterLogin" :client_id="google_id">
+        <GoogleLogin v-if="login_google && google_id" login_url="/auth/social/google" @success="afterLogin"
+                     :client_id="google_id">
 
           <button type="button"
 

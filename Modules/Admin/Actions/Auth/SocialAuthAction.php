@@ -9,6 +9,7 @@ use App\Models\VisaUser;
 use Google_Client;
 use Google_Service_Oauth2;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Modules\Frontend\Requests\SignupRequest;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -37,7 +38,7 @@ class SocialAuthAction
         if (!$user) {
             return response(trans('auth.failed'), 401);
         }
-        auth('admin')->login($user);
+        Auth::guard('admin')->login($user);
 
         return $user;
     }

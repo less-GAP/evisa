@@ -1,4 +1,4 @@
-<div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
+<div class="title-wrapper relative my-10 min-h-[40px] xl:min-h-[75px] overflow-hidden">
     <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
         <div class="bg-white h-1/3"></div>
         <div class="h-1/3"

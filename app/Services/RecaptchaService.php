@@ -19,19 +19,20 @@ class RecaptchaService
 {
     public function recaptcha()
     {
-        $secret = settings('recaptcha_site_key');
+        $secret = settings('recaptcha_secret_key');
         return new \ReCaptcha\ReCaptcha($secret);
 
     }
 
-    public function verify($gRecaptchaResponse)
+    public function verify($gRecaptchaResponse, $ip)
     {
         $recaptcha = $this->recaptcha();
-        $resp = $recaptcha->verify($gRecaptchaResponse);
+        $resp = $recaptcha->setScoreThreshold(0.5)->verify($gRecaptchaResponse, $ip);
         if ($resp->isSuccess()) {
-            // Verified!
+            return $resp;
         } else {
-            $errors = $resp->getErrorCodes();
+            throw new \Exception('Verify failed!');
+
         }
     }
 }
