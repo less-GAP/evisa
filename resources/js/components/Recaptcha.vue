@@ -10,11 +10,12 @@ const props = defineProps({
 })
 onMounted(() => {
     load(props.site_key, {
+        badge: 'inline',
         useRecaptchaNet: true,
         container: container.value,
         autoHideBadge: true
     }).then((recaptcha) => {
-        recaptcha.execute({action: props.action}).then(function (token) {
+        recaptcha.execute().then(function (token) {
             result.value = token
             // Add your logic to submit to your backend server here.
         });
@@ -24,5 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <slot v-bind="{result}"></slot>
+    <div ref="container" id="recaptcha">
+        <input required name="g-recaptcha-response" type="hidden" :value="result">
+    </div>
 </template>
