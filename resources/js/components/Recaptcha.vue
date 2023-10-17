@@ -26,6 +26,6 @@ onMounted(() => {
 
 <template>
     <div ref="container" id="recaptcha">
-        <input required name="g-recaptcha-response" type="hidden" :value="result">
+        <slot v-bind="{result}"></slot>
     </div>
 </template>

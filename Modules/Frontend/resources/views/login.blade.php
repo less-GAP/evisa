@@ -29,15 +29,22 @@
                     <x-splade-input name="password" type="password" label="Password" required autocomplete="off"/>
                     @if(settings('recaptcha_auth_enable') == 'active')
                         <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}" v-slot="{ result }">
-                            <x-splade-input v-bind:value="result" name="captcha" type="hidden" required autocomplete="off"/>
+                            <x-splade-input v-bind:value="result" name="captcha" type="hidden" required
+                                            autocomplete="off"/>
+                            <x-splade-submit
+                                v-bind:disabled="!result"
+                                data-badge="inline"
+                                class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                                :spinner="true"/>
                         </Recaptcha>
                         <br/>
+                    @else
+                        <x-splade-submit
+                            data-badge="inline"
+                            class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                            :spinner="true"/>
                     @endif
-                    <x-splade-submit
 
-                         data-badge="inline"
-                        class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
-                        :spinner="true"/>
                     <div class="inline-flex w-full">
                         <Link class="mr-5 w-1/2" href="/reset-password">
                             <x-front::button link>Reset</x-front::button>
