@@ -9,14 +9,12 @@ const props = defineProps({
 })
 onMounted(() => {
     load(props.site_key, {
-        useRecaptchaNet: true,
-        autoHideBadge: true,
-        action: 'validate_captcha',
+        useRecaptchaNet: false,
         container: container.value
     }).then((recaptcha) => {
-        recaptcha.execute('submit').then((token) => {
-            result.value = token
-        })
+        recaptcha.execute('submit').then(function (token) {
+            // Add your logic to submit to your backend server here.
+        });
     })
 })
 
@@ -24,7 +22,10 @@ onMounted(() => {
 
 <template>
     <div ref="container" id="recaptcha-container">
-        <input type="hidden" name="action" value="validate_captcha">
-        <input name="g-recaptcha-response" type="hidden" :value="result">
+        <button class="g-recaptcha"
+                :data-sitekey="site_key"
+                data-action='submit'>Submit
+        </button>
+        <input required name="g-recaptcha-response" type="hidden" :value="result">
     </div>
 </template>
