@@ -2,7 +2,7 @@
 import {ref, onMounted} from "vue";
 import {load} from 'recaptcha-v3'
 
-const token = ref(null);
+const result = ref(null);
 const container = ref(null);
 const props = defineProps({
     site_key: String,
@@ -13,8 +13,8 @@ onMounted(() => {
         autoHideBadge: true,
         container: container.value
     }).then((recaptcha) => {
-        recaptcha.execute('<action>').then((token) => {
-            token.value = token
+        recaptcha.execute('submit').then((token) => {
+            result.value = token
         })
     })
 })
@@ -23,6 +23,6 @@ onMounted(() => {
 
 <template>
     <div ref="container" id="recaptcha-container">
-        <input type="hidden" :value="token">
+        <input type="hidden" :value="result">
     </div>
 </template>
