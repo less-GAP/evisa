@@ -6,13 +6,12 @@ const result = ref(null);
 const container = ref(null);
 const props = defineProps({
     site_key: String,
+    action: String,
 })
 onMounted(() => {
-    load(props.site_key, {
-        useRecaptchaNet: false,
-        container: container.value
-    }).then((recaptcha) => {
-        recaptcha.execute('submit').then(function (token) {
+    load(props.site_key).then((recaptcha) => {
+        recaptcha.execute(props.action).then(function (token) {
+            result.value = token
             // Add your logic to submit to your backend server here.
         });
     })
@@ -21,11 +20,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="container" id="recaptcha-container">
-        <button class="g-recaptcha"
-                :data-sitekey="site_key"
-                data-action='submit'>Submit
-        </button>
-        <input required name="g-recaptcha-response" type="hidden" :value="result">
-    </div>
+    <input required name="g-recaptcha-response" type="hidden" :value="result">
 </template>
