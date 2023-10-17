@@ -22,7 +22,9 @@
         </div>
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
-                <x-splade-form  :validateTrigger="'submit'" action="/signup" method="POST">
+                <x-splade-form 
+                class="max-w-[600px] mx-auto"
+                 :validateTrigger="'submit'" action="/signup" method="POST">
                 <a-card class="px-4 min-w-full max-w-[800px]">
                         <x-splade-input required name="full_name" label="Full Name"  autocomplete="off"/>
                         <x-splade-input required name="phone" label="Phone"  autocomplete="off"/>

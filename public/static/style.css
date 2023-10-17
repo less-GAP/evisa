@@ -201,3 +201,7 @@
 #page-content ol{
     padding-left: 1rem;
 }
+
+form[data-splade-id] {
+    width: 100%;
+}

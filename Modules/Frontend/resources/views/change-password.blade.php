@@ -36,6 +36,7 @@ if (!cache()->get('reset_code_matched_' . $email)) {
         <div class="flex  justify-center px-6 my-12">
             <!-- Row -->
             <x-splade-form
+            class="max-w-[600px] mx-auto"
                 :default="$default"
                 :validateTrigger="'submit'" action="/change-password" method="POST">
                 <a-card class="px-4 min-w-full max-w-[800px]">
