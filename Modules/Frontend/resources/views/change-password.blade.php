@@ -38,7 +38,7 @@ if (!cache()->get('reset_code_matched_' . $email)) {
             <x-splade-form
                 :default="$default"
                 :validateTrigger="'submit'" action="/change-password" method="POST">
-                <a-card class="px-4 " body-style="width:500px">
+                <a-card class="px-4 min-w-full max-w-[800px]">
 
                     @if(cache()->has('reset_code_matched_valid_' .session('reset_email')))
 
