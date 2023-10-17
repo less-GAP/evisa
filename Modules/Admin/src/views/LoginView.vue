@@ -78,8 +78,12 @@ fetchConfig()
         </a-form>
 
         <hr class="my-6 border-gray-300 w-full">
+<<<<<<< HEAD
         <GoogleLogin v-if="login_google && google_id" login_url="/auth/social/google" @success="afterLogin"
                      :client_id="google_id">
+=======
+        <GoogleLogin v-if="login_google && google_id" login_url="/auth/social/google" @success="afterLogin" :client_id="google_id">
+>>>>>>> 6dbc9b3b5609cc31d72e00581d772f7b7972e58e
 
           <button type="button"
 
