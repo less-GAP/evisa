@@ -9,8 +9,12 @@ const props = defineProps({
     action: String,
 })
 onMounted(() => {
-    load(props.site_key).then((recaptcha) => {
-        recaptcha.execute(props.action).then(function (token) {
+    load(props.site_key, {
+        useRecaptchaNet: true,
+        container: container.value,
+        autoHideBadge: true
+    }).then((recaptcha) => {
+        recaptcha.execute({action: props.action}).then(function (token) {
             result.value = token
             // Add your logic to submit to your backend server here.
         });
@@ -20,5 +24,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <input required name="g-recaptcha-response" type="hidden" :value="result">
+    <div ref="container" id="recaptcha">
+        awdadw
+        <input required name="g-recaptcha-response" type="hidden" :value="result">
+    </div>
 </template>

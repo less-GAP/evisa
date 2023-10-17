@@ -31,7 +31,7 @@
                         <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}"></Recaptcha>
                         <br/>
                     @endif
-                    <button  data-action="test" type="button">test</button>
+                    <button  data-action="test"  data-badge="inline" type="button">test</button>
                     <x-splade-submit
 
                          data-badge="inline"
