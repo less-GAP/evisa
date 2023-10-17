@@ -40,10 +40,10 @@
                                          :success="()=>$splade.visit('/my-account')"
                                          client_id="{{settings('login_google_id')}}">
 
-                            </GoogleLogin>
-                        @endif
-                    </a-card>
-                </x-splade-form>
+                        </GoogleLogin>
+                    @endif
+                </a-card>
+            </x-splade-form>
         </div>
     </div>
 </x-front::layout.default>

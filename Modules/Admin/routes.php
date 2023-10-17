@@ -283,7 +283,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
                 'allowedFilters' => [AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'email_title,email_to')]
             ]
         );
-    Route::prefix('/sms')->middleware(['permission:SMS.menu'])->group(function () {
+    Route::prefix('/sms')->group(function () {
         Route::get('list', \Modules\Admin\Actions\SMS\GetListAction::class . '@handle');
         Route::post('', \Modules\Admin\Actions\SMS\PostAction::class . '@handle');
     });
