@@ -24,8 +24,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="container" id="recaptcha">
-        awdadw
-        <input required name="g-recaptcha-response" type="hidden" :value="result">
-    </div>
+    <slot v-bind="{result}"></slot>
 </template>

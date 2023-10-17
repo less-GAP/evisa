@@ -28,10 +28,11 @@
                     <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
                     <x-splade-input name="password" type="password" label="Password" required autocomplete="off"/>
                     @if(settings('recaptcha_auth_enable') == 'active')
-                        <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}"></Recaptcha>
+                        <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}" v-slot="{ result }">
+                            <x-splade-input v-bind:value="result" name="captcha" type="hidden" required autocomplete="off"/>
+                        </Recaptcha>
                         <br/>
                     @endif
-                    <button  data-action="test"  data-badge="inline" type="button">test</button>
                     <x-splade-submit
 
                          data-badge="inline"
