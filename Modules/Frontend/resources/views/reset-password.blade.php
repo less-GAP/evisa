@@ -7,12 +7,11 @@ $default = [
 ];
 ?>
 <x-front::layout.default>
-    <div class="container mx-auto">
+<div class="pt-10 mx-auto">
         <div class="title-wrapper relative min-h-[40px] xl:min-h-[75px] overflow-hidden">
             <div class="absolute top-0 left-0 z-10 flex flex-col justify-end w-full h-full">
                 <div class="bg-white h-1/3"></div>
-                <div class="h-1/3"
-                     style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
+                <div class="h-1/3" style="background: linear-gradient( to right, rgb(233,68,220) 0%, rgb(35,171,169) 25%, rgb(230,214,36) 50%, rgb(35,171,169) 75%, rgb(233,68,220) 100%); background-size: 200%; background-position: center;">
                 </div>
                 <div class="bg-white h-1/3"></div>
             </div>
@@ -24,7 +23,7 @@ $default = [
                     <div>
                         <h1
                             class="title font-black mb-0 mt-2 relative text-center uppercase text-xl md:text-[42px] lg:text-[56px] 2xl:text-[72px] whitespace-nowrap">
-                            SIGNIN</h1>
+                            RESET</h1>
                     </div>
                 </div>
             </div>
@@ -70,15 +69,14 @@ $default = [
                         <x-splade-input  v-model="form.email" name="email" label="Email" type="email" required
                                         autocomplete="off"/>
                         <x-splade-submit
-                            class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                        class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
                             :spinner="true">Send Code
                         </x-splade-submit>
                     @endif
 
                     <div class="inline-flex w-full">
-
                         <Link href="/login">
-                            <x-front::button border link>Login</x-front::button>
+                            <x-front::button link>Login</x-front::button>
                         </Link>
                     </div>
 
