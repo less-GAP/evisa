@@ -31,6 +31,7 @@
                         <Recaptcha action="test" site_key="{{settings('recaptcha_site_key')}}" v-slot="{ result }">
                             <x-splade-input v-bind:value="result" name="captcha" type="hidden" required
                                             autocomplete="off"/>
+                            <span v-text="result"></span>
                             <x-splade-submit
                                 v-bind:disabled="!result"
                                 data-badge="inline"
