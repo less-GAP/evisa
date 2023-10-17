@@ -37,5 +37,16 @@ class DatabaseSeeder extends Seeder
             'data_key' => 'type-of-visa',
             'data' => json_decode('[{"label":"E-Visa (1 Month Multiple Entry)","value":"1","fee_per_applicant":5,"status":"active"},{"label":"E-Visa (1 Month Multiple Entry)","value":"2","fee_per_applicant":10,"status":"active"},{"label":"E-Visa (3 Months Single Entry)","value":"3","fee_per_applicant":15,"status":"active"},{"label":"E-Visa (3 Months Multiple Entry)","value":"4","fee_per_applicant":20,"status":"active"}]', true),
         ]);
+        MasterData::create([
+            'data_key' => 'site-menu',
+            'data' => json_decode('[{"children":[],"label":"Home","url":"/"},{"children":[],"label":"Check Status","url":"/check-status"},{"children":[{"children":[],"label":"Vietnam E-visa","url":"/vietnam-e-visa"},{"label":"Visa on arrival","url":"/vietnam-visa-on-arrival"},{"label":"Emergency visa","url":"/vietnam-emergency-visa"}],"label":"How to apply","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"News","url":"/news"},{"children":[{"label":"Vietnam e-visa fees","url":"/vietnam-e-visa-fees"},{"label":"Visa on arrival fees","url":"/vietnam-visa-cost"}],"label":"Visa fees","url":null},{"children":[],"label":"FAQs","url":"/faqs"},{"children":[],"label":"Apply online","url":"/apply"},{"children":[],"label":"Vietnam Visa Requirements","url":"/post/vietnam-visa-requirements"},{"children":[],"label":"How to get a Vietnam visa","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"Vietnam visa exemption","url":"/post/vietnam-visa-exemption-all-you-need-to-know-2023"},{"children":[],"label":"Emergency visa","url":"/vietnam-emergency-visa"},{"children":[],"label":"Business visa","url":"/post/vietnam-business-visa"},{"children":[],"label":"Photo requirements","url":"/post/vietnam-visa-photo-guidelines"},{"children":[],"label":"Visa types","url":"/post/6-major-types-of-vietnam-visa"},{"children":[],"url":"/contact-us","label":"Contact us"},{"children":[],"label":"All guides (46)","url":"all-guides"}]'),
+        ]);
+        MasterData::create([
+            'data_key' => 'footer-menu',
+            'data' => json_decode('[{"children":[],"label":"Home","url":"/"},{"children":[],"label":"Apply online","url":"/apply"},{"children":[],"label":"Visa fees","url":null},{"children":[],"label":"How to apply","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"FAQs","url":"/faqs"},{"children":[],"label":"News","url":"/news"},{"children":[],"label":"Vietnam Visa Requirements","url":"/post/vietnam-visa-requirements"},{"children":[],"label":"How to get a Vietnam visa","url":"/post/how-to-get-a-visa-to-vietnam"},{"children":[],"label":"Vietnam visa exemption","url":"/post/vietnam-visa-exemption-all-you-need-to-know-2023"},{"children":[],"label":"Emergency visa","url":"/vietnam-emergency-visa"},{"children":[],"label":"Business visa","url":"/post/vietnam-business-visa"},{"children":[],"label":"Photo requirements","url":"/post/vietnam-visa-photo-guidelines"},{"children":[],"label":"Visa types","url":"/post/6-major-types-of-vietnam-visa"},{"children":[],"url":"/contact-us","label":"Contact us"},{"children":[],"label":"All guides","url":"/faqs"}]'),
+        ]);
+
+        \App\Models\VisaCustomerLevel::factory()->create();
+
     }
 }
