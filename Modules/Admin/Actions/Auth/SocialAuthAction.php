@@ -36,7 +36,6 @@ class SocialAuthAction
         ])->first();
         if (!$user) {
             return response(trans('auth.failed'), 401);
-
         }
         auth('admin')->login($user);
 

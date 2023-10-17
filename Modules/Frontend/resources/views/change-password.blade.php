@@ -2,9 +2,13 @@
 
 use Carbon\Carbon;
 
+$email = session('reset_email');
 $default = [
-    'email' => cache()->has('reset_code_' . session('reset_email')) ? session('reset_email') : ''
+    'email' => $email
 ];
+if (!cache()->get('reset_code_matched_' . $email)) {
+//    return redirect()->intended('/reset-password');
+}
 ?>
 <x-front::layout.default>
     <div class="container mx-auto">
@@ -33,40 +37,47 @@ $default = [
             <!-- Row -->
             <x-splade-form
                 :default="$default"
-                :validateTrigger="'submit'" action="/reset-password" method="POST">
+                :validateTrigger="'submit'" action="/change-password" method="POST">
                 <a-card class="px-4 " body-style="width:500px">
 
-                    @if(cache()->has('reset_code_' .session('reset_email')))
+                    @if(cache()->has('reset_code_matched_valid_' .session('reset_email')))
 
                         <vue-countdown
-                            :time="{{(int)Carbon::parse(cache()->get('reset_code_valid_' .session('reset_email')))->diffInSeconds(Carbon::now())}}*1000"
+                            :time="{{(int)Carbon::parse(cache()->get('reset_code_matched_valid_' .session('reset_email')))->diffInSeconds(Carbon::now())}}*1000"
                             v-slot="{ days, hours, minutes, seconds }">
-                            <x-splade-input v-bind:disabled="minutes || seconds" v-model="form.email" name="email" label="Email" type="email" required
-                                            autocomplete="off"/>
-                            <x-splade-input v-if="minutes || seconds" v-model="form.code" name="code" label="Code"
-                                            required autocomplete="off"/>
+                            <div v-if="minutes || seconds">
 
-                            <p v-if="minutes || seconds">
-                                Expired after: <b v-if="minutes" v-text="minutes+' minutes'"></b> <b
-                                    v-text="seconds +' seconds'"></b>
+                                <x-splade-input v-bind:disabled="minutes || seconds" v-model="form.email" name="email"
+                                                label="Change Password For Email" type="email" required
+                                                autocomplete="off"/>
+                                <x-splade-input name="password" type="password" label="Password" required
+                                                autocomplete="off"/>
+                                <x-splade-input type="password" name="password_confirmation" label="Confirm Password"
+                                                required
+                                                autocomplete="off"/>
+                                <p v-if="minutes || seconds">
+                                    Expired after: <b v-if="minutes" v-text="minutes+' minutes'"></b> <b
+                                        v-text="seconds +' seconds'"></b>
 
-                            </p>
-                            <div class="inline-flex w-full">
-                                <div v-if="minutes || seconds" class="w-full" href="/reset-password">
-                                    <x-splade-submit
-                                        class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
-                                        :spinner="true">Submit
-                                    </x-splade-submit>
-                                </div>
-                                <div class="w-full" v-if="!minutes && !seconds" href="/resend">
-                                    <x-splade-submit :spinner="true">Resend</x-splade-submit>
+                                </p>
+                                <div class="inline-flex w-full">
+                                    <div v-if="minutes || seconds" class="w-full" href="/reset-password">
+                                        <x-splade-submit
+                                            class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
+                                            :spinner="true">Submit
+                                        </x-splade-submit>
+                                    </div>
+                                    <div class="w-full" v-if="!minutes && !seconds" href="/resend">
+                                        <x-splade-submit :spinner="true">Resend</x-splade-submit>
+                                    </div>
                                 </div>
                             </div>
+
                         </vue-countdown>
 
 
                     @else
-                        <x-splade-input  v-model="form.email" name="email" label="Email" type="email" required
+                        <x-splade-input v-model="form.email" name="email" label="Email" type="email" required
                                         autocomplete="off"/>
                         <x-splade-submit
                             class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"

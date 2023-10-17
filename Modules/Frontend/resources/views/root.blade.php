@@ -18,7 +18,12 @@
           type='text/css' media='all'/>
     <link rel='shortlink' href='https://evisadirect.com/'/>
     <script src="{{ asset('static/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    @if(settings('square_environment')=='sandbox')
+        <script src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    @elseif(settings('square_environment')=='production')
+        <script src="https://web.squarecdn.com/v1/square.js"></script>
+    @endif
+
     @vite(['resources/js/app.js'])
     @spladeHead
 </head>
@@ -150,10 +155,12 @@
     .fixed {
         position: fixed;
     }
-    #primary{
+
+    #primary {
         min-height: 80vh;
     }
-    #site-main{
+
+    #site-main {
         padding-top: 15px;
     }
 

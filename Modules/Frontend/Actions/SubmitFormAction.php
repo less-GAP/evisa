@@ -2,15 +2,13 @@
 namespace Modules\Frontend\Actions;
 
 
+use Core\Request\Request;
 use ProtoneMedia\Splade\Facades\Toast;
-use ProtoneMedia\Splade\FormBuilder\Input;
-use ProtoneMedia\Splade\FormBuilder\Password;
-use ProtoneMedia\Splade\FormBuilder\Submit;
-use ProtoneMedia\Splade\SpladeForm;
 
 class SubmitFormAction
 {
-    public function handle(){
+    public function handle(Request $request){
+
         Toast::message('Send message successfully!')
             ->success()
             ->centerTop();

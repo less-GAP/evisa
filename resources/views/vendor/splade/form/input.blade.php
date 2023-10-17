@@ -19,7 +19,7 @@
             @endif
 
             <a-input {{ $attributes->except(['v-if', 'v-show', 'v-for', 'class'])->class([
-                'block w-full border-0 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed',
+                'block w-full border-0 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 !text-[#000000] disabled:cursor-not-allowed',
                 'rounded-md' => !$append && !$prepend,
                 'min-w-0 flex-1 rounded-none' => $append || $prepend,
                 'rounded-l-md' => $append && !$prepend,

@@ -27,6 +27,10 @@
                 <a-card class="px-4 " body-style="width:500px">
                     <x-splade-input name="email" label="Email" type="email" required autocomplete="off"/>
                     <x-splade-input name="password" type="password" label="Password" required autocomplete="off"/>
+                    @if(settings('recaptcha_auth_enable') == 'active')
+                        <Recaptcha site_key="{{settings('recaptcha_site_key')}}"></Recaptcha>
+                        <br/>
+                    @endif
                     <x-splade-submit
                         class="items-center justify-center transition p-4 mt-5 text-xl text-white bg-black disabled:bg-gray-300 disabled:text-gray-700 2xl:text-xl w-full"
                         :spinner="true"/>

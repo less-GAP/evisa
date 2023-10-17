@@ -30,7 +30,7 @@ class SignupRequest extends FormRequest
             'email' => 'required|email|unique:visa_users' ,
             'full_name' => 'required',
             'phone' => 'required|numeric|min:8|unique:visa_users',
-            'password' => ['required','confirmed',Password::min(8)],
+            'password' => ['required','confirmed',Password::min(6)],
         ];
     }
 }

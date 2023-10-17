@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Middleware\AdminIsAuthenticated;
+use Modules\Frontend\Actions\Auth\ChangePasswordAction;
 use Modules\Frontend\Actions\Auth\LogoutAction;
+use Modules\Frontend\Actions\Auth\PostChangePasswordAction;
 use Modules\Frontend\Actions\Auth\PostLoginAction;
+use Modules\Frontend\Actions\Auth\PostResetPasswordAction;
 use Modules\Frontend\Actions\Auth\PostSignupAction;
 use Modules\Frontend\Actions\Auth\SocialAuthAction;
 use Modules\Frontend\Actions\CheckoutVisaApplication;
@@ -38,7 +41,10 @@ Route::middleware(['splade'])->group(function () {
     Route::view('/my-account/edit-profile', 'front::my-account.edit-profile')->name('edit-profile');
 
     Route::view('/login', 'front::login')->name('login');
+    Route::post('/reset-password', PostResetPasswordAction::class.'@handle')->name('post-reset-password');
     Route::view('/reset-password', 'front::reset-password')->name('reset-password');
+    Route::get('/change-password', ChangePasswordAction::class.'@handle')->name('change-password');
+    Route::post('/change-password', PostChangePasswordAction::class.'@handle')->name('post-change-password');
     Route::view('/signup', 'front::signup')->name('signup');
     Route::get('/logout', LogoutAction::class . '@handle')->name('logout');
     Route::post('/login', PostLoginAction::class . '@handle')->name('post-login');

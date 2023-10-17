@@ -68,7 +68,7 @@ const cancel = function () {
     v-bind="formConfig"
     @finish="submit"
   >
-    <a-row class="w-full">
+    <a-space class="w-full">
       <a-form-item class="md:w-[200px] w-full mr-5" name="smtp_server" label="SMTP Server"
                    :rules="[{ required: true }]">
         <a-input placeholder="domain.com" autocomplete="off" v-model:value="formState.smtp_server"/>
@@ -79,16 +79,16 @@ const cancel = function () {
       <a-form-item class="md:w-[200px] w-full mr-5" name="smtp_security" label="Security" :rules="[{ required: true }]">
         <a-input placeholder="tls" autocomplete="off" v-model:value="formState.smtp_security"/>
       </a-form-item>
-    </a-row>
+    </a-space>
 
-    <a-row class="w-full">
+    <a-space class="w-full">
       <a-form-item class="md:w-[200px] w-full mr-5" name="smtp_user" label="User" :rules="[{ required: true }]">
         <a-input placeholder="User" autocomplete="off" v-model:value="formState.smtp_user"/>
       </a-form-item>
       <a-form-item class="md:w-[200px] w-full mr-5" name="smtp_password" label="Password" :rules="[{ required: true }]">
         <a-input placeholder="Password" type="password" autocomplete="off" v-model:value="formState.smtp_password"/>
       </a-form-item>
-    </a-row>
+    </a-space>
     <a-row class="w-full">
       <a-form-item class="md:w-[200px] w-full mr-5" name="smtp_email_from" label="From email"
                    :rules="[{ required: true }]">

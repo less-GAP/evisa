@@ -15,7 +15,9 @@ class PostLoginAction
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+        if (settings('recaptcha_auth_enable') == 'active') {
 
+        }
         if (auth('frontend')->attempt($credentials)) {
             $request->session()->regenerate();
 //            $request->session()->flash('message', 'Login successful!');
@@ -23,8 +25,7 @@ class PostLoginAction
                 ->success()
                 ->centerTop();
             return redirect()
-                ->intended('my-account')
-                ;
+                ->intended('my-account');
         }
         Toast::message('The provided credentials do not match our records.')
             ->warning()
