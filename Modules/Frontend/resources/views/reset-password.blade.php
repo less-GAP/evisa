@@ -34,7 +34,7 @@ $default = [
             <x-splade-form
                 :default="$default"
                 :validateTrigger="'submit'" action="/reset-password" method="POST">
-                <a-card class="px-4 " >
+                <a-card class="px-4 min-w-full max-w-[800px]">
 
                     @if(cache()->has('reset_code_' .session('reset_email')))
 
