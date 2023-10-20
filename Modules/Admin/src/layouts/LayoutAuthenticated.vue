@@ -74,12 +74,12 @@ const menuClick = (event, item) => {
   <Header class="bg-dark" :style="{height:$style.theme.headerHeight}"></Header>
   <div :style="{'height':'calc(100vh - '+$style.theme.headerHeight+')'}"
        class="overflow-hidden flex relative w-full bg-gray-50 dark:bg-gray-900">
-    <Sidebar class="h-full  d-inline"></Sidebar>
+    <Sidebar class="h-full d-inline"></Sidebar>
 
     <main
-      class="relative p-5 flex-1 w-full h-full h-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
+      class="relative p-5 flex-1 w-full overflow-y-auto bg-gray-50  dark:bg-gray-900">
       <slot name="header-content"></slot>
-      <a-card class="h-full">
+      <a-card>
         <slot/>
       </a-card>
 
