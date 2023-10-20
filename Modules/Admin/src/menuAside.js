@@ -15,18 +15,17 @@ import {
   mdiImageMultiple,
   mdiViewWeek,
   mdiEmail,
-  mdiChartAreasplineVariant
+  // mdiChartAreasplineVariant
 } from "@mdi/js";
 
 export default [
   {
-    to: "/",
+    to: "/dashboard",
     icon: mdiViewDashboard,
     label: "Dashboard",
   },
-
   {
-    to: "/visa/pending-preview",
+    to: "/visa/",
     label: "Visa Applications",
     icon: mdiFileDocumentMultipleOutline,
   },
@@ -110,13 +109,13 @@ export default [
     // permission: "SMS.menu",
     icon: mdiEmail,
   },
-  {
-    to: "/report",
-    label: "Report",
-    // permission: "Report.menu",
-    icon: mdiChartAreasplineVariant,
-    // disable: true,
-  },
+  // {
+  //   to: "/report",
+  //   label: "Report",
+  //   // permission: "Report.menu",
+  //   icon: mdiChartAreasplineVariant,
+  //   // disable: true,
+  // },
   {
     to: null,
     label: "System",
