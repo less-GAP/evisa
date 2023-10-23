@@ -6,7 +6,7 @@ $dotenv->load();
 @servers(['web' => 'root@134.122.4.168'])
 
 @task('deploy')
-    cd /home/evisa_dev
+    cd /home/evisa
     git pull origin main
     docker build  -t registry.digitalocean.com/lessgap/evisa:latest . --build-arg APP_ADMIN={{ env('APP_ADMIN') }}
     docker-compose down -v && docker-compose up -d
