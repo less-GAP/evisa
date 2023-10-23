@@ -128,12 +128,32 @@
 <!--          </div>-->
 
           <div class="flex items-center ml-3">
-            <div>
+
+            <div class="flex items-center">
+              {{$auth.user.full_name}} 
+              <a-dropdown :placement="bottomRight" :arrow="{ pointAtCenter: true }">
+                  <img class="ml-2 w-8 h-8 rounded-full" :src="$auth.user.profile_photo_url" alt="user photo"> 
+                <template #overlay>
+                  <a-menu class="!items-start !justify-start">
+                    <a-menu-item key="1" class="!text-left !items-start">
+                      {{$auth.user.email}}
+                    </a-menu-item>
+                    <a-menu-item key="2" class="!text-left !items-start">
+                      <UserOutlined />
+                      <a @click.prevent="$auth.logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                    </a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
+            </div>
+
+
+            <!-- <div>
               <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                 <span class="sr-only">Open user menu</span>
                 <img class="w-8 h-8 rounded-full" :src="$auth.user.profile_photo_url" alt="user photo">
               </button>
-            </div>
+            </div> -->
 
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-2" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1176px, 61px);">
               <div class="px-4 py-3" role="none">
@@ -145,15 +165,6 @@
                 </p>
               </div>
               <ul class="py-1" role="none">
-<!--                <li>-->
-<!--                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>-->
-<!--                </li>-->
                 <li>
                   <a @click.prevent="$auth.logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
                 </li>

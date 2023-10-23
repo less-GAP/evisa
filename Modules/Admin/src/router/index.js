@@ -10,11 +10,26 @@ let routes = [
     meta: {
       title: "Dashboard",
     },
-    path: "/",
+    path: "/dashboard",
     name: "dashboard",
     component: Home,
   },
-
+  {
+    // meta: {
+    //   title: "Dashboard",
+    // },
+    path: "/",
+    name: "home",
+    component: Home,
+  },
+  {
+    meta: {
+      title: "File Manager",
+    },
+    path: "/files",
+    name: "files",
+    component: () => import("@/views/files/index.vue"),
+  },
 
   {
     meta: {

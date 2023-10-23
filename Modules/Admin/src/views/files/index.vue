@@ -50,7 +50,7 @@ const tableConfig = {
     //   , icon: mdiEye
     //   , class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'
     //   , action(item, reload) {
-    //     router.replace('/users/' + item.id)
+    //     router.push('/users/' + item.id)
     //   }
     // },
     {
