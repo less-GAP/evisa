@@ -54,11 +54,14 @@ export default [
   {
     to: "/content-management/menu/site-menu",
     label: "Main Menu",
+    permission: "Content.mainMenu",
+
     icon: mdiViewWeek,
   },
   {
     to: "/content-management/menu/footer-menu",
     label: "Footer Menu",
+    permission: "Content.footerMenu",
     icon: mdiViewWeek,
   },
   {
@@ -94,12 +97,15 @@ export default [
   // TODO: Hi Phương em thêm mấy cái tính năng này vô hệ thống nha (copy từ đryce)
   {
     to: null,
+
     label: "Marketing",
-    permission: "Marketing.menu",
+    permission: "Marketing",
   },
   {
     to: "/email-histories",
     label: "Email Histories",
+    permission: 'Marketing.Email',
+
     // permission: "EmailHistories.menu",
     // disable: false,
     icon: mdiMessageText,
@@ -107,39 +113,47 @@ export default [
   {
     to: "/sms",
     label: "SMS",
+    permission: 'Marketing.SMS',
+
     // permission: "SMS.menu",
     icon: mdiEmail,
   },
   {
     to: "/report",
     label: "Report",
+    permission: 'Marketing.report',
+
     // permission: "Report.menu",
     icon: mdiChartAreasplineVariant,
     // disable: true,
   },
   {
     to: null,
+    permission: 'System',
     label: "System",
   },
   // TODO: Hi Phương em thêm mấy cái tính năng này vô hệ thống nha (copy từ đryce)
   {
     to: "/files",
     label: "File Manager",
+    permission: 'System.file',
     icon: mdiImageMultiple,
   },
   {
     to: "/user",
+    permission: 'System.user',
     label: "User",
     icon: mdiAccountMultiple,
   },
   {
     to: "/email",
-    permission: 'email.list',
+    permission: 'System.email',
     label: "Email",
     icon: mdiMessageText,
   },
   {
     to: null,
+    permission: 'Platform',
     label: "Platform",
   },
   {

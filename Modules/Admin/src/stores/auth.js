@@ -16,9 +16,9 @@ export const useAuthStore = defineStore("auth", {
       const user = this.user
 
       if (user && user.full_name) {
-        if(isFull){
+        if (isFull) {
           return user.full_name;
-        }else{
+        } else {
           const fullNameParts = user.full_name.split(" ");
           const lastWord = fullNameParts[fullNameParts.length - 1];
           if (lastWord.length > 0) {
@@ -28,9 +28,19 @@ export const useAuthStore = defineStore("auth", {
       }
       return "N/A";
     },
-    hasPermission(permission) {
+    hasRole(role) {
+      const user = this.user
+      if (!user || user.role != role) {
+        return false;
+      }
       return true;
-      // const user = this.user
+    },
+    hasPermission(permission) {
+      const user = this.user
+      if (!permission || user.role == 'admin') {
+        return true
+      }
+      return false
       // if (!user && permission) {
       //   return false;
       // }
