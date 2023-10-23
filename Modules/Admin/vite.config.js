@@ -27,6 +27,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      replacement: path.resolve(__dirname, 'node_modules','vue3-google-login'),
     },
   },
 });
