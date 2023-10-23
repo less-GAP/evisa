@@ -37,6 +37,6 @@
         "recaptcha-v3": "^1.10.0",
         "swiper": "^10.2.0",
         "vue-recaptcha": "^3.0.0-alpha.2",
-        "vue3-google-login": "^2.0.23"
+        "vue3-google-login": "2.0.23"
     }
 }
