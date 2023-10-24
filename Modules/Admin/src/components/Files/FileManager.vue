@@ -230,7 +230,7 @@ reload()
       </template>
     </a-pagination>
   </div>
-  <a-drawer style="max-width: 100vw" appendTo="body" v-model:open="fileDetail" class="custom-class" width="800px"
+  <a-drawer style="max-width: 100vw" appendTo="body" v-model:open="fileDetail" class="custom-class" width="80vw"
     title="File Detail" placement="right">
     <FileDetailForm @delete="fileDetail = false; reload()" :value="fileDetail"></FileDetailForm>
   </a-drawer>
