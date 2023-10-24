@@ -133,6 +133,14 @@ async function onFilesSelect(option) {
 function isImageUrl(url) {
   return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
 }
+function getFullPath(url) {
+  const host = window.location.host
+  if (host.indexOf('9200') > -1) {
+    return "//" + host.split(':')[0] + ":9100/" + url
+  }
+  return "//" + host + "/" + url
+}
+
 reload()
 </script>
 
@@ -194,7 +202,7 @@ reload()
       <div @click="fileDetail = image" v-for="image in tableData.data" :key="image.id"
         class=" cursor-pointer relative border-2 border-gray-100 hover:border-blue-700 h-[150px]  mb-[50px] rounded-lg overflow:hidden">
         <img v-if="isImageUrl(image.file_url)" style="max-width:auto;max-height:auto" :title="image.file_name"
-          class="h-full object-contain object-center w-full max-w-full " :src="image.file_url" />
+          class="h-full object-contain object-center w-full max-w-full " :src="getFullPath(image.site_path)" />
 
         <div v-else :title="image.file_name"
           class="h-full flex items-center text-center object-contain object-center w-full max-w-full ">
