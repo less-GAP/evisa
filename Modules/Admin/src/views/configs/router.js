@@ -93,5 +93,13 @@ export default [{
       name: "config-social",
       component: () => import("./SocialConfig.vue"),
     },
+    {
+      meta: {
+        title: "System Configuration",
+      },
+      path: "/configs/system",
+      name: "config-system",
+      component: () => import("./SystemConfig.vue"),
+    },
   ]
 }]

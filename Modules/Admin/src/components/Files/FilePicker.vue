@@ -176,6 +176,14 @@ function addSelectedFile(file) {
   fileDetail.value = file
 }
 
+function getFullPath(url) {
+  const host = window.location.host
+  if (host.indexOf('9200') > -1) {
+    return "//" + host.split(':')[0] + ":9100/" + url
+  }
+  return "//" + host + "/" + url
+}
+
 reload()
 </script>
 
@@ -250,7 +258,7 @@ reload()
               style="max-width:auto;max-height:auto"
               :title="image.file_name"
               class="h-full object-contain object-center w-full max-w-full "
-              :src="image.file_url"
+              :src="getFullPath(image.site_path)"
             />
             <div
               v-else

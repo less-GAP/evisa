@@ -75,6 +75,12 @@ const items = ref([
       label: 'Authenticate',
       title: 'Authenticate',
     },
+    {
+    key: 'config-system',
+    href: '/configs/system',
+    label: 'System',
+    title: 'System',
+  },
   ])
 ;
 
