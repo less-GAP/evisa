@@ -53,14 +53,27 @@ class VisaUser extends Authenticatable
     ];
 
     protected $appends = [
-        'submit_visa_number'
+        'submit_visa_number',
+        'success_visa_number_from_30_days'
     ];
-    public function getSubmitVisaNumberAttribute(){
+
+    public function getSubmitVisaNumberAttribute()
+    {
         return $this->visa_applications->count();
     }
-    public function visa_applications(){
-        return $this->hasMany(VisaApplication::class,'user_id');
+
+    public function getSuccessVisaNumberFrom30DaysAttribute()
+    {
+        return $this->visa_applications()->where('status', 'done')
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->count();
     }
+
+    public function visa_applications()
+    {
+        return $this->hasMany(VisaApplication::class, 'user_id');
+    }
+
     public function level()
     {
         return $this->belongsTo(VisaCustomerLevel::class, 'customer_level');

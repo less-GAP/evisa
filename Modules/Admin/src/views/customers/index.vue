@@ -42,7 +42,8 @@ const columns = [
   , {title: 'Level Expired At', key: 'customer_level_expired_at', format: Format.formatDateTime}
   , {title: 'Status', key: 'status'}
   , {title: 'Type', key: 'type'}
-  , {title: 'Submit Visa Number', key: 'submit_visa_number'}
+  , {title: 'Total Visa Number', key: 'submit_visa_number'}
+  , {title: 'Total Success From 30 Days ', key: 'success_visa_number_from_30_days'}
   , {title: 'Joined date', key: 'created_at'}
 ]
 

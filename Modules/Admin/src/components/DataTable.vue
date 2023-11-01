@@ -155,7 +155,7 @@ async function doSelectionAction(action) {
 
 function toggleCheckAll() {
   if (checkAll.value) {
-    selectedItems.value = toRaw(data || [])
+    selectedItems.value = data.value
   } else {
     selectedItems.value = []
   }
