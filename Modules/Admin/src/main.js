@@ -1,11 +1,11 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+import {createApp} from "vue";
+import {createPinia} from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
-import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import { darkModeKey, styleKey } from "@/config.js";
+import {useMainStore} from "@/stores/main.js";
+import {useStyleStore} from "@/stores/style.js";
+import {darkModeKey, styleKey} from "@/config.js";
 
 import "./css/main.css";
 import "ant-design-vue/dist/reset.css";
@@ -19,11 +19,14 @@ import Antd from 'ant-design-vue';
 import {useAppStateStore} from "@/stores/appState";
 import Format from "@/utils/Format";
 import * as config from "@/config";
+import {HtmlEditor} from "@/components";
 /* Init Pinia */
 const pinia = createPinia();
 pinia.use(piniaPersist)
 /* Create Vue app */
-const myApp = createApp(App).use(router).use(pinia)
+const myApp = createApp(App)
+  .use(router).use(pinia)
+  .component('HtmlEditor',HtmlEditor)
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);

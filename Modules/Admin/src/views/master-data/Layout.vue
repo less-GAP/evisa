@@ -1,6 +1,6 @@
 <script setup>
 import {ref, h} from "vue";
-import {AppstoreOutlined, MailOutlined, QuestionOutlined} from '@ant-design/icons-vue';
+import {AppstoreOutlined,CrownOutlined ,CustomerServiceTwoTone,CustomerServiceOutlined, MailOutlined, QuestionOutlined} from '@ant-design/icons-vue';
 import router from "@/router";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 
@@ -8,10 +8,17 @@ const items = ref([
 
     {
       key: 'visa-customer-level',
-      icon: () => h(AppstoreOutlined),
+      icon: () => h(CrownOutlined),
       href: '/master-data/visa-customer-level',
       label: 'Customer Level',
       title: 'Customer Level',
+    },
+    {
+      key: 'visa-service',
+      icon: () => h(CustomerServiceOutlined),
+      href: '/master-data/visa-service',
+      label: 'Visa Service',
+      title: 'Visa Service',
     },
     {
       key: 'data-country',

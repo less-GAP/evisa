@@ -9,9 +9,9 @@ use ProtoneMedia\Splade\Facades\SEO;
     @seoDescription(settings('site_description', ''))
     @seoKeywords(settings('site_keywords', ''))
     <section class="relative banner">
-        <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden bg-banner">
-            <img src="/static/images/home/banner.png"
-                 alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-30">
+        <div class="absolute top-0 left-0 z-10 w-full h-full overflow-hidden">
+            <img src="{{url(settings('home_banner','/static/images/logo-eVisa.png?v=1691981753'))}}"
+                 alt="eVisa" class="absolute top-0 left-0 z-0 object-cover w-full h-full ">
         </div>
         <div class="container relative z-20 px-4 py-20 mx-auto content lg:py-32 xl:pt-32 xl:pb-56">
             <!-- <legend class="text-white text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] 2xl:text-[100px] uppercase font-black italic leading-none">Make your dream</br>vacation happen!</legend> -->

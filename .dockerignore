@@ -24,3 +24,4 @@ docker/mysql/dbdata/
 storage
 storage-xtf
 database.sqlite
+/helm/secrets.yml

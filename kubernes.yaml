@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evisa
+spec:
+  selector:
+    matchLabels:
+      run: evisa
+  template:
+    metadata:
+      labels:
+        run: evisa
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: evisa
+          image: registry.digitalocean.com/lessgap/evisa:latest
+          ports:
+            - containerPort: 9100
+              name: evisaport
+          env:
+            - name: APP_KEY
+              value: base64:cUPmwHx4LXa4Z25HhzFiWCf7TlQmSqnt98pnuiHmzgY=
+            - name: APP_URL
+              value: https://dev2.evisadirect.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evisa
+spec:
+  selector:
+    run: evisa
+  ports:
+    - name: http
+      port: 9100
+      targetPort: 9100
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: evisa
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    name: rewrite
+    namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: evisa
+                port:
+                  number: 9100
+

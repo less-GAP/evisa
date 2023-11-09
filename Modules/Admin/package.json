@@ -15,6 +15,7 @@
     "@mdi/js": "^7.0.96",
     "@protonemedia/laravel-splade": "^1.4.15",
     "@rushstack/eslint-patch": "^1.1.4",
+    "@tinymce/tinymce-vue": "^5.1.1",
     "@vue/compat": "^3.3.4",
     "ant-design-vue": "^4.0.0",
     "axios": "^0.27.0",

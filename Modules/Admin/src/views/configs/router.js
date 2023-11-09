@@ -16,6 +16,14 @@ export default [{
     },
     {
       meta: {
+        title: "Images Configuration",
+      },
+      path: "/configs/images",
+      name: "images-general",
+      component: () => import("./ImagesConfig.vue"),
+    },
+    {
+      meta: {
         title: "SMTP Configuration",
       },
       path: "/configs/smtp",

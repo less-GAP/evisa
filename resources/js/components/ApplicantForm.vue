@@ -6,8 +6,11 @@ import RemoteSelect from "./RemoteSelect.vue";
 
 const props = defineProps({
     value: Object,
+    level:  [String, Number],
     prefix: [String, Number],
-    index: [String, Number]
+    index: [String, Number],
+    photo_placeholder: String,
+    passport_placeholder: String
 })
 
 const validateMessages = {
@@ -55,7 +58,7 @@ const cancel = function () {
         <template #label>
           Photo (4x6cm, white background)
         </template>
-        <InputUpload placeholder="images/photo.jpg" width="153px" height="230px"
+        <InputUpload :placeholder="photo_placeholder" width="153px" height="230px"
                      v-model:value="value.profile_photo"></InputUpload>
     </a-form-item>
     <a-form-item :name="[prefix,index, 'passport_photo']" class="w-1/2  inline-block"
@@ -63,7 +66,7 @@ const cancel = function () {
         <template #label>
             Passport scan
         </template>
-        <InputUpload placeholder="images/passport.jpg" width="346px" height="230px"
+        <InputUpload :placeholder="passport_placeholder" width="346px" height="230px"
                      v-model:value="value.passport_photo"></InputUpload>
     </a-form-item>
     <a-form-item :name="[prefix,index, 'full_name']" name="" label="Full name as in passport"

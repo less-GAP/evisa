@@ -70,7 +70,9 @@ import DataListEdit from "./DataListEdit.vue"
 import ApiData from "./ApiData.vue"
 import InputCategories from "./InputCategories.vue"
 import GoogleLogin from "./GoogleLogin.vue"
+import HtmlEditor from "./HtmlEditor.vue"
 export {
+  HtmlEditor,
   InputCategories,
   GoogleLogin,
   ApiData,

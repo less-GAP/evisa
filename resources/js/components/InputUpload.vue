@@ -1,6 +1,6 @@
 <template>
     <slot></slot>
-    <a-image :width="width" :height="height" v-if="value" :src="inputValue" :alt="alt"/>
+    <a-image :style="{width,height}"  v-if="value" :src="inputValue" :alt="alt"/>
     <br>
     <a-space class="mt-2">
 
@@ -17,7 +17,7 @@
             <a-card v-if="!value && placeholder" shadow="none"
                     style="display:inline-block;margin-right:5px;text-align: center;position:relative">
                 <template #cover>
-                    <img :width="width" :height="height" style="object-fit:contain"
+                    <img :style="{width,height}"  :width="width" :height="height" style="object-fit:contain"
                          :src="'/'+placeholder"
                          :alt="alt"/>
                 </template>

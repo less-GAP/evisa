@@ -9,7 +9,10 @@ import Api from "../utils/Api";
 import dayjs from "../utils/Dayjs";
 
 const props = defineProps({
-    value: Object
+    value: Object,
+    level: [String,Number],
+    photo_placeholder: String,
+    passport_placeholder: String
 })
 
 const validateMessages = {
@@ -40,6 +43,7 @@ const formState = reactive({
     number_of_visa: 1,
     type_of_visa: "1",
     processing_time: "2",
+    services: [],
     applicants: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
 
 });
@@ -92,7 +96,11 @@ function calculateFee() {
     if (!getSelectedProcessingTime()) {
         return 0
     }
-    return getSelectedProcessingTime()['price_' + formState.type_of_visa] * formState.number_of_visa
+    let serviceFee = 0;
+    for (let service of formState.services){
+        serviceFee+=parseInt(service.price_config[props.level])
+    }
+    return getSelectedProcessingTime()['price_' + formState.type_of_visa] * formState.number_of_visa +serviceFee
 }
 
 function getSelectedProcessingTime() {
@@ -287,6 +295,18 @@ const currentTime = useDateFormat(useNow(), formatter)
                                 </a-select-opt-group>
                             </a-select>
                         </a-form-item>
+                        <ApiData
+                            url="master-data/visa-service/options">
+                            <template #default="{data}">
+                                <label class="mr-5" v-for="service in data">
+
+                                    <input type="checkbox" class="mr-2" :value="service"
+                                           v-model="formState.services"/> {{ service.name }}
+                                </label>
+
+                            </template>
+
+                        </ApiData>
                     </div>
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 ">
                         <a-form-item name="date_arrival" :rules="[{ required: true }]"
@@ -462,8 +482,11 @@ const currentTime = useDateFormat(useNow(), formatter)
                             <a-tab-pane v-for="number of parseInt(formState.number_of_visa)" :key="number"
                                         :tab="'Applicant ' + number">
                                 <ApplicantForm prefix="applicants" :index="number-1"
+                                               :passport_placeholder="passport_placeholder"
+                                               :photo_placeholder="photo_placeholder"
                                                v-model:value="formState.applicants[number - 1]"></ApplicantForm>
                             </a-tab-pane>
+                            F
                         </a-tabs>
                     </div>
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">

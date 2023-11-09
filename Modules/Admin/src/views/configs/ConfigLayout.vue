@@ -12,6 +12,13 @@ const items = ref([
     href:'/configs/general',
     title: 'General',
   },
+    {
+    key: 'config-images',
+    // icon: () => h(MailOutlined),
+    label: 'Images',
+    href:'/configs/images',
+    title: 'Images',
+  },
   {
     key: 'PostsPages',
     // icon: () => h(OrderedListOutlined),
@@ -92,7 +99,7 @@ function menuClick({item}) {
 </script>
 
 <template>
-  
+
 
   <LayoutAuthenticated>
     <a-layout class="rounded-xl overflow-hidden shadow">

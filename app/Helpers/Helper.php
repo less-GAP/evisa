@@ -23,11 +23,23 @@ function frontend_processing_time()
     return collect($userLevel->price_config);
 }
 
+function current_level_id()
+{
+    $user = auth('frontend')->user();
+    if ($user && $user->level) {
+        return $user->level->id;
+    }
+    $userLevel = VisaCustomerLevel::where('is_default', 1)->where('status', 'active')->first();
+    return $userLevel->id;
+}
+
 function default_visa_customer_level_id()
 {
     $userLevel = VisaCustomerLevel::where('is_default', 1)->where('status', 'active')->first();
     return $userLevel ? $userLevel->id : null;
 }
-function frontend_user(){
+
+function frontend_user()
+{
     return auth('frontend')->user();
 }

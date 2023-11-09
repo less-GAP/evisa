@@ -21,6 +21,7 @@ use Modules\Frontend\Actions\TestFormAction;
 
 Route::get('/master-data/country/options', \Modules\Frontend\Actions\MasterData\GetCountryOptionsAction::class . '@handle');
 Route::get('/master-data/visa-processing-time/options', \Modules\Frontend\Actions\MasterData\GetProcessingTimeOptionsAction::class . '@handle');
+Route::get('/master-data/visa-service/options', \Modules\Frontend\Actions\MasterData\GetVisaServiceOptionsAction::class . '@handle');
 Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterData\GetOptionsAction::class . '@handle');
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::view('/preview', 'front::preview')->name('preview');

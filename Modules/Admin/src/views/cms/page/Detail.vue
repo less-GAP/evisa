@@ -143,34 +143,8 @@ const closeDetail = function () {
             <a-col :span="24">
 
               <a-form-item label="Mô tả">
-                <jodit-editor v-if="!loading " style="height: 50vh" v-model="formState.content" :config="{
-                iframe:true,
-                style: {
-                  fontFamily: 'Arial',
-                  fontSize: '13px'
-                },
-                 height: '50vh',
-                 iframeStyle: 'html{margin:0;padding:0;min-height: 100%;}body{box-sizing:border-box;font-family:roboto;font-size:16px;line-height:1.6;padding:10px;margin:0;background:transparent;color:#000;position:relative;z-index:2;user-select:auto;margin:0px;overflow:auto;outline:none;}table{width:100%;border:none;border-collapse:collapse;empty-cells: show;max-width: 100%;}th,td{padding: 2px 5px;border:1px solid #ccc;-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}p{margin-top:0;}.jodit_editor .jodit_iframe_wrapper{display: block;clear: both;user-select: none;position: relative;}.jodit_editor .jodit_iframe_wrapper:after {position:absolute;content:\'\';z-index:1;top:0;left:0;right: 0;bottom: 0;cursor: pointer;display: block;background: rgba(0, 0, 0, 0);} .jodit_disabled{user-select: none;-o-user-select: none;-moz-user-select: none;-khtml-user-select: none;-webkit-user-select: none;-ms-user-select: none}',
-                  toolbarButtonSize: 'large',
-                 buttons: [
-                   ...Jodit.defaultOptions.buttons,
-                    {
-                      name: 'Select Image',
-                      tooltip: 'Select Image',
-                      exec: (editor) => {
-                        showPicker=true
-                        onSelectImage=function(images){
-                          images.forEach(function(image){
-                            showPicker = false
-                            const html =`<img width=100% title=`+image.title+` src=`+image.file_url+` />`;
-                                                       editor.s.insertHTML(html);
-                          })
-                        }
-                        // editor.s.insertHTML(new Date().toDateString());
-                      }
-                    }
-                  ]
-              }"/>
+                <HtmlEditor  v-model:value="formState.content"
+                />
               </a-form-item>
               <a-form-item name="excerpt" :rules="[{ required: true }]" label="Mô tả ngắn">
                 <a-textarea :showCount="true" maxlength="160" v-model:value="formState.excerpt" placeholder="Excerpt..."

@@ -119,6 +119,16 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         )->routes(function () {
 
         });
+    EloquentRouter::prefix('visa-service')
+        ->handle(\App\Models\VisaServices::class,
+            [
+                'allowedFilters' => [
+                    AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'name')
+                ]
+            ]
+        )->routes(function () {
+
+        });
 
     EloquentRouter::prefix('taxonomy')
         ->handle(\App\Models\Taxonomy::class,

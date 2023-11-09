@@ -24,6 +24,24 @@ export default [{
         }
       ]
     },
+    {
+      meta: {
+        title: "Visa Services",
+      },
+      path: "/master-data/visa-service",
+      name: "visa-service",
+      component: () => import("./visa-service/index.vue"),
+      children: [
+        {
+          meta: {
+            title: "Visa Services",
+          },
+          path: "/master-data/visa-service/:id",
+          name: "visa-service-form",
+          component: () => import("./visa-service/form.vue"),
+        }
+      ]
+    },
 
     {
       meta: {

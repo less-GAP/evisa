@@ -14,6 +14,7 @@ RUN npm run build
 FROM node:19 AS node
 FROM registry.digitalocean.com/lessgap/laravel-php82:latest
 WORKDIR /app
+RUN npm install -g http-server
 ARG APP_ADMIN
 RUN echo ${APP_ADMIN}
 COPY --from=admin /app/public ./public/${APP_ADMIN}
@@ -30,6 +31,7 @@ COPY ./package.json .
 
 RUN npm install
 COPY ./ .
+COPY ./.env.production ./.env
 # build app for production with minification
 RUN npm run build
 RUN rm -rf ./public/hot
