@@ -24,7 +24,7 @@ const {
   deleteApi,
   updateApi
 } = UseEloquentRouter(prefix, {
-  'include': 'user'
+  'include': 'user,services'
 })
 const isShowModal = ref(false)
 
@@ -57,6 +57,10 @@ const columns = [
   {
     title: 'Agency/User',
     key: 'user',
+  },
+  {
+    title: 'Services',
+    key: 'services',
   },
 
   {
@@ -178,6 +182,14 @@ async function doneVisa(items) {
     </template>
     <template #cell[user]="{item}">
       {{ item.user?.full_name }}
+    </template>
+    <template #cell[services]="{item}">
+      <template v-if="item.services?.length">
+        <a-tag v-for="service in item.services">{{ service.name }}</a-tag>
+      </template>
+      <template v-else>
+        &nbsp;
+      </template>
     </template>
     <template #cell[number_of_visa]="{item}">
       <div class="flex items-center">

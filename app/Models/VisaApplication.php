@@ -27,6 +27,7 @@ class VisaApplication extends Model
         'number_of_visa',
         'type_of_visa',
         'date_arrival',
+        'level_id',
         'entry_port',
         'processing_time',
         'est_delivery_time',
@@ -82,7 +83,25 @@ class VisaApplication extends Model
     {
         return $this->hasMany(VisaApplicationApplicant::class, 'visa_application_id');
     }
+    public function services()
+    {
+        return $this->belongsToMany(VisaServices::class,'visa_application_services','visa_application_id', 'visa_application_service_id');
+    }
+    public function saveServices($items){
+        if (!is_array($items)) {
+            return;
+        }
 
+        $data = [];
+        foreach ($items as $item) {
+            $data[$item['id']] = [
+                'price' => $item['price_config'][$this->level_id],
+                'level_id' => $this->level_id
+            ];
+        }
+        $this->services()->sync($data);
+        return $this->load('services');
+    }
     public function comments()
     {
         return $this->hasMany(VisaApplicationComment::class, 'visa_application_id');

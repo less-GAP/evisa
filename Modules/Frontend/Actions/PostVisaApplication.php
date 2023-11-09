@@ -18,6 +18,7 @@ class PostVisaApplication
             $visaData = $request->all();
             $visaData['est_delivery_time'] = $visaData['due_date'];
             $visaData['status'] = 'pending-preview';
+            $visaData['level_id'] = current_level_id();
             $visaData['payment_status'] = 'waiting';
             $visaData['user_id'] = auth('frontend')->user() ? auth('frontend')->user()->id : null;
 
@@ -55,7 +56,9 @@ class PostVisaApplication
             }
             $request->session()->put('currentVisa', $visaApplication);
             lessgap_handle_event('after_visa_submitted', ['visaApplication' => $visaApplication]);
-
+            if (!empty($visaData['services'])) {
+                $visaApplication->saveServices($visaData['services']);
+            }
             return $visaApplication;
         } catch (\Throwable $exception) {
             \Log::error($exception);

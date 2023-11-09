@@ -56,7 +56,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
         })
         ->handle(\App\Models\VisaApplication::class,
             [
-                'allowedIncludes' => ['applicants', 'history', 'assignees', 'user'],
+                'allowedIncludes' => ['applicants','services', 'history', 'assignees', 'user'],
                 'allowedFilters' => [
                     AllowedFilter::custom('search', new \App\Builder\Filters\SearchLikeMultipleField, 'contact_name,contact_email,mobile_phone')
                     , AllowedFilter::custom('status', new \App\Builder\Filters\SearchLikeMultipleField, 'status')
