@@ -30,10 +30,46 @@
 
 <body
     class="home bg-[#f8f8f8] page-template page-template-templates page-template-frontpage page-template-templates frontpage-php page page-id-5 lessGAP">
-
+<div id="loading" style="display: none">
+    <div role="status" class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
+        @if(settings('loading_image'))
+            <img width="200" src="{{url(settings('loading_image'))}}" alt="Loading..."/>
+        @else
+            <svg class="animate-spin h-8 w-8 text-black mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+            <div style="margin-left: -20px">
+                Please wait...
+            </div>
+        @endif
+    </div>
+</div>
 @splade
 </body>
 <style>
+    #loading {
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        text-align: center;
+        background-color: rgb(255 255 255 / 17%);
+        z-index: 99;
+    }
+
+    #loading-image {
+        position: absolute;
+        top: 100px;
+        left: 240px;
+        z-index: 100;
+    }
+
     /*remove custom style*/
     .circles {
         position: absolute;
@@ -169,4 +205,9 @@
         padding: 10px;
     }
 </style>
+<script>
+    window.onbeforeunload = function () {
+        document.getElementById('loading').style.display = 'block'
+    }
+</script>
 </html>

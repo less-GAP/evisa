@@ -1,7 +1,17 @@
 import moment from "moment";
 
 export default {
-
+  getObjValue(object, path) {
+    if(!object){
+      return object
+    }
+    return [object].concat(path.split('.')).reduce(function (a, b) {
+      if(!a){
+        return a;
+      }
+      return a[b]
+    });
+  },
   formatMoney: function (value, defaultValue = '-', symbol = ' đ', locale = 'vi-VN') {
     if (!value) {
       return defaultValue

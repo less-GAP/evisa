@@ -1298,6 +1298,11 @@ laravel-vite-plugin@^0.7.5:
     picocolors "^1.0.0"
     vite-plugin-full-reload "^1.0.5"
 
+libphonenumber-js@^1.10.12:
+  version "1.10.49"
+  resolved "https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.10.49.tgz"
+  integrity sha512-gvLtyC3tIuqfPzjvYLH9BmVdqzGDiSi4VjtWe2fAgSdBf0yt8yPmbNnRIHNbR5IdtVkm0ayGuzwQKTWmU0hdjQ==
+
 lilconfig@^2.0.5, lilconfig@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-2.1.0.tgz"
@@ -2078,6 +2083,14 @@ vue-recaptcha@^3.0.0-alpha.2:
     std-env "^3.3.2"
     type-fest "^3.9.0"
     vue-demi "^0.14.0"
+
+vue-tel-input@^8.1.4:
+  version "8.1.4"
+  resolved "https://registry.npmjs.org/vue-tel-input/-/vue-tel-input-8.1.4.tgz"
+  integrity sha512-gx+hX9VsYrfGj2mwT84xkpTu9mokFZZqpyymIYZs6XwKL+O63P1x7lcu0nyySDUycHkBXzYmHtvgYfBgDZ9J1w==
+  dependencies:
+    libphonenumber-js "^1.10.12"
+    vue "^3.2.47"
 
 vue-types@^3.0.0:
   version "3.0.2"

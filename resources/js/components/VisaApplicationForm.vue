@@ -10,7 +10,7 @@ import dayjs from "../utils/Dayjs";
 
 const props = defineProps({
     value: Object,
-    level: [String,Number],
+    level: [String, Number],
     photo_placeholder: String,
     passport_placeholder: String
 })
@@ -64,12 +64,14 @@ const submitForm = async function () {
         await form.value
             .validate()
         loading.value = true
+        document.getElementById('loading').style.display = 'block'
         Api.post('visa-application', {...formState, total_amount: calculateFee()}).then(result => {
             // current.value = 2
             window.location.href = '/checkout'
         }).catch(e => {
         })
     } catch (e) {
+        document.getElementById('loading').style.display = 'none'
 
     }
 }
@@ -97,10 +99,10 @@ function calculateFee() {
         return 0
     }
     let serviceFee = 0;
-    for (let service of formState.services){
-        serviceFee+=parseInt(service.price_config[props.level])
+    for (let service of formState.services) {
+        serviceFee += parseInt(service.price_config[props.level])
     }
-    return getSelectedProcessingTime()['price_' + formState.type_of_visa] * formState.number_of_visa +serviceFee
+    return getSelectedProcessingTime()['price_' + formState.type_of_visa] * formState.number_of_visa + serviceFee
 }
 
 function getSelectedProcessingTime() {
@@ -163,6 +165,7 @@ function disabledDate(current) {
     return current && current < dayjs().addBusinessDays(1);
 };
 import {useDateFormat, useNow} from '@vueuse/core'
+import {InfoCircleOutlined} from "@ant-design/icons-vue";
 
 const formatter = ref('HH:mm A dddd, MMMM D, YYYY')
 const currentTime = useDateFormat(useNow(), formatter)
@@ -295,18 +298,30 @@ const currentTime = useDateFormat(useNow(), formatter)
                                 </a-select-opt-group>
                             </a-select>
                         </a-form-item>
-                        <ApiData
-                            url="master-data/visa-service/options">
-                            <template #default="{data}">
-                                <label class="mr-5" v-for="service in data">
+                        <a-form-item label="Extra Services:" class="mt-4 lg:mt-6 has-feedback">
 
-                                    <input type="checkbox" class="mr-2" :value="service"
-                                           v-model="formState.services"/> {{ service.name }}
-                                </label>
+                            <ApiData
+                                url="master-data/visa-service/options">
+                                <template #default="{data}">
+                                    <label class="mb-5 block w-full" v-for="service in data">
 
-                            </template>
+                                        <input type="checkbox" class="mr-2" :value="service"
+                                               v-model="formState.services"/> {{ service.name }}
+                                        <!--                                        <a-popover v-if="service.description">-->
+                                        <a-popover trigger="click">
+                                            <template #content>
+                                                <div v-html="service.description"></div>
+                                            </template>
+                                            <span class="ml-5">
+                                            <InfoCircleOutlined></InfoCircleOutlined>
+                                            </span>
+                                        </a-popover>
+                                    </label>
 
-                        </ApiData>
+                                </template>
+
+                            </ApiData>
+                        </a-form-item>
                     </div>
                     <div class="w-full px-4 mt-5 md:w-1/2 lg:w-1/3 md:mt-0 ">
                         <a-form-item name="date_arrival" :rules="[{ required: true }]"
@@ -496,8 +511,10 @@ const currentTime = useDateFormat(useNow(), formatter)
                         <a-form-item name="contact_email" label="Contact Email" :rules="[{ required: true }]">
                             <a-input v-model:value="formState.contact_email"/>
                         </a-form-item>
-                        <a-form-item name="contact_phone" label="Contact Phone" :rules="[{ required: true }]">
-                            <a-input v-model:value="formState.contact_phone"/>
+                        <a-form-item name="contact_phone" label="Contact Phone"
+                                     :rules="[{ required: true,pattern:/^\+(?:[0-9] ?){6,14}[0-9]$/,message:'Incorrect phone!' }]">
+                            {{ formState.contact_phone }}
+                            <vue-tel-input v-model="formState.contact_phone"></vue-tel-input>
                         </a-form-item>
                         <div class="font-semibold uppercase">Service fee:</div>
                         <div class="mt-2 font-semibold text-[36px] 2xl:text-[48px] leading-none"><span id="lblTotal"

@@ -1,13 +1,13 @@
 <template>
   <Editor
 v-model="modelValue" :api-key="$appState.editorKey" model-events="change keydown blur focus paste" :init="{
-    menubar: true,
+    menubar: false,
     branding: false,
     plugins: 'autolink fullscreen charmap  emoticons  link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect  typography inlinecss',
     // toolbar: 'add_image | fullscreen | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link  media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
     // 2 line toolbar
     toolbar: [
-      'add_image | undo redo | blocks fontfamily fontsize fullscreen', 
+      'add_image | undo redo | blocks fontfamily fontsize fullscreen',
       'bold italic underline strikethrough link  media table mergetags, align lineheight tinycomments checklist numlist bullist indent outdent emoticons charmap removeformat',
     ],
     tinycomments_mode: 'inline',
@@ -15,7 +15,6 @@ v-model="modelValue" :api-key="$appState.editorKey" model-events="change keydown
     apply_source_formatting : true,
     toolbar_mode: 'scrolling',
     image_dimensions: false,
-    min_height: 750,
     resize: true,
     autoScroll: true,
     autoresize_bottom_margin: 25,

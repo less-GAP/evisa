@@ -8,6 +8,7 @@ import {InputUpload, InputUploadGetPath} from "@/components";
 
 const configNames = [
   'home_banner',
+  'loading_image',
   'visa_placeholder_2',
   'visa_placeholder_2',
 ]
@@ -65,6 +66,10 @@ const cancel = function () {
       </a-form-item>
       <a-form-item name="visa_placeholder_passport" label="Visa Passport Placeholder" >
         <InputUploadGetPath width="200px" alt="Favicon" autocomplete="off" v-model:value="formState.visa_placeholder_passport">
+        </InputUploadGetPath>
+      </a-form-item>
+      <a-form-item name="loading_image" label="Page Loader" >
+        <InputUploadGetPath width="200px" alt="Favicon" autocomplete="off" v-model:value="formState.loading_image">
         </InputUploadGetPath>
       </a-form-item>
     </a-space>

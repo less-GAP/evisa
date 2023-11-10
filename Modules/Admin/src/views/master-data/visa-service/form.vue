@@ -155,30 +155,36 @@ Array.from({length: MAX - MIN + 1}, (v, k) => k + MIN).forEach(item => {
       </a-card>
       <div style="height:calc(100% - 70px);margin-top:15px;overflow: auto;padding:0;" :gutter="20">
         <a-card title="Visa Service">
-          <a-form-item class="lg:w-1/5 inline-flex w-full" label="Name"
-                       name="name"
-                       :rules="[{ required: true }]"
+          <div class="lg:w-1/5 inline">
+
+            <a-form-item class="  w-full" label="Name"
+                         name="name"
+                         :rules="[{ required: true }]"
+            >
+              <a-input v-model:value="formState.name" placeholder="Title.."/>
+            </a-form-item>
+            <a-form-item class="w-full" label="Status"
+                         name="status"
+                         :rules="[{ required: true }]"
+            >
+              <a-switch checkedValue="active" unCheckedValue="inactive" v-model:checked="formState.status"/>
+            </a-form-item>
+          </div>
+
+          <div class="lg:w-4/5  inline" label="Description"
+               name="description"
           >
-            <a-input v-model:value="formState.name" placeholder="Title.."/>
-          </a-form-item>
+            <HtmlEditor v-model:value="formState.description"/>
+          </div>
 
 
-          <a-form-item class="lg:w-4/5  inline-flex w-full" label="Description"
-                       name="description"
-          >
-            <a-textarea v-model:checked="formState.description"/>
-          </a-form-item>
-          <a-form-item class="w-full" label="Status"
-                       name="status"
-                       :rules="[{ required: true }]"
-          >
-            <a-switch checkedValue="active" unCheckedValue="inactive" v-model:checked="formState.status"/>
-          </a-form-item>
         </a-card>
         <a-card class="!mt-5" title="Pricing Config For Customer Level">
           <ApiData url="/visa-customer-level/all" v-slot="{data}">
-            <a-form-item class="w-1/2 inline-flex" :rules="[{ required: true }]" :label="level.name" v-for="level in data">
-              <a-input-number style="width: 200px" :min="1" v-model:value="formState.price_config[level.id]"></a-input-number>
+            <a-form-item class="w-1/2 inline-flex" :rules="[{ required: true }]" :label="level.name"
+                         v-for="level in data">
+              <a-input-number style="width: 200px" :min="1"
+                              v-model:value="formState.price_config[level.id]"></a-input-number>
             </a-form-item>
           </ApiData>
 
