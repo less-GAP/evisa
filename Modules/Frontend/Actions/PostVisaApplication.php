@@ -19,7 +19,7 @@ class PostVisaApplication
             $visaData['est_delivery_time'] = $visaData['due_date'];
             $visaData['status'] = 'pending-preview';
             $visaData['level_id'] = current_level_id();
-            $visaData['payment_status'] = 'waiting';
+            $visaData['payment_status'] = 'UNPAID';
             $visaData['user_id'] = auth('frontend')->user() ? auth('frontend')->user()->id : null;
 
             $visaApplication = VisaApplication::create($visaData);

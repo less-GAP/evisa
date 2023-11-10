@@ -97,7 +97,8 @@ function calculateFee() {
             <a-descriptions-item label="Number of applicants"><b>{{ value.number_of_visa }}</b></a-descriptions-item>
             <a-descriptions-item label="Type of visas"><b>E-Visa (1 Month Single Entry)</b></a-descriptions-item>
             <a-descriptions-item label="Processing Time"><b>
-              <RemoteSelect url="master-data/visa-processing-time/data" :disabled="true" :value="value.processing_time"></RemoteSelect>
+              <RemoteSelect url="master-data/visa-processing-time/data" :disabled="true"
+                            :value="value.processing_time"></RemoteSelect>
             </b>
             </a-descriptions-item>
             <a-descriptions-item label="Intended entry ports"><b>
@@ -159,12 +160,21 @@ function calculateFee() {
               <b>{{ value.contact_phone }}</b>
             </a-descriptions-item>
             <a-descriptions-item label="Payment Status">
-              <a-tag v-if="value?.payment_status == 'done'" color="green">Success</a-tag>
-              <span v-else class="bg-yellow-100 text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Waiting for payment</span>
+          <span v-if="value.payment_status=='UNPAID'"
+                class="bg-yellow-100  text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">UNPAID</span>
+
+              <span v-else-if="value.payment_status=='PAID'"
+                    class="bg-green-100 text-ellipsis text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{
+                  value.payment_status
+                }}</span>
+              <span v-else
+                    class="bg-yellow-100  text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">{{
+                  value.payment_status
+                }}</span>
             </a-descriptions-item>
 
             <a-descriptions-item label="Agency">
-              <b>{{value?.user?.full_name}}</b>
+              <b>{{ value?.user?.full_name }}</b>
             </a-descriptions-item>
           </a-descriptions>
         </a-tab-pane>
@@ -200,58 +210,58 @@ function calculateFee() {
       </a-tabs>
 
     </a-card>
-    <a-card  class="!mt-5">
-<!--      <a-input-group v-if="!value?.assigned_users?.length " class="w-full" compact>-->
-<!--        <a-form-item style="width: 600px" label="Please select assignees">-->
-<!--          <RemoteSelect v-if="formState.assigned_users" mode="multiple"-->
-<!--                        url="user/options"-->
-<!--                        valueKey="username"-->
-<!--                        labelKey="full_name"-->
-<!--                        style="width: 100%"-->
-<!--                        placeholder="Please select" v-model:value="formState.assigned_users">-->
-<!--            <template #option="{option}">-->
-<!--              <img class="h-[15px]  inline-flex border-2 border-white rounded-full dark:border-gray-800"-->
-<!--                   :src="option.profile_photo_url" alt=""> {{ option.full_name }}-->
-<!--            </template>-->
-<!--          </RemoteSelect>-->
-<!--        </a-form-item>-->
-<!--        <a-button @click="submitAssignees" style="margin-left:-10px" type="primary" success>Save</a-button>-->
-<!--      </a-input-group>-->
+    <a-card class="!mt-5">
+      <!--      <a-input-group v-if="!value?.assigned_users?.length " class="w-full" compact>-->
+      <!--        <a-form-item style="width: 600px" label="Please select assignees">-->
+      <!--          <RemoteSelect v-if="formState.assigned_users" mode="multiple"-->
+      <!--                        url="user/options"-->
+      <!--                        valueKey="username"-->
+      <!--                        labelKey="full_name"-->
+      <!--                        style="width: 100%"-->
+      <!--                        placeholder="Please select" v-model:value="formState.assigned_users">-->
+      <!--            <template #option="{option}">-->
+      <!--              <img class="h-[15px]  inline-flex border-2 border-white rounded-full dark:border-gray-800"-->
+      <!--                   :src="option.profile_photo_url" alt=""> {{ option.full_name }}-->
+      <!--            </template>-->
+      <!--          </RemoteSelect>-->
+      <!--        </a-form-item>-->
+      <!--        <a-button @click="submitAssignees" style="margin-left:-10px" type="primary" success>Save</a-button>-->
+      <!--      </a-input-group>-->
 
-      <a-row  :gutter="20">
+      <a-row :gutter="20">
         <a-col v-if="value.status == 'pending-preview'" :span="12">
           <a-space>
             <a-button @click="addStatus('approved')" type="primary">Approve</a-button>
             <a-button @click="addStatus('rejected')" type="primary" danger>Reject</a-button>
           </a-space>
-<!--          <a-form-item style="width: 600px" label="Assignees">-->
-<!--            <RemoteSelect :disabled="true" mode="multiple"-->
-<!--                          url="user/options"-->
-<!--                          valueKey="username"-->
-<!--                          labelKey="full_name"-->
-<!--                          style="width: 100%"-->
-<!--                          placeholder="Please select" :value="value.assigned_users">-->
-<!--              <template #option="{option}">-->
-<!--                <img class="h-[15px]  inline-flex border-2 border-white rounded-full dark:border-gray-800"-->
-<!--                     :src="option.profile_photo_url" alt=""> {{ option.full_name }}-->
-<!--              </template>-->
-<!--            </RemoteSelect>-->
-<!--          </a-form-item>-->
+          <!--          <a-form-item style="width: 600px" label="Assignees">-->
+          <!--            <RemoteSelect :disabled="true" mode="multiple"-->
+          <!--                          url="user/options"-->
+          <!--                          valueKey="username"-->
+          <!--                          labelKey="full_name"-->
+          <!--                          style="width: 100%"-->
+          <!--                          placeholder="Please select" :value="value.assigned_users">-->
+          <!--              <template #option="{option}">-->
+          <!--                <img class="h-[15px]  inline-flex border-2 border-white rounded-full dark:border-gray-800"-->
+          <!--                     :src="option.profile_photo_url" alt=""> {{ option.full_name }}-->
+          <!--              </template>-->
+          <!--            </RemoteSelect>-->
+          <!--          </a-form-item>-->
 
-<!--          <a-form v-if="!value.approval_status || value.approval_status == 'pending'" :model="formState">-->
+          <!--          <a-form v-if="!value.approval_status || value.approval_status == 'pending'" :model="formState">-->
 
-<!--            <a-form-item label="Comment">-->
-<!--              <a-textarea v-model:value="formState.comment">-->
+          <!--            <a-form-item label="Comment">-->
+          <!--              <a-textarea v-model:value="formState.comment">-->
 
-<!--              </a-textarea>-->
-<!--            </a-form-item>-->
-<!--            <a-form-item :wrapper-col="{ offset: 2, span: 16 }">-->
-<!--              <a-space>-->
-<!--                <a-button @click="addStatus('approved')" type="primary">Approve</a-button>-->
-<!--                <a-button @click="addStatus('rejected')" type="primary" danger>Reject</a-button>-->
-<!--              </a-space>-->
-<!--            </a-form-item>-->
-<!--          </a-form>-->
+          <!--              </a-textarea>-->
+          <!--            </a-form-item>-->
+          <!--            <a-form-item :wrapper-col="{ offset: 2, span: 16 }">-->
+          <!--              <a-space>-->
+          <!--                <a-button @click="addStatus('approved')" type="primary">Approve</a-button>-->
+          <!--                <a-button @click="addStatus('rejected')" type="primary" danger>Reject</a-button>-->
+          <!--              </a-space>-->
+          <!--            </a-form-item>-->
+          <!--          </a-form>-->
         </a-col>
         <a-col :span="12">
           <ol v-if="value?.history?.length" class="relative ml-12 border-gray-200 dark:border-gray-700">

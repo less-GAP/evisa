@@ -68,7 +68,7 @@ const submitForm = async function () {
             // current.value = 2
             window.location.href = '/checkout'
         }).catch(e => {
-        }).finally(loading.value = false)
+        })
     } catch (e) {
 
     }

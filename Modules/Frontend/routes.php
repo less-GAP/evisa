@@ -26,7 +26,7 @@ Route::get('/master-data/{listKey}/options', \Modules\Frontend\Actions\MasterDat
 Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::view('/preview', 'front::preview')->name('preview');
 });
-Route::post('/process-payment', ProcessPaymentAction::class . '@handle');
+Route::get('/process-payment', ProcessPaymentAction::class . '@handle');
 
 Route::middleware(['splade'])->group(function () {
 

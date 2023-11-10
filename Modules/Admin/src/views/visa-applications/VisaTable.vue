@@ -197,15 +197,15 @@ async function doneVisa(items) {
       </div>
     </template>
     <template #cell[payment_status]="{item}">
-      <span v-if="item.payment_status=='waiting'"
-            class="bg-yellow-100  text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Waiting for payment</span>
+      <span v-if="item.payment_status=='UNPAID'"
+            class="bg-yellow-100  text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">UNPAID</span>
 
-      <span v-else-if="item.payment_status=='done'"
+      <span v-else-if="item.payment_status=='PAID'"
             class="bg-green-100 text-ellipsis text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{
           item.payment_status
         }}</span>
       <span v-else
-            class="bg-red-100 text-ellipsis text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-red-400">{{
+            class="bg-yellow-100  text-ellipsis text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">{{
           item.payment_status
         }}</span>
 
