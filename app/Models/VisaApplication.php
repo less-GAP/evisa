@@ -59,6 +59,7 @@ class VisaApplication extends Model
      * @var array<string, string>
      */
     protected $casts = [
+        'due_date' => 'datetime',
         'est_delivery_time' => 'datetime',
         'date_arrival' => 'datetime',
         'square_payment_complete_at' => 'datetime',
@@ -79,15 +80,30 @@ class VisaApplication extends Model
         return $this->belongsTo(VisaUser::class, 'user_id');
     }
 
+    public function current_square_invoice()
+    {
+        return $this->hasOne(Invoice::class, 'class_key')
+            ->where('type','evisa_sevice')
+            ->where('payment_gateway','square')
+            ->where('status','UNPAID')
+            ->where('class', get_class($this))
+            ->orderByDesc('id')
+            ;
+
+    }
+
     public function applicants()
     {
         return $this->hasMany(VisaApplicationApplicant::class, 'visa_application_id');
     }
+
     public function services()
     {
-        return $this->belongsToMany(VisaServices::class,'visa_application_services','visa_application_id', 'visa_application_service_id');
+        return $this->belongsToMany(VisaServices::class, 'visa_application_services', 'visa_application_id', 'visa_application_service_id');
     }
-    public function saveServices($items){
+
+    public function saveServices($items)
+    {
         if (!is_array($items)) {
             return;
         }
@@ -102,6 +118,7 @@ class VisaApplication extends Model
         $this->services()->sync($data);
         return $this->load('services');
     }
+
     public function comments()
     {
         return $this->hasMany(VisaApplicationComment::class, 'visa_application_id');

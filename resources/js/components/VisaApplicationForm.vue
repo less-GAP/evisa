@@ -81,7 +81,7 @@ const nextStep = async function () {
             .validate()
         current.value = current.value + 1
     } catch (e) {
-
+        showError(e)
     }
 }
 const cancel = function () {
@@ -169,6 +169,17 @@ import {InfoCircleOutlined} from "@ant-design/icons-vue";
 
 const formatter = ref('HH:mm A dddd, MMMM D, YYYY')
 const currentTime = useDateFormat(useNow(), formatter)
+import {notification} from 'ant-design-vue';
+
+const showError = function ({errorFields}) {
+    form.value.scrollToField(errorFields[0].name[0])
+    // notification.open({
+    //     message: `Notification `,
+    //     description:
+    //         'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    //     placement: 'center'
+    // });
+}
 </script>
 
 <template>
@@ -212,7 +223,9 @@ const currentTime = useDateFormat(useNow(), formatter)
     </div>
     <div class="container mx-auto px-4 bg1">
         <div class="fS">
-            <a-form v-bind="formConfig" :model="formState" ref="form" class="!2xl:text-lg" method="post"
+            <a-form v-bind="formConfig" @finishFailed="showError" :scrollToFirstError="true" :model="formState"
+                    ref="form" class="!2xl:text-lg"
+                    method="post"
                     novalidate="novalidate">
                 <div class="flex flex-wrap -mx-4" v-if="current == 0">
                     <div class="w-full px-4 md:w-1/2 lg:w-1/3">
@@ -254,49 +267,25 @@ const currentTime = useDateFormat(useNow(), formatter)
                             <template #label>
                                 <label class="block mb-2 font-semibold uppercase" for="type_of_visa">Entry Port</label>
                             </template>
-                            <a-select class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer" show-search
-                                      v-model:value="formState.entry_port" style="width: 300px"
-                            >
-                                <a-select-opt-group>
-                                    <template #label>
-                                        <b class="text-blue text-lg">
-                                            International Airports
-                                        </b>
-                                    </template>
-                                    <a-select-option value="1">Noi Bai Int Airport (Ha Noi)</a-select-option>
-                                    <a-select-option value="2">Cat Bi Int Airport (Hai Phong)</a-select-option>
-                                    <a-select-option value="3">Cam Ranh Int Airport (Khanh Hoa)</a-select-option>
-                                    <a-select-option value="4">Can Tho International Airport</a-select-option>
-                                    <a-select-option value="5">Da Nang International Airport</a-select-option>
-                                    <a-select-option value="6">Phu Bai Int Airport</a-select-option>
-                                    <a-select-option value="7">Phu Quoc International Airport</a-select-option>
-                                    <a-select-option value="8">Tan Son Nhat Int Airport (Ho Chi Minh City)
-                                    </a-select-option>
-                                </a-select-opt-group>
-                                <a-select-opt-group>
-                                    <template #label>
-                                        <b class="text-blue text-lg">
-                                            Landports
-                                        </b>
-                                    </template>
-                                    <a-select-option value="9">Bo Y Landport</a-select-option>
-                                    <a-select-option value="10">Cha Lo Landport</a-select-option>
-                                    <a-select-option value="11">Cau Treo Landport</a-select-option>
-                                    <a-select-option value="12">Huu Nghi Landport</a-select-option>
-                                    <a-select-option value="13">Ha Tien Landport</a-select-option>
-                                    <a-select-option value="14">Lao Bao Landport</a-select-option>
-                                    <a-select-option value="15">Lao Cai Landport</a-select-option>
-                                    <a-select-option value="16">La Lay Landport</a-select-option>
-                                    <a-select-option value="17">Moc Bai Landport</a-select-option>
-                                    <a-select-option value="18">Mong Cai Landport</a-select-option>
-                                    <a-select-option value="19">Nam Can Landport</a-select-option>
-                                    <a-select-option value="20">Na Meo Landport</a-select-option>
-                                    <a-select-option value="21">Song Tien Landport</a-select-option>
-                                    <a-select-option value="22">Tinh Bien Landport</a-select-option>
-                                    <a-select-option value="23">Tay Trang Landport</a-select-option>
-                                    <a-select-option value="24">Xa Mat Landport</a-select-option>
-                                </a-select-opt-group>
-                            </a-select>
+                            <ApiData v-model:value="typeVisaList" url="master-data/entry-port/options" v-slot="{data}">
+
+                                <a-select class="w-full bg-gray-50 shadow border-0 rounded-none cursor-pointer"
+                                          show-search
+                                          v-model:value="formState.entry_port" style="width: 300px"
+                                >
+                                    <a-select-opt-group v-for="group in data">
+                                        <template #label>
+                                            <b class="text-blue text-lg">
+                                                {{ group.name }}
+                                            </b>
+                                        </template>
+                                        <a-select-option v-for="item in group.children" :value="item.name">
+                                            {{ item.name }}
+                                        </a-select-option>
+                                    </a-select-opt-group>
+                                </a-select>
+                            </ApiData>
+
                         </a-form-item>
                         <a-form-item label="Extra Services:" class="mt-4 lg:mt-6 has-feedback">
 
@@ -310,7 +299,7 @@ const currentTime = useDateFormat(useNow(), formatter)
                                         <!--                                        <a-popover v-if="service.description">-->
                                         <a-popover trigger="click">
                                             <template #content>
-                                                <div v-html="service.description"></div>
+                                                <div style="max-width: 500px" v-html="service.description"></div>
                                             </template>
                                             <span class="ml-5">
                                             <InfoCircleOutlined></InfoCircleOutlined>
@@ -555,4 +544,11 @@ const currentTime = useDateFormat(useNow(), formatter)
         </div>
     </div>
 </template>
-<style scoped></style>
+<style >
+.ant-form-item-explain-error {
+    margin: 10px ;
+    margin-left: 0 ;
+    padding: 10px;
+    border: 1px solid;
+}
+</style>

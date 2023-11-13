@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Models\Invoice;
 use App\Models\SquareCustomer;
 use App\Models\VisaApplication;
 use Carbon\Carbon;
@@ -102,37 +103,34 @@ class PaymentService
 
     public function getSquarePaymentUrl(VisaApplication $visaApplication)
     {
-        if ($visaApplication->square_payment_url) {
-            return $visaApplication->square_payment_url;
+        $invoice = $visaApplication->current_square_invoice()->first();
+        if ($invoice) {
+            return $invoice->payment_url;
         }
-        $this->createInvoice($visaApplication);
-        return $visaApplication->fresh()->square_payment_url;
+        $appInvoice = $this->createInvoice($visaApplication);
+        return $appInvoice->payment_url;
     }
 
     public function createInvoice(VisaApplication $visaApplication)
     {
-
-        if (!$visaApplication->square_order_id) {
-            $order = $this->createOrder($visaApplication);
-            $visaApplication->square_order_id = $order->getId();
-            $visaApplication->save();
-        }
+        $squareCustomer = $this->createCustomer($visaApplication);
+        $order = $this->createOrder($visaApplication);
         $visaApplication = $visaApplication->fresh();
         $invoicesApi = $this->client()->getInvoicesApi();
         $body = CreateInvoiceRequestBuilder::init(
             InvoiceBuilder::init()
                 ->locationId(settings('square_location_id'))
-                ->orderId($visaApplication->square_order_id)
+                ->orderId($order->getId())
                 ->primaryRecipient(
                     InvoiceRecipientBuilder::init()
-                        ->customerId($visaApplication->square_customer_id)
+                        ->customerId($squareCustomer->square_customer_id)
                         ->build()
                 )
                 ->paymentRequests(
                     [
                         InvoicePaymentRequestBuilder::init()
                             ->requestType(InvoiceRequestType::BALANCE)
-                            ->dueDate(Carbon::now()->addDays(7)->format('Y-m-d'))
+                            ->dueDate($visaApplication->date_arrival->format('Y-m-d'))
                             ->tippingEnabled(false)
                             ->automaticPaymentSource(InvoiceAutomaticPaymentSource::NONE)
                             ->reminders(
@@ -184,8 +182,20 @@ class PaymentService
 
         if ($apiResponse->isSuccess()) {
             $invoice = $apiResponse->getResult()->getInvoice();
+
             $visaApplication->square_invoice_id = $invoice->getId();
             $visaApplication->save();
+
+            $appInvoice = Invoice::create([
+                'payment_gateway' => 'square'
+                , 'type' => 'evisa_sevice'
+                , 'invoice_id' => $invoice->getId()
+                , 'order_id' => $invoice->getOrderId()
+                , 'customer_id' => $invoice->getPrimaryRecipient()->getCustomerId()
+                , 'status' => 'DRAFT'
+                , 'class' => VisaApplication::class
+                , 'class_key' => $visaApplication->id
+            ]);
             $body = PublishInvoiceRequestBuilder::init(
                 0
             )
@@ -199,9 +209,12 @@ class PaymentService
 
             if ($apiResponse->isSuccess()) {
                 $publishInvoiceResponse = $apiResponse->getResult();
-                $visaApplication->square_payment_url = $publishInvoiceResponse->getInvoice()->getPublicUrl();
+                $appInvoice->payment_url = $publishInvoiceResponse->getInvoice()->getPublicUrl();
+                $appInvoice->status = $publishInvoiceResponse->getInvoice()->getStatus();
+                $appInvoice->save();
+                $visaApplication->payment_status = $publishInvoiceResponse->getInvoice()->getStatus();
                 $visaApplication->save();
-                return $visaApplication;
+                return $appInvoice;
             } else {
                 throw new \Exception('Publish Invoice Error:' . $visaApplication->square_invoice_id);
             }
@@ -245,11 +258,6 @@ class PaymentService
     public function createOrder(VisaApplication $visaApplication)
     {
         $ordersApi = $this->client()->getOrdersApi();
-        if (!$visaApplication->square_customer_id) {
-            $squareCustomer = $this->createCustomer($visaApplication);
-            $visaApplication->square_customer_id = $squareCustomer->square_customer_id;
-            $visaApplication->save();
-        }
         $body = CreateOrderRequestBuilder::init()
             ->order(
                 OrderBuilder::init(
@@ -287,15 +295,17 @@ class PaymentService
 
     public function checkPayment(VisaApplication $visaApplication)
     {
-        if (!$visaApplication->square_invoice_id) {
+        if (!$visaApplication->current_square_invoice) {
             return;
         }
         $invoicesApi = $this->client()->getInvoicesApi();
-        $apiResponse = $invoicesApi->getInvoice($visaApplication->square_invoice_id);
+        $apiResponse = $invoicesApi->getInvoice($visaApplication->current_square_invoice->invoice_id);
 
         if ($apiResponse->isSuccess()) {
             $visaApplication->payment_status = $apiResponse->getResult()->getInvoice()->getStatus();
             $visaApplication->save();
+            $visaApplication->current_square_invoice->status = $apiResponse->getResult()->getInvoice()->getStatus();
+            $visaApplication->current_square_invoice->save();
         } else {
             $errors = $apiResponse->getErrors();
         }

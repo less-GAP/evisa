@@ -29,7 +29,7 @@ class CheckPayment extends Command
     {
         $visaApplications = VisaApplication::where('payment_status','<>', 'PAID')
             ->where('status', '<>', 'rejected')
-            ->whereNotNull('square_invoice_id')
+            ->whereHas('current_square_invoice')
             ->get();
         foreach ($visaApplications as $visaApplication) {
             app(PaymentService::class)->checkPayment($visaApplication);

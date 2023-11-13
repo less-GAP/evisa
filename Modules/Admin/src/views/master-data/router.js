@@ -68,6 +68,14 @@ export default [{
       name: "type-of-visa",
       component: () => import("./type-of-visa/index.vue"),
     },
+    {
+      meta: {
+        title: "Entry Port",
+      },
+      path: "/master-data/entry-port",
+      name: "entry-port",
+      component: () => import("./entry-port/index.vue"),
+    },
 
   ]
 }]

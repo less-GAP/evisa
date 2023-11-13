@@ -43,3 +43,34 @@ function frontend_user()
 {
     return auth('frontend')->user();
 }
+
+global $countryList;
+function countryName($code)
+{
+    global $countryList;
+    if (!$countryList) {
+        $countryList = \App\Models\Country::pluck('name', 'code');
+    }
+    return $countryList[$code] ?? $code;
+}
+
+global $typeVisas;
+function typeOfVisaName($value)
+{
+    global $typeVisas;
+    if (!$typeVisas) {
+        $masterData = MasterData::find('type-of-visa');
+        $typeVisas = collect($masterData->data)->pluck('label', 'value');
+    }
+    return $typeVisas[$value] ?? $value;
+}
+global $processingTypes;
+function processingTypeName($value)
+{
+    global $processingTypes;
+    if (!$processingTypes) {
+        $masterData = MasterData::find('visa-processing-time');
+        $processingTypes = collect($masterData->data)->pluck('label', 'value');
+    }
+    return $processingTypes[$value] ?? $value;
+}

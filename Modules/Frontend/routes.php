@@ -16,6 +16,7 @@ use Modules\Frontend\Actions\MyAccount\PostUpdatePasswordAction;
 use Modules\Frontend\Actions\PackageDetailPage;
 use Modules\Frontend\Actions\PostVisaApplication;
 use Modules\Frontend\Actions\ProcessPaymentAction;
+use Modules\Frontend\Actions\ProcessPaypalPaymentAction;
 use Modules\Frontend\Actions\SubmitFormAction;
 use Modules\Frontend\Actions\TestFormAction;
 
@@ -27,6 +28,7 @@ Route::middleware([AdminIsAuthenticated::class])->group(function () {
     Route::view('/preview', 'front::preview')->name('preview');
 });
 Route::get('/process-payment', ProcessPaymentAction::class . '@handle');
+Route::get('/process-payment-paypal', ProcessPaypalPaymentAction::class . '@handle');
 
 Route::middleware(['splade'])->group(function () {
 

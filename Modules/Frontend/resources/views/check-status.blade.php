@@ -11,8 +11,8 @@
                             <tr class="text-left text-xs font-medium text-neutral-500 dark:text-neutral-300 uppercase tracking-wider">
                                 <th scope="col" class="px-6 py-3">Photos</th>
                                 <th scope="col" class="px-6 py-3">Submit Date</th>
-                                <th scope="col" class="px-6 py-3">Status</th>
-                                <th scope="col" class="px-6 py-3">Payment</th>
+                                <th scope="col" class="px-6 py-3">Payment Status</th>
+                                <th scope="col" class="px-6 py-3">Preview Statue</th>
                             </tr>
                             </thead>
                             <tbody
@@ -22,10 +22,10 @@
                                     <a-image-preview-group>
 
                                         @foreach($visaApplication->applicants as $applicant)
-                                            <img style="object-fit: cover;float:left;height: 50px;margin-right:5px"
+                                            <img style="object-fit: cover;width:100px;float:left;height: 50px;margin-right:5px"
                                                      class="!mr-2" :width="50" :height="50"
                                                      src="{{url($applicant->profile_photo)}}"/>
-                                            <img style="object-fit: cover;float:left;height: 50px;margin-right:5px"
+                                            <img style="object-fit: cover;width:100px;float:left;height: 50px;margin-right:5px"
                                                      class="!mr-2" :width="50" :height="50"
                                                      src="{{url($applicant->passport_photo)}}"/>
                                         @endforeach

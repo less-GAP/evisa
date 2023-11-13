@@ -19,6 +19,7 @@ export const formConfig = {
   "label-align": "top",
   "layout": "vertical",
   labelCol: {span: 24},
+  scrollToFirstError: true,
   wrapperCol: {span: 24},
   "validate-messages": validateMessages,
 }

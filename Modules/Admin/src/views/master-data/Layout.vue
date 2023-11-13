@@ -17,8 +17,8 @@ const items = ref([
       key: 'visa-service',
       icon: () => h(CustomerServiceOutlined),
       href: '/master-data/visa-service',
-      label: 'Visa Service',
-      title: 'Visa Service',
+      label: 'Extra Services',
+      title: 'Extra Services',
     },
     {
       key: 'data-country',
@@ -39,6 +39,11 @@ const items = ref([
       icon: () => h(AppstoreOutlined),
       href: '/master-data/type-of-visa',
       label: 'Type of visa',
+    },{
+      key: 'entry-port',
+      icon: () => h(AppstoreOutlined),
+      href: '/master-data/entry-port',
+      label: 'Entry Port',
     },
 
 

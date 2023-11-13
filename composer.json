@@ -21,6 +21,7 @@
         "protonemedia/laravel-splade": "1.4.15.1",
         "spatie/laravel-query-builder": "^5.2",
         "square/square": "31.0.0.20230925",
+        "srmklive/paypal": "~3.0",
         "twilio/sdk": "^7.9"
     },
     "require-dev": {
