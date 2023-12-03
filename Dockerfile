@@ -11,13 +11,11 @@ COPY ./Modules/Admin .
 # build app for production with minification
 RUN npm run build
 
-FROM node:19 AS node
+
 FROM registry.digitalocean.com/lessgap/laravel-php82:latest
 WORKDIR /app
 RUN npm install -g http-server
-ARG APP_ADMIN
-RUN echo ${APP_ADMIN}
-COPY --from=admin /app/public ./public/${APP_ADMIN}
+COPY --from=admin /app/public ./public/lessgap
 RUN mkdir ./storage
 RUN mkdir ./storage/logs
 RUN mkdir ./storage/upload
@@ -30,14 +28,11 @@ RUN mkdir ./storage/framework/views
 COPY ./package.json .
 
 RUN npm install
+
 COPY ./ .
 COPY ./.env.production ./.env
 # build app for production with minification
 RUN npm run build
 RUN rm -rf ./public/hot
 RUN composer install
-COPY ./docker/supervisor/supervisord.conf /etc/supervisor
-COPY ./docker/supervisor/conf.d/* /etc/supervisor/conf.d
 COPY php.ini /usr/local/etc/php/php.ini
-CMD ["/usr/bin/supervisord"]
-
