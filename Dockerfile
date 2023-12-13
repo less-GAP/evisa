@@ -12,7 +12,7 @@ COPY ./Modules/Admin .
 RUN npm run build
 
 
-FROM registry.digitalocean.com/lessgap/laravel-php82:latest
+FROM registry.lessgap.xyz/common/laravel-php82:latest
 WORKDIR /app
 RUN npm install -g http-server
 COPY --from=admin /app/public ./public/lessgap
